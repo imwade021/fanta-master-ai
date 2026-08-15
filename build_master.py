@@ -1,66 +1,83 @@
 import pandas as pd
 from fanta_engine import FantaEngine
+import math
 
 def genera_master_db(file_listone, file_storico, output_csv):
     print("Inizializzazione del Master Engine...")
     motore = FantaEngine()
     
     try:
-        # 1. Carichiamo il listone nuovo dell'anno in corso
+        # 1. Carichiamo il listone nuovo dell'anno in corso (senza intestazione)
+        print(f"Lettura del listone: {file_listone}")
         df_listone = pd.read_csv(file_listone, sep=';', header=None)
-        # Assicurati che gli indici (0, 1, 3, 9) corrispondano alle tue colonne reali
+        
+        # Rinominiamo le colonne in base alle posizioni standard di Fantacalcio.it
+        # (0: ID, 1: Nome, 3: Ruolo, 9: Squadra)
         df_listone.rename(columns={0: 'ID', 1: 'Nome', 3: 'Ruolo', 9: 'Squadra'}, inplace=True)
         
-        # 2. Carichiamo il file storico (quello che hai appena caricato)
-        # NB: Se il file è un Excel usa read_excel, se è un csv usa read_csv
+        # 2. Carichiamo il file storico in formato Excel
+        print(f"Lettura dello storico Excel: {file_storico}")
         df_storico = pd.read_excel(file_storico) 
         
-        # Uniformiamo il nome della colonna ID per farli combaciare
-        # Assumiamo che nel file storico l'ID si chiami 'Id' (con la i maiuscola)
-        df_storico.rename(columns={'Id': 'ID'}, inplace=True)
-        
+        # Uniformiamo il nome della colonna ID ('Id' o 'ID')
+        if 'Id' in df_storico.columns:
+            df_storico.rename(columns={'Id': 'ID'}, inplace=True)
+            
     except Exception as e:
-        print(f"ERRORE durante il caricamento dei file: {e}")
+        print(f"ERRORE CRITICO durante il caricamento dei file: {e}")
         return
 
-    print("Incrocio dei dati in corso...")
+    print("Incrocio dei dati storici in corso...")
+    
+    # Pulizia: Assicuriamoci che l'ID sia un numero intero per entrambi i file
+    df_listone['ID'] = pd.to_numeric(df_listone['ID'], errors='coerce')
+    df_storico['ID'] = pd.to_numeric(df_storico['ID'], errors='coerce')
+    
+    # Trova in automatico il nome della colonna Fantamedia nello storico (solitamente 'Fm' o 'FM')
+    colonna_fantamedia = 'Fm' if 'Fm' in df_storico.columns else 'FM'
     
     # 3. IL MERGE MAGICO
-    # Uniamo il listone con la colonna 'Fm' (Fantamedia) dello storico usando l'ID.
-    # 'how=left' significa: tieni tutti i giocatori del listone nuovo, anche se non ci sono nello storico.
-    df_master = pd.merge(df_listone, df_storico[['ID', 'Fm']], on='ID', how='left')
+    # Unisce le due tabelle mantenendo tutti i giocatori del listone
+    df_master = pd.merge(df_listone, df_storico[['ID', colonna_fantamedia]], on='ID', how='left')
     
-    # Prepariamo le colonne per l'output
+    # Creiamo le colonne per il bot
     df_master['P_FM'] = 0.0
     df_master['Valore_Base_Perc'] = 0.0
     
-    print(f"Trovati {len(df_master)} giocatori. Inizio calcolo proiezioni...")
+    print(f"Trovati {len(df_master)} giocatori. Calcolo proiezioni e prezzi...")
     
-    # 4. Il motore analizza ogni giocatore
+    # 4. Il Motore analizza ogni singolo giocatore
     for index, row in df_master.iterrows():
         ruolo = str(row['Ruolo']).strip()
-        fantamedia_storica = row['Fm']
+        fantamedia_storica = row[colonna_fantamedia]
         
-        # Controllo: il giocatore ha una Fantamedia nello storico?
-        if pd.isna(fantamedia_storica):
-            # IL DATO MANCA (Nuovo arrivo o Serie B)
-            # Qui si accenderà l'Auto-Scouting! Per ora impostiamo un voto base fittizio.
+        # Controlliamo se il dato storico esiste o se è un nuovo arrivo (NaN)
+        if pd.isna(fantamedia_storica) or math.isnan(fantamedia_storica) or fantamedia_storica == 0:
+            # IL DATO MANCA (Nuovo arrivo dall'estero o Serie B)
+            # Per ora assegniamo 6.0 in attesa di collegare l'Auto-Scouting
             pfm_calcolata = 6.0 
         else:
-            # GIOCATORE GIÀ IN SERIE A
-            # Usiamo la sua vera Fantamedia dell'anno scorso!
+            # GIOCATORE NOTO IN SERIE A
             pfm_calcolata = float(fantamedia_storica)
             
-        # Il motore calcola la percentuale reale matematica (per ora solo per gli attaccanti nel nostro script test)
+        # Calcolo del prezzo/percentuale con il FantaEngine
         valore_perc = motore.calcola_percentuale_valore(pfm_calcolata, ruolo)
         
-        df_master.at[index, 'P_FM'] = pfm_calcolata
+        # Inserimento nel database finale
+        df_master.at[index, 'P_FM'] = round(pfm_calcolata, 2)
         df_master.at[index, 'Valore_Base_Perc'] = valore_perc
         
-    # Salviamo il file finale
+    # 5. Esportazione del file per il Bot Telegram
     df_master.to_csv(output_csv, index=False, sep=';')
-    print(f"File MASTER salvato con successo in: {output_csv}!")
+    print(f"SUCCESSO! File MASTER salvato in: {output_csv}")
+
 
 if __name__ == "__main__":
-    # IMPORTANTE: Sostituisci i nomi qui sotto con i nomi ESATTI dei tuoi file su GitHub
-    genera_master_db("Lista-FantaAsta-Fantacalcio.csv", "Quotazioni_Fantacalcio_NOMECOMPLETO.xlsx", "Lista_Finale_Master.csv")
+    # ---> ATTENZIONE: MODIFICA QUESTA RIGA <---
+    # Sostituisci il nome qui sotto con il nome ESATTO del file Excel che hai caricato su GitHub
+    NOME_FILE_STORICO = "Quotazioni_Fantacalcio_COMPLETA_QUI.xlsx"
+    
+    NOME_FILE_LISTONE = "Lista-FantaAsta-Fantacalcio.csv"
+    NOME_OUTPUT = "Lista_Finale_Master.csv"
+    
+    genera_master_db(NOME_FILE_LISTONE, NOME_FILE_STORICO, NOME_OUTPUT)
