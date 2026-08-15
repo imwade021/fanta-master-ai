@@ -1,0 +1,37 @@
+name: Esegui Master Engine
+
+# Questo comando crea un pulsante manuale per avviare il test
+on:
+  workflow_dispatch:
+
+jobs:
+  run-bot-engine:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Scarica i file della tua repository nel server
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # 2. Installa Python
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      # 3. Installa Pandas e le altre librerie
+      - name: Installa dipendenze
+        run: pip install -r requirements.txt
+
+      # 4. ESEGUE IL TUO SCRIPT MAGICO
+      - name: Genera il Master CSV
+        run: python build_master.py
+
+      # 5. Salva il file appena creato e lo carica sulla tua repository
+      - name: Salva e pusha i risultati
+        run: |
+          git config --global user.name 'GitHub Actions Bot'
+          git config --global user.email 'actions@github.com'
+          git add Lista_Finale_Master.csv
+          git commit -m "Generato nuovo file Master automatico" || echo "Nessuna modifica da salvare"
+          git push
