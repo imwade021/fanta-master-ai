@@ -9,7 +9,8 @@ def genera_master_db(file_listone, file_storico, output_csv):
     try:
         # 1. Carichiamo il listone nuovo dell'anno in corso
         print(f"Lettura del listone: {file_listone}")
-        df_listone = pd.read_csv(file_listone, sep=';', header=None)
+        # Pandas ora rileverà automaticamente se il file usa virgole o punti e virgola
+        df_listone = pd.read_csv(file_listone, sep=None, engine='python', header=None)
         
         # Rinominiamo le colonne in base alle posizioni (0: ID, 1: Nome, 3: Ruolo, 9: Squadra)
         df_listone.rename(columns={0: 'ID', 1: 'Nome', 3: 'Ruolo', 9: 'Squadra'}, inplace=True)
@@ -62,7 +63,7 @@ def genera_master_db(file_listone, file_storico, output_csv):
         df_master.at[index, 'P_FM'] = round(pfm_calcolata, 2)
         df_master.at[index, 'Valore_Base_Perc'] = valore_perc
         
-    # 5. Salvataggio
+    # 5. Salvataggio (il file finale uscirà con il punto e virgola, più pulito)
     df_master.to_csv(output_csv, index=False, sep=';')
     print(f"SUCCESSO! File MASTER salvato in: {output_csv}")
 
