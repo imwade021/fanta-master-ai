@@ -52,7 +52,14 @@ def main():
     scout = ScoutEngine()
     
     try:
-        df_listone = pd.read_csv("Lista-FantaAsta-Fantacalcio.csv", header=None)
+        # Tenta prima di leggere con il punto e virgola, poi ripiega sulla virgola se fallisce
+        try:
+            df_listone = pd.read_csv("Lista-FantaAsta-Fantacalcio.csv", header=None, sep=';')
+            if len(df_listone.columns) < 19:
+                df_listone = pd.read_csv("Lista-FantaAsta-Fantacalcio.csv", header=None, sep=',')
+        except Exception:
+            df_listone = pd.read_csv("Lista-FantaAsta-Fantacalcio.csv", header=None)
+
         df_listone.columns = [
             'Id', 'Nome_Breve', 'Nome', 'R', 'Ruolo_Esteso', 'Qt.A', 'Qt.I', 
             'Qt.M', 'Diff.M', 'Squadra', 'FVM', 'FVM.M', 'Piede', 'Nazionalita', 
@@ -76,14 +83,14 @@ def main():
         ruolo = str(row['R'])
         squadra = str(row.get('Squadra', '')).strip()
         
-        # Prendi la quotazione migliore tra quella Iniziale (Qt.I) e quella Attuale (Qt.A)
+        # Prendi la quotazione migliore tra Iniziale (Qt.I) e Attuale (Qt.A)
         qt_iniziale = pd.to_numeric(str(row.get('Qt.I', 1)).replace(',', '.'), errors='coerce') or 1.0
         qt_attuale = pd.to_numeric(str(row.get('Qt.A', qt_iniziale)).replace(',', '.'), errors='coerce') or qt_iniziale
         best_qt = max(qt_iniziale, qt_attuale)
 
         fm_reale_raw = trova_fantamedia_reale(nome, df_stats)
         
-        # 1. Se ha giocato in Italia l'anno scorso (es. Nico Paz al Como)
+        # 1. Storico Italia
         if fm_reale_raw is not None and str(fm_reale_raw).strip() != '':
             try:
                 fm_val = float(str(fm_reale_raw).replace(',', '.'))
@@ -97,20 +104,18 @@ def main():
         else:
             fm_val = None
 
-        # 2. Se è un NUOVO ACQUISTO (es. Molina, Mastantuono)
+        # 2. Nuovi Acquisti (Molina, Mastantuono, ecc.)
         if fm_val is None:
             fvm_proiettata = scout.calcola_fantamedia_proiettata(nome, ruolo)
-            stima_da_fm = max(0, (fvm_proiettata - 5.5) * 30) # Formula molto più reattiva
+            stima_da_fm = max(0, (fvm_proiettata - 5.5) * 30)
             
             if squadra in BIG_TEAMS:
-                # Se Fantacalcio gli dà già 10+ crediti di base (es. Molina), è un titolare/semi-top
                 if best_qt >= 10:
-                    floor = 45.0 # FVM 45 = FP ~ 25 crediti (2a Fascia)
-                # Se parte da 1 credito ma è in una Big (es. Mastantuono), forziamo un minimo dignitoso
+                    floor = 45.0 # Molina andrà qui
                 elif best_qt >= 5:
-                    floor = 30.0 # FVM 30 = FP ~ 15 crediti
+                    floor = 30.0 # Mastantuono (se Qt è salita) andrà qui
                 else:
-                    floor = 22.0 # FVM 22 = FP ~ 11 crediti (Scommessa di lusso)
+                    floor = 22.0 # Altri
                 
                 base_valore = max(best_qt * 2.2, stima_da_fm * 1.4, floor)
             else:
