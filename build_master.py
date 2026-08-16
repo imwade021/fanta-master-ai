@@ -8,10 +8,10 @@ import io
 from scout_engine import ScoutEngine
 
 LISTONE_URL = "https://raw.githubusercontent.com/imwade021/fanta-data-bridge/main/Lista-FantaAsta-Fantacalcio.csv"
-BIG_TEAMS = ['Inter', 'Milan', 'Juventus', 'Napoli', 'Roma', 'Atalanta', 'Lazio', 'Fiorentina', 'Bologna', 'Como']
+BIG_TEAMS = ['Inter', 'Milan', 'Juventus', 'Napoli', 'Roma', 'Atalanta', 'Lazio', 'Fiorentina', 'Bologna']
 
-# Parole vietate: i menu del sito web che si fingono giocatori
-GARBAGE_WORDS = ['guida', 'asta', 'rose', 'scheda', 'serie a', 'fantacalcio', '>>']
+# Parole "tossiche" per ripulire i menu del sito sfuggiti allo scraping
+GARBAGE_WORDS = ['guida', 'asta', 'rose', 'scheda', 'serie a', 'fantacalcio', '>>', 'news', 'home']
 
 def normalize_and_tokenize(s):
     if not isinstance(s, str): return set()
@@ -45,7 +45,7 @@ def trova_fantamedia_reale(nome_cercato, df_stats):
     return None
 
 def main():
-    print("🚀 Avvio Master Engine - FILTRO TRITATUTTO ATTIVO...")
+    print("🚀 Avvio Master Engine - CURVE ESPONENZIALI E FILTRO BLINDATO...")
     
     scarica_listone_aggiornato()
     scout = ScoutEngine()
@@ -70,22 +70,24 @@ def main():
                 
             parts = line_clean.split(sep)
             if len(parts) >= 10:
+                # -------------------------------------------------------------
+                # FILTRO 1: L'ID DEVE ESSERE UN NUMERO (Ghigliottina per titoli e righe vuote)
+                try: int(parts[0].strip())
+                except ValueError: continue
+
+                # FILTRO 2: Ruolo Valido
+                ruolo = parts[3].strip().upper()
+                if ruolo not in ['P', 'D', 'C', 'A']: continue
+                
+                # FILTRO 3: Scudo contro i finti giocatori (Menu, Numeri, Squadre)
                 nome_raw = parts[2].strip()
                 nome_lower = nome_raw.lower()
-                ruolo = parts[3].strip().upper()
                 squadra_raw = parts[9].strip()
                 
-                # -------------------------------------------------------------
-                # SCUDO ANTI-SPAZZATURA (Elimina i menu del sito web)
-                # -------------------------------------------------------------
-                # 1. Se è un ruolo invalido, scarta
-                if ruolo not in ['P', 'D', 'C', 'A']: continue
-                # 2. Se il nome contiene numeri ("Guida 26-27"), scarta
                 if any(char.isdigit() for char in nome_raw): continue
-                # 3. Se il nome contiene parole del menu web, scarta
-                if any(g in nome_lower for g in GARBAGE_WORDS): continue
-                # 4. Se il nome è uguale alla squadra ("Atalanta"), scarta
                 if nome_lower == squadra_raw.lower(): continue
+                if any(g in nome_lower for g in GARBAGE_WORDS): continue
+                # -------------------------------------------------------------
                 
                 row_data = parts[:19]
                 while len(row_data) < 19: row_data.append("")
@@ -114,15 +116,9 @@ def main():
         ruolo = str(row['R'])
         squadra = str(row.get('Squadra', '')).replace('*', '').strip()
         
-        try: qt_iniziale = float(str(row.get('Qt.I', '1')).replace(',', '.'))
-        except: qt_iniziale = 1.0
-        try: qt_attuale = float(str(row.get('Qt.A', qt_iniziale)).replace(',', '.'))
-        except: qt_attuale = qt_iniziale
-        
-        best_qt = max(qt_iniziale, qt_attuale)
         fm_reale_raw = trova_fantamedia_reale(nome, df_stats)
-
         fm_val = None
+        
         if fm_reale_raw is not None and str(fm_reale_raw).strip() != '':
             try: fm_val = float(str(fm_reale_raw).replace(',', '.'))
             except: pass
@@ -134,29 +130,30 @@ def main():
             except: fm_val = 5.0
 
         # -------------------------------------------------------------
-        # MOTORE INTELLIGENTE PER QUOTAZIONI SBALLATE
+        # LE CURVE ESPONENZIALI (Ignoriamo le quotazioni rotte)
         # -------------------------------------------------------------
-        # Se la quotazione base è > 50 (es. Carnesecchi 94), significa che è GIÀ un Rating!
-        # Quindi non lo moltiplichiamo, lo teniamo così com'è.
-        if best_qt > 50:
-            fvm_da_qt = best_qt
-        else:
-            # Se invece è una normale quotazione Fantacalcio (es. 15 cr), la moltiplichiamo
-            fvm_da_qt = best_qt * 1.5
-            
+        base_fvm = 1.0
+        
         if fm_val > 5.5:
-            fvm_da_fm = (fm_val - 5.2) ** 2 * 12
-        else:
-            fvm_da_fm = max(1.0, fvm_da_qt)
+            diff = fm_val - 5.5
             
-        base_fvm = max(fvm_da_qt, fvm_da_fm)
-
-        # Boost hype solo se la quotazione originaria era vera e degna di nota
-        if squadra in BIG_TEAMS and 8.0 <= best_qt <= 50.0:
-            base_fvm *= 1.15
-
+            # Formule letali e personalizzate per ruolo! 
+            if ruolo == 'A':
+                base_fvm = (diff ** 3) * 18   # Es: Lautaro (8.5 FM) -> diff 3.0 -> 3^3 * 18 = 486 FVM
+            elif ruolo == 'C':
+                base_fvm = (diff ** 3) * 14   # Es: Calhanoglu (7.5 FM) -> diff 2.0 -> 2^3 * 14 = 112 FVM
+            elif ruolo == 'D':
+                base_fvm = (diff ** 3) * 10   # Difensori crescono più lentamente
+            elif ruolo == 'P':
+                base_fvm = (diff ** 3) * 15   # Portieri top costano parecchio
+        
+        # Premio extra per chi gioca nelle squadre di cartello (garanzia)
+        if squadra in BIG_TEAMS:
+            base_fvm *= 1.25
+            
+        # NESSUN TETTO 95.0! Blocchiamo a 450 solo per evitare numeri astronomici (es. chi ha 1 presenza con 10 di media)
         try:
-            fvm_finale = round(min(95.0, max(1.0, float(base_fvm))), 1)
+            fvm_finale = round(min(450.0, max(1.0, float(base_fvm))), 1)
         except:
             fvm_finale = 1.0
 
@@ -165,7 +162,7 @@ def main():
     df_listone['FVM'] = fvm_calcolati
     df_listone = df_listone.fillna(0)
     df_listone.to_csv("Lista_Finale_Master.csv", sep=';', index=False)
-    print("✅ File CSV Pulito, Filtrato e Generato!")
+    print("✅ File CSV Generato: Filtri attivi e limiti rimossi (Max FVM 450)!")
 
 if __name__ == '__main__':
     main()
