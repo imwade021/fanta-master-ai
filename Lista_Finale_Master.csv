@@ -46,7 +46,7 @@ Id;Nome_Breve;Nome;R;Ruolo_Esteso;Qt.A;Qt.I;Qt.M;Diff.M;Squadra;FVM;FVM.M;Piede;
 6844;Rowe;Jonathan Rowe;C;"W;T";15;14;11;11;Bologna;161.6;40;destro;Inghilterra;30/04/2003 00:00:00;https://content.fantacalcio.it/web/campioncini/21/card/6844.png?v=647;0;0.0;0.0;28;6.2;6.59;3;3;2;0
 2765;Odgaard;Jens Odgaard;C;T;13;16;7;7;Bologna;171.4;20;sinistro;Danimarca;31/03/1999 00:00:00;https://content.fantacalcio.it/web/campioncini/21/card/2765.png?v=647;0;0.0;0.0;22;5.91;6.61;5;1;1;0
 4436;Cambiaghi;Nicolò Cambiaghi;C;"W;A";12;11;7;7;Bologna;126.2;25;destro;Italia;28/12/2000 00:00:00;https://content.fantacalcio.it/web/campioncini/21/card/4436.png?v=647;0;0.0;0.0;24;5.98;6.42;3;4;3;1
-6895;Dominguez B.;Benjamin Dominguez;C;"W;A";3;9;2;2;Bologna;84.3;12;destro;Argentina;19/09/2003 00:00:00;https://content.fantacalcio.it/web/campioncini/21/card/6895.png?v=647;0;0.0;0.0;12;5.83;6.04;0;3;1;0
+6895;Dominguez B.;Benjamin Dominguez;C;"W;A";3;9;2;2;Sassuolo;70.3;12;destro;Argentina;19/09/2003 00:00:00;https://content.fantacalcio.it/web/campioncini/21/card/6895.png?v=647;0;0.0;0.0;12;5.83;6.04;0;3;1;0
 2167;Orsolini;Riccardo Orsolini;C;"W;A";19;30;25;25;Bologna;299.6;200;sinistro;Italia;24/01/1997 00:00:00;https://content.fantacalcio.it/web/campioncini/21/card/2167.png?v=647;0;0.0;0.0;34;6.06;6.76;10;1;2;0
 6643;Dallinga;Thijs Dallinga;A;Pc;6;10;7;7;Bologna;129.2;10;destro;Olanda;03/08/2000 00:00:00;https://content.fantacalcio.it/web/campioncini/21/card/6643.png?v=647;0;0.0;0.0;19;5.82;6.13;2;1;2;0
 6675;Dovbyk;Artem Dovbyk;A;Pc;10;21;16;16;Bologna;310.5;70;sinistro;Ucraina;21/06/1997 00:00:00;https://content.fantacalcio.it/web/campioncini/21/card/6675.png?v=647;0;0.0;0.0;13;6.0;6.77;3;1;0;0
@@ -123,7 +123,7 @@ Id;Nome_Breve;Nome;R;Ruolo_Esteso;Qt.A;Qt.I;Qt.M;Diff.M;Squadra;FVM;FVM.M;Piede;
 6206;Fabbian;Giovanni Fabbian;C;"C;T";6;10;4;4;Fiorentina;93.1;8;destro;Italia;14/01/2003 00:00:00;https://content.fantacalcio.it/web/campioncini/21/card/6206.png?v=647;0;0.0;0.0;22;5.8;6.05;2;0;2;0
 5800;Gudmundsson A.;Albert Gudmundsson;C;"T;A";13;24;12;12;Fiorentina;222.8;58;destro;Islanda;15/06/1997 00:00:00;https://content.fantacalcio.it/web/campioncini/21/card/5800.png?v=647;0;0.0;0.0;32;5.88;6.34;5;3;4;1
 2097;Kean;Moise Kean;A;Pc;16;33;25;25;Fiorentina;447.3;197;destro;"Italia;Costa d''Avorio";28/02/2000 00:00:00;https://content.fantacalcio.it/web/campioncini/21/card/2097.png?v=647;0;0.0;0.0;26;5.88;6.77;8;1;4;0
-4359;Piccoli;Roberto Piccoli;A;Pc;9;17;7;7;Fiorentina;215.5;28;destro;Italia;27/01/2001 00:00:00;https://content.fantacalcio.it/web/campioncini/21/card/4359.png?v=647;0;0.0;0.0;27;5.78;6.24;4;1;1;0
+4359;Piccoli;Roberto Piccoli;A;Pc;9;17;7;7;Bologna;215.5;28;destro;Italia;27/01/2001 00:00:00;https://content.fantacalcio.it/web/campioncini/21/card/4359.png?v=647;0;0.0;0.0;27;5.78;6.24;4;1;1;0
 7463;Desplanches;Sebastiano Desplanches;P;Por;2;2;2;2;Frosinone;8.0;8;sinistro;"Italia;Francia";11/03/2003 00:00:00;https://content.fantacalcio.it/web/campioncini/21/card/7463.png?v=647;0;0.0;0.0;0;0.0;6.0;0;0;0;0
 7466;Lolic;Eldin Lolic;P;Por;1;1;1;1;Frosinone;1.0;1;destro;"Bosnia Erzegovina;Francia";15/05/2004 00:00:00;https://content.fantacalcio.it/web/campioncini/21/card/7466.png?v=647;0;0.0;0.0;0;0.0;0.0;0;0;0;0
 6415;Palmisani;Lorenzo Palmisani;P;Por;4;4;4;4;Frosinone;16.0;8;destro;Italia;12/06/2004 00:00:00;https://content.fantacalcio.it/web/campioncini/21/card/6415.png?v=647;0;0.0;0.0;0;0.0;6.0;0;0;0;0
@@ -499,7 +499,7 @@ Id;Nome_Breve;Nome;R;Ruolo_Esteso;Qt.A;Qt.I;Qt.M;Diff.M;Squadra;FVM;FVM.M;Piede;
 2127;Satalino;Giacomo Satalino;P;Por;1;1;1;1;Sassuolo;1.0;1;destro;Italia;20/05/1999 00:00:00;https://content.fantacalcio.it/web/campioncini/21/card/2127.png?v=647;0;0.0;0.0;0;0.0;0.0;0;0;0;0
 7546;Robinson J.;Jay Robinson;A;A;4;4;4;4;Monza;16.0;10;destro;Inghilterra;15/03/2007 00:00:00;https://content.fantacalcio.it/web/campioncini/21/card/7546.png?v=647;0;0.0;0.0;0;0.0;6.0;0;0;0;0
 7078;Mastantuono;Franco Mastantuono;C;"W;T";12;12;12;12;Fiorentina;48.0;58;sinistro;Argentina;14/08/2007 00:00:00;https://content.fantacalcio.it/web/campioncini/21/card/7078.png?v=647;0;0.0;0.0;0;0.0;6.0;0;0;0;0
-6229;Tourè E.;El Bilal Tourè;A;Pc;11;11;11;11;Atalanta;44.0;43;ambidestro;"Mali;Costa D''Avorio";03/10/2001 00:00:00;https://content.fantacalcio.it/web/campioncini/21/card/6229.png?v=647;0;0.0;0.0;0;0.0;6.0;0;0;0;0
+6229;Tourè E.;El Bilal Tourè;A;Pc;11;11;11;11;Parma;44.0;43;ambidestro;"Mali;Costa D''Avorio";03/10/2001 00:00:00;https://content.fantacalcio.it/web/campioncini/21/card/6229.png?v=647;0;0.0;0.0;0;0.0;6.0;0;0;0;0
 530;Pellegrini Lo.;Lorenzo Pellegrini;C;"C;T";13;11;10;10;Roma;144.2;28;destro;Italia;19/06/1996 00:00:00;https://content.fantacalcio.it/web/campioncini/21/card/530.png?v=647;0;0.0;0.0;24;6.04;6.58;4;2;2;0
 5641;Chalobah T.;Trevoh Chalobah;D;"Dd;Dc";9;9;10;10;Como;36.0;28;destro;"Inghilterra;Sierra Leone";05/07/1999 00:00:00;https://content.fantacalcio.it/web/campioncini/21/card/5641.png?v=647;0;0.0;0.0;0;0.0;6.0;0;0;0;0
 7547;Kevin Carlos;Kevin Carlos;A;Pc;13;13;12;12;Cagliari;52.0;44;destro;"Spagna;Nigeria";10/04/2001 00:00:00;https://content.fantacalcio.it/web/campioncini/21/card/7547.png?v=647;0;0.0;0.0;0;0.0;6.0;0;0;0;0
@@ -508,99 +508,3 @@ Id;Nome_Breve;Nome;R;Ruolo_Esteso;Qt.A;Qt.I;Qt.M;Diff.M;Squadra;FVM;FVM.M;Piede;
 7550;Grillitsch;Florian Grillitsch;C;"M;C";5;5;5;5;Frosinone;20.0;14;destro;Austria;07/08/1995 00:00:00;https://content.fantacalcio.it/web/campioncini/21/card/7550.png?v=647;0;0.0;0.0;0;0.0;6.0;0;0;0;0
 7551;Schmid;Romano Schmid;C;"W;T";8;8;8;8;Frosinone;32.0;30;destro;Austria;27/01/2000 00:00:00;https://content.fantacalcio.it/web/campioncini/21/card/7551.png?v=647;0;0.0;0.0;0;0.0;6.0;0;0;0;0
 7557;Penev;Plamen Penev;P;Por;1;1;1;1;Lecce;1.0;1;sinistro;Bulgaria;22/04/2008 00:00:00;https://content.fantacalcio.it/web/campioncini/21/card/7557.png?v=647;0;0.0;0;0;0.0;0.0;0;0;0;0
-9509;Y. Maye;Y. Maye;D;D;1;1;;;Inter;1.0;;;;;;;;;0;0.0;0.0;0;0;0;0
-9510;L. Bovo;L. Bovo;C;C;1;1;;;Inter;1.0;;;;;;;;;0;0.0;0.0;0;0;0;0
-9511;L. Topalović;L. Topalović;C;C;1;1;;;Inter;1.0;;;;;;;;;0;0.0;0.0;0;0;0;0
-9512;M. Lavelli;M. Lavelli;A;A;1;1;;;Inter;1.0;;;;;;;;;0;0.0;0.0;0;0;0;0
-9513;M. Mosconi;M. Mosconi;A;A;1;1;;;Inter;1.0;;;;;;;;;0;0.0;0.0;0;0;0;0
-9514;M. Spinaccè;M. Spinaccè;A;A;1;1;;;Inter;1.0;;;;;;;;;0;0.0;0.0;0;0;0;0
-9515;M. Pittarella;M. Pittarella;P;P;1;1;;;Milan;1.0;;;;;;;;;0;0.0;0.0;0;0;0;0
-9516;S. Bocoum;S. Bocoum;D;D;1;1;;;Milan;1.0;;;;;;;;;0;0.0;0.0;0;0;0;0
-9517;D. Odogu;D. Odogu;D;D;1;1;;;Milan;1.0;;;;;;;;;0;0.0;0.0;0;0;0;0
-9518;V. Vladimirov;V. Vladimirov;D;D;1;1;;;Milan;1.0;;;;;;;;;0;0.0;0.0;0;0;0;0
-9519;S. Vos;S. Vos;C;C;1;1;;;Milan;1.0;;;;;;;;;0;0.0;0.0;0;0;0;0
-9520;C. Comotto;C. Comotto;C;C;1;1;;;Milan;1.0;;;;;;;;;0;0.0;0.0;0;0;0;0
-9521;J. Sardo;J. Sardo;C;C;1;1;;;Milan;1.0;;;;;;;;;0;0.0;0.0;0;0;0;0
-9522;F. Terracciano;F. Terracciano;C;C;1;1;;;Milan;1.0;;;;;;;;;0;0.0;0.0;0;0;0;0
-9523;M. Valletta;M. Valletta;A;A;1;1;;;Milan;1.0;;;;;;;;;0;0.0;0.0;0;0;0;0
-9524;E. Borsani;E. Borsani;A;A;1;1;;;Milan;1.0;;;;;;;;;0;0.0;0.0;0;0;0;0
-9525;A. Cissè;A. Cissè;A;A;1;1;;;Milan;1.0;;;;;;;;;0;0.0;0.0;0;0;0;0
-9526;A. Kostić;A. Kostić;A;A;1;1;;;Milan;1.0;;;;;;;;;0;0.0;0.0;0;0;0;0
-9527;R. Radu;R. Radu;P;P;1;1;;;Juventus;1.0;;;;;;;;;0;0.0;0.0;0;0;0;0
-9528;S. Scaglia;S. Scaglia;P;P;1;1;;;Juventus;1.0;;;;;;;;;0;0.0;0.0;0;0;0;0
-9529;Bremer;Bremer;D;D;1;1;;;Juventus;26.5;;;;;;;;;26;6.33;6.81;4;3;5;0
-9530;Javier Gil;Javier Gil;D;D;1;1;;;Juventus;1.0;;;;;;;;;0;0.0;0.0;0;0;0;0
-9531;N. Rizzo;N. Rizzo;D;D;1;1;;;Juventus;1.0;;;;;;;;;0;0.0;0.0;0;0;0;0
-9532;J. Rouhi;J. Rouhi;D;D;1;1;;;Juventus;1.0;;;;;;;;;0;0.0;0.0;0;0;0;0
-9533;Arthur;Arthur;C;C;1;1;;;Juventus;1.0;;;;;;;;;0;0.0;0.0;0;0;0;0
-9534;D. Elimoghale;D. Elimoghale;A;A;1;1;;;Juventus;1.0;;;;;;;;;0;0.0;0.0;0;0;0;0
-9535;A. Milik;A. Milik;A;A;1;1;;;Juventus;1.0;;;;;;;;;0;0.0;0.0;0;0;0;0
-9536;K. Yıldız;K. Yıldız;A;A;1;1;;;Juventus;1.0;;;;;;;;;0;0.0;0.0;0;0;0;0
-9537;C. Garofalo;C. Garofalo;D;D;1;1;;;Napoli;1.0;;;;;;;;;0;0.0;0.0;0;0;0;0
-9538;N. Obaretin;N. Obaretin;D;D;1;1;;;Napoli;1.0;;;;;;;;;0;0.0;0.0;0;0;0;0
-9539;F. Barido;F. Barido;C;C;1;1;;;Napoli;1.0;;;;;;;;;0;0.0;0.0;0;0;0;0
-9540;J. Lindstrøm;J. Lindstrøm;C;C;1;1;;;Napoli;1.0;;;;;;;;;0;0.0;0.0;0;0;0;0
-9541;V. Prisco;V. Prisco;C;C;1;1;;;Napoli;1.0;;;;;;;;;0;0.0;0.0;0;0;0;0
-9542;W. Cheddira;W. Cheddira;A;A;1;1;;;Napoli;1.0;;;;;;;;;0;0.0;0.0;0;0;0;0
-9543;R. Højlund;R. Højlund;A;A;1;1;;;Napoli;1.0;;;;;;;;;0;0.0;0.0;0;0;0;0
-9544;R. Żelezny;R. Żelezny;P;P;1;1;;;Roma;1.0;;;;;;;;;0;0.0;0.0;0;0;0;0
-9545;Hermoso;Hermoso;D;D;1;1;;;Roma;17.0;;;;;;;;;27;6.17;6.41;3;2;9;0
-9546;E. Lulli;E. Lulli;D;D;1;1;;;Roma;1.0;;;;;;;;;0;0.0;0.0;0;0;0;0
-9547;Jacopo Mirra;Jacopo Mirra;D;D;1;1;;;Roma;1.0;;;;;;;;;0;0.0;0.0;0;0;0;0
-9548;F. Nardin;F. Nardin;D;D;1;1;;;Roma;1.0;;;;;;;;;0;0.0;0.0;0;0;0;0
-9549;F. Reale;F. Reale;D;D;1;1;;;Roma;1.0;;;;;;;;;0;0.0;0.0;0;0;0;0
-9550;M. Seck;M. Seck;D;D;1;1;;;Roma;1.0;;;;;;;;;0;0.0;0.0;0;0;0;0
-9551;J. Ziółkowski;J. Ziółkowski;D;D;1;1;;;Roma;1.0;;;;;;;;;0;0.0;0.0;0;0;0;0
-9552;M. Bah;M. Bah;C;C;1;1;;;Roma;1.0;;;;;;;;;0;0.0;0.0;0;0;0;0
-9553;Mattia Mannini;Mattia Mannini;C;C;1;1;;;Roma;1.0;;;;;;;;;0;0.0;0.0;0;0;0;0
-9554;A. Arena;A. Arena;A;A;1;1;;;Roma;1.0;;;;;;;;;0;0.0;0.0;0;0;0;0
-9555;L. Cherubini;L. Cherubini;A;A;1;1;;;Roma;1.0;;;;;;;;;0;0.0;0.0;0;0;0;0
-9556;P. Pardel;P. Pardel;P;P;1;1;;;Atalanta;1.0;;;;;;;;;0;0.0;0.0;0;0;0;0
-9557;M. Bakker;M. Bakker;D;D;1;1;;;Atalanta;1.0;;;;;;;;;0;0.0;0.0;0;0;0;0
-9558;J. Idele;J. Idele;D;D;1;1;;;Atalanta;1.0;;;;;;;;;0;0.0;0.0;0;0;0;0
-9559;R. ObriÄ;R. ObriÄ;D;D;1;1;;;Atalanta;1.0;;;;;;;;;0;0.0;0.0;0;0;0;0
-9560;Éderson;Éderson;C;C;1;1;;;Atalanta;1.0;;;;;;;;;0;0.0;0.0;0;0;0;0
-9561;S. Levak;S. Levak;C;C;1;1;;;Atalanta;1.0;;;;;;;;;0;0.0;0.0;0;0;0;0
-9562;A. Manzoni;A. Manzoni;C;C;1;1;;;Atalanta;1.0;;;;;;;;;0;0.0;0.0;0;0;0;0
-9563;F. Steffanoni;F. Steffanoni;C;C;1;1;;;Atalanta;1.0;;;;;;;;;0;0.0;0.0;0;0;0;0
-9564;F. Cassa;F. Cassa;A;A;1;1;;;Atalanta;1.0;;;;;;;;;0;0.0;0.0;0;0;0;0
-9565;A. Furlanetto;A. Furlanetto;P;P;1;1;;;Lazio;1.0;;;;;;;;;0;0.0;0.0;0;0;0;0
-9566;Giacomo Giacomone;Giacomo Giacomone;P;P;1;1;;;Lazio;1.0;;;;;;;;;0;0.0;0.0;0;0;0;0
-9567;Nicolo Pannozzo;Nicolo Pannozzo;P;P;1;1;;;Lazio;1.0;;;;;;;;;0;0.0;0.0;0;0;0;0
-9568;F. Bordon;F. Bordon;D;D;1;1;;;Lazio;1.0;;;;;;;;;0;0.0;0.0;0;0;0;0
-9569;S. Gigot;S. Gigot;D;D;1;1;;;Lazio;1.0;;;;;;;;;0;0.0;0.0;0;0;0;0
-9570;Patric;Patric;D;D;1;1;;;Lazio;5.9;;;;;;;;;10;5.85;5.75;0;0;2;0
-9571;Pedraza;Pedraza;D;D;1;1;;;Lazio;1.0;;;;;;;;;0;0.0;0.0;0;0;0;0
-9572;V. Farcomeni;V. Farcomeni;C;C;1;1;;;Lazio;1.0;;;;;;;;;0;0.0;0.0;0;0;0;0
-9573;B. Galassi;B. Galassi;C;C;1;1;;;Lazio;1.0;;;;;;;;;0;0.0;0.0;0;0;0;0
-9574;G. Artistico;G. Artistico;A;A;1;1;;;Lazio;1.0;;;;;;;;;0;0.0;0.0;0;0;0;0
-9575;S. Fernandes;S. Fernandes;A;A;1;1;;;Lazio;1.0;;;;;;;;;0;0.0;0.0;0;0;0;0
-9576;F. Serra;F. Serra;A;A;1;1;;;Lazio;1.0;;;;;;;;;0;0.0;0.0;0;0;0;0
-9577;Mattia Magalotti;Mattia Magalotti;P;P;1;1;;;Fiorentina;1.0;;;;;;;;;0;0.0;0.0;0;0;0;0
-9578;N. Fortini;N. Fortini;D;D;1;1;;;Fiorentina;1.0;;;;;;;;;0;0.0;0.0;0;0;0;0
-9579;João Mário;João Mário;D;D;1;1;;;Fiorentina;9.3;;;;;;;;;14;5.79;6.0;1;1;2;0
-9580;E. Košpo;E. Košpo;D;D;1;1;;;Fiorentina;1.0;;;;;;;;;0;0.0;0.0;0;0;0;0
-9581;E. Sadotti;E. Sadotti;D;D;1;1;;;Fiorentina;1.0;;;;;;;;;0;0.0;0.0;0;0;0;0
-9582;P. Bonanno;P. Bonanno;C;C;1;1;;;Fiorentina;1.0;;;;;;;;;0;0.0;0.0;0;0;0;0
-9583;L. Deli;L. Deli;C;C;1;1;;;Fiorentina;1.0;;;;;;;;;0;0.0;0.0;0;0;0;0
-9584;C. Inao OulaÃ¯;C. Inao OulaÃ¯;C;C;1;1;;;Fiorentina;1.0;;;;;;;;;0;0.0;0.0;0;0;0;0
-9585;Pirro;Pirro;C;C;1;1;;;Fiorentina;1.0;;;;;;;;;0;0.0;0.0;0;0;0;0
-9586;G. Bertolini;G. Bertolini;A;A;1;1;;;Fiorentina;1.0;;;;;;;;;0;0.0;0.0;0;0;0;0
-9587;R. Braschi;R. Braschi;A;A;1;1;;;Fiorentina;1.0;;;;;;;;;0;0.0;0.0;0;0;0;0
-9588;A. Guðmundsson;A. Guðmundsson;C;C;1;1;;;Fiorentina;1.0;;;;;;;;;0;0.0;0.0;0;0;0;0
-9589;"M&apos;Bala Nzola";"M&apos;Bala Nzola";A;A;1;1;;;Fiorentina;1.0;;;;;;;;;0;0.0;0.0;0;0;0;0
-9590;G. Puzzoli;G. Puzzoli;A;A;1;1;;;Fiorentina;1.0;;;;;;;;;0;0.0;0.0;0;0;0;0
-9591;Matteo Franceschelli;Matteo Franceschelli;P;P;1;1;;;Bologna;1.0;;;;;;;;;0;0.0;0.0;0;0;0;0
-9592;Riccardo Gnudi;Riccardo Gnudi;P;P;1;1;;;Bologna;1.0;;;;;;;;;0;0.0;0.0;0;0;0;0
-9593;Ł. Skorupski;Ł. Skorupski;P;P;1;1;;;Bologna;6.7;;;;;;;;;18;6.19;5.28;0;0;1;1
-9594;D. Baroncioni;D. Baroncioni;D;D;1;1;;;Bologna;1.0;;;;;;;;;0;0.0;0.0;0;0;0;0
-9595;M. Ilić;M. Ilić;D;D;1;1;;;Bologna;1.0;;;;;;;;;0;0.0;0.0;0;0;0;0
-9596;F. Castaldo;F. Castaldo;A;A;1;1;;;Bologna;1.0;;;;;;;;;0;0.0;0.0;0;0;0;0
-9597;F. Israel;F. Israel;P;P;1;1;;;Torino;1.0;;;;;;;;;0;0.0;0.0;0;0;0;0
-9598;C. Bianay Balcot;C. Bianay Balcot;D;D;1;1;;;Torino;1.0;;;;;;;;;0;0.0;0.0;0;0;0;0
-9599;A. Dembélé;A. Dembélé;D;D;1;1;;;Torino;1.0;;;;;;;;;0;0.0;0.0;0;0;0;0
-9600;M. Pellini;M. Pellini;D;D;1;1;;;Torino;1.0;;;;;;;;;0;0.0;0.0;0;0;0;0
-9601;W. Acquah;W. Acquah;C;C;1;1;;;Torino;1.0;;;;;;;;;0;0.0;0.0;0;0;0;0
-9602;A. Ballanti;A. Ballanti;C;C;1;1;;;Torino;1.0;;;;;;;;;0;0.0;0.0;0;0;0;0
-9603;M. Dalla Vecchia;M. Dalla Vecchia;C;C;1;1;;;Torino;1.0;;;;;;;;;0;0.0;0.0;0;0;0;0
-9604;T. Gabellini;T. Gabellini;A;A;1;1;;;Torino;1.0;;;;;;;;;0;0.0;0.0;0;0;0;0
