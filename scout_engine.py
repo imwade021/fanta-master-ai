@@ -5,11 +5,15 @@ import unicodedata
 
 class ScoutEngine:
     def __init__(self):
-        # Legge la chiave API dalle impostazioni ambiente
-        self.api_key = os.getenv("FOOTBALL_API_KEY") or os.getenv("RAPIDAPI_KEY")
+        # Intercetta il secret sotto qualsiasi nome sia stato salvato
+        self.api_key = (
+            os.getenv("FOOTBALL_API_KEY") or 
+            os.getenv("API_FOOTBALL_KEY") or 
+            os.getenv("RAPIDAPI_KEY")
+        )
         self.base_url = "https://v3.football.api-sports.io"
         
-        # Mappatura ID Squadre Serie A per API-Football
+        # Mappatura ID Squadre Serie A su API-Football
         self.serie_a_teams = {
             'Inter': 505, 'Milan': 489, 'Juventus': 496, 'Napoli': 492,
             'Roma': 497, 'Atalanta': 499, 'Lazio': 487, 'Fiorentina': 502,
@@ -25,16 +29,14 @@ class ScoutEngine:
         }
 
     def sincronizza_rose_serie_a(self):
-        """Scansiona le rose reali di Serie A via API e rileva i nuovi acquisti"""
+        """Scansiona le rose ufficiali via API e rileva i nuovi acquisti di mercato"""
         if not self.api_key:
             print("⚠️ FOOTBALL_API_KEY non trovata nei Secrets di GitHub. Sincronizzazione rose saltata.")
             return []
 
         nuovi_giocatori = []
-        print(f"📡 Connessione ad API-Football in corso per 20 squadre...")
+        print(f"📡 Connessione ad API-Football in corso per la scansione delle rose...")
 
-        # Per evitare di consumare troppe chiamate API in una volta sola,
-        # scansioniamo le principali squadre di mercato
         for squadra, team_id in self.serie_a_teams.items():
             try:
                 url = f"{self.base_url}/players/squads?team={team_id}"
@@ -48,7 +50,6 @@ class ScoutEngine:
                         nome_p = p.get('name')
                         pos_p = p.get('position', 'Midfielder')
                         
-                        # Mappatura ruoli (Defender -> D, Attacker -> A, etc.)
                         ruolo_fanta = 'C'
                         if pos_p == 'Goalkeeper': ruolo_fanta = 'P'
                         elif pos_p == 'Defender': ruolo_fanta = 'D'
@@ -61,14 +62,14 @@ class ScoutEngine:
                                 'squadra': squadra,
                                 'quotazione_base': 10
                             })
-            except Exception as e:
+            except Exception:
                 continue
 
-        print(f"✅ Trovati {len(nuovi_giocatori)} giocatori aggiornati via API!")
+        print(f"✅ Sincronizzazione completata: rilevati {len(nuovi_giocatori)} calciatori via API!")
         return nuovi_giocatori
 
     def calcola_fantamedia_proiettata(self, nome_giocatore, ruolo):
-        """Proietta la FantaMedia per i nuovi arrivi analizzando lo storico estero"""
+        """Recupera lo storico estero/recente per proiettare la FantaMedia dei nuovi arrivi"""
         if not self.api_key:
             return 5.8
 
@@ -83,7 +84,6 @@ class ScoutEngine:
                     assists = stats.get('goals', {}).get('assists') or 0
                     apps = stats.get('games', {}).get('appearences') or 1
                     
-                    # Calcolo base
                     base_mv = 6.0
                     bonus = (goals * 3 + assists * 1) / max(1, apps)
                     return round(base_mv + bonus, 2)
