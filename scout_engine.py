@@ -66,7 +66,6 @@ class ScoutEngine:
         return nuovi_giocatori
 
     def verifica_prospetto_giovanile(self, nome_giocatore, squadra):
-        """Distingue i giovani reali (es. Comotto) dai semplici aggregati (es. Valletta)"""
         if not self.api_key:
             return False
             
