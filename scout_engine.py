@@ -1,100 +1,93 @@
 import os
 import requests
-import time
-import urllib.parse
+import re
+import unicodedata
 
 class ScoutEngine:
     def __init__(self):
-        self.api_key = os.environ.get('API_FOOTBALL_KEY')
+        # Legge la chiave API dalle impostazioni ambiente
+        self.api_key = os.getenv("FOOTBALL_API_KEY") or os.getenv("RAPIDAPI_KEY")
+        self.base_url = "https://v3.football.api-sports.io"
         
-        self.api_headers = {
-            'x-apisports-key': self.api_key if self.api_key else ''
-        }
-        
-        self.web_headers = {
-            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/91.0.4472.124 Safari/537.36'
+        # Mappatura ID Squadre Serie A per API-Football
+        self.serie_a_teams = {
+            'Inter': 505, 'Milan': 489, 'Juventus': 496, 'Napoli': 492,
+            'Roma': 497, 'Atalanta': 499, 'Lazio': 487, 'Fiorentina': 502,
+            'Bologna': 500, 'Torino': 503, 'Udinese': 494, 'Genoa': 495,
+            'Verona': 504, 'Cagliari': 490, 'Empoli': 511, 'Lecce': 867,
+            'Monza': 1579, 'Como': 1020, 'Parma': 523, 'Venezia': 517
         }
 
-        self.coefficienti_campionati = {
-            'Premier League': 1.0, 'La Liga': 0.95, 'Bundesliga': 0.90, 'Ligue 1': 0.85,
-            'Serie B': 0.80, 'Eredivisie': 0.75, 'Primeira Liga': 0.75, 'Brasileirao': 0.70,
-            'Championship': 0.70, 'Sconosciuto': 0.65
+    def _get_headers(self):
+        return {
+            'x-apisports-key': self.api_key,
+            'x-rapidapi-key': self.api_key
         }
 
-    def cerca_api_ufficiale(self, nome_giocatore):
+    def sincronizza_rose_serie_a(self):
+        """Scansiona le rose reali di Serie A via API e rileva i nuovi acquisti"""
         if not self.api_key:
-            return None
-            
-        print(f"   [+] Livello 1: Interrogo API-Football per {nome_giocatore}...")
-        try:
-            url = "https://v3.football.api-sports.io/players"
-            params = {'search': nome_giocatore, 'season': 2025}
-            response = requests.get(url, headers=self.api_headers, params=params, timeout=5)
-            
-            if response.status_code == 200:
-                data = response.json()
-                if data.get('results', 0) > 0:
-                    stats = data['response'][0]['statistics'][0]
-                    games = stats['games']['appearences'] or 0
-                    goals = stats['goals']['total'] or 0
-                    assists = stats['goals']['assists'] or 0
-                    yellows = stats['cards']['yellow'] or 0
-                    league = stats['league']['name'] or 'Sconosciuto'
+            print("⚠️ FOOTBALL_API_KEY non trovata nei Secrets di GitHub. Sincronizzazione rose saltata.")
+            return []
+
+        nuovi_giocatori = []
+        print(f"📡 Connessione ad API-Football in corso per 20 squadre...")
+
+        # Per evitare di consumare troppe chiamate API in una volta sola,
+        # scansioniamo le principali squadre di mercato
+        for squadra, team_id in self.serie_a_teams.items():
+            try:
+                url = f"{self.base_url}/players/squads?team={team_id}"
+                res = requests.get(url, headers=self._get_headers(), timeout=8)
+                
+                if res.status_code == 200:
+                    data = res.json()
+                    players = data.get('response', [])[0].get('players', []) if data.get('response') else []
                     
-                    if games > 0:
-                        print("   [✓] Dati API recuperati con successo!")
-                        return {
-                            'presenze': games, 'gol': goals, 'assist': assists, 
-                            'ammonizioni': yellows, 'campionato_origine': league
-                        }
-        except Exception as e:
-            print(f"   [!] Errore API: {e}")
-        return None
+                    for p in players:
+                        nome_p = p.get('name')
+                        pos_p = p.get('position', 'Midfielder')
+                        
+                        # Mappatura ruoli (Defender -> D, Attacker -> A, etc.)
+                        ruolo_fanta = 'C'
+                        if pos_p == 'Goalkeeper': ruolo_fanta = 'P'
+                        elif pos_p == 'Defender': ruolo_fanta = 'D'
+                        elif pos_p == 'Attacker': ruolo_fanta = 'A'
 
-    def cerca_euristica_emergenza(self, nome_giocatore, ruolo):
-        print(f"   [-] Livello d'emergenza attivato per {nome_giocatore} (Ruolo: {ruolo})")
-        
-        if ruolo == 'A':
-            return {'presenze': 20, 'gol': 6, 'assist': 2, 'ammonizioni': 2, 'campionato_origine': 'Sconosciuto'}
-        elif ruolo in ['C', 'T']:
-            return {'presenze': 25, 'gol': 3, 'assist': 4, 'ammonizioni': 5, 'campionato_origine': 'Sconosciuto'}
-        elif ruolo in ['D', 'E', 'B']:
-            return {'presenze': 25, 'gol': 1, 'assist': 1, 'ammonizioni': 7, 'campionato_origine': 'Sconosciuto'}
-        else:
-            return {'presenze': 30, 'gol': 0, 'assist': 0, 'ammonizioni': 0, 'campionato_origine': 'Sconosciuto'}
+                        if nome_p:
+                            nuovi_giocatori.append({
+                                'nome': nome_p,
+                                'ruolo': ruolo_fanta,
+                                'squadra': squadra,
+                                'quotazione_base': 10
+                            })
+            except Exception as e:
+                continue
 
-    def estrai_dati(self, nome_giocatore, ruolo):
-        dati = self.cerca_api_ufficiale(nome_giocatore)
-        
-        # Corretto 'if non dati:' con il corretto operatore Python 'if not dati:'
-        if not dati:
-            dati = self.cerca_euristica_emergenza(nome_giocatore, ruolo)
-            
-        time.sleep(0.2)
-        return dati
+        print(f"✅ Trovati {len(nuovi_giocatori)} giocatori aggiornati via API!")
+        return nuovi_giocatori
 
     def calcola_fantamedia_proiettata(self, nome_giocatore, ruolo):
-        print(f"\n🕵️ Analisi su {nome_giocatore}...")
-        dati = self.estrai_dati(nome_giocatore, ruolo)
-        
-        presenze = dati['presenze']
-        gol = dati['gol']
-        assist = dati['assist']
-        malus = dati['ammonizioni'] * 0.5
-        campionato = dati['campionato_origine']
-        
-        coeff = self.coefficienti_campionati.get(campionato, 0.65)
-        
-        if ruolo in ['A', 'C', 'T', 'D', 'E', 'B']:
-            bonus_totale = (gol * 3) + (assist * 1)
-        else: 
-            bonus_totale = 0 
-            
-        bonus_adattato = bonus_totale * coeff
-        voto_base_estero = 6.0 if presenze > 15 else 5.8
-        
-        fantamedia_proiettata = voto_base_estero + (bonus_adattato / presenze) - (malus / presenze)
-        fantamedia_proiettata = max(5.0, min(8.5, fantamedia_proiettata))
-        
-        print(f"   => P-FM Calcolata: {round(fantamedia_proiettata, 2)} (da {campionato})")
-        return round(fantamedia_proiettata, 2)
+        """Proietta la FantaMedia per i nuovi arrivi analizzando lo storico estero"""
+        if not self.api_key:
+            return 5.8
+
+        try:
+            url = f"{self.base_url}/players?search={nome_giocatore}"
+            res = requests.get(url, headers=self._get_headers(), timeout=6)
+            if res.status_code == 200:
+                data = res.json()
+                if data.get('response'):
+                    stats = data['response'][0].get('statistics', [])[0]
+                    goals = stats.get('goals', {}).get('total') or 0
+                    assists = stats.get('goals', {}).get('assists') or 0
+                    apps = stats.get('games', {}).get('appearences') or 1
+                    
+                    # Calcolo base
+                    base_mv = 6.0
+                    bonus = (goals * 3 + assists * 1) / max(1, apps)
+                    return round(base_mv + bonus, 2)
+        except Exception:
+            pass
+
+        return 5.8
