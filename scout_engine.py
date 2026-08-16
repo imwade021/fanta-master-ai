@@ -5,7 +5,6 @@ import unicodedata
 
 class ScoutEngine:
     def __init__(self):
-        # Intercetta il secret sotto qualsiasi nome sia stato salvato
         self.api_key = (
             os.getenv("FOOTBALL_API_KEY") or 
             os.getenv("API_FOOTBALL_KEY") or 
@@ -13,7 +12,6 @@ class ScoutEngine:
         )
         self.base_url = "https://v3.football.api-sports.io"
         
-        # Mappatura ID Squadre Serie A su API-Football
         self.serie_a_teams = {
             'Inter': 505, 'Milan': 489, 'Juventus': 496, 'Napoli': 492,
             'Roma': 497, 'Atalanta': 499, 'Lazio': 487, 'Fiorentina': 502,
@@ -29,13 +27,12 @@ class ScoutEngine:
         }
 
     def sincronizza_rose_serie_a(self):
-        """Scansiona le rose ufficiali via API e rileva i nuovi acquisti di mercato"""
         if not self.api_key:
-            print("⚠️ FOOTBALL_API_KEY non trovata nei Secrets di GitHub. Sincronizzazione rose saltata.")
+            print("⚠️ API Key non trovata. Sincronizzazione rose saltata.")
             return []
 
         nuovi_giocatori = []
-        print(f"📡 Connessione ad API-Football in corso per la scansione delle rose...")
+        print("📡 Connessione ad API-Football per la scansione rose...")
 
         for squadra, team_id in self.serie_a_teams.items():
             try:
@@ -60,18 +57,40 @@ class ScoutEngine:
                                 'nome': nome_p,
                                 'ruolo': ruolo_fanta,
                                 'squadra': squadra,
-                                'quotazione_base': 10
+                                'quotazione_base': 1
                             })
             except Exception:
                 continue
 
-        print(f"✅ Sincronizzazione completata: rilevati {len(nuovi_giocatori)} calciatori via API!")
+        print(f"✅ Sincronizzazione completata: {len(nuovi_giocatori)} giocatori rilevati via API.")
         return nuovi_giocatori
 
-    def calcola_fantamedia_proiettata(self, nome_giocatore, ruolo):
-        """Recupera lo storico estero/recente per proiettare la FantaMedia dei nuovi arrivi"""
+    def verifica_prospetto_giovanile(self, nome_giocatore, squadra):
+        """Distingue i giovani reali (es. Comotto) dai semplici aggregati (es. Valletta)"""
         if not self.api_key:
-            return 5.8
+            return False
+            
+        try:
+            url = f"{self.base_url}/players?search={nome_giocatore}"
+            res = requests.get(url, headers=self._get_headers(), timeout=5)
+            if res.status_code == 200:
+                data = res.json()
+                if data.get('response'):
+                    player_data = data['response'][0]
+                    stats = player_data.get('statistics', [])
+                    for st in stats:
+                        league_name = st.get('league', {}).get('name', '').lower()
+                        apps = st.get('games', {}).get('appearences') or 0
+                        if ('national' in league_name or 'serie a' in league_name or 'cup' in league_name) and apps > 0:
+                            return True
+        except Exception:
+            pass
+            
+        return False
+
+    def calcola_fantamedia_proiettata(self, nome_giocatore, ruolo):
+        if not self.api_key:
+            return None
 
         try:
             url = f"{self.base_url}/players?search={nome_giocatore}"
@@ -90,4 +109,4 @@ class ScoutEngine:
         except Exception:
             pass
 
-        return 5.8
+        return None
