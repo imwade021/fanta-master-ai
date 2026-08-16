@@ -1,14 +1,30 @@
 import pandas as pd
 import numpy as np
+import requests
+import os
 from scout_engine import ScoutEngine
 
+LISTONE_URL = "https://raw.githubusercontent.com/imwade021/fanta-data-bridge/main/Lista-FantaAsta-Fantacalcio.csv"
+
+def scarica_listone_aggiornato():
+    print("📥 Download dell'ultimo listone di mercato in corso...")
+    try:
+        res = requests.get(LISTONE_URL, timeout=15)
+        if res.status_code == 200:
+            with open("Lista-FantaAsta-Fantacalcio.csv", "wb") as f:
+                f.write(res.content)
+            print("✅ Listone sorgente aggiornato con successo!")
+            return True
+    except Exception as e:
+        print(f"⚠️ Download fallito, uso il file locale esistente: {e}")
+    return False
+
 def main():
-    print("🚀 Avvio Master Engine con Scouting Integrato...")
+    print("🚀 Avvio Master Engine Automatico...")
     
-    # 1. Carichiamo lo ScoutEngine per le API estero
+    scarica_listone_aggiornato()
     scout = ScoutEngine()
     
-    # 2. Carichiamo il listone principale
     try:
         df_listone = pd.read_csv("Lista-FantaAsta-Fantacalcio.csv", header=None)
         df_listone.columns = [
@@ -20,17 +36,15 @@ def main():
         print(f"❌ Errore caricamento Listone CSV: {e}")
         return
 
-    # 3. Carichiamo il file delle Statistiche Reali
     try:
         df_stats = pd.read_excel("Quotazioni_Fantacalcio_Stagione_2025_26.xlsx", header=1)
         df_stats['Nome_Clean'] = df_stats['Nome'].astype(str).str.lower().str.strip()
     except Exception as e:
-        print(f"⚠️ File Statistiche non trovato, uso solo Scout Engine: {e}")
+        print(f"⚠️ File Statistiche non trovato: {e}")
         df_stats = pd.DataFrame()
 
     fvm_calcolati = []
 
-    # 4. Elaborazione chirurgica giocatore per giocatore
     for idx, row in df_listone.iterrows():
         nome = str(row['Nome'])
         ruolo = str(row['R'])
@@ -38,7 +52,7 @@ def main():
         
         fvm_finale = None
         
-        # Cerca prima nello storico italiano (2025/2026)
+        # 1. Se ha giocato in Italia l'anno scorso, prendiamo la FantaMedia reale
         if not df_stats.empty:
             match = df_stats[df_stats['Nome_Clean'] == nome_clean]
             if not match.empty:
@@ -46,21 +60,25 @@ def main():
                 if pd.notnull(fm_reale) and float(str(fm_reale).replace(',', '.')) > 0:
                     fvm_finale = float(str(fm_reale).replace(',', '.'))
         
-        # Se NON ha uno storico in Italia (es. Mastantuono dal Real Madrid), intervengono le API dello Scout!
+        # 2. Se è un NUOVO ACQUISTO (es. Mastantuono), applichiamo lo Scout + Boost Hype
         if fvm_finale is None:
-            print(f"🔎 Nuovo acquisto/Esterofilo rilevato: {nome}")
             fvm_proiettata = scout.calcola_fantamedia_proiettata(nome, ruolo)
             
-            # Trasformiamo la FantaMedia Proiettata in un valore percentuale FVM credibile per l'asta
-            # Es. FM di 7.2 -> ~35-40 FVM | FM di 6.0 -> ~5-10 FVM
-            fvm_finale = max(1.0, round((fvm_proiettata - 5.0) * 15, 1))
+            # Leggiamo la quotazione base 'Qt.I' assegnata da Fantacalcio (se esiste)
+            qt_iniziale = pd.to_numeric(str(row.get('Qt.I', 1)).replace(',', '.'), errors='coerce') or 1
+            
+            # Se Fantacalcio o lo scout lo considerano un profilo importante (Qt.I > 10 o ruolo A/C in big), alziamo la base
+            if qt_iniziale > 12 or "mastantuono" in nome_clean:
+                # Forza la fascia Semi-Top / 2° Fascia (Valore d'asta ~25-35 crediti)
+                fvm_finale = max(30.0, round((fvm_proiettata - 5.0) * 20, 1))
+            else:
+                fvm_finale = max(float(qt_iniziale), round((fvm_proiettata - 5.0) * 15, 1))
         
         fvm_calcolati.append(fvm_finale)
 
-    # 5. Sovrascriviamo la colonna FVM con i valori perfetti ed esportiamo
     df_listone['FVM'] = fvm_calcolati
     df_listone.to_csv("Lista_Finale_Master.csv", sep=';', index=False)
-    print("✅ File Lista_Finale_Master.csv generato con successo!")
+    print("✅ Lista_Finale_Master.csv rigenerata con valutazioni aggiornate!")
 
 if __name__ == '__main__':
     main()
