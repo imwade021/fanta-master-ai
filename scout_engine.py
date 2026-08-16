@@ -6,32 +6,39 @@ import requests
 
 from fanta_engine import FantaEngine
 
-LEAGUE_ID_SERIE_A = 135
-SEASON = int(os.getenv("FANTA_SEASON", "2025"))          # 2025 = stagione 2025/26
-MAX_LOOKUP = int(os.getenv("FANTA_MAX_LOOKUP", "80"))     # tetto chiamate /players per run
+LEAGUE_SERIE_A = 135
+LEAGUE_SERIE_B = 136
+
+# Il piano free copre solo le stagioni 2022-2024: le statistiche si chiedono
+# sull'ultima stagione conclusa, non su quella in corso.
+SEASON_STATS = int(os.getenv("FANTA_SEASON_STATS", "2024"))
+SEASON_CORRENTE = int(os.getenv("FANTA_SEASON", "2025"))
+
+MAX_LOOKUP = int(os.getenv("FANTA_MAX_LOOKUP", "50"))
 CACHE_FILE = "scout_cache.json"
 
-# Fallback usato solo se /teams non risponde. Gli Id API sono stabili nel tempo.
-FALLBACK_TEAMS = {
-    'Inter': 505, 'Milan': 489, 'Juventus': 496, 'Napoli': 492,
-    'Roma': 497, 'Atalanta': 499, 'Lazio': 487, 'Fiorentina': 502,
-    'Bologna': 500, 'Torino': 503, 'Udinese': 494, 'Genoa': 495,
-    'Verona': 504, 'Cagliari': 490, 'Lecce': 867, 'Como': 1020,
-    'Parma': 523
+# Composizione Serie A 2025/26. Gli Id vengono risolti una volta sola e messi in cache.
+SQUADRE_SERIE_A = [
+    'Atalanta', 'Bologna', 'Cagliari', 'Como', 'Cremonese', 'Fiorentina',
+    'Genoa', 'Inter', 'Juventus', 'Lazio', 'Lecce', 'Milan', 'Napoli',
+    'Parma', 'Pisa', 'Roma', 'Sassuolo', 'Torino', 'Udinese', 'Verona'
+]
+
+# Id noti e stabili (l'API non li cambia). Servono da rete di sicurezza.
+TEAM_ID_NOTI = {
+    'inter': 505, 'milan': 489, 'juventus': 496, 'napoli': 492,
+    'roma': 497, 'atalanta': 499, 'lazio': 487, 'fiorentina': 502,
+    'bologna': 500, 'torino': 503, 'udinese': 494, 'genoa': 495,
+    'verona': 504, 'cagliari': 490, 'lecce': 867, 'como': 1020,
+    'parma': 523
 }
 
-# Nomi API -> nomi usati nel listone Fantacalcio
 ALIAS_SQUADRE = {
-    'hellas verona': 'Verona',
-    'ac milan': 'Milan',
-    'as roma': 'Roma',
-    'ssc napoli': 'Napoli',
-    'inter': 'Inter',
-    'fc internazionale': 'Inter',
-    'us lecce': 'Lecce',
-    'us cremonese': 'Cremonese',
-    'ac pisa': 'Pisa',
-    'us sassuolo': 'Sassuolo',
+    'hellas verona': 'Verona', 'ac milan': 'Milan', 'as roma': 'Roma',
+    'ssc napoli': 'Napoli', 'fc internazionale': 'Inter', 'inter': 'Inter',
+    'us lecce': 'Lecce', 'us cremonese': 'Cremonese', 'ac pisa': 'Pisa',
+    'us sassuolo': 'Sassuolo', 'sassuolo': 'Sassuolo', 'pisa': 'Pisa',
+    'cremonese': 'Cremonese',
 }
 
 
@@ -44,10 +51,7 @@ def normalize_str(s):
 
 
 def nome_squadra_listone(nome_api):
-    chiave = normalize_str(nome_api)
-    if chiave in ALIAS_SQUADRE:
-        return ALIAS_SQUADRE[chiave]
-    return str(nome_api).strip()
+    return ALIAS_SQUADRE.get(normalize_str(nome_api), str(nome_api).strip())
 
 
 class ScoutEngine:
@@ -60,37 +64,43 @@ class ScoutEngine:
         self.base_url = "https://v3.football.api-sports.io"
         self.engine = FantaEngine()
 
-        self.serie_a_teams = {}          # nome squadra -> team id
-        self.mappa_api_id = {}           # nome giocatore normalizzato -> player id API
-        self.chiamate_players = 0
+        self.serie_a_teams = {}
+        self.mappa_api_id = {}
+        self.chiamate = 0
+        self.quota_esaurita = False      # interruttore: si spegne tutto al primo "limit reached"
         self.cache = self._carica_cache()
 
     # ------------------------------------------------------------------
-    # CACHE (risparmia quota: il piano free ha ~100 chiamate/giorno)
+    # CACHE
     # ------------------------------------------------------------------
     def _carica_cache(self):
         if os.path.exists(CACHE_FILE):
             try:
                 with open(CACHE_FILE, 'r', encoding='utf-8') as f:
-                    return json.load(f)
+                    dati = json.load(f)
+                    dati.setdefault("stats", {})
+                    dati.setdefault("team_ids", {})
+                    return dati
             except Exception:
                 pass
-        return {"stats": {}}
+        return {"stats": {}, "team_ids": {}}
 
     def salva_cache(self):
         try:
             with open(CACHE_FILE, 'w', encoding='utf-8') as f:
-                json.dump(self.cache, f, ensure_ascii=False, indent=1)
+                json.dump(self.cache, f, ensure_ascii=False, indent=1, sort_keys=True)
         except Exception as e:
             print(f"⚠️ Impossibile salvare la cache: {e}")
 
     # ------------------------------------------------------------------
-    # CHIAMATA BASE
+    # CHIAMATA BASE -> (risposta, stato)
+    # stato: 'ok' | 'quota' | 'piano' | 'errore'
     # ------------------------------------------------------------------
     def _get(self, endpoint, params, timeout=10):
-        """Ritorna la lista 'response' oppure [] loggando l'errore vero dell'API."""
-        if not self.api_key:
-            return []
+        if not self.api_key or self.quota_esaurita:
+            return [], 'errore'
+
+        self.chiamate += 1
         try:
             res = requests.get(
                 f"{self.base_url}/{endpoint}",
@@ -100,48 +110,80 @@ class ScoutEngine:
             )
         except Exception as e:
             print(f"⚠️ Errore rete su /{endpoint}: {e}")
-            return []
+            return [], 'errore'
 
         if res.status_code != 200:
-            print(f"⚠️ /{endpoint} ha risposto HTTP {res.status_code}")
-            return []
+            print(f"⚠️ /{endpoint}: HTTP {res.status_code}")
+            return [], 'errore'
 
         try:
             data = res.json()
         except Exception:
-            print(f"⚠️ /{endpoint}: risposta non JSON")
-            return []
+            return [], 'errore'
 
-        # L'API risponde 200 anche quando i parametri sono sbagliati: l'errore sta qui.
+        # L'API risponde 200 anche sugli errori: il motivo sta nel campo 'errors'.
         errori = data.get('errors')
         if errori and not isinstance(errori, list):
+            testo = " ".join(str(v) for v in errori.values()).lower()
+            if 'request limit' in testo or 'requests' in errori:
+                if not self.quota_esaurita:
+                    print("🛑 Quota giornaliera API esaurita: interrompo le chiamate "
+                          "(il resto viene calcolato dai dati locali).")
+                self.quota_esaurita = True
+                return [], 'quota'
+            if 'plan' in errori:
+                print(f"⚠️ /{endpoint} non incluso nel piano: {errori.get('plan')}")
+                return [], 'piano'
             print(f"⚠️ /{endpoint} errore API: {errori}")
-            return []
+            return [], 'errore'
 
-        return data.get('response', []) or []
+        return data.get('response', []) or [], 'ok'
 
     # ------------------------------------------------------------------
-    # SQUADRE DELLA STAGIONE CORRENTE (niente lista hardcoded)
+    # RISOLUZIONE ID SQUADRE (una volta sola, poi da cache)
     # ------------------------------------------------------------------
     def carica_squadre_serie_a(self):
-        risposta = self._get("teams", {'league': LEAGUE_ID_SERIE_A, 'season': SEASON})
-        squadre = {}
-        for item in risposta:
-            team = item.get('team', {})
-            if team.get('id') and team.get('name'):
-                squadre[nome_squadra_listone(team['name'])] = team['id']
+        squadre, da_risolvere = {}, []
 
-        if squadre:
-            print(f"✅ Squadre Serie A {SEASON}/{str(SEASON + 1)[-2:]}: {len(squadre)} rilevate dall'API.")
-        else:
-            squadre = dict(FALLBACK_TEAMS)
-            print(f"⚠️ /teams non disponibile: uso la lista di fallback ({len(squadre)} squadre, potenzialmente incompleta).")
+        for nome in SQUADRE_SERIE_A:
+            chiave = normalize_str(nome)
+            tid = self.cache["team_ids"].get(chiave) or TEAM_ID_NOTI.get(chiave)
+            if tid:
+                squadre[nome] = tid
+            else:
+                da_risolvere.append(nome)
+
+        # Le neopromosse non sono fra gli Id noti: le cerco in Serie A e in Serie B
+        # dell'ultima stagione coperta dal piano. Due chiamate, poi restano in cache.
+        if da_risolvere:
+            print(f"🔎 Risoluzione Id per: {', '.join(da_risolvere)}")
+            trovati = {}
+            for lega in (LEAGUE_SERIE_A, LEAGUE_SERIE_B):
+                risposta, stato = self._get("teams", {'league': lega, 'season': SEASON_STATS})
+                if stato != 'ok':
+                    continue
+                for item in risposta:
+                    team = item.get('team', {})
+                    if team.get('id') and team.get('name'):
+                        trovati[normalize_str(nome_squadra_listone(team['name']))] = team['id']
+
+            for nome in list(da_risolvere):
+                tid = trovati.get(normalize_str(nome))
+                if tid:
+                    squadre[nome] = tid
+                    self.cache["team_ids"][normalize_str(nome)] = tid
+                    da_risolvere.remove(nome)
+
+            if da_risolvere:
+                print(f"⚠️ Id non risolti (rose non scaricabili): {', '.join(da_risolvere)}")
 
         self.serie_a_teams = squadre
+        print(f"✅ Squadre Serie A {SEASON_CORRENTE}/{str(SEASON_CORRENTE + 1)[-2:]}: "
+              f"{len(squadre)} su {len(SQUADRE_SERIE_A)} con Id valido.")
         return squadre
 
     # ------------------------------------------------------------------
-    # ROSE
+    # ROSE (endpoint senza parametro season: funziona anche sul piano free)
     # ------------------------------------------------------------------
     def sincronizza_rose_serie_a(self):
         if not self.api_key:
@@ -151,115 +193,89 @@ class ScoutEngine:
         if not self.serie_a_teams:
             self.carica_squadre_serie_a()
 
-        nuovi_giocatori = []
-        squadre_vuote = []
-        print("📡 Connessione ad API-Football per la scansione rose...")
+        nuovi_giocatori, vuote = [], []
+        print("📡 Scansione rose in corso...")
 
         for squadra, team_id in self.serie_a_teams.items():
-            risposta = self._get("players/squads", {'team': team_id})
-            players = risposta[0].get('players', []) if risposta else []
+            if self.quota_esaurita:
+                vuote.append(squadra)
+                continue
 
+            risposta, stato = self._get("players/squads", {'team': team_id})
+            players = risposta[0].get('players', []) if risposta else []
             if not players:
-                squadre_vuote.append(squadra)
+                vuote.append(squadra)
                 continue
 
             for p in players:
                 nome_p = p.get('name')
                 if not nome_p:
                     continue
-
-                pos_p = p.get('position', 'Midfielder')
-                ruolo_fanta = {'Goalkeeper': 'P', 'Defender': 'D', 'Attacker': 'A'}.get(pos_p, 'C')
-
+                ruolo = {'Goalkeeper': 'P', 'Defender': 'D', 'Attacker': 'A'}.get(
+                    p.get('position', 'Midfielder'), 'C')
                 if p.get('id'):
                     self.mappa_api_id[normalize_str(nome_p)] = p['id']
-
                 nuovi_giocatori.append({
-                    'nome': nome_p,
-                    'ruolo': ruolo_fanta,
-                    'squadra': squadra,
-                    'api_id': p.get('id'),
-                    'quotazione_base': 1
+                    'nome': nome_p, 'ruolo': ruolo, 'squadra': squadra,
+                    'api_id': p.get('id'), 'quotazione_base': 1
                 })
 
-        if squadre_vuote:
-            print(f"⚠️ Rosa vuota per: {', '.join(squadre_vuote)}")
-        print(f"✅ Sincronizzazione completata: {len(nuovi_giocatori)} giocatori rilevati "
-              f"su {len(self.serie_a_teams) - len(squadre_vuote)} squadre.")
+        if vuote:
+            print(f"⚠️ Rosa non scaricata per: {', '.join(vuote)}")
+        print(f"✅ Rose sincronizzate: {len(nuovi_giocatori)} giocatori su "
+              f"{len(self.serie_a_teams) - len(vuote)} squadre.")
         return nuovi_giocatori
 
     # ------------------------------------------------------------------
-    # STATISTICHE DI UN SINGOLO GIOCATORE
+    # STATISTICHE INDIVIDUALI
     # ------------------------------------------------------------------
-    def _stats_giocatore(self, nome, ruolo=None):
-        """
-        Recupera le statistiche stagionali. Combinazioni valide richieste dall'API:
-        id + season, oppure league + season, oppure team + season.
-        Prova la stagione corrente, poi la precedente (i nuovi arrivi non hanno
-        ancora dati sulla stagione appena iniziata).
-        """
+    def _stats_giocatore(self, nome):
         chiave = normalize_str(nome)
         if chiave in self.cache["stats"]:
             return self.cache["stats"][chiave]
 
-        if not self.api_key or self.chiamate_players >= MAX_LOOKUP:
+        if not self.api_key or self.quota_esaurita or self.chiamate >= MAX_LOOKUP:
             return None
 
         player_id = self.mappa_api_id.get(chiave)
-        risultato = None
-
-        for stagione in (SEASON, SEASON - 1):
-            if player_id:
-                params = {'id': player_id, 'season': stagione}
-            else:
-                # senza id serve comunque league+season: cerca fra chi gioca in Serie A
-                params = {'search': nome, 'league': LEAGUE_ID_SERIE_A, 'season': stagione}
-                if len(nome) < 4:
-                    return None
-
-            self.chiamate_players += 1
-            risposta = self._get("players", params, timeout=8)
-            if not risposta:
-                continue
-
-            statistiche = risposta[0].get('statistics', []) or []
-            aggregato = None
-            for st in statistiche:
-                apps = st.get('games', {}).get('appearences') or 0
-                if apps <= 0:
-                    continue
-                candidato = {
-                    'presenze': apps,
-                    'gol': st.get('goals', {}).get('total') or 0,
-                    'assist': st.get('goals', {}).get('assists') or 0,
-                    'lega': st.get('league', {}).get('name', ''),
-                }
-                if aggregato is None or candidato['presenze'] > aggregato['presenze']:
-                    aggregato = candidato
-
-            if aggregato:
-                risultato = aggregato
-                break
-
-        self.cache["stats"][chiave] = risultato
-        return risultato
-
-    def calcola_fantamedia_proiettata(self, nome_giocatore, ruolo):
-        """Proiezione della fantamedia in Serie A, pesata per lega di provenienza."""
-        dati = self._stats_giocatore(nome_giocatore, ruolo)
-        if not dati or dati['presenze'] <= 0:
+        if player_id:
+            params = {'id': player_id, 'season': SEASON_STATS}
+        elif len(chiave) >= 4:
+            params = {'search': nome, 'league': LEAGUE_SERIE_A, 'season': SEASON_STATS}
+        else:
             return None
 
+        risposta, stato = self._get("players", params, timeout=8)
+        if stato != 'ok':
+            return None   # errore o quota: NON si mette in cache, si riprova domani
+
+        migliore = None
+        for st in (risposta[0].get('statistics', []) if risposta else []):
+            apps = st.get('games', {}).get('appearences') or 0
+            if apps <= 0:
+                continue
+            candidato = {
+                'presenze': apps,
+                'gol': st.get('goals', {}).get('total') or 0,
+                'assist': st.get('goals', {}).get('assists') or 0,
+                'lega': st.get('league', {}).get('name', ''),
+            }
+            if migliore is None or candidato['presenze'] > migliore['presenze']:
+                migliore = candidato
+
+        self.cache["stats"][chiave] = migliore   # anche None: risposta valida, dato assente
+        return migliore
+
+    def calcola_fantamedia_proiettata(self, nome_giocatore, ruolo):
+        dati = self._stats_giocatore(nome_giocatore)
+        if not dati or dati['presenze'] <= 0:
+            return None
         return self.engine.calcola_pfm_estero(
-            presenze=dati['presenze'],
-            gol=dati['gol'],
-            assist=dati['assist'],
-            lega=dati['lega'],
-            fascia_squadra_destinazione='Media'
+            presenze=dati['presenze'], gol=dati['gol'], assist=dati['assist'],
+            lega=dati['lega'], fascia_squadra_destinazione='Media'
         )
 
     def verifica_prospetto_giovanile(self, nome_giocatore, squadra):
-        """True se il giocatore ha comunque minuti ufficiali alle spalle."""
         dati = self._stats_giocatore(nome_giocatore)
         return bool(dati and dati['presenze'] > 0)
 
@@ -268,5 +284,5 @@ if __name__ == "__main__":
     scout = ScoutEngine()
     scout.carica_squadre_serie_a()
     rose = scout.sincronizza_rose_serie_a()
-    print(f"Giocatori totali: {len(rose)}")
+    print(f"Giocatori totali: {len(rose)} | chiamate usate: {scout.chiamate}")
     scout.salva_cache()
