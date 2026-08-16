@@ -1,12 +1,12 @@
 import pandas as pd
 from fanta_engine import FantaEngine
-from scout_engine import ScoutEngine  # <--- IL NOSTRO NUOVO AGENTE SEGRETO
+from scout_engine import ScoutEngine
 import math
 
 def genera_master_db(file_listone, file_storico, output_csv):
     print("Inizializzazione del Master Engine e dello Scout...")
     motore = FantaEngine()
-    scout = ScoutEngine() # <--- ACCENDIAMO LO SCOUT
+    scout = ScoutEngine()
     
     try:
         print(f"Lettura del listone: {file_listone}")
@@ -45,12 +45,9 @@ def genera_master_db(file_listone, file_storico, output_csv):
         nome = str(row.get('Nome', 'Sconosciuto')).strip()
         fantamedia_storica = row['FM']
         
-        # --- IL MOMENTO DELLA MAGIA ---
         if pd.isna(fantamedia_storica) or math.isnan(fantamedia_storica) or fantamedia_storica == 0:
-            # Se manca la Fantamedia, entra in azione lo Scout!
             pfm_calcolata = scout.calcola_fantamedia_proiettata(nome, ruolo)
         else:
-            # Altrimenti usiamo il dato reale italiano
             pfm_calcolata = float(fantamedia_storica)
             
         valore_perc = motore.calcola_percentuale_valore(pfm_calcolata, ruolo)
@@ -62,7 +59,8 @@ def genera_master_db(file_listone, file_storico, output_csv):
     print(f"SUCCESSO! File MASTER salvato in: {output_csv}")
 
 if __name__ == "__main__":
-    NOME_FILE_STORICO = "Quotazioni_Fantacalcio_Stagione_2024_25.xlsx"
+    # NOME FILE AGGIORNATO ALLA STAGIONE CORRETTA (2025/26)
+    NOME_FILE_STORICO = "Quotazioni_Fantacalcio_Stagione_2025_26.xlsx"
     NOME_FILE_LISTONE = "Lista-FantaAsta-Fantacalcio.csv"
     NOME_OUTPUT = "Lista_Finale_Master.csv"
     
