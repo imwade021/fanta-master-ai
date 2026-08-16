@@ -216,6 +216,9 @@ def main():
     # ------------------------------------------------------------------
     print("🌐 Sincronizzazione API con DEDUPLICAZIONE...")
     try:
+        # Le squadre della stagione arrivano dal listone, non da una lista fissa
+        squadre_listone = sorted({str(s).strip() for s in df_listone['Squadra'] if str(s).strip()})
+        scout.carica_squadre_serie_a(squadre_listone)
         nuovi_giocatori_api = scout.sincronizza_rose_serie_a()
         if nuovi_giocatori_api:
             indice_nomi = {normalize_str(n): i for i, n in df_listone['Nome'].items()}
