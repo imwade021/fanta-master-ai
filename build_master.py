@@ -55,7 +55,7 @@ def trova_miglior_match_stats(nome_cercato, ruolo_cercato, df_stats):
     return df_matches.iloc[0]
 
 def main():
-    print("🚀 Avvio Master Engine V10.0 - FVM TOP SCALATO E NO DUPLICATI...")
+    print("🚀 Avvio Master Engine V11.0 - INIEZIONE STATISTICHE NEL CSV MASTER...")
     scout = ScoutEngine()
 
     excel_file = "Quotazioni_Fantacalcio_Stagione_2025_26.xlsx"
@@ -122,7 +122,17 @@ def main():
     except Exception as e:
         print(f"⚠️ Avviso API: {e}")
 
+    # Liste per memorizzare le statistiche da incollare nel Master
     fvm_calcolati = []
+    pres_list, mv_list, fm_list, gf_list, ass_list, amm_list, esp_list = [], [], [], [], [], [], []
+
+    def safe_int(x):
+        try: return int(pd.to_numeric(x, errors='coerce'))
+        except: return 0
+
+    def safe_float(x):
+        try: return float(pd.to_numeric(str(x).replace(',', '.'), errors='coerce'))
+        except: return 0.0
 
     for idx, row in df_listone.iterrows():
         nome = str(row['Nome']).strip()
@@ -136,17 +146,28 @@ def main():
         best_qt = max(qt_i, qt_a)
 
         fm_val = None
+        pv, mv_storico, fm_storico, gf, ass, amm, esp = 0, 0.0, 0.0, 0, 0, 0, 0
 
+        # ESTRAZIONE DAL FILE STORICO EXCEL
         best_match = trova_miglior_match_stats(nome, ruolo, df_stats)
         if best_match is not None:
-            try: fm_val = float(str(best_match.get('Fm', '')).replace(',', '.'))
-            except: pass
+            pv = safe_int(best_match.get('Pv', 0))
+            mv_storico = safe_float(best_match.get('Mv', 0.0))
+            fm_storico = safe_float(best_match.get('Fm', 0.0))
+            gf = safe_int(best_match.get('Gf', 0))
+            ass = safe_int(best_match.get('Ass', 0))
+            amm = safe_int(best_match.get('Amm', 0))
+            esp = safe_int(best_match.get('Esp', 0))
+            
+            if fm_storico > 0:
+                fm_val = fm_storico
 
+        # SE MANCA LO STORICO, USA L'IA SCOUT
         if fm_val is None or fm_val <= 0:
             try: fm_val = scout.calcola_fantamedia_proiettata(nome, ruolo)
             except: fm_val = None
 
-        # MATEMATICA CORRETTA PER I TOP PLAYER E I PROSPETTI
+        # MATEMATICA CORRETTA PER L'FVM
         if fm_val is None:
             if best_qt <= 1:
                 is_prospetto = scout.verifica_prospetto_giovanile(nome, squadra)
@@ -156,7 +177,6 @@ def main():
                 base_fvm = best_qt * 4.0
         else:
             if ruolo == 'A':
-                # Formula rinforzata per spingere i Top (Leao, Lautaro) verso i 300-450 FVM
                 base_fvm = (best_qt * 9.5) + (max(0, fm_val - 5.5) ** 2.2) * 35
             elif ruolo == 'C':
                 base_fvm = (best_qt * 7.0) + (max(0, fm_val - 5.5) ** 2.0) * 25
@@ -171,12 +191,33 @@ def main():
                 base_fvm *= 1.20
 
         fvm_finale = round(min(500.0, max(1.0, float(base_fvm))), 1)
+        
+        # Salvataggio dati nelle liste
         fvm_calcolati.append(fvm_finale)
+        pres_list.append(pv)
+        mv_list.append(mv_storico)
+        # Se ha giocato all'estero (scout), salva la fanta media proiettata nel CSV per visualizzarla
+        fm_list.append(fm_storico if fm_storico > 0 else (round(fm_val, 2) if fm_val else 0.0))
+        gf_list.append(gf)
+        ass_list.append(ass)
+        amm_list.append(amm)
+        esp_list.append(esp)
 
+    # ------------------------------------------------------------------
+    # AGGIUNTA COLONNE STATISTICHE AL DATAFRAME FINALE MASTER
+    # ------------------------------------------------------------------
     df_listone['FVM'] = fvm_calcolati
+    df_listone['Pv'] = pres_list
+    df_listone['Mv'] = mv_list
+    df_listone['Fm'] = fm_list
+    df_listone['Gf'] = gf_list
+    df_listone['Ass'] = ass_list
+    df_listone['Amm'] = amm_list
+    df_listone['Esp'] = esp_list
+
     df_listone = df_listone.fillna("")
     df_listone.to_csv("Lista_Finale_Master.csv", sep=';', index=False)
-    print("✅ Lista_Finale_Master.csv RIGENERATO PERFETTAMENTE!")
+    print("✅ Lista_Finale_Master.csv RIGENERATO CON TUTTE LE STATISTICHE REALI INCLUSE!")
 
 if __name__ == '__main__':
     main()
