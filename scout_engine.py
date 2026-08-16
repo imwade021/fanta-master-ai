@@ -9,20 +9,18 @@ from fanta_engine import FantaEngine
 LEAGUE_SERIE_A = 135
 LEAGUE_SERIE_B = 136
 
-# Il piano free copre solo le stagioni 2022-2024: le statistiche si chiedono
-# sull'ultima stagione conclusa, non su quella in corso.
-SEASON_STATS = int(os.getenv("FANTA_SEASON_STATS", "2024"))
-SEASON_CORRENTE = int(os.getenv("FANTA_SEASON", "2025"))
+# Stagione appena conclusa (2025 = 2025/26): e' quella da cui si proietta l'asta.
+# Il piano free non la copre (si ferma al 2024): in quel caso si ripiega
+# automaticamente sulla stagione precedente, segnalandolo nel log.
+SEASON_STATS = int(os.getenv("FANTA_SEASON_STATS", "2025"))
+SEASON_CORRENTE = int(os.getenv("FANTA_SEASON", "2026"))
 
 MAX_LOOKUP = int(os.getenv("FANTA_MAX_LOOKUP", "50"))
 CACHE_FILE = "scout_cache.json"
 
-# Composizione Serie A 2025/26. Gli Id vengono risolti una volta sola e messi in cache.
-SQUADRE_SERIE_A = [
-    'Atalanta', 'Bologna', 'Cagliari', 'Como', 'Cremonese', 'Fiorentina',
-    'Genoa', 'Inter', 'Juventus', 'Lazio', 'Lecce', 'Milan', 'Napoli',
-    'Parma', 'Pisa', 'Roma', 'Sassuolo', 'Torino', 'Udinese', 'Verona'
-]
+# Le squadre NON sono piu' hardcoded: si ricavano dal listone Fantacalcio della
+# stagione corrente (colonna Squadra). Cosi' promozioni e retrocessioni si
+# aggiornano da sole. Gli Id API vengono risolti una volta e messi in cache.
 
 # Id noti e stabili (l'API non li cambia). Servono da rete di sicurezza.
 TEAM_ID_NOTI = {
@@ -67,6 +65,8 @@ class ScoutEngine:
         self.serie_a_teams = {}
         self.mappa_api_id = {}
         self.chiamate = 0
+        self.season_stats = SEASON_STATS
+        self.season_declassata = False
         self.quota_esaurita = False      # interruttore: si spegne tutto al primo "limit reached"
         self.cache = self._carica_cache()
 
@@ -142,10 +142,16 @@ class ScoutEngine:
     # ------------------------------------------------------------------
     # RISOLUZIONE ID SQUADRE (una volta sola, poi da cache)
     # ------------------------------------------------------------------
-    def carica_squadre_serie_a(self):
+    def carica_squadre_serie_a(self, nomi_squadre=None):
+        nomi_squadre = [n for n in (nomi_squadre or []) if n and str(n).strip()]
+        if not nomi_squadre:
+            print("⚠️ Nessuna squadra ricavata dal listone: rose non sincronizzabili.")
+            self.serie_a_teams = {}
+            return {}
+
         squadre, da_risolvere = {}, []
 
-        for nome in SQUADRE_SERIE_A:
+        for nome in nomi_squadre:
             chiave = normalize_str(nome)
             tid = self.cache["team_ids"].get(chiave) or TEAM_ID_NOTI.get(chiave)
             if tid:
@@ -159,7 +165,9 @@ class ScoutEngine:
             print(f"🔎 Risoluzione Id per: {', '.join(da_risolvere)}")
             trovati = {}
             for lega in (LEAGUE_SERIE_A, LEAGUE_SERIE_B):
-                risposta, stato = self._get("teams", {'league': lega, 'season': SEASON_STATS})
+                risposta, stato = self._get("teams", {'league': lega, 'season': self.season_stats})
+                if stato == 'piano':
+                    risposta, stato = self._get("teams", {'league': lega, 'season': self.season_stats - 1})
                 if stato != 'ok':
                     continue
                 for item in risposta:
@@ -179,7 +187,7 @@ class ScoutEngine:
 
         self.serie_a_teams = squadre
         print(f"✅ Squadre Serie A {SEASON_CORRENTE}/{str(SEASON_CORRENTE + 1)[-2:]}: "
-              f"{len(squadre)} su {len(SQUADRE_SERIE_A)} con Id valido.")
+              f"{len(squadre)} su {len(nomi_squadre)} con Id valido.")
         return squadre
 
     # ------------------------------------------------------------------
@@ -238,14 +246,29 @@ class ScoutEngine:
             return None
 
         player_id = self.mappa_api_id.get(chiave)
-        if player_id:
-            params = {'id': player_id, 'season': SEASON_STATS}
-        elif len(chiave) >= 4:
-            params = {'search': nome, 'league': LEAGUE_SERIE_A, 'season': SEASON_STATS}
-        else:
+
+        def costruisci(stagione):
+            if player_id:
+                return {'id': player_id, 'season': stagione}
+            if len(chiave) >= 4:
+                return {'search': nome, 'league': LEAGUE_SERIE_A, 'season': stagione}
+            return None
+
+        params = costruisci(self.season_stats)
+        if params is None:
             return None
 
         risposta, stato = self._get("players", params, timeout=8)
+
+        # Il piano free non arriva all'ultima stagione: si ripiega su quella prima.
+        if stato == 'piano':
+            if not self.season_declassata:
+                print(f"⚠️ Stagione {self.season_stats} non inclusa nel piano: "
+                      f"uso la {self.season_stats - 1} (dati piu' vecchi di un anno).")
+                self.season_declassata = True
+            self.season_stats -= 1
+            risposta, stato = self._get("players", costruisci(self.season_stats), timeout=8)
+
         if stato != 'ok':
             return None   # errore o quota: NON si mette in cache, si riprova domani
 
