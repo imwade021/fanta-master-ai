@@ -16,16 +16,16 @@ def normalize_str(s):
     return " ".join(s.lower().split())
 
 def scarica_listone_aggiornato():
-    print("📥 Download dell'ultimo listone di mercato in corso...")
+    print("📥 Download listone in corso...")
     try:
         res = requests.get(LISTONE_URL, timeout=15)
         if res.status_code == 200:
             with open("Lista-FantaAsta-Fantacalcio.csv", "wb") as f:
                 f.write(res.content)
-            print("✅ Listone sorgente aggiornato con successo!")
+            print("✅ Listone scaricato!")
             return True
     except Exception as e:
-        print(f"⚠️ Download fallito, uso il file locale esistente: {e}")
+        print(f"⚠️ Download fallito: {e}")
     return False
 
 def trova_fantamedia_reale(nome_cercato, df_stats):
@@ -46,7 +46,7 @@ def trova_fantamedia_reale(nome_cercato, df_stats):
     return None
 
 def main():
-    print("🚀 Avvio Master Engine - V 3.0 (Intelligenza Analitica Pura)...")
+    print("🚀 Avvio Master Engine - V 4.0 (Pulizia Strutturale Estrema)...")
     
     scarica_listone_aggiornato()
     scout = ScoutEngine()
@@ -55,14 +55,37 @@ def main():
         with open("Lista-FantaAsta-Fantacalcio.csv", "r", encoding="utf-8", errors="ignore") as f:
             prima_riga = f.readline()
         separatore = ';' if ';' in prima_riga else ','
-        df_listone = pd.read_csv("Lista-FantaAsta-Fantacalcio.csv", header=None, sep=separatore, on_bad_lines='skip')
         
-        if len(df_listone.columns) > 19: df_listone = df_listone.iloc[:, :19]
-        while len(df_listone.columns) < 19: df_listone[len(df_listone.columns)] = ""
-
-        df_listone.columns = ['Id', 'Nome_Breve', 'Nome', 'R', 'Ruolo_Esteso', 'Qt.A', 'Qt.I', 'Qt.M', 'Diff.M', 'Squadra', 'FVM', 'FVM.M', 'Piede', 'Nazionalita', 'DataNascita', 'PhotoURL', 'Extra1', 'Extra2', 'Extra3']
+        # 1. LETTURA DINAMICA SENZA ASSUNZIONI
+        raw_df = pd.read_csv("Lista-FantaAsta-Fantacalcio.csv", header=None, sep=separatore, dtype=str, on_bad_lines='skip')
+        
+        # TROVA L'INTESTAZIONE REALE
+        header_idx = -1
+        for i, row in raw_df.iterrows():
+            row_str = [str(x).lower().strip() for x in row.values]
+            if 'nome' in row_str and 'squadra' in row_str:
+                header_idx = i
+                break
+                
+        if header_idx == -1:
+            print("❌ Errore critico: Impossibile trovare le colonne 'Nome' e 'Squadra' nel CSV.")
+            return
+            
+        # Imposta le vere colonne e butta via la spazzatura sopra l'intestazione
+        df_listone = raw_df.iloc[header_idx+1:].copy()
+        df_listone.columns = [str(c).strip() for c in raw_df.iloc[header_idx].values]
+        
+        # 2. FILTRO DI FERRO SUI RUOLI
+        if 'R' not in df_listone.columns:
+            print("❌ Errore: Colonna 'R' mancante.")
+            return
+            
+        df_listone['R'] = df_listone['R'].astype(str).str.strip().str.upper()
+        # Cancella chiunque non sia P, D, C o A (via "Guida", "Serie A", ecc.)
+        df_listone = df_listone[df_listone['R'].isin(['P', 'D', 'C', 'A'])]
+        
     except Exception as e:
-        print(f"❌ Errore critico: {e}")
+        print(f"❌ Errore di lettura file: {e}")
         return
 
     try:
@@ -74,15 +97,11 @@ def main():
     fvm_calcolati = []
 
     for idx, row in df_listone.iterrows():
-        nome_raw = str(row['Nome'])
-        if nome_raw.lower() == 'nan' or nome_raw.strip() == '':
-            fvm_calcolati.append(0)
-            continue
-            
-        nome = nome_raw.replace('*', '').strip()
-        ruolo = str(row['R']).replace('*', '').strip()
+        nome = str(row.get('Nome', '')).replace('*', '').strip()
+        ruolo = str(row['R'])
         squadra = str(row.get('Squadra', '')).replace('*', '').strip()
         
+        # Recupero intelligente delle quotazioni
         qt_iniziale = pd.to_numeric(str(row.get('Qt.I', 1)).replace(',', '.'), errors='coerce')
         if pd.isna(qt_iniziale): qt_iniziale = 1.0
         qt_attuale = pd.to_numeric(str(row.get('Qt.A', qt_iniziale)).replace(',', '.'), errors='coerce')
@@ -91,21 +110,13 @@ def main():
         best_qt = max(qt_iniziale, qt_attuale)
         fm_reale_raw = trova_fantamedia_reale(nome, df_stats)
 
-        # ---------------------------------------------------------
-        # MOTORE 1: Curva del Mercato (Esponenziale su Quotazione)
-        # Più costi, più il moltiplicatore sale.
-        # Es: Qt=1 -> FVM 1.1 | Qt=15 -> FVM 27 | Qt=30 -> FVM 69
-        # ---------------------------------------------------------
+        # Motore 1: Mercato
         fvm_da_qt = best_qt * (1.1 + (best_qt / 25.0))
 
-        # ---------------------------------------------------------
-        # MOTORE 2: Curva del Campo (Quadratica su FantaMedia)
-        # Premia i top player ignorando in quale squadra giocano
-        # ---------------------------------------------------------
+        # Motore 2: Campo
         if fm_reale_raw is not None and str(fm_reale_raw).strip() != '':
             try:
                 fm_val = float(str(fm_reale_raw).replace(',', '.'))
-                # Formula quadratica: un 7.5 schizza in alto, un 6.0 resta basso
                 fvm_da_fm = max(0, (fm_val - 5.5) ** 2 * 18) if fm_val > 5.5 else max(1.0, best_qt)
             except ValueError:
                 fm_val = None
@@ -118,16 +129,10 @@ def main():
                 if fvm_proiettata is None: fvm_proiettata = 5.0
             except:
                 fvm_proiettata = 5.0
-            # Sulle proiezioni API andiamo leggermente più cauti (*14 invece di *18)
             fvm_da_fm = max(0, (fvm_proiettata - 5.5) ** 2 * 14) if fvm_proiettata > 5.5 else max(1.0, best_qt)
 
-        # ---------------------------------------------------------
-        # LA SINTESI: Si prende il dato che valorizza meglio il giocatore
-        # ---------------------------------------------------------
         base_fvm = max(fvm_da_qt, fvm_da_fm)
 
-        # Boost "Hype" Big Team: SI APPLICA SOLO SE SEI GIÀ UN GIOCATORE RILEVANTE (Qt >= 8)
-        # I primavera e le riserve (Qt < 8) non prendono il boost!
         if squadra in BIG_TEAMS and best_qt >= 8.0:
             base_fvm *= 1.15
 
@@ -138,10 +143,11 @@ def main():
 
         fvm_calcolati.append(fvm_finale)
 
+    # Scrive la colonna FVM mantenendo intatte e in ordine le colonne del CSV originale
     df_listone['FVM'] = fvm_calcolati
     df_listone = df_listone.fillna(0)
     df_listone.to_csv("Lista_Finale_Master.csv", sep=';', index=False)
-    print("✅ Lista_Finale_Master.csv generata con Intelligenza Analitica V3.0!")
+    print("✅ Lista_Finale_Master.csv generata. Database pulito e allineato!")
 
 if __name__ == '__main__':
     main()
