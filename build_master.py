@@ -4,10 +4,14 @@ import requests
 import os
 import re
 import unicodedata
+import io
 from scout_engine import ScoutEngine
 
 LISTONE_URL = "https://raw.githubusercontent.com/imwade021/fanta-data-bridge/main/Lista-FantaAsta-Fantacalcio.csv"
 BIG_TEAMS = ['Inter', 'Milan', 'Juventus', 'Napoli', 'Roma', 'Atalanta', 'Lazio', 'Fiorentina', 'Bologna', 'Como']
+
+# Parole vietate: i menu del sito web che si fingono giocatori
+GARBAGE_WORDS = ['guida', 'asta', 'rose', 'scheda', 'serie a', 'fantacalcio', '>>']
 
 def normalize_and_tokenize(s):
     if not isinstance(s, str): return set()
@@ -22,8 +26,7 @@ def scarica_listone_aggiornato():
             with open("Lista-FantaAsta-Fantacalcio.csv", "wb") as f:
                 f.write(res.content)
             return True
-    except:
-        pass
+    except: pass
     return False
 
 def trova_fantamedia_reale(nome_cercato, df_stats):
@@ -42,14 +45,11 @@ def trova_fantamedia_reale(nome_cercato, df_stats):
     return None
 
 def main():
-    print("🚀 Avvio Master Engine - PARSER MANUALE ANTIPROIETTILE...")
+    print("🚀 Avvio Master Engine - FILTRO TRITATUTTO ATTIVO...")
     
     scarica_listone_aggiornato()
     scout = ScoutEngine()
     
-    # -------------------------------------------------------------------
-    # LETTURA MANUALE: Bypassa tutti gli errori di formattazione del CSV
-    # -------------------------------------------------------------------
     valid_data = []
     try:
         with open("Lista-FantaAsta-Fantacalcio.csv", "r", encoding="utf-8", errors="ignore") as f:
@@ -62,7 +62,6 @@ def main():
             line_clean = line.strip()
             if not line_clean: continue
             
-            # Cerca l'inizio reale della tabella
             if not header_found:
                 if 'nome' in line_clean.lower() and 'squadra' in line_clean.lower():
                     header_found = True
@@ -71,19 +70,29 @@ def main():
                 
             parts = line_clean.split(sep)
             if len(parts) >= 10:
+                nome_raw = parts[2].strip()
+                nome_lower = nome_raw.lower()
                 ruolo = parts[3].strip().upper()
-                # FILTRO ASSOLUTO: Se non è P, D, C, A, la riga viene distrutta
-                if ruolo in ['P', 'D', 'C', 'A']:
-                    row_data = parts[:19]
-                    while len(row_data) < 19:
-                        row_data.append("")
-                    valid_data.append(row_data)
+                squadra_raw = parts[9].strip()
+                
+                # -------------------------------------------------------------
+                # SCUDO ANTI-SPAZZATURA (Elimina i menu del sito web)
+                # -------------------------------------------------------------
+                # 1. Se è un ruolo invalido, scarta
+                if ruolo not in ['P', 'D', 'C', 'A']: continue
+                # 2. Se il nome contiene numeri ("Guida 26-27"), scarta
+                if any(char.isdigit() for char in nome_raw): continue
+                # 3. Se il nome contiene parole del menu web, scarta
+                if any(g in nome_lower for g in GARBAGE_WORDS): continue
+                # 4. Se il nome è uguale alla squadra ("Atalanta"), scarta
+                if nome_lower == squadra_raw.lower(): continue
+                
+                row_data = parts[:19]
+                while len(row_data) < 19: row_data.append("")
+                valid_data.append(row_data)
+                
     except Exception as e:
-        print(f"❌ Errore lettura manuale: {e}")
-        return
-
-    if not valid_data:
-        print("❌ Nessun giocatore valido trovato. CSV illeggibile.")
+        print(f"❌ Errore lettura: {e}")
         return
 
     df_listone = pd.DataFrame(valid_data, columns=[
@@ -91,12 +100,11 @@ def main():
         'Qt.M', 'Diff.M', 'Squadra', 'FVM', 'FVM.M', 'Piede', 'Nazionalita', 
         'DataNascita', 'PhotoURL', 'Extra1', 'Extra2', 'Extra3'
     ])
-    print(f"✅ Trovati {len(df_listone)} giocatori reali.")
 
     try:
         df_stats = pd.read_excel("Quotazioni_Fantacalcio_Stagione_2025_26.xlsx", header=1)
         df_stats['Tokens'] = df_stats['Nome'].apply(normalize_and_tokenize)
-    except Exception:
+    except:
         df_stats = pd.DataFrame()
 
     fvm_calcolati = []
@@ -106,46 +114,45 @@ def main():
         ruolo = str(row['R'])
         squadra = str(row.get('Squadra', '')).replace('*', '').strip()
         
-        # Protezione valori astronomici
-        try:
-            qt_iniziale = float(str(row.get('Qt.I', '1')).replace(',', '.'))
-        except:
-            qt_iniziale = 1.0
-        if qt_iniziale > 150: qt_iniziale = 1.0
-        
-        try:
-            qt_attuale = float(str(row.get('Qt.A', qt_iniziale)).replace(',', '.'))
-        except:
-            qt_attuale = qt_iniziale
-        if qt_attuale > 150: qt_attuale = qt_iniziale
+        try: qt_iniziale = float(str(row.get('Qt.I', '1')).replace(',', '.'))
+        except: qt_iniziale = 1.0
+        try: qt_attuale = float(str(row.get('Qt.A', qt_iniziale)).replace(',', '.'))
+        except: qt_attuale = qt_iniziale
         
         best_qt = max(qt_iniziale, qt_attuale)
         fm_reale_raw = trova_fantamedia_reale(nome, df_stats)
 
         fm_val = None
         if fm_reale_raw is not None and str(fm_reale_raw).strip() != '':
-            try:
-                fm_val = float(str(fm_reale_raw).replace(',', '.'))
-            except:
-                pass
+            try: fm_val = float(str(fm_reale_raw).replace(',', '.'))
+            except: pass
 
         if fm_val is None:
             try:
                 fm_val = scout.calcola_fantamedia_proiettata(nome, ruolo)
                 if fm_val is None: fm_val = 5.0
-            except:
-                fm_val = 5.0
+            except: fm_val = 5.0
 
-        # Calcolo FVM Corretto
-        fvm_da_qt = best_qt * 1.5
+        # -------------------------------------------------------------
+        # MOTORE INTELLIGENTE PER QUOTAZIONI SBALLATE
+        # -------------------------------------------------------------
+        # Se la quotazione base è > 50 (es. Carnesecchi 94), significa che è GIÀ un Rating!
+        # Quindi non lo moltiplichiamo, lo teniamo così com'è.
+        if best_qt > 50:
+            fvm_da_qt = best_qt
+        else:
+            # Se invece è una normale quotazione Fantacalcio (es. 15 cr), la moltiplichiamo
+            fvm_da_qt = best_qt * 1.5
+            
         if fm_val > 5.5:
             fvm_da_fm = (fm_val - 5.2) ** 2 * 12
         else:
-            fvm_da_fm = max(1.0, best_qt)
+            fvm_da_fm = max(1.0, fvm_da_qt)
             
         base_fvm = max(fvm_da_qt, fvm_da_fm)
 
-        if squadra in BIG_TEAMS and best_qt >= 8.0:
+        # Boost hype solo se la quotazione originaria era vera e degna di nota
+        if squadra in BIG_TEAMS and 8.0 <= best_qt <= 50.0:
             base_fvm *= 1.15
 
         try:
@@ -158,7 +165,7 @@ def main():
     df_listone['FVM'] = fvm_calcolati
     df_listone = df_listone.fillna(0)
     df_listone.to_csv("Lista_Finale_Master.csv", sep=';', index=False)
-    print("✅ File CSV esportato correttamente!")
+    print("✅ File CSV Pulito, Filtrato e Generato!")
 
 if __name__ == '__main__':
     main()
