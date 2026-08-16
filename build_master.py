@@ -14,7 +14,20 @@ COLONNE_MASTER = [
     'DataNascita', 'PhotoURL', 'Extra1', 'Extra2', 'Extra3'
 ]
 
-COLONNE_STATS = ['Pv', 'Mv', 'Fm', 'Gf', 'Ass', 'Amm', 'Esp']
+COLONNE_STATS = ['Pv', 'Mv', 'Fm', 'Gf', 'Gs', 'Rp', 'Rc', 'R+', 'R-', 'Ass', 'Amm', 'Esp']
+COLONNE_DECIMALI = {'Mv', 'Fm'}
+
+# Parametri lega per il prezzo consigliato (sovrascrivibili da variabili d'ambiente)
+SQUADRE_LEGA = int(os.getenv("FANTA_SQUADRE_LEGA", "8"))
+BUDGET_LEGA = int(os.getenv("FANTA_BUDGET", "500"))
+QUOTE_RUOLO = {'P': 0.08, 'D': 0.14, 'C': 0.28, 'A': 0.50}
+SLOT_RUOLO = {'P': 3, 'D': 8, 'C': 8, 'A': 6}
+
+# Quanto pesa la media di ruolo rispetto alle presenze reali: con K=8, un giocatore
+# con 8 presenze vale meta' se stesso e meta' baseline. Serve a non far esplodere
+# la FVM di chi ha una fantamedia altissima su 2 partite.
+K_SHRINK = 8
+BASELINE_DEFAULT = {'P': 5.40, 'D': 5.80, 'C': 6.00, 'A': 6.20}
 
 
 def normalize_str(s):
@@ -192,6 +205,68 @@ def costruisci_listone(quotazioni, df_extra):
     return df
 
 
+def calcola_baseline_ruoli(stats_per_id):
+    """Fantamedia mediana per ruolo fra chi ha giocato almeno 15 partite."""
+    per_ruolo = {}
+    for rec in stats_per_id.values():
+        ruolo = rec.get('R', '')
+        pv, fm = safe_int(rec.get('Pv')), safe_float(rec.get('Fm'))
+        if ruolo in BASELINE_DEFAULT and pv >= 15 and fm > 0:
+            per_ruolo.setdefault(ruolo, []).append(fm)
+
+    baseline = {}
+    for ruolo, default in BASELINE_DEFAULT.items():
+        valori = sorted(per_ruolo.get(ruolo, []))
+        baseline[ruolo] = round(valori[len(valori) // 2], 2) if len(valori) >= 10 else default
+    print(f"📐 Baseline fantamedia per ruolo: {baseline}")
+    return baseline
+
+
+def fm_ponderata(fm, presenze, baseline):
+    """Avvicina la fantamedia alla media di ruolo quando le presenze sono poche."""
+    if not fm or fm <= 0:
+        return None
+    presenze = max(0, int(presenze))
+    return (presenze * fm + K_SHRINK * baseline) / (presenze + K_SHRINK)
+
+
+def calcola_prezzi(df):
+    """
+    Converte la FVM in crediti spendibili: per ogni ruolo distribuisce la quota
+    di budget della lega fra i giocatori che verranno realmente comprati.
+    """
+    prezzi = pd.Series(1.0, index=df.index)
+    fvm = pd.to_numeric(df['FVM'], errors='coerce').fillna(0.0)
+
+    for ruolo, quota in QUOTE_RUOLO.items():
+        mask = df['R'] == ruolo
+        if not mask.any():
+            continue
+
+        acquistabili = SLOT_RUOLO[ruolo] * SQUADRE_LEGA
+        candidati = fvm[mask].sort_values(ascending=False).head(acquistabili)
+        peso = candidati ** 1.25
+        if peso.sum() <= 0:
+            continue
+
+        # Crediti che l'intera lega spendera' su questo ruolo
+        monte = quota * BUDGET_LEGA * SQUADRE_LEGA
+        quota_giocatore = ((peso / peso.sum()) * monte).clip(lower=1.0)
+        prezzi.loc[quota_giocatore.index] = quota_giocatore
+
+        # Chi resta fuori dai titolari non vale 1 credito d'ufficio: si prolunga
+        # la stessa scala del gruppo, partendo dall'ultimo prezzo assegnato.
+        fvm_taglio = candidati.iloc[-1]
+        prezzo_taglio = quota_giocatore.iloc[-1]
+        if fvm_taglio > 0:
+            restanti = fvm[mask].drop(candidati.index)
+            if not restanti.empty:
+                prezzi.loc[restanti.index] = (restanti * (prezzo_taglio / fvm_taglio)).clip(
+                    lower=1.0, upper=float(prezzo_taglio))
+
+    return prezzi.round(0).astype(int)
+
+
 # ----------------------------------------------------------------------
 # LOOKUP STATISTICHE: Id -> nome esatto -> nome abbreviato
 # ----------------------------------------------------------------------
@@ -216,14 +291,15 @@ def trova_stats(id_giocatore, nome, ruolo, stats_per_id, stats_per_nome):
 # CALCOLO FVM
 # ----------------------------------------------------------------------
 def calcola_fvm(best_qt, fm_val, ruolo, squadra, scout, nome):
+    """fm_val e' gia' ponderata per le presenze (vedi fm_ponderata)."""
     if fm_val is None or fm_val <= 0:
         if best_qt <= 1:
             is_prospetto = scout.verifica_prospetto_giovanile(nome, squadra)
             base_fvm = 15.0 if is_prospetto else 1.0
-            return round(min(500.0, max(1.0, base_fvm)), 1), None
+            return round(min(1000.0, max(1.0, base_fvm)), 1), None
         fm_val = 6.0
         base_fvm = best_qt * 4.0
-        return round(min(500.0, max(1.0, base_fvm)), 1), fm_val
+        return round(min(1000.0, max(1.0, base_fvm)), 1), fm_val
 
     if ruolo == 'A':
         base_fvm = (best_qt * 9.5) + (max(0, fm_val - 5.5) ** 2.2) * 35
@@ -239,7 +315,7 @@ def calcola_fvm(best_qt, fm_val, ruolo, squadra, scout, nome):
     if squadra in BIG_TEAMS and best_qt >= 8.0:
         base_fvm *= 1.20
 
-    return round(min(500.0, max(1.0, float(base_fvm))), 1), fm_val
+    return round(min(1000.0, max(1.0, float(base_fvm))), 1), fm_val
 
 
 # ----------------------------------------------------------------------
@@ -312,6 +388,8 @@ def main():
     # ------------------------------------------------------------------
     # INIEZIONE STATISTICHE + CALCOLO FVM
     # ------------------------------------------------------------------
+    baseline = calcola_baseline_ruoli(stats_per_id)
+
     colonne_out = {c: [] for c in ['FVM'] + COLONNE_STATS}
     conteggio = {'id': 0, 'nome': 0, 'nome_abbreviato': 0, 'scout': 0, 'nessuno': 0}
 
@@ -320,52 +398,55 @@ def main():
         ruolo = str(row['R']).strip()
         squadra = str(row['Squadra']).strip()
 
-        qt_i = safe_float(row['Qt.I']) or 1.0
-        qt_a = safe_float(row['Qt.A']) or qt_i
-        best_qt = max(qt_i, qt_a)
+        # Qt.A e' la quotazione attuale: in un file pre-asta coincide con Qt.I,
+        # a stagione in corso e' la piu' aggiornata. Prendere il massimo delle due
+        # gonfiava chi era partito caro e si era svalutato (es. un lungodegente).
+        qt_a = safe_float(row['Qt.A'])
+        qt_i = safe_float(row['Qt.I'])
+        best_qt = qt_a or qt_i or 1.0
 
         record, metodo = trova_stats(row['Id'], nome, ruolo, stats_per_id, stats_per_nome)
 
-        pv = mv = fm_storico = gf = ass = amm = esp = 0
-        fm_val = None
-
+        valori = {c: 0 for c in COLONNE_STATS}
         if record is not None:
             conteggio[metodo] += 1
-            pv = safe_int(record['Pv'])
-            mv = safe_float(record['Mv'])
-            fm_storico = safe_float(record['Fm'])
-            gf = safe_int(record['Gf'])
-            ass = safe_int(record['Ass'])
-            amm = safe_int(record['Amm'])
-            esp = safe_int(record['Esp'])
-            if fm_storico > 0:
-                fm_val = fm_storico
+            for c in COLONNE_STATS:
+                valori[c] = safe_float(record.get(c)) if c in COLONNE_DECIMALI else safe_int(record.get(c))
+
+        pv = int(valori['Pv'])
+        fm_storico = float(valori['Fm'])
+        fm_grezza = fm_storico if fm_storico > 0 else None
+        presenze_peso = pv
 
         # Nessuno storico in Serie A: proiezione dello scout (estero / nuovi arrivi)
-        if fm_val is None:
+        if fm_grezza is None:
             try:
-                fm_val = scout.calcola_fantamedia_proiettata(nome, ruolo)
-                if fm_val:
-                    conteggio['scout'] += 1
-                elif record is None:
-                    conteggio['nessuno'] += 1
+                proiezione = scout.calcola_fantamedia_proiettata(nome, ruolo)
             except Exception:
-                fm_val = None
+                proiezione = None
+            if proiezione:
+                conteggio['scout'] += 1
+                fm_grezza = proiezione
+                presenze_peso = K_SHRINK      # fiducia media: la proiezione pesa quanto la baseline
+            elif record is None:
+                conteggio['nessuno'] += 1
 
-        fvm_finale, fm_usata = calcola_fvm(best_qt, fm_val, ruolo, squadra, scout, nome)
+        base_ruolo = baseline.get(ruolo, 6.0)
+        fm_per_fvm = fm_ponderata(fm_grezza, presenze_peso, base_ruolo)
+
+        fvm_finale, fm_usata = calcola_fvm(best_qt, fm_per_fvm, ruolo, squadra, scout, nome)
 
         colonne_out['FVM'].append(fvm_finale)
-        colonne_out['Pv'].append(pv)
-        colonne_out['Mv'].append(mv)
-        colonne_out['Fm'].append(fm_storico if fm_storico > 0 else (round(fm_usata, 2) if fm_usata else 0.0))
-        colonne_out['Gf'].append(gf)
-        colonne_out['Ass'].append(ass)
-        colonne_out['Amm'].append(amm)
-        colonne_out['Esp'].append(esp)
+        for c in COLONNE_STATS:
+            if c == 'Fm':
+                colonne_out[c].append(round(fm_grezza, 2) if fm_grezza else 0.0)
+            else:
+                colonne_out[c].append(valori[c])
 
     for col, valori in colonne_out.items():
         df_listone[col] = valori
 
+    df_listone['Prezzo'] = calcola_prezzi(df_listone)
     df_listone = df_listone.fillna("")
     df_listone.to_csv("Lista_Finale_Master.csv", sep=';', index=False)
 
@@ -378,6 +459,7 @@ def main():
     print(f"📊 Proiezioni scout: {conteggio['scout']} | Senza dati: {conteggio['nessuno']}")
     print(f"📡 Chiamate API usate in questo run: {scout.chiamate}"
           + (" (quota giornaliera esaurita)" if scout.quota_esaurita else ""))
+    print(f"💰 Prezzi calcolati su lega da {SQUADRE_LEGA} squadre e {BUDGET_LEGA} crediti.")
     print(f"✅ Lista_Finale_Master.csv rigenerato: {len(df_listone)} giocatori, "
           f"{con_stats} con statistiche reali.")
 
