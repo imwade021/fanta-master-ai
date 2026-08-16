@@ -2,12 +2,18 @@ import pandas as pd
 import numpy as np
 import requests
 import os
+import re
+import unicodedata
 from scout_engine import ScoutEngine
 
 LISTONE_URL = "https://raw.githubusercontent.com/imwade021/fanta-data-bridge/main/Lista-FantaAsta-Fantacalcio.csv"
+BIG_TEAMS = ['Inter', 'Milan', 'Juventus', 'Napoli', 'Roma', 'Atalanta', 'Lazio', 'Fiorentina', 'Bologna', 'Como']
 
-# Club di prima fascia che aumentano l'hype e il prezzo base dei nuovi acquisti
-BIG_TEAMS = ['Inter', 'Milan', 'Juventus', 'Napoli', 'Roma', 'Atalanta', 'Lazio', 'Fiorentina', 'Bologna']
+def normalize_str(s):
+    if not isinstance(s, str): return ""
+    s = unicodedata.normalize('NFKD', s).encode('ASCII', 'ignore').decode('utf-8')
+    s = re.sub(r"[^\w\s]", "", s)
+    return " ".join(s.lower().split())
 
 def scarica_listone_aggiornato():
     print("📥 Download dell'ultimo listone di mercato in corso...")
@@ -22,8 +28,25 @@ def scarica_listone_aggiornato():
         print(f"⚠️ Download fallito, uso il file locale esistente: {e}")
     return False
 
+def trova_fantamedia_reale(nome_cercato, df_stats):
+    if df_stats.empty: return None
+    norm_cercato = normalize_str(nome_cercato)
+    
+    match = df_stats[df_stats['Nome_Norm'] == norm_cercato]
+    if not match.empty: return match.iloc[0].get('Fm', None)
+    
+    match = df_stats[df_stats['Nome_Norm'].apply(lambda x: norm_cercato in x or x in norm_cercato if isinstance(x, str) else False)]
+    if not match.empty: return match.iloc[0].get('Fm', None)
+    
+    cognome = norm_cercato.split()[0] if norm_cercato else ""
+    if len(cognome) > 2:
+        match = df_stats[df_stats['Nome_Norm'].str.contains(cognome, regex=False, na=False)]
+        if not match.empty: return match.iloc[0].get('Fm', None)
+        
+    return None
+
 def main():
-    print("🚀 Avvio Master Engine Automatico e Dinamico...")
+    print("🚀 Avvio Master Engine - Logica Aggressiva per Semi-Top...")
     
     scarica_listone_aggiornato()
     scout = ScoutEngine()
@@ -41,7 +64,7 @@ def main():
 
     try:
         df_stats = pd.read_excel("Quotazioni_Fantacalcio_Stagione_2025_26.xlsx", header=1)
-        df_stats['Nome_Clean'] = df_stats['Nome'].astype(str).str.lower().str.strip()
+        df_stats['Nome_Norm'] = df_stats['Nome'].apply(normalize_str)
     except Exception as e:
         print(f"⚠️ File Statistiche non trovato: {e}")
         df_stats = pd.DataFrame()
@@ -52,50 +75,54 @@ def main():
         nome = str(row['Nome'])
         ruolo = str(row['R'])
         squadra = str(row.get('Squadra', '')).strip()
-        nome_clean = nome.lower().strip()
         
-        fvm_finale = None
+        # Prendi la quotazione migliore tra quella Iniziale (Qt.I) e quella Attuale (Qt.A)
+        qt_iniziale = pd.to_numeric(str(row.get('Qt.I', 1)).replace(',', '.'), errors='coerce') or 1.0
+        qt_attuale = pd.to_numeric(str(row.get('Qt.A', qt_iniziale)).replace(',', '.'), errors='coerce') or qt_iniziale
+        best_qt = max(qt_iniziale, qt_attuale)
+
+        fm_reale_raw = trova_fantamedia_reale(nome, df_stats)
         
-        # 1. Se ha giocato in Serie A l'anno scorso (2025/26), prendiamo la FantaMedia reale
-        if not df_stats.empty:
-            match = df_stats[df_stats['Nome_Clean'] == nome_clean]
-            if not match.empty:
-                fm_reale = match.iloc[0].get('Fm', None)
-                if pd.notnull(fm_reale) and float(str(fm_reale).replace(',', '.')) > 0:
-                    fvm_finale = float(str(fm_reale).replace(',', '.'))
-        
-        # 2. Se è un NUOVO ACQUISTO (es. Molina, Mastantuono, Spence, Pinco Pallino...)
-        if fvm_finale is None:
-            # Recuperiamo la quotazione iniziale ufficiale Fantacalcio
-            qt_iniziale = pd.to_numeric(str(row.get('Qt.I', 1)).replace(',', '.'), errors='coerce') or 1.0
-            
-            # Calcoliamo la FantaMedia proiettata tramite Scout Engine
+        # 1. Se ha giocato in Italia l'anno scorso (es. Nico Paz al Como)
+        if fm_reale_raw is not None and str(fm_reale_raw).strip() != '':
+            try:
+                fm_val = float(str(fm_reale_raw).replace(',', '.'))
+                if fm_val > 0:
+                    fvm_da_fm = max(10.0, (fm_val - 5.0) * 22)
+                    fvm_finale = max(best_qt * 1.5, fvm_da_fm)
+                else:
+                    fm_val = None
+            except ValueError:
+                fm_val = None
+        else:
+            fm_val = None
+
+        # 2. Se è un NUOVO ACQUISTO (es. Molina, Mastantuono)
+        if fm_val is None:
             fvm_proiettata = scout.calcola_fantamedia_proiettata(nome, ruolo)
+            stima_da_fm = max(0, (fvm_proiettata - 5.5) * 30) # Formula molto più reattiva
             
-            # Stima base d'asta ricavata dalla FantaMedia
-            stima_da_fm = (fvm_proiettata - 5.0) * 18
-            
-            # MOLTIPLICATORE DINAMICO DI SQUADRA (Hype / Status del Club)
-            # Se va in una Big di Serie A, il prezzo minimo d'asta sale automaticamente
-            factor_squadra = 1.35 if squadra in BIG_TEAMS else 1.0
-            
-            # La FVM finale prende IL VALORE PIÙ ALTO tra:
-            # - La quotazione iniziale di Fantacalcio (riproporzionata per le Big)
-            # - La stima calcolata dalle API dello Scout
-            base_valore = max(qt_iniziale * 1.5, stima_da_fm) * factor_squadra
-            
-            # Garantiamo un valore coerente tra 1 e 100
-            fvm_finale = max(qt_iniziale, round(base_valore, 1))
-            fvm_finale = min(95.0, fvm_finale)
-            
-            print(f"   [+] Nuovo Acquisto: {nome} ({squadra}) => Quot.Iniziale: {qt_iniziale} | FVM Calcolata: {fvm_finale}")
+            if squadra in BIG_TEAMS:
+                # Se Fantacalcio gli dà già 10+ crediti di base (es. Molina), è un titolare/semi-top
+                if best_qt >= 10:
+                    floor = 45.0 # FVM 45 = FP ~ 25 crediti (2a Fascia)
+                # Se parte da 1 credito ma è in una Big (es. Mastantuono), forziamo un minimo dignitoso
+                elif best_qt >= 5:
+                    floor = 30.0 # FVM 30 = FP ~ 15 crediti
+                else:
+                    floor = 22.0 # FVM 22 = FP ~ 11 crediti (Scommessa di lusso)
+                
+                base_valore = max(best_qt * 2.2, stima_da_fm * 1.4, floor)
+            else:
+                base_valore = max(best_qt * 1.5, stima_da_fm)
+                
+            fvm_finale = base_valore
 
-        fvm_calcolati.append(fvm_finale)
+        fvm_calcolati.append(round(min(95.0, fvm_finale), 1))
 
-    # Aggiorniamo il listone e salviamo il file master
     df_listone['FVM'] = fvm_calcolati
     df_listone.to_csv("Lista_Finale_Master.csv", sep=';', index=False)
-    print("✅ Lista_Finale_Master.csv generata in modo 100% automatico!")
+    print("✅ Lista_Finale_Master.csv rigenerata con Fasce corrette!")
 
 if __name__ == '__main__':
     main()
