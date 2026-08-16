@@ -1,67 +1,66 @@
 import pandas as pd
-from fanta_engine import FantaEngine
+import numpy as np
 from scout_engine import ScoutEngine
-import math
 
-def genera_master_db(file_listone, file_storico, output_csv):
-    print("Inizializzazione del Master Engine e dello Scout...")
-    motore = FantaEngine()
+def main():
+    print("🚀 Avvio Master Engine con Scouting Integrato...")
+    
+    # 1. Carichiamo lo ScoutEngine per le API estero
     scout = ScoutEngine()
     
+    # 2. Carichiamo il listone principale
     try:
-        print(f"Lettura del listone: {file_listone}")
-        df_listone = pd.read_csv(file_listone, sep=None, engine='python', header=None)
-        df_listone.rename(columns={0: 'ID', 1: 'Nome', 3: 'Ruolo', 9: 'Squadra'}, inplace=True)
-        
-        print(f"Lettura dello storico Excel: {file_storico}")
-        df_storico = pd.read_excel(file_storico) 
-        df_storico.columns = df_storico.columns.astype(str).str.strip().str.upper()
-        
+        df_listone = pd.read_csv("Lista-FantaAsta-Fantacalcio.csv", header=None)
+        df_listone.columns = [
+            'Id', 'Nome_Breve', 'Nome', 'R', 'Ruolo_Esteso', 'Qt.A', 'Qt.I', 
+            'Qt.M', 'Diff.M', 'Squadra', 'FVM', 'FVM.M', 'Piede', 'Nazionalita', 
+            'DataNascita', 'PhotoURL', 'Extra1', 'Extra2', 'Extra3'
+        ]
     except Exception as e:
-        print(f"ERRORE CRITICO durante il caricamento dei file: {e}")
+        print(f"❌ Errore caricamento Listone CSV: {e}")
         return
 
-    print("Incrocio dei dati storici in corso...")
-    
-    col_id_storico = 'ID'
-    if 'ID' not in df_storico.columns:
-        col_id_storico = df_storico.columns[0]
+    # 3. Carichiamo il file delle Statistiche Reali
+    try:
+        df_stats = pd.read_excel("Quotazioni_Fantacalcio_Stagione_2025_26.xlsx", header=1)
+        df_stats['Nome_Clean'] = df_stats['Nome'].astype(str).str.lower().str.strip()
+    except Exception as e:
+        print(f"⚠️ File Statistiche non trovato, uso solo Scout Engine: {e}")
+        df_stats = pd.DataFrame()
 
-    df_listone['ID'] = pd.to_numeric(df_listone['ID'], errors='coerce')
-    df_storico[col_id_storico] = pd.to_numeric(df_storico[col_id_storico], errors='coerce')
-    
-    if 'FM' not in df_storico.columns:
-        df_storico['FM'] = float('nan')
+    fvm_calcolati = []
 
-    df_master = pd.merge(df_listone, df_storico[[col_id_storico, 'FM']], left_on='ID', right_on=col_id_storico, how='left')
-    
-    df_master['P_FM'] = 0.0
-    df_master['Valore_Base_Perc'] = 0.0
-    
-    print(f"Trovati {len(df_master)} giocatori. Calcolo proiezioni e prezzi...")
-    
-    for index, row in df_master.iterrows():
-        ruolo = str(row.get('Ruolo', 'A')).strip()
-        nome = str(row.get('Nome', 'Sconosciuto')).strip()
-        fantamedia_storica = row['FM']
+    # 4. Elaborazione chirurgica giocatore per giocatore
+    for idx, row in df_listone.iterrows():
+        nome = str(row['Nome'])
+        ruolo = str(row['R'])
+        nome_clean = nome.lower().strip()
         
-        if pd.isna(fantamedia_storica) or math.isnan(fantamedia_storica) or fantamedia_storica == 0:
-            pfm_calcolata = scout.calcola_fantamedia_proiettata(nome, ruolo)
-        else:
-            pfm_calcolata = float(fantamedia_storica)
+        fvm_finale = None
+        
+        # Cerca prima nello storico italiano (2025/2026)
+        if not df_stats.empty:
+            match = df_stats[df_stats['Nome_Clean'] == nome_clean]
+            if not match.empty:
+                fm_reale = match.iloc[0].get('Fm', None)
+                if pd.notnull(fm_reale) and float(str(fm_reale).replace(',', '.')) > 0:
+                    fvm_finale = float(str(fm_reale).replace(',', '.'))
+        
+        # Se NON ha uno storico in Italia (es. Mastantuono dal Real Madrid), intervengono le API dello Scout!
+        if fvm_finale is None:
+            print(f"🔎 Nuovo acquisto/Esterofilo rilevato: {nome}")
+            fvm_proiettata = scout.calcola_fantamedia_proiettata(nome, ruolo)
             
-        valore_perc = motore.calcola_percentuale_valore(pfm_calcolata, ruolo)
+            # Trasformiamo la FantaMedia Proiettata in un valore percentuale FVM credibile per l'asta
+            # Es. FM di 7.2 -> ~35-40 FVM | FM di 6.0 -> ~5-10 FVM
+            fvm_finale = max(1.0, round((fvm_proiettata - 5.0) * 15, 1))
         
-        df_master.at[index, 'P_FM'] = round(pfm_calcolata, 2)
-        df_master.at[index, 'Valore_Base_Perc'] = valore_perc
-        
-    df_master.to_csv(output_csv, index=False, sep=';')
-    print(f"SUCCESSO! File MASTER salvato in: {output_csv}")
+        fvm_calcolati.append(fvm_finale)
 
-if __name__ == "__main__":
-    # NOME FILE AGGIORNATO ALLA STAGIONE CORRETTA (2025/26)
-    NOME_FILE_STORICO = "Quotazioni_Fantacalcio_Stagione_2025_26.xlsx"
-    NOME_FILE_LISTONE = "Lista-FantaAsta-Fantacalcio.csv"
-    NOME_OUTPUT = "Lista_Finale_Master.csv"
-    
-    genera_master_db(NOME_FILE_LISTONE, NOME_FILE_STORICO, NOME_OUTPUT)
+    # 5. Sovrascriviamo la colonna FVM con i valori perfetti ed esportiamo
+    df_listone['FVM'] = fvm_calcolati
+    df_listone.to_csv("Lista_Finale_Master.csv", sep=';', index=False)
+    print("✅ File Lista_Finale_Master.csv generato con successo!")
+
+if __name__ == '__main__':
+    main()
