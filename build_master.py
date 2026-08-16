@@ -55,7 +55,7 @@ def trova_miglior_match_stats(nome_cercato, ruolo_cercato, df_stats):
     return df_matches.iloc[0]
 
 def main():
-    print("🚀 Avvio Master Engine V9.0 - DEDUPLICAZIONE & GERARCHIA GIOVANILE...")
+    print("🚀 Avvio Master Engine V10.0 - FVM TOP SCALATO E NO DUPLICATI...")
     scout = ScoutEngine()
 
     excel_file = "Quotazioni_Fantacalcio_Stagione_2025_26.xlsx"
@@ -146,33 +146,29 @@ def main():
             try: fm_val = scout.calcola_fantamedia_proiettata(nome, ruolo)
             except: fm_val = None
 
-        # -------------------------------------------------------------
-        # DISTINZIONE CHIARA: PROSPETTI (Comotto) VS AGGREGATI (Valletta)
-        # -------------------------------------------------------------
+        # MATEMATICA CORRETTA PER I TOP PLAYER E I PROSPETTI
         if fm_val is None:
             if best_qt <= 1:
                 is_prospetto = scout.verifica_prospetto_giovanile(nome, squadra)
-                if is_prospetto:
-                    base_fvm = 8.0 if squadra in BIG_TEAMS else 5.0  # Scommessa viva (Comotto)
-                else:
-                    base_fvm = 1.0  # Semplice aggregato (Valletta)
+                base_fvm = 15.0 if is_prospetto else 1.0
             else:
-                fm_val = 5.8
-                base_fvm = best_qt * 1.5
+                fm_val = 6.0
+                base_fvm = best_qt * 4.0
         else:
             if ruolo == 'A':
-                if best_qt >= 25: base_fvm = (best_qt * 8.5) + (max(0, fm_val - 5.5) ** 2) * 30
-                elif best_qt >= 10: base_fvm = (best_qt * 4.5) + (max(0, fm_val - 5.5) ** 2) * 15
-                else: base_fvm = best_qt * 2.5 + max(0, (fm_val - 5.5) * 5)
+                # Formula rinforzata per spingere i Top (Leao, Lautaro) verso i 300-450 FVM
+                base_fvm = (best_qt * 9.5) + (max(0, fm_val - 5.5) ** 2.2) * 35
             elif ruolo == 'C':
-                if best_qt >= 18: base_fvm = (best_qt * 6.0) + (max(0, fm_val - 5.5) ** 2) * 20
-                elif best_qt >= 8: base_fvm = (best_qt * 3.5) + (max(0, fm_val - 5.5) ** 2) * 12
-                else: base_fvm = best_qt * 2.0 + max(0, (fm_val - 5.5) * 5)
-            elif ruolo == 'D': base_fvm = best_qt * 2.0 + max(0, (fm_val - 5.5) * 10)
-            elif ruolo == 'P': base_fvm = best_qt * 2.2 + max(0, (fm_val - 5.0) * 10)
-            else: base_fvm = best_qt * 1.5
+                base_fvm = (best_qt * 7.0) + (max(0, fm_val - 5.5) ** 2.0) * 25
+            elif ruolo == 'D':
+                base_fvm = (best_qt * 4.0) + (max(0, fm_val - 5.5) ** 1.5) * 15
+            elif ruolo == 'P':
+                base_fvm = (best_qt * 4.5) + (max(0, fm_val - 5.0) ** 1.5) * 15
+            else:
+                base_fvm = best_qt * 3.0
 
-            if squadra in BIG_TEAMS and best_qt >= 5.0: base_fvm *= 1.12
+            if squadra in BIG_TEAMS and best_qt >= 8.0:
+                base_fvm *= 1.20
 
         fvm_finale = round(min(500.0, max(1.0, float(base_fvm))), 1)
         fvm_calcolati.append(fvm_finale)
@@ -180,7 +176,7 @@ def main():
     df_listone['FVM'] = fvm_calcolati
     df_listone = df_listone.fillna("")
     df_listone.to_csv("Lista_Finale_Master.csv", sep=';', index=False)
-    print("✅ Lista_Finale_Master.csv RIGENERATO!")
+    print("✅ Lista_Finale_Master.csv RIGENERATO PERFETTAMENTE!")
 
 if __name__ == '__main__':
     main()
