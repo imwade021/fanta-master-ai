@@ -5,15 +5,12 @@ import urllib.parse
 
 class ScoutEngine:
     def __init__(self):
-        # Livello di sicurezza: Recuperiamo la chiave dalla cassaforte di GitHub
         self.api_key = os.environ.get('API_FOOTBALL_KEY')
         
-        # Header per l'API Ufficiale
         self.api_headers = {
             'x-apisports-key': self.api_key if self.api_key else ''
         }
         
-        # Header per le ricerche web d'emergenza (Wikipedia)
         self.web_headers = {
             'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/91.0.4472.124 Safari/537.36'
         }
@@ -25,21 +22,18 @@ class ScoutEngine:
         }
 
     def cerca_api_ufficiale(self, nome_giocatore):
-        """Livello 1: Ricerca chirurgica nel database di API-Football"""
         if not self.api_key:
             return None
             
         print(f"   [+] Livello 1: Interrogo API-Football per {nome_giocatore}...")
         try:
             url = "https://v3.football.api-sports.io/players"
-            # Cerchiamo i dati dell'ultima stagione conclusa (2025/2026 -> usiamo 2025 per i campionati invernali)
             params = {'search': nome_giocatore, 'season': 2025}
             response = requests.get(url, headers=self.api_headers, params=params, timeout=5)
             
             if response.status_code == 200:
                 data = response.json()
                 if data.get('results', 0) > 0:
-                    # Trovato! Estraiamo le statistiche
                     stats = data['response'][0]['statistics'][0]
                     games = stats['games']['appearences'] or 0
                     goals = stats['goals']['total'] or 0
@@ -58,28 +52,25 @@ class ScoutEngine:
         return None
 
     def cerca_euristica_emergenza(self, nome_giocatore, ruolo):
-        """Livello di Sopravvivenza: Generazione dati logici garantita al 100%"""
         print(f"   [-] Livello d'emergenza attivato per {nome_giocatore} (Ruolo: {ruolo})")
         
-        # Assegniamo statistiche base credibili a seconda del ruolo in campo
         if ruolo == 'A':
             return {'presenze': 20, 'gol': 6, 'assist': 2, 'ammonizioni': 2, 'campionato_origine': 'Sconosciuto'}
-        elif ruolo == 'C' or ruolo == 'T':
+        elif ruolo in ['C', 'T']:
             return {'presenze': 25, 'gol': 3, 'assist': 4, 'ammonizioni': 5, 'campionato_origine': 'Sconosciuto'}
-        elif ruolo == 'D' or ruolo == 'E' or ruolo == 'B':
+        elif ruolo in ['D', 'E', 'B']:
             return {'presenze': 25, 'gol': 1, 'assist': 1, 'ammonizioni': 7, 'campionato_origine': 'Sconosciuto'}
         else:
             return {'presenze': 30, 'gol': 0, 'assist': 0, 'ammonizioni': 0, 'campionato_origine': 'Sconosciuto'}
 
     def estrai_dati(self, nome_giocatore, ruolo):
-        # Tenta il Livello 1 (API)
         dati = self.cerca_api_ufficiale(nome_giocatore)
         
-        # Se fallisce, passa al Livello di Sopravvivenza
-        if non dati:
+        # Corretto 'if non dati:' con il corretto operatore Python 'if not dati:'
+        if not dati:
             dati = self.cerca_euristica_emergenza(nome_giocatore, ruolo)
             
-        time.sleep(0.2) # Pausa leggerissima
+        time.sleep(0.2)
         return dati
 
     def calcola_fantamedia_proiettata(self, nome_giocatore, ruolo):
