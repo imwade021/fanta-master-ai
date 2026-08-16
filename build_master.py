@@ -4,7 +4,6 @@ import requests
 import os
 import re
 import unicodedata
-import io
 from scout_engine import ScoutEngine
 
 LISTONE_URL = "https://raw.githubusercontent.com/imwade021/fanta-data-bridge/main/Lista-FantaAsta-Fantacalcio.csv"
@@ -17,16 +16,14 @@ def normalize_and_tokenize(s):
     return set(s.split())
 
 def scarica_listone_aggiornato():
-    print("📥 Download listone in corso...")
     try:
         res = requests.get(LISTONE_URL, timeout=15)
         if res.status_code == 200:
             with open("Lista-FantaAsta-Fantacalcio.csv", "wb") as f:
                 f.write(res.content)
-            print("✅ Listone scaricato!")
             return True
-    except Exception as e:
-        print(f"⚠️ Download fallito: {e}")
+    except:
+        pass
     return False
 
 def trova_fantamedia_reale(nome_cercato, df_stats):
@@ -34,66 +31,70 @@ def trova_fantamedia_reale(nome_cercato, df_stats):
     tokens_cercato = normalize_and_tokenize(nome_cercato)
     if not tokens_cercato: return None
 
-    # Ricerca Infallibile: Indipendente dall'ordine "Nome Cognome" o "Cognome Nome"
     for idx, row in df_stats.iterrows():
         tokens_stat = row.get('Tokens', set())
         if not tokens_stat: continue
-        
-        # Match Perfetto (es. [nico, paz] == [paz, nico])
         if tokens_cercato == tokens_stat:
             return row.get('Fm', None)
-        
-        # Match Parziale Sicuro (Se hanno almeno 2 parole uguali, o 1 parola lunga e unica)
         overlap = tokens_cercato.intersection(tokens_stat)
         if len(overlap) >= 2 or (len(overlap) == 1 and any(len(w) >= 5 for w in overlap)):
             return row.get('Fm', None)
-            
     return None
 
 def main():
-    print("🚀 Avvio Master Engine - V DEFINITIVA (Match Infallibile e Pulizia Assoluta)...")
+    print("🚀 Avvio Master Engine - PARSER MANUALE ANTIPROIETTILE...")
     
     scarica_listone_aggiornato()
     scout = ScoutEngine()
     
+    # -------------------------------------------------------------------
+    # LETTURA MANUALE: Bypassa tutti gli errori di formattazione del CSV
+    # -------------------------------------------------------------------
+    valid_data = []
     try:
-        # LETTURA BLINDATA DEL FILE
         with open("Lista-FantaAsta-Fantacalcio.csv", "r", encoding="utf-8", errors="ignore") as f:
-            testo = f.read()
-        separatore = ';' if ';' in testo else ','
+            lines = f.readlines()
+            
+        header_found = False
+        sep = ','
         
-        df_listone = pd.read_csv(io.StringIO(testo), header=None, sep=separatore, dtype=str, on_bad_lines='skip')
-        
-        # FORZATURA STRUTTURALE: Esattamente 19 colonne
-        if len(df_listone.columns) > 19:
-            df_listone = df_listone.iloc[:, :19]
-        for i in range(len(df_listone.columns), 19):
-            df_listone[i] = ""
-
-        df_listone.columns = [
-            'Id', 'Nome_Breve', 'Nome', 'R', 'Ruolo_Esteso', 'Qt.A', 'Qt.I', 
-            'Qt.M', 'Diff.M', 'Squadra', 'FVM', 'FVM.M', 'Piede', 'Nazionalita', 
-            'DataNascita', 'PhotoURL', 'Extra1', 'Extra2', 'Extra3'
-        ]
-
-        # -------------------------------------------------------------
-        # GHIGLIOTTINA 1: Elimina intestazioni e spazzatura HTML (Guida, Serie A, ecc)
-        df_listone['R'] = df_listone['R'].astype(str).str.strip().str.upper()
-        df_listone = df_listone[df_listone['R'].isin(['P', 'D', 'C', 'A'])]
-        
-        # GHIGLIOTTINA 2: L'ID deve essere un numero valido
-        df_listone['Id_Num'] = pd.to_numeric(df_listone['Id'], errors='coerce')
-        df_listone = df_listone.dropna(subset=['Id_Num'])
-        df_listone = df_listone.drop(columns=['Id_Num'])
-        # -------------------------------------------------------------
-        
+        for line in lines:
+            line_clean = line.strip()
+            if not line_clean: continue
+            
+            # Cerca l'inizio reale della tabella
+            if not header_found:
+                if 'nome' in line_clean.lower() and 'squadra' in line_clean.lower():
+                    header_found = True
+                    sep = ';' if ';' in line_clean else ','
+                continue
+                
+            parts = line_clean.split(sep)
+            if len(parts) >= 10:
+                ruolo = parts[3].strip().upper()
+                # FILTRO ASSOLUTO: Se non è P, D, C, A, la riga viene distrutta
+                if ruolo in ['P', 'D', 'C', 'A']:
+                    row_data = parts[:19]
+                    while len(row_data) < 19:
+                        row_data.append("")
+                    valid_data.append(row_data)
     except Exception as e:
-        print(f"❌ Errore critico lettura CSV: {e}")
+        print(f"❌ Errore lettura manuale: {e}")
         return
+
+    if not valid_data:
+        print("❌ Nessun giocatore valido trovato. CSV illeggibile.")
+        return
+
+    df_listone = pd.DataFrame(valid_data, columns=[
+        'Id', 'Nome_Breve', 'Nome', 'R', 'Ruolo_Esteso', 'Qt.A', 'Qt.I', 
+        'Qt.M', 'Diff.M', 'Squadra', 'FVM', 'FVM.M', 'Piede', 'Nazionalita', 
+        'DataNascita', 'PhotoURL', 'Extra1', 'Extra2', 'Extra3'
+    ])
+    print(f"✅ Trovati {len(df_listone)} giocatori reali.")
 
     try:
         df_stats = pd.read_excel("Quotazioni_Fantacalcio_Stagione_2025_26.xlsx", header=1)
-        # Prepara l'Excel per la ricerca intelligente
         df_stats['Tokens'] = df_stats['Nome'].apply(normalize_and_tokenize)
     except Exception:
         df_stats = pd.DataFrame()
@@ -105,23 +106,27 @@ def main():
         ruolo = str(row['R'])
         squadra = str(row.get('Squadra', '')).replace('*', '').strip()
         
-        # PARSING QUOTAZIONI CORRETTO E PROTETTO DA SLITTAMENTI (>150 viene azzerato)
-        qt_iniziale = pd.to_numeric(str(row.get('Qt.I', 1)).replace(',', '.'), errors='coerce')
-        if pd.isna(qt_iniziale) or qt_iniziale > 150: qt_iniziale = 1.0
+        # Protezione valori astronomici
+        try:
+            qt_iniziale = float(str(row.get('Qt.I', '1')).replace(',', '.'))
+        except:
+            qt_iniziale = 1.0
+        if qt_iniziale > 150: qt_iniziale = 1.0
         
-        qt_attuale = pd.to_numeric(str(row.get('Qt.A', qt_iniziale)).replace(',', '.'), errors='coerce')
-        if pd.isna(qt_attuale) or qt_attuale > 150: qt_attuale = qt_iniziale
+        try:
+            qt_attuale = float(str(row.get('Qt.A', qt_iniziale)).replace(',', '.'))
+        except:
+            qt_attuale = qt_iniziale
+        if qt_attuale > 150: qt_attuale = qt_iniziale
         
         best_qt = max(qt_iniziale, qt_attuale)
-        
-        # RICERCA FANTAMEDIA INFALLIBILE
         fm_reale_raw = trova_fantamedia_reale(nome, df_stats)
 
         fm_val = None
         if fm_reale_raw is not None and str(fm_reale_raw).strip() != '':
             try:
                 fm_val = float(str(fm_reale_raw).replace(',', '.'))
-            except ValueError:
+            except:
                 pass
 
         if fm_val is None:
@@ -131,27 +136,18 @@ def main():
             except:
                 fm_val = 5.0
 
-        # ---------------------------------------------------------
-        # IL MOTORE MATEMATICO (Curve perfette per il calcolo FVM)
-        # ---------------------------------------------------------
-        
-        # 1. Valore basato sul Mercato (Quotazione Fantacalcio)
+        # Calcolo FVM Corretto
         fvm_da_qt = best_qt * 1.5
-        
-        # 2. Valore basato sul Campo (Curva Quadratica della FantaMedia)
         if fm_val > 5.5:
-            # Formula letale: (7.3 di Nico Paz - 5.2)^2 * 12 = FVM ~52 (Perfetto per un Semi-Top)
             fvm_da_fm = (fm_val - 5.2) ** 2 * 12
         else:
             fvm_da_fm = max(1.0, best_qt)
             
         base_fvm = max(fvm_da_qt, fvm_da_fm)
 
-        # Boost per giocatori rilevanti in Top Club
         if squadra in BIG_TEAMS and best_qt >= 8.0:
             base_fvm *= 1.15
 
-        # Tetto massimo a 95.0, minimo a 1.0
         try:
             fvm_finale = round(min(95.0, max(1.0, float(base_fvm))), 1)
         except:
@@ -162,7 +158,7 @@ def main():
     df_listone['FVM'] = fvm_calcolati
     df_listone = df_listone.fillna(0)
     df_listone.to_csv("Lista_Finale_Master.csv", sep=';', index=False)
-    print("✅ Lista_Finale_Master.csv RIGENERATA. File Pulito e Calcoli Perfetti!")
+    print("✅ File CSV esportato correttamente!")
 
 if __name__ == '__main__':
     main()
