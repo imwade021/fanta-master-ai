@@ -1,79 +1,90 @@
+import os
 import requests
-from bs4 import BeautifulSoup
-import urllib.parse
 import time
+import urllib.parse
 
 class ScoutEngine:
     def __init__(self):
-        # I coefficienti di difficoltà dei campionati
-        self.coefficienti_campionati = {
-            'Premier League': 1.0,
-            'La Liga': 0.95,
-            'Bundesliga': 0.90,
-            'Ligue 1': 0.85,
-            'Serie B': 0.80,
-            'Eredivisie': 0.75,
-            'Primeira Liga': 0.75,
-            'Brasileirao': 0.70,
-            'Championship': 0.70,
-            'Sconosciuto': 0.65
+        # Livello di sicurezza: Recuperiamo la chiave dalla cassaforte di GitHub
+        self.api_key = os.environ.get('API_FOOTBALL_KEY')
+        
+        # Header per l'API Ufficiale
+        self.api_headers = {
+            'x-apisports-key': self.api_key if self.api_key else ''
         }
         
-        # Un travestimento: diciamo ai siti che siamo un browser Google Chrome e non un bot
-        self.headers = {
-            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
+        # Header per le ricerche web d'emergenza (Wikipedia)
+        self.web_headers = {
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/91.0.4472.124 Safari/537.36'
         }
 
-    def estrai_dati_reali(self, nome_giocatore):
-        print(f"🕵️ Scout online: Mi collego alla rete per cercare {nome_giocatore}...")
-        
-        # Base di partenza nel caso la rete non ci dia risposte utili
-        dati_base = {'presenze': 25, 'gol': 0, 'assist': 0, 'ammonizioni': 2, 'campionato_origine': 'Sconosciuto'}
-        
-        try:
-            # Creiamo l'URL sicuro per l'API di Wikipedia
-            nome_url = urllib.parse.quote(nome_giocatore)
-            url = f"https://it.wikipedia.org/w/api.php?action=query&list=search&srsearch={nome_url}+calciatore&utf8=&format=json"
+        self.coefficienti_campionati = {
+            'Premier League': 1.0, 'La Liga': 0.95, 'Bundesliga': 0.90, 'Ligue 1': 0.85,
+            'Serie B': 0.80, 'Eredivisie': 0.75, 'Primeira Liga': 0.75, 'Brasileirao': 0.70,
+            'Championship': 0.70, 'Sconosciuto': 0.65
+        }
+
+    def cerca_api_ufficiale(self, nome_giocatore):
+        """Livello 1: Ricerca chirurgica nel database di API-Football"""
+        if not self.api_key:
+            return None
             
-            # Effettuiamo la VERA chiamata a internet
-            response = requests.get(url, headers=self.headers, timeout=5)
+        print(f"   [+] Livello 1: Interrogo API-Football per {nome_giocatore}...")
+        try:
+            url = "https://v3.football.api-sports.io/players"
+            # Cerchiamo i dati dell'ultima stagione conclusa (2025/2026 -> usiamo 2025 per i campionati invernali)
+            params = {'search': nome_giocatore, 'season': 2025}
+            response = requests.get(url, headers=self.api_headers, params=params, timeout=5)
             
             if response.status_code == 200:
-                dati_json = response.json()
-                risultati = dati_json.get('query', {}).get('search', [])
-                
-                if risultati:
-                    # Leggiamo il riassunto della pagina trovata online
-                    snippet = risultati[0].get('snippet', '').lower()
-                    print(f"   [+] Profilo trovato online! Analisi in corso...")
+                data = response.json()
+                if data.get('results', 0) > 0:
+                    # Trovato! Estraiamo le statistiche
+                    stats = data['response'][0]['statistics'][0]
+                    games = stats['games']['appearences'] or 0
+                    goals = stats['goals']['total'] or 0
+                    assists = stats['goals']['assists'] or 0
+                    yellows = stats['cards']['yellow'] or 0
+                    league = stats['league']['name'] or 'Sconosciuto'
                     
-                    # Deduzione intelligente dal testo web (Proof of Concept)
-                    if 'attaccante' in snippet:
-                        dati_base['gol'] = 8
-                        dati_base['assist'] = 3
-                    elif 'centrocampista' in snippet:
-                        dati_base['gol'] = 3
-                        dati_base['assist'] = 5
-                    elif 'difensore' in snippet:
-                        dati_base['gol'] = 1
-                        dati_base['ammonizioni'] = 6
-                else:
-                    print(f"   [-] Nessuna info web precisa. Uso statistiche base.")
-            else:
-                print(f"   [!] Rete respinta (Errore {response.status_code}).")
-
+                    if games > 0:
+                        print("   [✓] Dati API recuperati con successo!")
+                        return {
+                            'presenze': games, 'gol': goals, 'assist': assists, 
+                            'ammonizioni': yellows, 'campionato_origine': league
+                        }
         except Exception as e:
-            print(f"   [!] Errore di connessione a internet: {e}")
+            print(f"   [!] Errore API: {e}")
+        return None
+
+    def cerca_euristica_emergenza(self, nome_giocatore, ruolo):
+        """Livello di Sopravvivenza: Generazione dati logici garantita al 100%"""
+        print(f"   [-] Livello d'emergenza attivato per {nome_giocatore} (Ruolo: {ruolo})")
         
-        # Pausa di cortesia di 1 secondo per non subire blocchi dal sito
-        time.sleep(1) 
-        return dati_base
+        # Assegniamo statistiche base credibili a seconda del ruolo in campo
+        if ruolo == 'A':
+            return {'presenze': 20, 'gol': 6, 'assist': 2, 'ammonizioni': 2, 'campionato_origine': 'Sconosciuto'}
+        elif ruolo == 'C' or ruolo == 'T':
+            return {'presenze': 25, 'gol': 3, 'assist': 4, 'ammonizioni': 5, 'campionato_origine': 'Sconosciuto'}
+        elif ruolo == 'D' or ruolo == 'E' or ruolo == 'B':
+            return {'presenze': 25, 'gol': 1, 'assist': 1, 'ammonizioni': 7, 'campionato_origine': 'Sconosciuto'}
+        else:
+            return {'presenze': 30, 'gol': 0, 'assist': 0, 'ammonizioni': 0, 'campionato_origine': 'Sconosciuto'}
+
+    def estrai_dati(self, nome_giocatore, ruolo):
+        # Tenta il Livello 1 (API)
+        dati = self.cerca_api_ufficiale(nome_giocatore)
+        
+        # Se fallisce, passa al Livello di Sopravvivenza
+        if non dati:
+            dati = self.cerca_euristica_emergenza(nome_giocatore, ruolo)
+            
+        time.sleep(0.2) # Pausa leggerissima
+        return dati
 
     def calcola_fantamedia_proiettata(self, nome_giocatore, ruolo):
-        """
-        Richiama l'estrazione da internet e calcola il valore reale.
-        """
-        dati = self.estrai_dati_reali(nome_giocatore)
+        print(f"\n🕵️ Analisi su {nome_giocatore}...")
+        dati = self.estrai_dati(nome_giocatore, ruolo)
         
         presenze = dati['presenze']
         gol = dati['gol']
@@ -83,22 +94,16 @@ class ScoutEngine:
         
         coeff = self.coefficienti_campionati.get(campionato, 0.65)
         
-        if ruolo == 'A':
-            bonus_totale = (gol * 3) + (assist * 1)
-        elif ruolo == 'C' or ruolo == 'T':
-            bonus_totale = (gol * 3) + (assist * 1)
-        elif ruolo == 'D' or ruolo == 'E' or ruolo == 'B':
+        if ruolo in ['A', 'C', 'T', 'D', 'E', 'B']:
             bonus_totale = (gol * 3) + (assist * 1)
         else: 
             bonus_totale = 0 
             
         bonus_adattato = bonus_totale * coeff
-        voto_base_estero = 6.0 if presenze > 20 else 5.8
+        voto_base_estero = 6.0 if presenze > 15 else 5.8
         
         fantamedia_proiettata = voto_base_estero + (bonus_adattato / presenze) - (malus / presenze)
-        
         fantamedia_proiettata = max(5.0, min(8.5, fantamedia_proiettata))
         
-        print(f"   => P-FM Calcolata per {nome_giocatore}: {round(fantamedia_proiettata, 2)}")
-        
+        print(f"   => P-FM Calcolata: {round(fantamedia_proiettata, 2)} (da {campionato})")
         return round(fantamedia_proiettata, 2)
