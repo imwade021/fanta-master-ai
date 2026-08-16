@@ -313,11 +313,14 @@ def main():
     df_listone = df_listone.fillna("")
     df_listone.to_csv("Lista_Finale_Master.csv", sep=';', index=False)
 
+    scout.salva_cache()
+
     con_stats = sum(1 for v in colonne_out['Pv'] if v > 0)
     print("─" * 50)
     print(f"📊 Match statistiche: {conteggio['id']} per Id | {conteggio['nome']} per nome | "
           f"{conteggio['nome_abbreviato']} per nome abbreviato")
     print(f"📊 Proiezioni scout: {conteggio['scout']} | Senza dati: {conteggio['nessuno']}")
+    print(f"📡 Chiamate /players usate in questo run: {scout.chiamate_players}")
     print(f"✅ Lista_Finale_Master.csv rigenerato: {len(df_listone)} giocatori, "
           f"{con_stats} con statistiche reali.")
 
