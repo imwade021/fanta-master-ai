@@ -1,40 +1,42 @@
 name: Esegui Master Engine
 
-# Questo comando crea un pulsante manuale per avviare il test
 on:
-  workflow_dispatch:
+  workflow_dispatch: # Ti permette di lanciare il bot manualmente con il tasto Play
+  push:
+    paths:
+      - 'Lista-FantaAsta-Fantacalcio.csv' # Si avvia da solo se aggiorni questo file
+      - 'Quotazioni_Fantacalcio_Stagione_2025_26.xlsx'
 
 jobs:
-  run-bot-engine:
+  aggiorna_database:
     runs-on: ubuntu-latest
 
-    steps:
-      # 1. Scarica i file della tua repository nel server
-      - name: Checkout repository
-        uses: actions/checkout@v3
+    permissions:
+      contents: write # Dà al bot il permesso di salvare file nella tua repo
 
-      # 2. Installa Python
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
       - name: Setup Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: '3.10'
 
-      # 3. Installa Pandas e le altre librerie
-      - name: Installa dipendenze
-        run: pip install -r requirements.txt
+      - name: Installa Librerie
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
 
-      # 4. ESEGUE IL TUO SCRIPT MAGICO
-      - name: Genera il Master CSV
+      - name: Esegui Motore e Scout
         run: python build_master.py
         env:
-        API_FOOTBALL_KEY: ${{ secrets.API_FOOTBALL_KEY }}
+          API_FOOTBALL_KEY: ${{ secrets.API_FOOTBALL_KEY }} # <-- La chiave della cassaforte!
 
-
-      # 5. Salva il file appena creato e lo carica sulla tua repository
-      - name: Salva e pusha i risultati
+      - name: Salva il nuovo File Master
         run: |
-          git config --global user.name 'GitHub Actions Bot'
-          git config --global user.email 'actions@github.com'
+          git config --local user.email "action@github.com"
+          git config --local user.name "FantaBot GitHub Action"
           git add Lista_Finale_Master.csv
-          git commit -m "Generato nuovo file Master automatico" || echo "Nessuna modifica da salvare"
+          git commit -m "Aggiornamento: Nuovo Master CSV generato con dati Scout" || echo "Nessun nuovo dato da salvare"
           git push
