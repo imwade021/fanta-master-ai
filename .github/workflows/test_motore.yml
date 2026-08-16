@@ -26,6 +26,9 @@ jobs:
       # 4. ESEGUE IL TUO SCRIPT MAGICO
       - name: Genera il Master CSV
         run: python build_master.py
+        env:
+        API_FOOTBALL_KEY: ${{ secrets.API_FOOTBALL_KEY }}
+
 
       # 5. Salva il file appena creato e lo carica sulla tua repository
       - name: Salva e pusha i risultati
