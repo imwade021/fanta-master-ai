@@ -2,6 +2,7 @@ import pandas as pd
 import numpy as np
 import os
 import re
+import glob
 import unicodedata
 from scout_engine import ScoutEngine
 
@@ -90,10 +91,20 @@ def carica_statistiche(percorso="Statistiche.xlsx"):
     return per_id, per_nome
 
 
-def carica_quotazioni(percorso="Quotazioni_Fantacalcio_Stagione_2025_26.xlsx"):
+def trova_file_quotazioni():
+    """Prende il file quotazioni piu' recente, qualunque stagione abbia nel nome."""
+    candidati = sorted(glob.glob("Quotazioni_Fantacalcio_Stagione_*.xlsx"), reverse=True)
+    return candidati[0] if candidati else None
+
+
+def carica_quotazioni(percorso=None):
     """Quotazioni ufficiali aggiornate, indicizzate per Id (Qt.A / Qt.I)."""
-    if not os.path.exists(percorso):
+    percorso = percorso or trova_file_quotazioni()
+    if not percorso or not os.path.exists(percorso):
+        print("⚠️ Nessun file Quotazioni_Fantacalcio_Stagione_*.xlsx trovato: "
+              "le quotazioni restano quelle del listone base.")
         return {}
+    print(f"📄 File quotazioni in uso: {percorso}")
     try:
         df = pd.read_excel(percorso, header=1)
     except Exception as e:
@@ -109,6 +120,9 @@ def carica_quotazioni(percorso="Quotazioni_Fantacalcio_Stagione_2025_26.xlsx"):
             'Qt.A': row.get('Qt.A'),
             'Qt.I': row.get('Qt.I'),
             'Squadra': row.get('Squadra'),
+            'Nome': row.get('Nome'),
+            'R': str(row.get('R', '')).strip().upper(),
+            'RM': row.get('RM'),
         }
     print(f"✅ Quotazioni caricate: {len(quote)} giocatori.")
     return quote
@@ -131,6 +145,51 @@ def carica_listone_base(percorso="Lista-FantaAsta-Fantacalcio.csv"):
     df['Id'] = df['Id'].apply(clean_id)
     df['R'] = df['R'].astype(str).str.strip().str.upper()
     return df[df['R'].isin(['P', 'D', 'C', 'A'])].reset_index(drop=True)
+
+
+def costruisci_listone(quotazioni, df_extra):
+    """
+    Il file quotazioni definisce CHI e' in Serie A quest'anno e in che squadra.
+    Il vecchio CSV serve solo ad arricchire (foto, piede, nazionalita') per Id.
+    """
+    extra_per_id = {}
+    if df_extra is not None and not df_extra.empty:
+        for _, row in df_extra.iterrows():
+            extra_per_id[clean_id(row['Id'])] = row
+
+    righe = []
+    for pid, q in quotazioni.items():
+        ruolo = q['R']
+        if ruolo not in ('P', 'D', 'C', 'A'):
+            continue
+
+        extra = extra_per_id.get(pid)
+        riga = {c: "" for c in COLONNE_MASTER}
+        riga['Id'] = pid
+        riga['Nome'] = str(q['Nome']).strip()
+        riga['R'] = ruolo
+        riga['Ruolo_Esteso'] = str(q.get('RM') or "").strip()
+        riga['Squadra'] = str(q['Squadra']).strip()
+        riga['Qt.A'] = q['Qt.A']
+        riga['Qt.I'] = q['Qt.I']
+        riga['Nome_Breve'] = riga['Nome']
+
+        if extra is not None:
+            for campo in ['Nome_Breve', 'Piede', 'Nazionalita', 'DataNascita',
+                          'PhotoURL', 'Qt.M', 'Diff.M', 'FVM.M']:
+                valore = str(extra.get(campo, "") or "").strip()
+                if valore:
+                    riga[campo] = valore
+            if not riga['Ruolo_Esteso']:
+                riga['Ruolo_Esteso'] = str(extra.get('Ruolo_Esteso', "") or "").strip()
+
+        righe.append(riga)
+
+    df = pd.DataFrame(righe, columns=COLONNE_MASTER)
+    arricchiti = sum(1 for pid in quotazioni if pid in extra_per_id)
+    print(f"✅ Listone costruito dalle quotazioni: {len(df)} giocatori "
+          f"({arricchiti} arricchiti con foto/anagrafica dal CSV).")
+    return df
 
 
 # ----------------------------------------------------------------------
@@ -192,24 +251,18 @@ def main():
     quotazioni = carica_quotazioni()
 
     csv_file = "Lista-FantaAsta-Fantacalcio.csv"
-    if not os.path.exists(csv_file):
-        print(f"❌ File base {csv_file} mancante.")
+    df_extra = carica_listone_base(csv_file) if os.path.exists(csv_file) else pd.DataFrame()
+    if df_extra.empty:
+        print("⚠️ CSV anagrafica assente: niente foto/piede/nazionalita'.")
+
+    if quotazioni:
+        df_listone = costruisci_listone(quotazioni, df_extra)
+    elif not df_extra.empty:
+        print("⚠️ Nessuna quotazione: ripiego sul CSV (rose potenzialmente vecchie).")
+        df_listone = df_extra
+    else:
+        print("❌ Nessuna fonte disponibile: servono le quotazioni o il CSV.")
         return
-
-    df_listone = carica_listone_base(csv_file)
-    print(f"✅ Listone base: {len(df_listone)} giocatori.")
-
-    # Refresh quotazioni ufficiali per Id (le quotazioni cambiano durante la stagione)
-    aggiornate = 0
-    for idx, row in df_listone.iterrows():
-        q = quotazioni.get(row['Id'])
-        if q:
-            if not pd.isna(q['Qt.A']):
-                df_listone.loc[idx, 'Qt.A'] = str(q['Qt.A'])
-            if not pd.isna(q['Qt.I']):
-                df_listone.loc[idx, 'Qt.I'] = str(q['Qt.I'])
-            aggiornate += 1
-    print(f"🔄 Quotazioni aggiornate da Excel per {aggiornate} giocatori.")
 
     # ------------------------------------------------------------------
     # SINCRONIZZAZIONE ROSE VIA API
