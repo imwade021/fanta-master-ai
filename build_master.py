@@ -46,46 +46,34 @@ def trova_fantamedia_reale(nome_cercato, df_stats):
     return None
 
 def main():
-    print("🚀 Avvio Master Engine - V 2.0 (Blindato)...")
+    print("🚀 Avvio Master Engine - V 3.0 (Intelligenza Analitica Pura)...")
     
     scarica_listone_aggiornato()
     scout = ScoutEngine()
     
     try:
-        # [🛡️ SISTEMA 5] LETTURA ANTIPROIETTILE CON AUTO-REGOLAZIONE
         with open("Lista-FantaAsta-Fantacalcio.csv", "r", encoding="utf-8", errors="ignore") as f:
             prima_riga = f.readline()
-        
         separatore = ';' if ';' in prima_riga else ','
-        
-        # skip_bad_lines evita che una singola riga corrotta distrugga tutto il file
         df_listone = pd.read_csv("Lista-FantaAsta-Fantacalcio.csv", header=None, sep=separatore, on_bad_lines='skip')
         
-        if len(df_listone.columns) > 19:
-            df_listone = df_listone.iloc[:, :19]
-        while len(df_listone.columns) < 19:
-            df_listone[len(df_listone.columns)] = ""
+        if len(df_listone.columns) > 19: df_listone = df_listone.iloc[:, :19]
+        while len(df_listone.columns) < 19: df_listone[len(df_listone.columns)] = ""
 
-        df_listone.columns = [
-            'Id', 'Nome_Breve', 'Nome', 'R', 'Ruolo_Esteso', 'Qt.A', 'Qt.I', 
-            'Qt.M', 'Diff.M', 'Squadra', 'FVM', 'FVM.M', 'Piede', 'Nazionalita', 
-            'DataNascita', 'PhotoURL', 'Extra1', 'Extra2', 'Extra3'
-        ]
+        df_listone.columns = ['Id', 'Nome_Breve', 'Nome', 'R', 'Ruolo_Esteso', 'Qt.A', 'Qt.I', 'Qt.M', 'Diff.M', 'Squadra', 'FVM', 'FVM.M', 'Piede', 'Nazionalita', 'DataNascita', 'PhotoURL', 'Extra1', 'Extra2', 'Extra3']
     except Exception as e:
-        print(f"❌ Errore critico caricamento Listone CSV: {e}")
+        print(f"❌ Errore critico: {e}")
         return
 
     try:
         df_stats = pd.read_excel("Quotazioni_Fantacalcio_Stagione_2025_26.xlsx", header=1)
         df_stats['Nome_Norm'] = df_stats['Nome'].apply(normalize_str)
-    except Exception as e:
-        print(f"⚠️ File Statistiche non trovato: {e}")
+    except Exception:
         df_stats = pd.DataFrame()
 
     fvm_calcolati = []
 
     for idx, row in df_listone.iterrows():
-        # [🛡️ SISTEMA 3] PULIZIA ASTERISCHI E "NaN"
         nome_raw = str(row['Nome'])
         if nome_raw.lower() == 'nan' or nome_raw.strip() == '':
             fvm_calcolati.append(0)
@@ -97,81 +85,63 @@ def main():
         
         qt_iniziale = pd.to_numeric(str(row.get('Qt.I', 1)).replace(',', '.'), errors='coerce')
         if pd.isna(qt_iniziale): qt_iniziale = 1.0
-        
         qt_attuale = pd.to_numeric(str(row.get('Qt.A', qt_iniziale)).replace(',', '.'), errors='coerce')
         if pd.isna(qt_attuale): qt_attuale = qt_iniziale
         
         best_qt = max(qt_iniziale, qt_attuale)
-
         fm_reale_raw = trova_fantamedia_reale(nome, df_stats)
-        
+
+        # ---------------------------------------------------------
+        # MOTORE 1: Curva del Mercato (Esponenziale su Quotazione)
+        # Più costi, più il moltiplicatore sale.
+        # Es: Qt=1 -> FVM 1.1 | Qt=15 -> FVM 27 | Qt=30 -> FVM 69
+        # ---------------------------------------------------------
+        fvm_da_qt = best_qt * (1.1 + (best_qt / 25.0))
+
+        # ---------------------------------------------------------
+        # MOTORE 2: Curva del Campo (Quadratica su FantaMedia)
+        # Premia i top player ignorando in quale squadra giocano
+        # ---------------------------------------------------------
         if fm_reale_raw is not None and str(fm_reale_raw).strip() != '':
             try:
                 fm_val = float(str(fm_reale_raw).replace(',', '.'))
-                if fm_val > 0:
-                    fvm_da_fm = max(10.0, (fm_val - 5.0) * 22)
-                    fvm_finale = max(best_qt * 1.5, fvm_da_fm)
-                else:
-                    fm_val = None
+                # Formula quadratica: un 7.5 schizza in alto, un 6.0 resta basso
+                fvm_da_fm = max(0, (fm_val - 5.5) ** 2 * 18) if fm_val > 5.5 else max(1.0, best_qt)
             except ValueError:
                 fm_val = None
         else:
             fm_val = None
 
         if fm_val is None:
-            # [🛡️ SISTEMA 2] SCUDO API
             try:
                 fvm_proiettata = scout.calcola_fantamedia_proiettata(nome, ruolo)
                 if fvm_proiettata is None: fvm_proiettata = 5.0
-            except Exception as e:
-                print(f"   [!] Errore API per {nome}, applico paracadute. Dettagli: {e}")
+            except:
                 fvm_proiettata = 5.0
+            # Sulle proiezioni API andiamo leggermente più cauti (*14 invece di *18)
+            fvm_da_fm = max(0, (fvm_proiettata - 5.5) ** 2 * 14) if fvm_proiettata > 5.5 else max(1.0, best_qt)
 
-            stima_da_fm = max(0, (fvm_proiettata - 5.5) * 30)
-            
-            # [🛡️ SISTEMA 1] PRIMAVERA LOCK
-            if best_qt <= 1.0 and fvm_proiettata <= 5.2:
-                print(f"   [👶] Primavera Lock attivato per {nome}: FVM bloccato a 1.0")
-                fvm_finale = 1.0
-            
-            # BIG TEAM BOOST
-            elif squadra in BIG_TEAMS:
-                if best_qt >= 10:
-                    floor = 45.0
-                elif best_qt >= 5:
-                    floor = 30.0
-                else:
-                    floor = 15.0 # Meno aggressivo per le semplici riserve
-                
-                base_valore = max(best_qt * 2.2, stima_da_fm * 1.4, floor)
-                fvm_finale = base_valore
-                
-            # [🛡️ SISTEMA 4] BOOST TITOLARI DI PROVINCIA
-            else:
-                if best_qt >= 8:
-                    floor = 15.0 # Se costa 8+ crediti in provincia, è titolare: va in 3a fascia
-                    base_valore = max(best_qt * 1.8, stima_da_fm * 1.2, floor)
-                else:
-                    base_valore = max(best_qt * 1.5, stima_da_fm)
-                
-                fvm_finale = base_valore
+        # ---------------------------------------------------------
+        # LA SINTESI: Si prende il dato che valorizza meglio il giocatore
+        # ---------------------------------------------------------
+        base_fvm = max(fvm_da_qt, fvm_da_fm)
 
-        # Convertitore di sicurezza finale per rimuovere eventuali NaN fantasma
+        # Boost "Hype" Big Team: SI APPLICA SOLO SE SEI GIÀ UN GIOCATORE RILEVANTE (Qt >= 8)
+        # I primavera e le riserve (Qt < 8) non prendono il boost!
+        if squadra in BIG_TEAMS and best_qt >= 8.0:
+            base_fvm *= 1.15
+
         try:
-            if pd.isna(fvm_finale): fvm_finale = 1.0
-            fvm_finale = round(min(95.0, float(fvm_finale)), 1)
+            fvm_finale = round(min(95.0, max(1.0, float(base_fvm))), 1)
         except:
             fvm_finale = 1.0
 
         fvm_calcolati.append(fvm_finale)
 
     df_listone['FVM'] = fvm_calcolati
-    
-    # Riempie con 0 eventuali celle vuote rimaste nel dataset
     df_listone = df_listone.fillna(0)
-    
     df_listone.to_csv("Lista_Finale_Master.csv", sep=';', index=False)
-    print("✅ Lista_Finale_Master.csv generata con Sicurezza V2.0!")
+    print("✅ Lista_Finale_Master.csv generata con Intelligenza Analitica V3.0!")
 
 if __name__ == '__main__':
     main()
