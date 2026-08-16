@@ -1,13 +1,21 @@
 class FantaEngine:
     def __init__(self):
-        # Coefficienti di difficoltà delle leghe rispetto alla Serie A (1.0)
+        # Coefficienti di difficoltà delle leghe rispetto alla Serie A (1.0).
+        # Le chiavi seguono i nomi restituiti da API-Football.
         self.coeff_leghe = {
-            'Premier League': 1.05,
-            'La Liga': 0.95,
-            'Bundesliga': 0.90,
-            'Ligue 1': 0.85,
-            'Serie B': 0.70,
-            'Eredivisie': 0.75
+            'serie a': 1.00,
+            'premier league': 1.05,
+            'la liga': 0.95,
+            'bundesliga': 0.90,
+            'ligue 1': 0.85,
+            'eredivisie': 0.75,
+            'primeira liga': 0.75,
+            'liga portugal': 0.75,
+            'serie b': 0.70,
+            'championship': 0.70,
+            'uefa champions league': 1.05,
+            'uefa europa league': 0.90,
+            'coppa italia': 0.90,
         }
         
         # Fattore squadra in Serie A (moltiplicatore in base a dove viene comprato)
@@ -47,7 +55,7 @@ class FantaEngine:
         fm_grezza = voto_base + punti_bonus
         
         # 4. Applicazione dei Moltiplicatori
-        c_lega = self.coeff_leghe.get(lega, 0.8) # Se lega non nota, usa 0.8
+        c_lega = self.coeff_leghe.get(str(lega).strip().lower(), 0.8)  # lega non nota -> 0.8
         f_squadra = self.fattore_squadra.get(fascia_squadra_destinazione, 1.0)
         
         pfm_finale = fm_grezza * c_lega * f_squadra
