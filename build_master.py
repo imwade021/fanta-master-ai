@@ -320,7 +320,8 @@ def main():
     print(f"📊 Match statistiche: {conteggio['id']} per Id | {conteggio['nome']} per nome | "
           f"{conteggio['nome_abbreviato']} per nome abbreviato")
     print(f"📊 Proiezioni scout: {conteggio['scout']} | Senza dati: {conteggio['nessuno']}")
-    print(f"📡 Chiamate /players usate in questo run: {scout.chiamate_players}")
+    print(f"📡 Chiamate API usate in questo run: {scout.chiamate}"
+          + (" (quota giornaliera esaurita)" if scout.quota_esaurita else ""))
     print(f"✅ Lista_Finale_Master.csv rigenerato: {len(df_listone)} giocatori, "
           f"{con_stats} con statistiche reali.")
 
