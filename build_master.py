@@ -1,10 +1,12 @@
 import pandas as pd
 from fanta_engine import FantaEngine
+from scout_engine import ScoutEngine  # <--- IL NOSTRO NUOVO AGENTE SEGRETO
 import math
 
 def genera_master_db(file_listone, file_storico, output_csv):
-    print("Inizializzazione del Master Engine...")
+    print("Inizializzazione del Master Engine e dello Scout...")
     motore = FantaEngine()
+    scout = ScoutEngine() # <--- ACCENDIAMO LO SCOUT
     
     try:
         print(f"Lettura del listone: {file_listone}")
@@ -13,7 +15,6 @@ def genera_master_db(file_listone, file_storico, output_csv):
         
         print(f"Lettura dello storico Excel: {file_storico}")
         df_storico = pd.read_excel(file_storico) 
-        
         df_storico.columns = df_storico.columns.astype(str).str.strip().str.upper()
         
     except Exception as e:
@@ -22,22 +23,16 @@ def genera_master_db(file_listone, file_storico, output_csv):
 
     print("Incrocio dei dati storici in corso...")
     
-    # PIANO B PER L'ID STORICO: Se non trova 'ID', prende la prima colonna
     col_id_storico = 'ID'
     if 'ID' not in df_storico.columns:
         col_id_storico = df_storico.columns[0]
-        print(f"ATTENZIONE: 'ID' non trovato. Uso la prima colonna come ID: '{col_id_storico}'")
 
-    # Pulizia: Assicuriamoci che l'ID sia un numero
     df_listone['ID'] = pd.to_numeric(df_listone['ID'], errors='coerce')
     df_storico[col_id_storico] = pd.to_numeric(df_storico[col_id_storico], errors='coerce')
     
-    # PIANO B PER LA FANTAMEDIA
     if 'FM' not in df_storico.columns:
-        print("ATTENZIONE: Colonna 'FM' non trovata nello storico. Uso valori vuoti.")
         df_storico['FM'] = float('nan')
 
-    # MERGE con il nuovo nome della colonna
     df_master = pd.merge(df_listone, df_storico[[col_id_storico, 'FM']], left_on='ID', right_on=col_id_storico, how='left')
     
     df_master['P_FM'] = 0.0
@@ -47,11 +42,15 @@ def genera_master_db(file_listone, file_storico, output_csv):
     
     for index, row in df_master.iterrows():
         ruolo = str(row.get('Ruolo', 'A')).strip()
+        nome = str(row.get('Nome', 'Sconosciuto')).strip()
         fantamedia_storica = row['FM']
         
+        # --- IL MOMENTO DELLA MAGIA ---
         if pd.isna(fantamedia_storica) or math.isnan(fantamedia_storica) or fantamedia_storica == 0:
-            pfm_calcolata = 6.0 
+            # Se manca la Fantamedia, entra in azione lo Scout!
+            pfm_calcolata = scout.calcola_fantamedia_proiettata(nome, ruolo)
         else:
+            # Altrimenti usiamo il dato reale italiano
             pfm_calcolata = float(fantamedia_storica)
             
         valore_perc = motore.calcola_percentuale_valore(pfm_calcolata, ruolo)
@@ -61,7 +60,6 @@ def genera_master_db(file_listone, file_storico, output_csv):
         
     df_master.to_csv(output_csv, index=False, sep=';')
     print(f"SUCCESSO! File MASTER salvato in: {output_csv}")
-
 
 if __name__ == "__main__":
     NOME_FILE_STORICO = "Quotazioni_Fantacalcio_Stagione_2024_25.xlsx"
