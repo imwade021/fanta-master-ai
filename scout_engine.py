@@ -71,6 +71,7 @@ class ScoutEngine:
 
         self.serie_a_teams = {}
         self.mappa_api_id = {}
+        self.foto_per_id = {}            # player id API -> url della foto ufficiale
         self.chiamate = 0
         self.season_stats = SEASON_STATS
         self.season_declassata = False
