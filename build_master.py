@@ -396,6 +396,8 @@ def main():
                             break
 
                 if idx is not None:
+                    # Collega l'id API al nome del listone: serve alle proiezioni
+                    scout.associa(df_listone.loc[idx, 'Nome'], g.get('api_id'))
                     if str(df_listone.loc[idx, 'Squadra']).strip() != g['squadra']:
                         df_listone.loc[idx, 'Squadra'] = g['squadra']
                         aggiornati += 1
