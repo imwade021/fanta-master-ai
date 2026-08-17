@@ -58,7 +58,10 @@ class FantaEngine:
         c_lega = self.coeff_leghe.get(str(lega).strip().lower(), 0.8)  # lega non nota -> 0.8
         f_squadra = self.fattore_squadra.get(fascia_squadra_destinazione, 1.0)
         
-        pfm_finale = fm_grezza * c_lega * f_squadra
+        # Il coefficiente lega pesa i BONUS, non il voto: cambiare campionato non
+        # abbassa il voto d'ufficio. Applicandolo a tutta la fantamedia, un 6.78
+        # in Ligue 1 diventava 5.77, sotto la media di ruolo della Serie A.
+        pfm_finale = voto_base + (punti_bonus * c_lega * f_squadra)
         
         # Arrotondiamo a 2 decimali
         return round(pfm_finale, 2)
