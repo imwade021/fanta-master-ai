@@ -527,6 +527,19 @@ def main():
                   f"(non acquistabili all'asta, ignorati) | {ambigui} scartati per omonimia.")
             segnala_nuovi_arrivi(candidati_nuovi, scout)
 
+            # Foto ufficiali API-Football, agganciate per id: piu' affidabili
+            # di qualunque pacchetto da incrociare per nome.
+            df_listone['FotoAPI'] = ""
+            con_foto = 0
+            for id_api, url in getattr(scout, 'foto_per_id', {}).items():
+                idx = id_api_riga.get(id_api)
+                if idx is None or not url:
+                    continue
+                df_listone.loc[idx, 'FotoAPI'] = url
+                con_foto += 1
+            if con_foto:
+                print(f"📸 Foto agganciate a {con_foto} giocatori.")
+
             # Quante gare ha saltato per infortunio la stagione scorsa: e' il
             # dato che distingue chi si e' rotto da chi resta in panchina.
             df_listone['GareSaltate'] = 0
@@ -672,7 +685,7 @@ def main():
     for col, valori in colonne_out.items():
         df_listone[col] = valori
 
-    for colonna in ('Infortunio', 'InfortunioTipo', 'InfortunioDal', 'MotivoStop'):
+    for colonna in ('Infortunio', 'InfortunioTipo', 'InfortunioDal', 'MotivoStop', 'FotoAPI'):
         if colonna not in df_listone.columns:
             df_listone[colonna] = ""
     if 'GareSaltate' not in df_listone.columns:
