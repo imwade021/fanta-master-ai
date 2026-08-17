@@ -1,5 +1,1710 @@
 {
  "stats": {
+  "2025:a adams": {
+   "assist": 3,
+   "gol": 10,
+   "lega": "La Liga",
+   "presenze": 32
+  },
+  "2025:a akarakiri": {
+   "assist": 1,
+   "gol": 0,
+   "lega": "EFL Trophy",
+   "presenze": 1
+  },
+  "2025:a albarracin": {
+   "assist": 0,
+   "gol": 2,
+   "lega": "Primera División - Clausura",
+   "presenze": 7
+  },
+  "2025:a alvarez": {
+   "assist": 1,
+   "gol": 4,
+   "lega": "Serie B",
+   "presenze": 25
+  },
+  "2025:a arena": {
+   "assist": 0,
+   "gol": 0,
+   "lega": "UEFA U17 Championship - Qualification",
+   "presenze": 3
+  },
+  "2025:a ballanti": null,
+  "2025:a brorsson": {
+   "assist": 1,
+   "gol": 2,
+   "lega": "Friendlies Clubs",
+   "presenze": 30
+  },
+  "2025:a cacciamani": {
+   "assist": 2,
+   "gol": 2,
+   "lega": "Serie B",
+   "presenze": 36
+  },
+  "2025:a carboni": {
+   "assist": 2,
+   "gol": 2,
+   "lega": "Serie B",
+   "presenze": 34
+  },
+  "2025:a cisse": {
+   "assist": 1,
+   "gol": 6,
+   "lega": "Serie B",
+   "presenze": 22
+  },
+  "2025:a deiola": {
+   "assist": 2,
+   "gol": 0,
+   "lega": "Serie A",
+   "presenze": 20
+  },
+  "2025:a dembele": {
+   "assist": 0,
+   "gol": 0,
+   "lega": "Serie B",
+   "presenze": 14
+  },
+  "2025:a el azzouzi": {
+   "assist": 1,
+   "gol": 1,
+   "lega": "2. Bundesliga",
+   "presenze": 29
+  },
+  "2025:a furlanetto": {
+   "assist": 0,
+   "gol": 0,
+   "lega": "Serie A",
+   "presenze": 2
+  },
+  "2025:a ghion": {
+   "assist": 1,
+   "gol": 0,
+   "lega": "Serie B",
+   "presenze": 26
+  },
+  "2025:a hainaut": {
+   "assist": 5,
+   "gol": 5,
+   "lega": "Serie B",
+   "presenze": 37
+  },
+  "2025:a joujou": {
+   "assist": 1,
+   "gol": 3,
+   "lega": "Primeira Liga",
+   "presenze": 23
+  },
+  "2025:a kostic": {
+   "assist": 1,
+   "gol": 11,
+   "lega": "Super Liga",
+   "presenze": 35
+  },
+  "2025:a lauriente": {
+   "assist": 9,
+   "gol": 7,
+   "lega": "Serie A",
+   "presenze": 38
+  },
+  "2025:a manzoni": null,
+  "2025:a mazzocchi": null,
+  "2025:a milik": {
+   "assist": 0,
+   "gol": 0,
+   "lega": "Serie A",
+   "presenze": 2
+  },
+  "2025:a naposdiaye": {
+   "assist": 0,
+   "gol": 0,
+   "lega": "Serie A",
+   "presenze": 11
+  },
+  "2025:a njie": {
+   "assist": 1,
+   "gol": 1,
+   "lega": "Serie A",
+   "presenze": 15
+  },
+  "2025:a okoro": {
+   "assist": 1,
+   "gol": 2,
+   "lega": "Serie B",
+   "presenze": 18
+  },
+  "2025:a oyono": {
+   "assist": 4,
+   "gol": 1,
+   "lega": "Serie B",
+   "presenze": 33
+  },
+  "2025:a przyborek": {
+   "assist": 2,
+   "gol": 2,
+   "lega": "Ekstraklasa",
+   "presenze": 17
+  },
+  "2025:a russo": null,
+  "2025:a sidibe": {
+   "assist": 0,
+   "gol": 0,
+   "lega": "Serie B",
+   "presenze": 5
+  },
+  "2025:a vogliacco": {
+   "assist": 0,
+   "gol": 1,
+   "lega": "Super League 1",
+   "presenze": 8
+  },
+  "2025:a zerbin": {
+   "assist": 3,
+   "gol": 0,
+   "lega": "Serie A",
+   "presenze": 32
+  },
+  "2025:abankwah": {
+   "assist": 0,
+   "gol": 0,
+   "lega": "Friendlies",
+   "presenze": 35
+  },
+  "2025:abdou konate": null,
+  "2025:abdoulie ndow": {
+   "assist": 0,
+   "gol": 0,
+   "lega": "Serie B",
+   "presenze": 2
+  },
+  "2025:abdullah bader mahbub": null,
+  "2025:adams a": {
+   "assist": 2,
+   "gol": 6,
+   "lega": "Serie A",
+   "presenze": 33
+  },
+  "2025:adorante": {
+   "assist": 1,
+   "gol": 17,
+   "lega": "Serie B",
+   "presenze": 33
+  },
+  "2025:ahmad bandar derwish": null,
+  "2025:akpoguma": {
+   "assist": 0,
+   "gol": 0,
+   "lega": "Bundesliga",
+   "presenze": 8
+  },
+  "2025:alajbegovic": null,
+  "2025:alessandro cardinali": {
+   "assist": 0,
+   "gol": 0,
+   "lega": "Serie A",
+   "presenze": 1
+  },
+  "2025:alhassane": {
+   "assist": 0,
+   "gol": 0,
+   "lega": "La Liga",
+   "presenze": 27
+  },
+  "2025:amey": {
+   "assist": 0,
+   "gol": 0,
+   "lega": "World Cup - U20",
+   "presenze": 1
+  },
+  "2025:amondarain": {
+   "assist": 0,
+   "gol": 0,
+   "lega": "Liga Profesional Argentina",
+   "presenze": 12
+  },
+  "2025:antonio casas": {
+   "assist": 1,
+   "gol": 3,
+   "lega": "Serie B",
+   "presenze": 24
+  },
+  "2025:antov": {
+   "assist": 0,
+   "gol": 1,
+   "lega": "Friendlies",
+   "presenze": 8
+  },
+  "2025:arthur": {
+   "assist": 0,
+   "gol": 0,
+   "lega": "Serie A",
+   "presenze": 13
+  },
+  "2025:aurelio": null,
+  "2025:azon": null,
+  "2025:b bjarkason": {
+   "assist": 1,
+   "gol": 1,
+   "lega": "Serie B",
+   "presenze": 15
+  },
+  "2025:b bogdanovic": null,
+  "2025:b djimsiti": {
+   "assist": 0,
+   "gol": 0,
+   "lega": "Serie A",
+   "presenze": 34
+  },
+  "2025:b dominguez": {
+   "assist": 3,
+   "gol": 0,
+   "lega": "Serie A",
+   "presenze": 15
+  },
+  "2025:b franjic": {
+   "assist": 2,
+   "gol": 0,
+   "lega": "Serie B",
+   "presenze": 19
+  },
+  "2025:b galassi": null,
+  "2025:b kone": {
+   "assist": 2,
+   "gol": 1,
+   "lega": "Serie B",
+   "presenze": 19
+  },
+  "2025:bakoune": {
+   "assist": 3,
+   "gol": 0,
+   "lega": "Serie B",
+   "presenze": 22
+  },
+  "2025:birindelli": null,
+  "2025:bracaglia": {
+   "assist": 1,
+   "gol": 5,
+   "lega": "Serie B",
+   "presenze": 32
+  },
+  "2025:branimir mlacic": {
+   "assist": 1,
+   "gol": 0,
+   "lega": "HNL",
+   "presenze": 15
+  },
+  "2025:busio": {
+   "assist": 4,
+   "gol": 7,
+   "lega": "Serie B",
+   "presenze": 37
+  },
+  "2025:c adams": {
+   "assist": 2,
+   "gol": 6,
+   "lega": "Serie A",
+   "presenze": 33
+  },
+  "2025:c b doumbia": null,
+  "2025:c bianay balcot": {
+   "assist": 0,
+   "gol": 0,
+   "lega": "Serie B",
+   "presenze": 2
+  },
+  "2025:c comotto": {
+   "assist": 0,
+   "gol": 0,
+   "lega": "Serie B",
+   "presenze": 28
+  },
+  "2025:c de ketelaere": {
+   "assist": 5,
+   "gol": 3,
+   "lega": "Serie A",
+   "presenze": 31
+  },
+  "2025:c frangella": {
+   "assist": 0,
+   "gol": 0,
+   "lega": "Serie A",
+   "presenze": 1
+  },
+  "2025:c fruchtl": {
+   "assist": 0,
+   "gol": 0,
+   "lega": "Coppa Italia",
+   "presenze": 1
+  },
+  "2025:c garofalo": null,
+  "2025:c inao oulaa": {
+   "assist": 4,
+   "gol": 2,
+   "lega": "Süper Lig",
+   "presenze": 25
+  },
+  "2025:c ligue": {
+   "assist": 0,
+   "gol": 1,
+   "lega": "Schweizer Cup",
+   "presenze": 15
+  },
+  "2025:c odenthal": {
+   "assist": 0,
+   "gol": 1,
+   "lega": "Serie B",
+   "presenze": 18
+  },
+  "2025:c pulisic": {
+   "assist": 4,
+   "gol": 8,
+   "lega": "Serie A",
+   "presenze": 30
+  },
+  "2025:cacciamani": null,
+  "2025:calo": {
+   "assist": 15,
+   "gol": 10,
+   "lega": "Serie B",
+   "presenze": 37
+  },
+  "2025:calvani": {
+   "assist": 1,
+   "gol": 1,
+   "lega": "Serie B",
+   "presenze": 35
+  },
+  "2025:camara a": {
+   "assist": 0,
+   "gol": 0,
+   "lega": "UEFA U17 Championship - Qualification",
+   "presenze": 5
+  },
+  "2025:chakvetadze": {
+   "assist": 3,
+   "gol": 0,
+   "lega": "Championship",
+   "presenze": 29
+  },
+  "2025:chalobah t": null,
+  "2025:cichella": {
+   "assist": 4,
+   "gol": 2,
+   "lega": "Serie B",
+   "presenze": 36
+  },
+  "2025:cittadini": {
+   "assist": 0,
+   "gol": 0,
+   "lega": "Serie B",
+   "presenze": 25
+  },
+  "2025:ciurria": null,
+  "2025:colpani": {
+   "assist": 1,
+   "gol": 2,
+   "lega": "Serie B",
+   "presenze": 27
+  },
+  "2025:comert": {
+   "assist": 1,
+   "gol": 2,
+   "lega": "La Liga",
+   "presenze": 17
+  },
+  "2025:contini": {
+   "assist": 0,
+   "gol": 0,
+   "lega": "Serie A",
+   "presenze": 1
+  },
+  "2025:corrado": {
+   "assist": 0,
+   "gol": 3,
+   "lega": "Serie B",
+   "presenze": 16
+  },
+  "2025:correia t": {
+   "assist": 2,
+   "gol": 0,
+   "lega": "La Liga",
+   "presenze": 24
+  },
+  "2025:couto": null,
+  "2025:d baroncioni": null,
+  "2025:d drobnic": null,
+  "2025:d elimoghale": null,
+  "2025:d magdic": null,
+  "2025:d odogu": {
+   "assist": 0,
+   "gol": 0,
+   "lega": "Serie A",
+   "presenze": 2
+  },
+  "2025:d pejicic": {
+   "assist": 0,
+   "gol": 1,
+   "lega": "UEFA U19 Championship - Qualification",
+   "presenze": 3
+  },
+  "2025:d resetar": null,
+  "2025:daffara": {
+   "assist": 0,
+   "gol": 0,
+   "lega": "Serie B",
+   "presenze": 25
+  },
+  "2025:dagasso": {
+   "assist": 4,
+   "gol": 1,
+   "lega": "Serie B",
+   "presenze": 19
+  },
+  "2025:david de gea": {
+   "assist": 0,
+   "gol": 0,
+   "lega": "Serie A",
+   "presenze": 37
+  },
+  "2025:de marzi": null,
+  "2025:delli carri": {
+   "assist": 1,
+   "gol": 3,
+   "lega": "Serie B",
+   "presenze": 36
+  },
+  "2025:desplanches": {
+   "assist": 0,
+   "gol": 0,
+   "lega": "Serie B",
+   "presenze": 25
+  },
+  "2025:diallo o": null,
+  "2025:diawara s": null,
+  "2025:doekhi": {
+   "assist": 0,
+   "gol": 5,
+   "lega": "Bundesliga",
+   "presenze": 34
+  },
+  "2025:douglas luiz": {
+   "assist": 0,
+   "gol": 1,
+   "lega": "Premier League",
+   "presenze": 13
+  },
+  "2025:dragusin": {
+   "assist": 0,
+   "gol": 0,
+   "lega": "Premier League",
+   "presenze": 10
+  },
+  "2025:duncan": {
+   "assist": 1,
+   "gol": 1,
+   "lega": "Serie B",
+   "presenze": 17
+  },
+  "2025:e bohinen": {
+   "assist": 0,
+   "gol": 0,
+   "lega": "Serie B",
+   "presenze": 11
+  },
+  "2025:e borsani": null,
+  "2025:e del prato": {
+   "assist": 0,
+   "gol": 2,
+   "lega": "Serie A",
+   "presenze": 35
+  },
+  "2025:e holm": {
+   "assist": 4,
+   "gol": 1,
+   "lega": "Serie A",
+   "presenze": 11
+  },
+  "2025:e kospo": {
+   "assist": 0,
+   "gol": 0,
+   "lega": "Serie A",
+   "presenze": 1
+  },
+  "2025:e larsen": null,
+  "2025:e lulli": null,
+  "2025:e plicco": {
+   "assist": 0,
+   "gol": 0,
+   "lega": "Coppa Italia",
+   "presenze": 2
+  },
+  "2025:e sadotti": null,
+  "2025:e stojak": null,
+  "2025:e zhegrova": {
+   "assist": 0,
+   "gol": 0,
+   "lega": "Serie A",
+   "presenze": 19
+  },
+  "2025:edoardo tigani": null,
+  "2025:el azzouzi a": null,
+  "2025:el azzouzi o": null,
+  "2025:elia spicuglia": null,
+  "2025:f barido": null,
+  "2025:f bernardeschi": {
+   "assist": 2,
+   "gol": 4,
+   "lega": "Serie A",
+   "presenze": 29
+  },
+  "2025:f bordon": null,
+  "2025:f carboni": {
+   "assist": 1,
+   "gol": 0,
+   "lega": "Serie B",
+   "presenze": 17
+  },
+  "2025:f cassa": null,
+  "2025:f castaldo": null,
+  "2025:f esposito": {
+   "assist": 3,
+   "gol": 7,
+   "lega": "Serie A",
+   "presenze": 35
+  },
+  "2025:f gelo": null,
+  "2025:f israel": {
+   "assist": 0,
+   "gol": 0,
+   "lega": "Serie A",
+   "presenze": 9
+  },
+  "2025:f nardin": null,
+  "2025:f ondoa": null,
+  "2025:f reale": {
+   "assist": 0,
+   "gol": 0,
+   "lega": "Serie B",
+   "presenze": 3
+  },
+  "2025:f rossi": null,
+  "2025:f serra": null,
+  "2025:f soldo": null,
+  "2025:f steffanoni": null,
+  "2025:f terracciano": {
+   "assist": 0,
+   "gol": 2,
+   "lega": "Serie A",
+   "presenze": 36
+  },
+  "2025:filippo grosso": {
+   "assist": 0,
+   "gol": 1,
+   "lega": "Serie B",
+   "presenze": 7
+  },
+  "2025:fitzjim": {
+   "assist": 0,
+   "gol": 1,
+   "lega": "Eredivisie",
+   "presenze": 17
+  },
+  "2025:francisco conceicao": {
+   "assist": 5,
+   "gol": 3,
+   "lega": "Serie A",
+   "presenze": 31
+  },
+  "2025:franco mastantuono": {
+   "assist": 0,
+   "gol": 1,
+   "lega": "La Liga",
+   "presenze": 23
+  },
+  "2025:franjic": null,
+  "2025:frigan": {
+   "assist": 0,
+   "gol": 0,
+   "lega": "UEFA U21 Championship - Qualification",
+   "presenze": 6
+  },
+  "2025:g artistico": {
+   "assist": 1,
+   "gol": 13,
+   "lega": "Serie B",
+   "presenze": 31
+  },
+  "2025:g astaldi": null,
+  "2025:g bertolini": null,
+  "2025:g ciocci": {
+   "assist": 0,
+   "gol": 0,
+   "lega": "Coppa Italia",
+   "presenze": 1
+  },
+  "2025:g de marzi": null,
+  "2025:g di lorenzo": {
+   "assist": 1,
+   "gol": 2,
+   "lega": "Serie A",
+   "presenze": 26
+  },
+  "2025:g isaksen": {
+   "assist": 1,
+   "gol": 5,
+   "lega": "Serie A",
+   "presenze": 30
+  },
+  "2025:g puzzoli": {
+   "assist": 0,
+   "gol": 0,
+   "lega": "UEFA Europa Conference League",
+   "presenze": 1
+  },
+  "2025:g stojak": null,
+  "2025:g vezzosi": null,
+  "2025:g vinciati": null,
+  "2025:g zacchi": {
+   "assist": 0,
+   "gol": 0,
+   "lega": "UEFA U21 Championship",
+   "presenze": 4
+  },
+  "2025:gabriele casentini": null,
+  "2025:gael lafont": {
+   "assist": 0,
+   "gol": 0,
+   "lega": "Serie A",
+   "presenze": 1
+  },
+  "2025:gelli f": {
+   "assist": 1,
+   "gol": 1,
+   "lega": "Serie B",
+   "presenze": 25
+  },
+  "2025:gelli j": {
+   "assist": 0,
+   "gol": 0,
+   "lega": "Serie B",
+   "presenze": 17
+  },
+  "2025:geubbels": {
+   "assist": 0,
+   "gol": 5,
+   "lega": "Ligue 1",
+   "presenze": 24
+  },
+  "2025:ghedjemis": {
+   "assist": 3,
+   "gol": 15,
+   "lega": "Serie B",
+   "presenze": 37
+  },
+  "2025:giacomo giacomone": null,
+  "2025:goldaniga": {
+   "assist": 0,
+   "gol": 0,
+   "lega": "Serie A",
+   "presenze": 2
+  },
+  "2025:gollini": {
+   "assist": 0,
+   "gol": 0,
+   "lega": "UEFA Europa League",
+   "presenze": 1
+  },
+  "2025:gomes": {
+   "assist": 0,
+   "gol": 0,
+   "lega": "Segunda División",
+   "presenze": 13
+  },
+  "2025:grandi": {
+   "assist": 0,
+   "gol": 0,
+   "lega": "Coppa Italia",
+   "presenze": 1
+  },
+  "2025:grillitsch": null,
+  "2025:hainaut": null,
+  "2025:halhal": {
+   "assist": 2,
+   "gol": 1,
+   "lega": "Jupiler Pro League",
+   "presenze": 33
+  },
+  "2025:happonen": null,
+  "2025:haps": {
+   "assist": 3,
+   "gol": 5,
+   "lega": "Serie B",
+   "presenze": 25
+  },
+  "2025:hasa": {
+   "assist": 4,
+   "gol": 5,
+   "lega": "Serie B",
+   "presenze": 31
+  },
+  "2025:havel": {
+   "assist": 3,
+   "gol": 13,
+   "lega": "Bundesliga",
+   "presenze": 30
+  },
+  "2025:hjalte laerke": null,
+  "2025:i jajalo": null,
+  "2025:i kone": {
+   "assist": 0,
+   "gol": 6,
+   "lega": "Serie A",
+   "presenze": 35
+  },
+  "2025:i krizanovic": null,
+  "2025:i mokrovic dajic": null,
+  "2025:ivan stoyanov sulev": null,
+  "2025:j antiste": {
+   "assist": 2,
+   "gol": 3,
+   "lega": "Bundesliga",
+   "presenze": 26
+  },
+  "2025:j arizala": {
+   "assist": 1,
+   "gol": 2,
+   "lega": "Primera A",
+   "presenze": 24
+  },
+  "2025:j idele": {
+   "assist": 0,
+   "gol": 0,
+   "lega": "World Cup - U20",
+   "presenze": 3
+  },
+  "2025:j lindstrm": {
+   "assist": 0,
+   "gol": 0,
+   "lega": "Bundesliga",
+   "presenze": 15
+  },
+  "2025:j odgaard": {
+   "assist": 1,
+   "gol": 5,
+   "lega": "Serie A",
+   "presenze": 26
+  },
+  "2025:j ondrejka": {
+   "assist": 0,
+   "gol": 0,
+   "lega": "Serie A",
+   "presenze": 16
+  },
+  "2025:j oyono": {
+   "assist": 1,
+   "gol": 0,
+   "lega": "Serie B",
+   "presenze": 14
+  },
+  "2025:j rouhi": {
+   "assist": 1,
+   "gol": 1,
+   "lega": "Serie B",
+   "presenze": 15
+  },
+  "2025:j rowe": {
+   "assist": 2,
+   "gol": 3,
+   "lega": "Serie A",
+   "presenze": 28
+  },
+  "2025:j samooja": null,
+  "2025:j sardo": {
+   "assist": 0,
+   "gol": 0,
+   "lega": "World Cup - U20",
+   "presenze": 3
+  },
+  "2025:j yeboah": {
+   "assist": 9,
+   "gol": 10,
+   "lega": "Serie B",
+   "presenze": 34
+  },
+  "2025:jacopo grossi": {
+   "assist": 0,
+   "gol": 0,
+   "lega": "Serie A",
+   "presenze": 1
+  },
+  "2025:jacopo mirra": null,
+  "2025:javier gil": null,
+  "2025:k balde": {
+   "assist": 2,
+   "gol": 2,
+   "lega": "Serie B",
+   "presenze": 21
+  },
+  "2025:k barcella": {
+   "assist": 0,
+   "gol": 0,
+   "lega": "Serie B",
+   "presenze": 4
+  },
+  "2025:k de bruyne": {
+   "assist": 2,
+   "gol": 5,
+   "lega": "Serie A",
+   "presenze": 18
+  },
+  "2025:k de winter": {
+   "assist": 1,
+   "gol": 1,
+   "lega": "Serie A",
+   "presenze": 26
+  },
+  "2025:k koulierakis": {
+   "assist": 1,
+   "gol": 4,
+   "lega": "Bundesliga",
+   "presenze": 31
+  },
+  "2025:k yldz": {
+   "assist": 6,
+   "gol": 10,
+   "lega": "Serie A",
+   "presenze": 36
+  },
+  "2025:kaiki": null,
+  "2025:kerimsam alajbegovic": {
+   "assist": 3,
+   "gol": 9,
+   "lega": "Bundesliga",
+   "presenze": 28
+  },
+  "2025:kevin carlos": null,
+  "2025:klisys": null,
+  "2025:kofler": {
+   "assist": 0,
+   "gol": 3,
+   "lega": "Serie B",
+   "presenze": 28
+  },
+  "2025:kolo muani": {
+   "assist": 1,
+   "gol": 1,
+   "lega": "Premier League",
+   "presenze": 30
+  },
+  "2025:kone b": {
+   "assist": 3,
+   "gol": 2,
+   "lega": "Serie A",
+   "presenze": 29
+  },
+  "2025:koulierakis": null,
+  "2025:koutsoupias": {
+   "assist": 4,
+   "gol": 8,
+   "lega": "Serie B",
+   "presenze": 34
+  },
+  "2025:kris gecaj": null,
+  "2025:kvernadze": {
+   "assist": 5,
+   "gol": 5,
+   "lega": "Serie B",
+   "presenze": 36
+  },
+  "2025:l banda": {
+   "assist": 1,
+   "gol": 2,
+   "lega": "Friendlies",
+   "presenze": 37
+  },
+  "2025:l banovec": {
+   "assist": 4,
+   "gol": 3,
+   "lega": "HNL",
+   "presenze": 31
+  },
+  "2025:l berardi": {
+   "assist": 1,
+   "gol": 0,
+   "lega": "Serie B",
+   "presenze": 15
+  },
+  "2025:l bernasconi": {
+   "assist": 3,
+   "gol": 0,
+   "lega": "Serie A",
+   "presenze": 23
+  },
+  "2025:l bovo": {
+   "assist": 0,
+   "gol": 0,
+   "lega": "Coppa Italia",
+   "presenze": 1
+  },
+  "2025:l cherubini": {
+   "assist": 1,
+   "gol": 2,
+   "lega": "Serie B",
+   "presenze": 35
+  },
+  "2025:l deli": null,
+  "2025:l dumancic": {
+   "assist": 0,
+   "gol": 1,
+   "lega": "A Lyga",
+   "presenze": 4
+  },
+  "2025:l kovac": null,
+  "2025:l lukia": null,
+  "2025:l nyarko": null,
+  "2025:l topalovic": {
+   "assist": 0,
+   "gol": 2,
+   "lega": "UEFA U19 Championship - Qualification",
+   "presenze": 6
+  },
+  "2025:l uzelac": null,
+  "2025:l venturino": {
+   "assist": 0,
+   "gol": 0,
+   "lega": "Serie A",
+   "presenze": 10
+  },
+  "2025:lahdo": null,
+  "2025:lamine dabo": {
+   "assist": 2,
+   "gol": 1,
+   "lega": "League One",
+   "presenze": 21
+  },
+  "2025:lauberbach": {
+   "assist": 1,
+   "gol": 6,
+   "lega": "Jupiler Pro League",
+   "presenze": 22
+  },
+  "2025:lezzerini": {
+   "assist": 0,
+   "gol": 0,
+   "lega": "UEFA Europa Conference League",
+   "presenze": 2
+  },
+  "2025:liberali": null,
+  "2025:lisman": {
+   "assist": 1,
+   "gol": 0,
+   "lega": "Ekstraklasa",
+   "presenze": 13
+  },
+  "2025:lolic": null,
+  "2025:lucchesi": {
+   "assist": 1,
+   "gol": 1,
+   "lega": "Friendlies Clubs",
+   "presenze": 33
+  },
+  "2025:m bah": null,
+  "2025:m bakker": {
+   "assist": 0,
+   "gol": 0,
+   "lega": "Serie A",
+   "presenze": 1
+  },
+  "2025:m barbini": null,
+  "2025:m bencic": null,
+  "2025:m cancellieri": {
+   "assist": 2,
+   "gol": 4,
+   "lega": "Serie A",
+   "presenze": 30
+  },
+  "2025:m dalla vecchia": {
+   "assist": 1,
+   "gol": 0,
+   "lega": "Serie B",
+   "presenze": 32
+  },
+  "2025:m de roon": {
+   "assist": 2,
+   "gol": 1,
+   "lega": "Serie A",
+   "presenze": 34
+  },
+  "2025:m di gregorio": {
+   "assist": 0,
+   "gol": 0,
+   "lega": "Serie A",
+   "presenze": 30
+  },
+  "2025:m farji": {
+   "assist": 4,
+   "gol": 9,
+   "lega": "Eliteserien",
+   "presenze": 29
+  },
+  "2025:m felici": {
+   "assist": 1,
+   "gol": 2,
+   "lega": "Serie A",
+   "presenze": 12
+  },
+  "2025:m ilic": {
+   "assist": 0,
+   "gol": 0,
+   "lega": "Jupiler Pro League",
+   "presenze": 10
+  },
+  "2025:m kone": {
+   "assist": 3,
+   "gol": 2,
+   "lega": "Serie A",
+   "presenze": 29
+  },
+  "2025:m lavelli": {
+   "assist": 0,
+   "gol": 0,
+   "lega": "Serie A",
+   "presenze": 1
+  },
+  "2025:m lazzari": {
+   "assist": 0,
+   "gol": 0,
+   "lega": "Friendlies Clubs",
+   "presenze": 35
+  },
+  "2025:m mosconi": {
+   "assist": 0,
+   "gol": 0,
+   "lega": "World Cup - U20",
+   "presenze": 3
+  },
+  "2025:m mout": null,
+  "2025:m pellini": null,
+  "2025:m perez": {
+   "assist": 0,
+   "gol": 0,
+   "lega": "Sudamericano U20",
+   "presenze": 3
+  },
+  "2025:m pittarella": null,
+  "2025:m plehan": null,
+  "2025:m politano": {
+   "assist": 5,
+   "gol": 2,
+   "lega": "Serie A",
+   "presenze": 34
+  },
+  "2025:m romano": {
+   "assist": 0,
+   "gol": 0,
+   "lega": "World Cup - U20",
+   "presenze": 3
+  },
+  "2025:m seck": null,
+  "2025:m spinacce": {
+   "assist": 0,
+   "gol": 0,
+   "lega": "Coppa Italia",
+   "presenze": 1
+  },
+  "2025:m ubani": null,
+  "2025:m uzelac": null,
+  "2025:m valletta": {
+   "assist": 0,
+   "gol": 0,
+   "lega": "Serie A",
+   "presenze": 2
+  },
+  "2025:m vaz": null,
+  "2025:m venturi": {
+   "assist": 0,
+   "gol": 0,
+   "lega": "Serie B",
+   "presenze": 8
+  },
+  "2025:mamedi doucoure": null,
+  "2025:mandas": {
+   "assist": 0,
+   "gol": 0,
+   "lega": "Friendlies Clubs",
+   "presenze": 23
+  },
+  "2025:mangas": null,
+  "2025:maposbala nzola": {
+   "assist": 0,
+   "gol": 3,
+   "lega": "Serie A",
+   "presenze": 16
+  },
+  "2025:marin r": {
+   "assist": 0,
+   "gol": 1,
+   "lega": "La Liga",
+   "presenze": 23
+  },
+  "2025:mascardi": {
+   "assist": 0,
+   "gol": 0,
+   "lega": "Serie B",
+   "presenze": 17
+  },
+  "2025:mastantuono": null,
+  "2025:matteo franceschelli": null,
+  "2025:mattia magalotti": null,
+  "2025:mattia mannini": {
+   "assist": 0,
+   "gol": 0,
+   "lega": "Serie B",
+   "presenze": 16
+  },
+  "2025:matturro": null,
+  "2025:meichtry": {
+   "assist": 3,
+   "gol": 8,
+   "lega": "Super League",
+   "presenze": 35
+  },
+  "2025:milla": null,
+  "2025:missori": {
+   "assist": 2,
+   "gol": 2,
+   "lega": "Serie B",
+   "presenze": 32
+  },
+  "2025:mitaj": {
+   "assist": 2,
+   "gol": 1,
+   "lega": "Pro League",
+   "presenze": 21
+  },
+  "2025:molina n": null,
+  "2025:monterisi": {
+   "assist": 5,
+   "gol": 2,
+   "lega": "Serie B",
+   "presenze": 25
+  },
+  "2025:moreno m": {
+   "assist": 0,
+   "gol": 0,
+   "lega": "La Liga",
+   "presenze": 28
+  },
+  "2025:mota": {
+   "assist": 2,
+   "gol": 5,
+   "lega": "Serie B",
+   "presenze": 34
+  },
+  "2025:muhammed colley": null,
+  "2025:mutandwa": {
+   "assist": 2,
+   "gol": 16,
+   "lega": "Bundesliga",
+   "presenze": 32
+  },
+  "2025:n baffoh": null,
+  "2025:n ballabio": null,
+  "2025:n cambiaghi": {
+   "assist": 4,
+   "gol": 3,
+   "lega": "Serie A",
+   "presenze": 28
+  },
+  "2025:n cavuoti": {
+   "assist": 1,
+   "gol": 0,
+   "lega": "Serie B",
+   "presenze": 7
+  },
+  "2025:n el aynaoui": {
+   "assist": 1,
+   "gol": 8,
+   "lega": "Friendlies Clubs",
+   "presenze": 25
+  },
+  "2025:n fortini": {
+   "assist": 0,
+   "gol": 0,
+   "lega": "Serie A",
+   "presenze": 16
+  },
+  "2025:n galazzi": {
+   "assist": 4,
+   "gol": 2,
+   "lega": "Friendlies Clubs",
+   "presenze": 33
+  },
+  "2025:n grandu": null,
+  "2025:n kovac": {
+   "assist": 0,
+   "gol": 0,
+   "lega": "UEFA U21 Championship - Qualification",
+   "presenze": 3
+  },
+  "2025:n lella": {
+   "assist": 1,
+   "gol": 0,
+   "lega": "Serie B",
+   "presenze": 19
+  },
+  "2025:n obaretin": {
+   "assist": 1,
+   "gol": 0,
+   "lega": "Serie B",
+   "presenze": 29
+  },
+  "2025:n pierini": {
+   "assist": 0,
+   "gol": 0,
+   "lega": "Serie A",
+   "presenze": 11
+  },
+  "2025:n rak": null,
+  "2025:n rizzo": null,
+  "2025:n vukasovic": null,
+  "2025:n zortea": {
+   "assist": 2,
+   "gol": 0,
+   "lega": "Serie A",
+   "presenze": 32
+  },
+  "2025:nicolo pannozzo": null,
+  "2025:o diallo": null,
+  "2025:o el azzouzi": {
+   "assist": 0,
+   "gol": 1,
+   "lega": "Ligue 1",
+   "presenze": 11
+  },
+  "2025:o forson": {
+   "assist": 1,
+   "gol": 0,
+   "lega": "Friendlies Clubs",
+   "presenze": 13
+  },
+  "2025:o raterink": {
+   "assist": 4,
+   "gol": 3,
+   "lega": "Eerste Divisie",
+   "presenze": 23
+  },
+  "2025:oulai": null,
+  "2025:oyono a": null,
+  "2025:oyono j": null,
+  "2025:p almqvist": {
+   "assist": 1,
+   "gol": 0,
+   "lega": "Serie A",
+   "presenze": 13
+  },
+  "2025:p bonanno": null,
+  "2025:p ciurria": {
+   "assist": 5,
+   "gol": 6,
+   "lega": "Friendlies Clubs",
+   "presenze": 38
+  },
+  "2025:p nuamah": {
+   "assist": 10,
+   "gol": 13,
+   "lega": "Serie B",
+   "presenze": 28
+  },
+  "2025:p pardel": null,
+  "2025:paco esteban": null,
+  "2025:palmisani": {
+   "assist": 0,
+   "gol": 0,
+   "lega": "Serie B",
+   "presenze": 38
+  },
+  "2025:pedraza": {
+   "assist": 3,
+   "gol": 1,
+   "lega": "La Liga",
+   "presenze": 27
+  },
+  "2025:pedro obiang": {
+   "assist": 1,
+   "gol": 0,
+   "lega": "Friendlies Clubs",
+   "presenze": 38
+  },
+  "2025:penev": {
+   "assist": 0,
+   "gol": 0,
+   "lega": "UEFA U17 Championship - Qualification",
+   "presenze": 2
+  },
+  "2025:perez k": {
+   "assist": 7,
+   "gol": 3,
+   "lega": "Serie B",
+   "presenze": 35
+  },
+  "2025:pessina": {
+   "assist": 1,
+   "gol": 5,
+   "lega": "Serie B",
+   "presenze": 37
+  },
+  "2025:petagna": {
+   "assist": 4,
+   "gol": 9,
+   "lega": "Serie B",
+   "presenze": 31
+  },
+  "2025:piana": null,
+  "2025:pieragnolo": null,
+  "2025:pinsoglio": null,
+  "2025:pirro": null,
+  "2025:pisseri": null,
+  "2025:pizzignacco": {
+   "assist": 0,
+   "gol": 0,
+   "lega": "Friendlies Clubs",
+   "presenze": 33
+  },
+  "2025:pozzi": null,
+  "2025:przyborek": {
+   "assist": 0,
+   "gol": 0,
+   "lega": "Serie A",
+   "presenze": 1
+  },
+  "2025:puczka": null,
+  "2025:r bellanova": {
+   "assist": 1,
+   "gol": 0,
+   "lega": "Serie A",
+   "presenze": 24
+  },
+  "2025:r braschi": {
+   "assist": 0,
+   "gol": 0,
+   "lega": "Serie A",
+   "presenze": 2
+  },
+  "2025:r ciervo": {
+   "assist": 3,
+   "gol": 5,
+   "lega": "Serie B",
+   "presenze": 37
+  },
+  "2025:r di gennaro": {
+   "assist": 0,
+   "gol": 0,
+   "lega": "Serie A",
+   "presenze": 1
+  },
+  "2025:r kouda": {
+   "assist": 1,
+   "gol": 1,
+   "lega": "Serie B",
+   "presenze": 15
+  },
+  "2025:r lukaku": {
+   "assist": 0,
+   "gol": 1,
+   "lega": "Serie A",
+   "presenze": 5
+  },
+  "2025:r malfitano": null,
+  "2025:r obria": {
+   "assist": 0,
+   "gol": 0,
+   "lega": "UEFA U19 Championship - Qualification",
+   "presenze": 5
+  },
+  "2025:r orsolini": {
+   "assist": 1,
+   "gol": 10,
+   "lega": "Serie A",
+   "presenze": 35
+  },
+  "2025:r pirih": null,
+  "2025:r radu": null,
+  "2025:r zelezny": null,
+  "2025:radunovic": {
+   "assist": 0,
+   "gol": 0,
+   "lega": "Serie B",
+   "presenze": 16
+  },
+  "2025:raimondo": null,
+  "2025:ramos g": {
+   "assist": 1,
+   "gol": 6,
+   "lega": "Ligue 1",
+   "presenze": 30
+  },
+  "2025:renzetti": null,
+  "2025:ricardo mangas": {
+   "assist": 1,
+   "gol": 2,
+   "lega": "Primeira Liga",
+   "presenze": 15
+  },
+  "2025:riccardo gnudi": null,
+  "2025:robinson j": null,
+  "2025:romano": {
+   "assist": 1,
+   "gol": 0,
+   "lega": "Serie B",
+   "presenze": 19
+  },
+  "2025:romero d": null,
+  "2025:rrahmani al": {
+   "assist": 3,
+   "gol": 11,
+   "lega": "Czech Liga",
+   "presenze": 34
+  },
+  "2025:russo a": null,
+  "2025:s birindelli": {
+   "assist": 1,
+   "gol": 0,
+   "lega": "Friendlies Clubs",
+   "presenze": 37
+  },
+  "2025:s bocoum": {
+   "assist": 1,
+   "gol": 0,
+   "lega": "Ligue 2",
+   "presenze": 14
+  },
+  "2025:s britschgi": {
+   "assist": 2,
+   "gol": 0,
+   "lega": "Serie A",
+   "presenze": 29
+  },
+  "2025:s chukwueze": {
+   "assist": 5,
+   "gol": 6,
+   "lega": "Friendlies Clubs",
+   "presenze": 38
+  },
+  "2025:s cinquegrano": null,
+  "2025:s di paolo": null,
+  "2025:s esposito": {
+   "assist": 5,
+   "gol": 7,
+   "lega": "Serie A",
+   "presenze": 36
+  },
+  "2025:s fernandes": null,
+  "2025:s fini": {
+   "assist": 1,
+   "gol": 1,
+   "lega": "Serie B",
+   "presenze": 8
+  },
+  "2025:s fofana": {
+   "assist": 0,
+   "gol": 0,
+   "lega": "Bundesliga",
+   "presenze": 15
+  },
+  "2025:s gigot": null,
+  "2025:s goglichidze": {
+   "assist": 0,
+   "gol": 0,
+   "lega": "Championship",
+   "presenze": 12
+  },
+  "2025:s levak": null,
+  "2025:s lontani": null,
+  "2025:s loubao": {
+   "assist": 0,
+   "gol": 0,
+   "lega": "Coupe de France",
+   "presenze": 2
+  },
+  "2025:s lovric": {
+   "assist": 0,
+   "gol": 0,
+   "lega": "Serie A",
+   "presenze": 8
+  },
+  "2025:s panada": null,
+  "2025:s pierotti": {
+   "assist": 2,
+   "gol": 1,
+   "lega": "Serie A",
+   "presenze": 37
+  },
+  "2025:s scaglia": null,
+  "2025:s vos": null,
+  "2025:s wiafe": {
+   "assist": 1,
+   "gol": 0,
+   "lega": "Serie B",
+   "presenze": 9
+  },
+  "2025:sagrado": {
+   "assist": 1,
+   "gol": 1,
+   "lega": "Serie B",
+   "presenze": 29
+  },
+  "2025:satalino": null,
+  "2025:schingtienne": {
+   "assist": 2,
+   "gol": 1,
+   "lega": "Serie B",
+   "presenze": 35
+  },
+  "2025:schmid": null,
+  "2025:sherri": {
+   "assist": 0,
+   "gol": 0,
+   "lega": "Coppa Italia",
+   "presenze": 1
+  },
+  "2025:siviero": null,
+  "2025:spence": null,
+  "2025:stankovic f": {
+   "assist": 0,
+   "gol": 0,
+   "lega": "Serie B",
+   "presenze": 38
+  },
+  "2025:stolz": {
+   "assist": 0,
+   "gol": 0,
+   "lega": "Bundesliga",
+   "presenze": 15
+  },
+  "2025:stones": {
+   "assist": 0,
+   "gol": 0,
+   "lega": "Premier League",
+   "presenze": 9
+  },
+  "2025:strajnar": null,
+  "2025:sverko": {
+   "assist": 1,
+   "gol": 0,
+   "lega": "Serie B",
+   "presenze": 25
+  },
+  "2025:t gabellini": null,
+  "2025:t macchioni": {
+   "assist": 0,
+   "gol": 0,
+   "lega": "Serie A",
+   "presenze": 1
+  },
+  "2025:t mazalovic": null,
+  "2025:terzic": null,
+  "2025:thiam": {
+   "assist": 0,
+   "gol": 0,
+   "lega": "Serie B",
+   "presenze": 42
+  },
+  "2025:tornqvist": null,
+  "2025:torriani": {
+   "assist": 0,
+   "gol": 0,
+   "lega": "Friendlies Clubs",
+   "presenze": 4
+  },
+  "2025:toure e": {
+   "assist": 4,
+   "gol": 5,
+   "lega": "Süper Lig",
+   "presenze": 22
+  },
+  "2025:traore hj": {
+   "assist": 1,
+   "gol": 2,
+   "lega": "Ligue 1",
+   "presenze": 13
+  },
+  "2025:unai gomez": {
+   "assist": 1,
+   "gol": 1,
+   "lega": "La Liga",
+   "presenze": 26
+  },
+  "2025:v farcomeni": null,
+  "2025:v prisco": null,
+  "2025:v vladimirov": {
+   "assist": 0,
+   "gol": 0,
+   "lega": "UEFA U17 Championship - Qualification",
+   "presenze": 2
+  },
+  "2025:valdepenas": null,
+  "2025:varela g": {
+   "assist": 3,
+   "gol": 6,
+   "lega": "Primeira Liga",
+   "presenze": 32
+  },
+  "2025:viery": {
+   "assist": 0,
+   "gol": 0,
+   "lega": "Gaúcho - 1",
+   "presenze": 12
+  },
+  "2025:vigorito": null,
+  "2025:vismara": null,
+  "2025:w acquah": null,
+  "2025:w cheddira": {
+   "assist": 1,
+   "gol": 3,
+   "lega": "Serie A",
+   "presenze": 17
+  },
+  "2025:w l ouedraogo": {
+   "assist": 0,
+   "gol": 0,
+   "lega": "Serie A",
+   "presenze": 2
+  },
+  "2025:winks": {
+   "assist": 2,
+   "gol": 1,
+   "lega": "Championship",
+   "presenze": 34
+  },
+  "2025:y fofana": {
+   "assist": 3,
+   "gol": 2,
+   "lega": "Serie A",
+   "presenze": 33
+  },
+  "2025:y maye": null,
+  "2025:y trepy": {
+   "assist": 0,
+   "gol": 1,
+   "lega": "Serie A",
+   "presenze": 8
+  },
+  "2025:yeboah j": null,
+  "2025:z aboukhlal": {
+   "assist": 0,
+   "gol": 0,
+   "lega": "Serie A",
+   "presenze": 15
+  },
+  "2025:z athekame": {
+   "assist": 2,
+   "gol": 2,
+   "lega": "Serie A",
+   "presenze": 27
+  },
   "abankwah": {
    "assist": 0,
    "gol": 0,
