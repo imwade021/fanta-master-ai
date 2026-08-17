@@ -435,14 +435,24 @@ def main():
             indice, per_cognome = {}, {}
             for idx, riga in df_listone.iterrows():
                 ruolo_riga = str(riga.get('R', '')).strip().upper()
+                squadra_riga = str(riga.get('Squadra', '')).strip()
                 for campo in ('Nome', 'Nome_Breve'):
                     chiave = normalize_str(riga.get(campo, ''))
                     if not chiave:
                         continue
                     indice.setdefault(chiave, idx)
-                    cognome = chiave.split()[0]
-                    if len(cognome) > 2:
-                        per_cognome.setdefault(cognome, []).append((idx, ruolo_riga))
+
+                    parole_riga = chiave.split()
+                    # Iniziali del nome proprio: in "Esposito Se." la parte dopo
+                    # il cognome distingue Sebastiano da Francesco Pio.
+                    iniziali = {p[0] for p in parole_riga[1:] if p}
+                    # Si indicizzano TUTTE le parole lunghe, non solo la prima:
+                    # i cognomi composti come "El Aynaoui" altrimenti si perdono.
+                    for parola in parole_riga:
+                        if len(parola) > 2:
+                            per_cognome.setdefault(parola, []).append(
+                                {'idx': idx, 'ruolo': ruolo_riga,
+                                 'squadra': squadra_riga, 'iniziali': iniziali})
 
             aggiornati, non_trovati, ambigui = 0, [], 0
             candidati_nuovi = []
@@ -453,25 +463,37 @@ def main():
                 if idx is None:
                     # Match per cognome SOLO se non ambiguo: "Lautaro Martinez"
                     # non deve finire su "Martinez Jo.", che e' un portiere.
-                    for parola in sorted(norm.split(), key=len, reverse=True):
+                    parole_api = norm.split()
+                    for parola in sorted(parole_api, key=len, reverse=True):
                         if len(parola) <= 2:
                             continue
                         candidati = per_cognome.get(parola, [])
                         if not candidati:
                             continue
 
-                        unici = set(i for i, _ in candidati)
-                        if len(unici) == 1:
+                        if len({c['idx'] for c in candidati}) == 1:
                             # Cognome unico: si accetta anche se il ruolo differisce.
                             # Fantacalcio e API classificano diversamente (Orsolini
                             # e' centrocampista per uno, attaccante per l'altro).
-                            idx = candidati[0][0]
+                            idx = candidati[0]['idx']
                             break
 
-                        # Piu' candidati: qui il ruolo serve a distinguerli
-                        stesso_ruolo = set(i for i, r in candidati if r == g['ruolo'])
-                        if len(stesso_ruolo) == 1:
-                            idx = stesso_ruolo.pop()
+                        # Omonimi: si restringe per iniziale del nome, poi squadra,
+                        # poi ruolo. "S. Esposito" -> "Esposito Se.", non "Esposito Fr."
+                        iniziali_api = {p[0] for p in parole_api if p != parola}
+                        rimasti = [c for c in candidati
+                                   if c['iniziali'] & iniziali_api] or candidati
+                        if len({c['idx'] for c in rimasti}) > 1:
+                            per_squadra = [c for c in rimasti if c['squadra'] == g['squadra']]
+                            if per_squadra:
+                                rimasti = per_squadra
+                        if len({c['idx'] for c in rimasti}) > 1:
+                            per_ruolo = [c for c in rimasti if c['ruolo'] == g['ruolo']]
+                            if per_ruolo:
+                                rimasti = per_ruolo
+
+                        if len({c['idx'] for c in rimasti}) == 1:
+                            idx = rimasti[0]['idx']
                             break
                         ambigui += 1
                         break
