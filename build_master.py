@@ -4,6 +4,7 @@ import os
 import re
 import glob
 import json
+import datetime
 import unicodedata
 from scout_engine import ScoutEngine
 
@@ -25,14 +26,19 @@ QUOTE_RUOLO = {'P': 0.08, 'D': 0.14, 'C': 0.28, 'A': 0.50}
 SLOT_RUOLO = {'P': 3, 'D': 8, 'C': 8, 'A': 6}
 
 # Quanto pesa la media di ruolo rispetto alle presenze reali: con K=8, un giocatore
-# con 8 presenze vale meta' se stesso e meta' baseline. Serve a non far esplodere
-# la FVM di chi ha una fantamedia altissima su 2 partite.
+# con 8 presenze vale meta' se stesso e meta' baseline.
 K_SHRINK = 8
 BASELINE_DEFAULT = {'P': 5.40, 'D': 5.80, 'C': 6.00, 'A': 6.20}
 
+# Presenze totali di stagione (tutte le competizioni e squadre): distingue chi
+# non gioca da chi e' arrivato nel mercato di gennaio.
+PRESENZE_SOSPETTE = int(os.getenv("FANTA_PRESENZE_SOSPETTE", "26"))
+
+# L'API dice PERCHE' e' fermo, non quando rientra: quella data non e' un dato
+# disponibile e non va inventata. Si registra solo da quando e' fermo.
 
 # Lettere che la normalizzazione standard cancella invece di convertire:
-# senza questa tabella "Hojlund" e "Hojlund" non si riconoscono fra loro.
+# senza questa tabella "Hojlund" e "Højlund" non si riconoscono fra loro.
 LETTERE_SPECIALI = str.maketrans({
     'ø': 'o', 'Ø': 'O', 'đ': 'd', 'Đ': 'D', 'ł': 'l', 'Ł': 'L',
     'ß': 'ss', 'æ': 'ae', 'Æ': 'AE', 'œ': 'oe', 'Œ': 'OE', 'ð': 'd', 'þ': 'th',
@@ -426,6 +432,7 @@ def main():
     # SINCRONIZZAZIONE ROSE VIA API
     # ------------------------------------------------------------------
     print("🌐 Sincronizzazione rose via API...")
+    id_api_riga = {}
     try:
         squadre_listone = sorted({str(x).strip() for x in df_listone['Squadra'] if str(x).strip()})
         scout.carica_squadre_serie_a(squadre_listone)
@@ -504,6 +511,8 @@ def main():
                 if idx is not None:
                     # Collega l'id API al nome del listone: serve alle proiezioni
                     scout.associa(df_listone.loc[idx, 'Nome'], g.get('api_id'))
+                    if g.get('api_id'):
+                        id_api_riga[g['api_id']] = idx
                     if str(df_listone.loc[idx, 'Squadra']).strip() != g['squadra']:
                         df_listone.loc[idx, 'Squadra'] = g['squadra']
                         aggiornati += 1
@@ -517,6 +526,51 @@ def main():
             print(f"ℹ️ {len(non_trovati)} giocatori dell'API non sono nel listone "
                   f"(non acquistabili all'asta, ignorati) | {ambigui} scartati per omonimia.")
             segnala_nuovi_arrivi(candidati_nuovi, scout)
+
+            # Infortunati di oggi: una chiamata per tutto il campionato
+            df_listone['Infortunio'] = ""
+            df_listone['InfortunioTipo'] = ""
+            df_listone['InfortunioDal'] = ""
+            try:
+                fermi = scout.infortuni_correnti()
+            except Exception as e:
+                print(f"⚠️ Infortuni non recuperati: {e}")
+                fermi = {}
+
+            # Da quando e' fermo: l'API non lo dice, lo memorizziamo noi al primo
+            # avvistamento e lo teniamo in cache finche' l'infortunio non cambia.
+            storico = scout.cache.setdefault('infortuni', {})
+            oggi = datetime.date.today().isoformat()
+            attivi = set()
+
+            segnati = 0
+            for id_api, info in fermi.items():
+                idx = id_api_riga.get(id_api)
+                chiave = str(id_api)
+                attivi.add(chiave)
+                motivo = info['motivo'] or info['tipo']
+
+                precedente = storico.get(chiave)
+                if precedente and precedente.get('motivo') == motivo:
+                    dal = precedente['dal']
+                else:
+                    dal = oggi
+                storico[chiave] = {'dal': dal, 'motivo': motivo}
+
+                if idx is None:
+                    continue
+
+                df_listone.loc[idx, 'InfortunioTipo'] = info['tipo']
+                df_listone.loc[idx, 'Infortunio'] = motivo
+                df_listone.loc[idx, 'InfortunioDal'] = dal
+                segnati += 1
+
+            # Chi non e' piu' nell'elenco e' rientrato: si libera lo storico
+            for chiave in list(storico):
+                if chiave not in attivi:
+                    storico.pop(chiave, None)
+            if fermi:
+                print(f"🚑 {segnati} indisponibili agganciati al listone.")
     except Exception as e:
         print(f"⚠️ Avviso API: {e}")
 
@@ -525,7 +579,7 @@ def main():
     # ------------------------------------------------------------------
     baseline = calcola_baseline_ruoli(stats_per_id)
 
-    colonne_out = {c: [] for c in ['FVM'] + COLONNE_STATS}
+    colonne_out = {c: [] for c in ['FVM', 'PvTot', 'SquadreStag', 'Tit', 'Min'] + COLONNE_STATS}
     conteggio = {'id': 0, 'nome': 0, 'nome_abbreviato': 0, 'scout': 0, 'nessuno': 0}
 
     for _, row in df_listone.iterrows():
@@ -572,6 +626,24 @@ def main():
         fvm_finale, fm_usata = calcola_fvm(best_qt, fm_per_fvm, ruolo, squadra,
                                            scout, nome, baseline)
 
+        # Chi ha poche presenze in Serie A: si controlla quante ne ha in totale.
+        presenze_totali, squadre_stagione = pv, 1
+        da_titolare, minuti = 0, 0
+        if 0 < pv < PRESENZE_SOSPETTE:
+            try:
+                extra = scout.presenze_stagione(nome)
+            except Exception:
+                extra = None
+            if extra:
+                presenze_totali = max(pv, extra['totali'])
+                squadre_stagione = extra['squadre']
+                da_titolare = extra.get('da_titolare', 0)
+                minuti = extra.get('minuti', 0)
+
+        colonne_out['PvTot'].append(int(presenze_totali))
+        colonne_out['SquadreStag'].append(int(squadre_stagione))
+        colonne_out['Tit'].append(int(da_titolare))
+        colonne_out['Min'].append(int(minuti))
         colonne_out['FVM'].append(fvm_finale)
         for c in COLONNE_STATS:
             if c == 'Fm':
@@ -582,6 +654,10 @@ def main():
     for col, valori in colonne_out.items():
         df_listone[col] = valori
 
+    for colonna in ('Infortunio', 'InfortunioTipo', 'InfortunioDal'):
+        if colonna not in df_listone.columns:
+            df_listone[colonna] = ""
+    df_listone['Aggiornato'] = datetime.date.today().isoformat()
     df_listone['Prezzo'] = calcola_prezzi(df_listone)
     df_listone = df_listone.fillna("")
     df_listone.to_csv("Lista_Finale_Master.csv", sep=';', index=False)
