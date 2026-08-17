@@ -273,6 +273,21 @@ class ScoutEngine:
     # ------------------------------------------------------------------
     # STATISTICHE INDIVIDUALI
     # ------------------------------------------------------------------
+    def _cerca_id_globale(self, testo_ricerca):
+        """
+        Trova l'id di un giocatore in QUALSIASI campionato. Serve perche' la
+        ricerca dentro la Serie A fallisce sempre per chi arriva dall'estero:
+        Mastantuono giocava nella Liga, in Serie A non poteva esserci.
+        """
+        if len(testo_ricerca) < 4:
+            return None
+        risposta, stato = self._get("players/profiles", {'search': testo_ricerca}, timeout=8)
+        if stato != 'ok' or not risposta:
+            return None
+        giocatore = risposta[0].get('player', {})
+        return giocatore.get('id')
+
+
     def _stats_giocatore(self, nome):
         # La chiave include la stagione: un "nessun dato" trovato sul 2024 non
         # deve impedire di riprovare sul 2025 dopo un upgrade di piano.
@@ -303,6 +318,16 @@ class ScoutEngine:
             return None
 
         risposta, stato = self._get("players", params, timeout=8)
+
+        # Nessun risultato cercando in Serie A: il giocatore arriva da un altro
+        # campionato. Si recupera il suo id globale e si richiede per id.
+        if stato == 'ok' and not risposta and not player_id:
+            id_trovato = self._cerca_id_globale(testo_ricerca)
+            if id_trovato:
+                self.mappa_api_id[nome_normalizzato] = id_trovato
+                player_id = id_trovato
+                risposta, stato = self._get(
+                    "players", {'id': player_id, 'season': self.season_stats}, timeout=8)
 
         # Il piano free non arriva all'ultima stagione: si ripiega su quella prima.
         if stato == 'piano':
