@@ -251,6 +251,10 @@ class ScoutEngine:
                     p.get('position', 'Midfielder'), 'C')
                 if p.get('id'):
                     self.mappa_api_id[normalize_str(nome_p)] = p['id']
+                    # La foto arriva gia' dentro la risposta delle rose:
+                    # nessuna chiamata aggiuntiva, e l'aggancio e' per id.
+                    if p.get('photo'):
+                        self.foto_per_id[p['id']] = p['photo']
                 nuovi_giocatori.append({
                     'nome': nome_p, 'ruolo': ruolo, 'squadra': squadra,
                     'api_id': p.get('id'), 'quotazione_base': 1
