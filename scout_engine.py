@@ -1,6 +1,7 @@
 import os
 import re
 import time
+import datetime
 import json
 import unicodedata
 import requests
@@ -342,18 +343,43 @@ class ScoutEngine:
             return None   # errore o quota: NON si mette in cache, si riprova domani
 
         migliore = None
+        presenze_totali, squadre_stagione, campionati = 0, set(), set()
+        titolarita_totale, minuti_totali = 0, 0
         for st in (risposta[0].get('statistics', []) if risposta else []):
             apps = st.get('games', {}).get('appearences') or 0
             if apps <= 0:
                 continue
+            lega = st.get('league', {}).get('name', '')
+            squadra = st.get('team', {}).get('name', '')
+
+            # Somma su tutte le squadre e competizioni: e' cosi' che si scopre
+            # chi ha poche presenze in Serie A solo perche' e' arrivato a gennaio.
+            presenze_totali += apps
+            # Titolarita' e minuti: chi entra sempre dalla panchina ha molte
+            # presenze e pochi minuti; chi si infortuna ne ha poche ma tutte
+            # da titolare. Sono due situazioni opposte, non la stessa.
+            titolarita_totale += st.get('games', {}).get('lineups') or 0
+            minuti_totali += st.get('games', {}).get('minutes') or 0
+            if squadra:
+                squadre_stagione.add(squadra)
+            if lega:
+                campionati.add(lega)
+
             candidato = {
                 'presenze': apps,
                 'gol': st.get('goals', {}).get('total') or 0,
                 'assist': st.get('goals', {}).get('assists') or 0,
-                'lega': st.get('league', {}).get('name', ''),
+                'lega': lega,
             }
             if migliore is None or candidato['presenze'] > migliore['presenze']:
                 migliore = candidato
+
+        if migliore is not None:
+            migliore['presenze_totali'] = presenze_totali
+            migliore['squadre_stagione'] = len(squadre_stagione)
+            migliore['campionati'] = sorted(campionati)
+            migliore['da_titolare'] = titolarita_totale
+            migliore['minuti'] = minuti_totali
 
         # Se la stagione e' stata declassata durante la chiamata, salva su quella usata
         self.cache["stats"][f"{self.season_stats}:{nome_normalizzato}"] = migliore
@@ -367,6 +393,50 @@ class ScoutEngine:
             presenze=dati['presenze'], gol=dati['gol'], assist=dati['assist'],
             lega=dati['lega'], fascia_squadra_destinazione='Media'
         )
+
+    def infortuni_correnti(self):
+        """
+        Chi e' fermo adesso. Una sola chiamata per tutto il campionato.
+        Restituisce {id_api: {'tipo', 'motivo', 'squadra'}}.
+        """
+        oggi = datetime.date.today().isoformat()
+        risposta, stato = self._get(
+            "injuries", {'league': LEAGUE_SERIE_A, 'season': SEASON_CORRENTE, 'date': oggi})
+
+        if stato != 'ok' or not risposta:
+            # Senza filtro data: prende gli infortuni noti della stagione
+            risposta, stato = self._get(
+                "injuries", {'league': LEAGUE_SERIE_A, 'season': SEASON_CORRENTE})
+            if stato != 'ok':
+                print("⚠️ Elenco infortuni non disponibile.")
+                return {}
+
+        fermi = {}
+        for voce in risposta:
+            giocatore = voce.get('player', {})
+            id_api = giocatore.get('id')
+            if not id_api:
+                continue
+            fermi[id_api] = {
+                'tipo': giocatore.get('type') or 'Indisponibile',
+                'motivo': giocatore.get('reason') or '',
+                'squadra': voce.get('team', {}).get('name', ''),
+                'nome_api': giocatore.get('name', ''),
+            }
+        print(f"🚑 Infortunati/indisponibili rilevati: {len(fermi)}")
+        return fermi
+
+    def presenze_stagione(self, nome_giocatore):
+        """Presenze totali della stagione, su tutte le squadre e competizioni."""
+        dati = self._stats_giocatore(nome_giocatore)
+        if not dati:
+            return None
+        return {
+            'totali': dati.get('presenze_totali', dati.get('presenze', 0)),
+            'squadre': dati.get('squadre_stagione', 1),
+            'da_titolare': dati.get('da_titolare', 0),
+            'minuti': dati.get('minuti', 0),
+        }
 
     def verifica_prospetto_giovanile(self, nome_giocatore, squadra):
         dati = self._stats_giocatore(nome_giocatore)
