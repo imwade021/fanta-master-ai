@@ -113,7 +113,7 @@ Id;Nome_Breve;Nome;R;Ruolo_Esteso;Qt.A;Qt.I;Qt.M;Diff.M;Squadra;FVM;FVM.M;Piede;
 6672;Idzes;Idzes;D;Dc;7;7;7;7;Sassuolo;31.9;19;destro;"Indonesia;Olanda";02/06/2000 00:00:00;https://content.fantacalcio.it/web/campioncini/21/card/6672.png?v=647;;;;35;5.94;5.9;0;0;0;0;0;0;0;3;0;5
 6642;Coco;Coco;D;Dc;7;7;7;7;Torino;32.0;18;destro;"Guinea Equatoriale;Spagna";09/02/1999 00:00:00;https://content.fantacalcio.it/web/campioncini/21/card/6642.png?v=647;;;;35;5.84;5.91;1;0;0;0;0;0;1;3;0;5
 5010;Ismajli;Ismajli;D;Dc;7;7;7;7;Torino;32.0;18;destro;"Albania;Kosovo";30/09/1996 00:00:00;https://content.fantacalcio.it/web/campioncini/21/card/5010.png?v=647;;;;24;5.92;5.9;0;0;0;0;0;0;2;5;0;5
-6485;Kristensen T.;Kristensen T.;D;"Dd;Dc";7;7;8;8;Udinese;36.2;22;destro;Danimarca;17/01/2002 00:00:00;https://content.fantacalcio.it/web/campioncini/21/card/6485.png?v=647;;;;28;5.98;6.23;3;0;0;0;0;0;0;4;0;6
+6485;Kristensen T.;Kristensen T.;D;"Dd;Dc";7;7;8;8;Atalanta;36.2;22;destro;Danimarca;17/01/2002 00:00:00;https://content.fantacalcio.it/web/campioncini/21/card/6485.png?v=647;;;;28;5.98;6.23;3;0;0;0;0;0;0;4;0;6
 6916;Ahanor;Ahanor;D;"B;Ds;E";6;6;7;7;Atalanta;26.0;18;sinistro;"Italia;Nigeria";23/02/2008 00:00:00;https://content.fantacalcio.it/web/campioncini/21/card/6916.png?v=647;;;;21;5.79;5.69;0;0;0;0;0;0;0;2;1;4
 4887;Bellanova;Bellanova;D;"Dd;E";6;6;6;6;Atalanta;27.2;15;destro;Italia;17/05/2000 00:00:00;https://content.fantacalcio.it/web/campioncini/21/card/4887.png?v=647;;;;22;5.82;5.82;0;0;0;0;0;0;1;2;0;4
 7219;Bernasconi;Bernasconi;D;"Ds;E";6;6;6;6;Atalanta;31.0;17;sinistro;Italia;16/11/2003 00:00:00;https://content.fantacalcio.it/web/campioncini/21/card/7219.png?v=647;;;;22;6.09;6.16;0;0;0;0;0;0;3;3;0;5
@@ -296,7 +296,7 @@ Id;Nome_Breve;Nome;R;Ruolo_Esteso;Qt.A;Qt.I;Qt.M;Diff.M;Squadra;FVM;FVM.M;Piede;
 6010;Fazzini;Fazzini;C;"C;T";7;7;8;8;Cagliari;54.9;21;destro;Italia;16/03/2003 00:00:00;https://content.fantacalcio.it/web/campioncini/21/card/6010.png?v=647;;;;12;5.88;5.83;0;0;0;0;0;0;0;2;0;6
 7472;Calò;Calò;C;"M;C";7;7;8;8;Frosinone;28.0;28;destro;Italia;05/02/1997 00:00:00;https://content.fantacalcio.it/web/campioncini/21/card/7472.png?v=647;;;;0;0.0;0.0;0;0;0;0;0;0;0;0;0;3
 5791;Frendrup;Frendrup;C;"M;C";7;7;8;8;Genoa;55.6;21;destro;Danimarca;07/04/2001 00:00:00;https://content.fantacalcio.it/web/campioncini/21/card/5791.png?v=647;;;;36;5.96;5.97;1;0;0;0;0;0;0;5;0;6
-2848;Frattesi;Frattesi;C;"C;T";7;7;7;7;Inter;55.5;15;destro;Italia;22/09/1999 00:00:00;https://content.fantacalcio.it/web/campioncini/21/card/2848.png?v=647;;;;14;5.89;5.89;0;0;0;0;0;0;0;0;0;6
+2848;Frattesi;Frattesi;C;"C;T";7;7;7;7;Lazio;55.5;15;destro;Italia;22/09/1999 00:00:00;https://content.fantacalcio.it/web/campioncini/21/card/2848.png?v=647;;;;14;5.89;5.89;0;0;0;0;0;0;0;0;0;6
 2741;Pessina;Pessina;C;"M;C";7;7;8;8;Monza;28.0;20;sinistro;Italia;21/04/1997 00:00:00;https://content.fantacalcio.it/web/campioncini/21/card/2741.png?v=647;;;;0;0.0;0.0;0;0;0;0;0;0;0;0;0;3
 4287;Lobotka;Lobotka;C;"M;C";7;7;8;8;Napoli;58.8;22;ambidestro;Slovacchia;25/11/1994 00:00:00;https://content.fantacalcio.it/web/campioncini/21/card/4287.png?v=647;;;;31;6.05;6.1;1;0;0;0;0;0;0;3;0;7
 6666;Bernabè;Bernabè;C;C;7;7;7;7;Parma;70.5;36;sinistro;Spagna;26/05/2001 00:00:00;https://content.fantacalcio.it/web/campioncini/21/card/6666.png?v=647;;;;32;6.17;6.48;3;0;0;0;0;0;1;0;0;8
@@ -386,7 +386,7 @@ Id;Nome_Breve;Nome;R;Ruolo_Esteso;Qt.A;Qt.I;Qt.M;Diff.M;Squadra;FVM;FVM.M;Piede;
 6225;El Azzouzi O.;El Azzouzi O.;C;"M;C";2;2;2;2;Bologna;8.0;4;destro;"Marocco;Olanda";29/05/2001 00:00:00;https://content.fantacalcio.it/web/campioncini/21/card/6225.png?v=647;;;;0;0.0;0.0;0;0;0;0;0;0;0;0;0;1
 6815;Fadera;Fadera;C;W;2;2;2;2;Como;25.1;3;destro;Gambia;03/11/2001 00:00:00;https://content.fantacalcio.it/web/campioncini/21/card/6815.png?v=647;;;;24;5.92;6.15;2;0;0;0;0;0;1;5;0;3
 6903;Hasa;Hasa;C;"C;T";2;2;2;2;Frosinone;8.0;5;destro;"Italia;Albania";06/01/2004 00:00:00;https://content.fantacalcio.it/web/campioncini/21/card/6903.png?v=647;;;;0;0.0;0.0;0;0;0;0;0;0;0;0;0;1
-6917;Masini;Masini;C;"M;C";2;2;2;2;Genoa;20.0;4;destro;Italia;27/01/2001 00:00:00;https://content.fantacalcio.it/web/campioncini/21/card/6917.png?v=647;;;;21;5.98;5.9;0;0;0;0;0;0;1;5;0;2
+6917;Masini;Masini;C;"M;C";2;2;2;2;Frosinone;20.0;4;destro;Italia;27/01/2001 00:00:00;https://content.fantacalcio.it/web/campioncini/21/card/6917.png?v=647;;;;21;5.98;5.9;0;0;0;0;0;0;1;5;0;2
 6980;Venturino;Venturino;C;W;2;2;2;2;Genoa;21.6;5;destro;Italia;22/06/2006 00:00:00;https://content.fantacalcio.it/web/campioncini/21/card/6980.png?v=647;;;;7;5.86;5.86;0;0;0;0;0;0;0;0;0;2
 5457;Maleh;Maleh;C;"M;C";2;2;2;2;Lecce;17.1;5;sinistro;"Italia;Marocco";22/08/1998 00:00:00;https://content.fantacalcio.it/web/campioncini/21/card/5457.png?v=647;;;;21;5.69;5.71;1;0;0;0;0;0;0;3;1;2
 5295;Musah;Musah;C;"C;W";2;2;2;2;Milan;24.0;6;destro;"Stati Uniti;Inghilterra";29/11/2002 00:00:00;https://content.fantacalcio.it/web/campioncini/21/card/5295.png?v=647;;;;16;5.94;6.09;1;0;0;0;0;0;0;1;0;3
@@ -412,14 +412,14 @@ Id;Nome_Breve;Nome;R;Ruolo_Esteso;Qt.A;Qt.I;Qt.M;Diff.M;Squadra;FVM;FVM.M;Piede;
 7392;Camara A.;Camara A.;C;"M;C";1;1;1;1;Udinese;1.0;3;destro;"Francia;Guinea";28/09/2008 00:00:00;https://content.fantacalcio.it/web/campioncini/21/card/7392.png?v=647;;;;0;0.0;0.0;0;0;0;0;0;0;0;0;0;1
 6212;Zarraga;Zarraga;C;"M;C";1;1;1;1;Udinese;11.6;4;destro;Spagna;04/01/1999 00:00:00;https://content.fantacalcio.it/web/campioncini/21/card/6212.png?v=647;;;;10;5.75;5.7;0;0;0;0;0;0;0;2;0;1
 7481;Dagasso;Dagasso;C;C;1;1;1;1;Venezia;1.0;1;sinistro;Italia;01/04/2004 00:00:00;https://content.fantacalcio.it/web/campioncini/21/card/7481.png?v=647;;;;0;0.0;0.0;0;0;0;0;0;0;0;0;0;1
-2764;Martinez L.;Martinez L.;A;Pc;35;35;35;35;Inter;685.1;370;destro;Argentina;22/08/1997 00:00:00;https://content.fantacalcio.it/web/campioncini/21/card/2764.png?v=647;;;;30;6.42;8.25;17;0;0;0;0;0;6;4;0;161
+2764;Martinez L.;Martinez L.;A;Pc;35;35;35;35;Inter;685.1;370;destro;Argentina;22/08/1997 00:00:00;https://content.fantacalcio.it/web/campioncini/21/card/2764.png?v=647;;;;30;6.42;8.25;17;0;0;0;0;0;6;4;0;160
 5585;Malen;Malen;A;Pc;34;34;34;34;Roma;768.8;365;destro;"Olanda;Suriname";19/01/1999 00:00:00;https://content.fantacalcio.it/web/campioncini/21/card/5585.png?v=647;;;;18;6.72;8.97;14;0;0;4;3;1;2;1;0;185
-4871;Thuram;Thuram;A;Pc;29;29;29;29;Inter;556.2;280;destro;"Francia;Guadalupe";06/08/1997 00:00:00;https://content.fantacalcio.it/web/campioncini/21/card/4871.png?v=647;;;;29;6.43;7.95;13;0;0;0;0;0;6;2;0;124
+4871;Thuram;Thuram;A;Pc;29;29;29;29;Inter;556.2;280;destro;"Francia;Guadalupe";06/08/1997 00:00:00;https://content.fantacalcio.it/web/campioncini/21/card/4871.png?v=647;;;;29;6.43;7.95;13;0;0;0;0;0;6;2;0;123
 6052;Hojlund;Hojlund;A;Pc;28;28;28;28;Napoli;466.0;271;sinistro;Danimarca;04/02/2003 00:00:00;https://content.fantacalcio.it/web/campioncini/21/card/6052.png?v=647;;;;33;6.21;7.44;12;0;0;1;1;0;5;1;0;99
 6397;Ramos G.;Ramos G.;A;Pc;27;27;27;27;Milan;108.0;232;destro;Portogallo;20/06/2001 00:00:00;https://content.fantacalcio.it/web/campioncini/21/card/6397.png?v=647;;;;0;0.0;0.0;0;0;0;0;0;0;0;0;0;16
 5951;Kolo Muani;Kolo Muani;A;Pc;26;26;26;26;Juventus;104.0;225;destro;"Francia;Repubblica Democratica del Congo";05/12/1998 00:00:00;https://content.fantacalcio.it/web/campioncini/21/card/5951.png?v=647;;;;0;0.0;0.0;0;0;0;0;0;0;0;0;0;15
 2097;Kean;Kean;A;Pc;25;25;25;25;Fiorentina;349.8;197;destro;"Italia;Costa d''Avorio";28/02/2000 00:00:00;https://content.fantacalcio.it/web/campioncini/21/card/2097.png?v=647;;;;26;5.88;6.77;8;0;0;2;2;0;1;4;0;69
-6434;Yildiz;Yildiz;A;A;23;23;24;24;Juventus;390.4;190;ambidestro;"Turchia;Germania";04/05/2005 00:00:00;https://content.fantacalcio.it/web/campioncini/21/card/6434.png?v=647;;;;35;6.39;7.3;10;0;0;2;1;1;6;2;0;80
+6434;Yildiz;Yildiz;A;A;23;23;24;24;Juventus;390.4;190;ambidestro;"Turchia;Germania";04/05/2005 00:00:00;https://content.fantacalcio.it/web/campioncini/21/card/6434.png?v=647;;;;35;6.39;7.3;10;0;0;2;1;1;6;2;0;79
 7017;Douvikas;Douvikas;A;Pc;20;20;20;20;Como;368.1;154;destro;Grecia;02/08/1999 00:00:00;https://content.fantacalcio.it/web/campioncini/21/card/7017.png?v=647;;;;36;6.18;7.38;14;0;0;1;1;0;1;0;0;74
 2137;Scamacca;Scamacca;A;Pc;19;19;18;18;Atalanta;366.6;128;ambidestro;Italia;01/01/1999 00:00:00;https://content.fantacalcio.it/web/campioncini/21/card/2137.png?v=647;;;;22;6.18;7.55;10;0;0;2;2;0;1;2;0;73
 5637;Davis K.;Davis K.;A;Pc;19;19;19;19;Udinese;292.6;119;destro;Inghilterra;13/02/1998 00:00:00;https://content.fantacalcio.it/web/campioncini/21/card/5637.png?v=647;;;;30;6.32;7.37;10;0;0;4;4;0;4;5;0;55
@@ -429,7 +429,7 @@ Id;Nome_Breve;Nome;R;Ruolo_Esteso;Qt.A;Qt.I;Qt.M;Diff.M;Squadra;FVM;FVM.M;Piede;
 5995;De Ketelaere;De Ketelaere;A;A;17;17;18;18;Atalanta;244.5;108;sinistro;Belgio;10/03/2001 00:00:00;https://content.fantacalcio.it/web/campioncini/21/card/5995.png?v=647;;;;31;6.21;6.6;3;0;0;0;0;0;5;4;0;44
 6675;Dovbyk;Dovbyk;A;Pc;16;16;16;16;Bologna;243.5;70;sinistro;Ucraina;21/06/1997 00:00:00;https://content.fantacalcio.it/web/campioncini/21/card/6675.png?v=647;;;;13;6.0;6.77;3;0;0;0;0;0;1;0;0;44
 7071;Esposito F.P.;Esposito F.P.;A;Pc;16;16;16;16;Inter;273.7;90;destro;Italia;28/06/2005 00:00:00;https://content.fantacalcio.it/web/campioncini/21/card/7071.png?v=647;;;;31;6.26;7.02;7;0;0;0;0;0;3;1;0;51
-7023;Pellegrino M.;Pellegrino M.;A;Pc;15;15;15;15;Parma;188.5;57;sinistro;"Argentina;Spagna";22/10/2001 00:00:00;https://content.fantacalcio.it/web/campioncini/21/card/7023.png?v=647;;;;37;5.99;6.65;9;0;0;1;1;0;0;5;0;32
+7023;Pellegrino M.;Pellegrino M.;A;Pc;15;15;15;15;Fiorentina;226.2;57;sinistro;"Argentina;Spagna";22/10/2001 00:00:00;https://content.fantacalcio.it/web/campioncini/21/card/7023.png?v=647;;;;37;5.99;6.65;9;0;0;1;1;0;0;5;0;40
 6060;Laurientè;Laurientè;A;A;15;15;16;16;Sassuolo;217.2;91;destro;"Francia;Guadalupa";04/12/1998 00:00:00;https://content.fantacalcio.it/web/campioncini/21/card/6060.png?v=647;;;;37;6.23;6.99;7;0;0;0;0;0;9;4;0;38
 2061;Simeone;Simeone;A;Pc;15;15;15;15;Torino;225.7;79;destro;"Argentina;Spagna";05/07/1995 00:00:00;https://content.fantacalcio.it/web/campioncini/21/card/2061.png?v=647;;;;32;6.08;7.09;11;0;0;0;0;0;0;1;0;40
 7351;Santos A.;Santos A.;A;"W;A";14;14;15;15;Napoli;257.8;57;destro;Brasile;27/09/2002 00:00:00;https://content.fantacalcio.it/web/campioncini/21/card/7351.png?v=647;;;;13;6.35;7.23;4;0;0;0;0;0;0;1;0;47
@@ -438,16 +438,16 @@ Id;Nome_Breve;Nome;R;Ruolo_Esteso;Qt.A;Qt.I;Qt.M;Diff.M;Squadra;FVM;FVM.M;Piede;
 4371;Raspadori;Raspadori;A;A;13;13;14;14;Atalanta;217.3;64;ambidestro;Italia;18/02/2000 00:00:00;https://content.fantacalcio.it/web/campioncini/21/card/4371.png?v=647;;;;13;6.12;6.88;3;0;0;0;0;0;1;0;0;38
 4463;Esposito Se.;Esposito Se.;A;A;13;13;14;14;Cagliari;188.0;40;destro;Italia;02/07/2002 00:00:00;https://content.fantacalcio.it/web/campioncini/21/card/4463.png?v=647;;;;36;6.26;6.88;7;0;0;1;1;0;4;6;0;32
 4728;Nkunku;Nkunku;A;A;13;13;14;14;Milan;222.3;25;destro;"Francia;Repubblica Democratica del Congo";14/11/1997 00:00:00;https://content.fantacalcio.it/web/campioncini/21/card/4728.png?v=647;;;;26;5.94;6.87;7;0;0;5;5;0;3;0;0;39
-2038;Pinamonti;Pinamonti;A;Pc;13;13;12;12;Sassuolo;167.2;52;destro;Italia;19/05/1999 00:00:00;https://content.fantacalcio.it/web/campioncini/21/card/2038.png?v=647;;;;34;5.88;6.62;9;0;0;1;0;1;3;2;1;28
+2038;Pinamonti;Pinamonti;A;Pc;13;13;12;12;Sassuolo;167.2;52;destro;Italia;19/05/1999 00:00:00;https://content.fantacalcio.it/web/campioncini/21/card/2038.png?v=647;;;;34;5.88;6.62;9;0;0;1;0;1;3;2;1;27
 7547;Kevin Carlos;Kevin Carlos;A;Pc;13;13;12;12;Cagliari;52.0;44;destro;"Spagna;Nigeria";10/04/2001 00:00:00;https://content.fantacalcio.it/web/campioncini/21/card/7547.png?v=647;;;;0;0.0;0.0;0;0;0;0;0;0;0;0;0;7
 5734;Soulè;Soulè;A;A;12;12;13;13;Roma;208.4;53;sinistro;"Argentina;Italia";15/04/2003 00:00:00;https://content.fantacalcio.it/web/campioncini/21/card/5734.png?v=647;;;;32;6.12;6.83;6;0;0;0;0;0;5;1;0;36
 7484;Adams A.;Adams A.;A;Pc;12;12;11;11;Venezia;48.0;48;destro;Nigeria;29/01/2000 00:00:00;https://content.fantacalcio.it/web/campioncini/21/card/7484.png?v=647;;;;0;0.0;0.0;0;0;0;0;0;0;0;0;0;7
 6967;Diao;Diao;A;"W;A";11;11;12;12;Como;161.8;52;destro;"Spagna;Senegal";07/09/2005 00:00:00;https://content.fantacalcio.it/web/campioncini/21/card/6967.png?v=647;;;;16;6.0;6.38;2;0;0;0;0;0;1;2;0;26
 4923;Colombo;Colombo;A;Pc;11;11;10;10;Genoa;134.7;60;sinistro;Italia;08/03/2002 00:00:00;https://content.fantacalcio.it/web/campioncini/21/card/4923.png?v=647;;;;37;5.92;6.41;7;0;0;2;1;1;1;2;0;21
-6229;Tourè E.;Tourè E.;A;Pc;11;11;11;11;Atalanta;44.0;43;ambidestro;"Mali;Costa D''Avorio";03/10/2001 00:00:00;https://content.fantacalcio.it/web/campioncini/21/card/6229.png?v=647;;;;0;0.0;0.0;0;0;0;0;0;0;0;0;0;6
+6229;Tourè E.;Tourè E.;A;Pc;11;11;11;11;Parma;44.0;43;ambidestro;"Mali;Costa D''Avorio";03/10/2001 00:00:00;https://content.fantacalcio.it/web/campioncini/21/card/6229.png?v=647;;;;0;0.0;0.0;0;0;0;0;0;0;0;0;0;6
 5672;Dia;Dia;A;A;10;10;11;11;Lazio;124.3;33;destro;"Senegal;Francia";16/11/1996 00:00:00;https://content.fantacalcio.it/web/campioncini/21/card/5672.png?v=647;;;;25;5.68;5.86;1;0;0;0;0;0;2;1;0;19
 7313;Ratkov;Ratkov;A;Pc;10;10;9;9;Lazio;129.0;29;destro;"Serbia;Croazia";18/08/2003 00:00:00;https://content.fantacalcio.it/web/campioncini/21/card/7313.png?v=647;;;;7;5.64;5.64;0;0;0;0;0;0;0;0;0;20
-7347;Bowie;Bowie;A;Pc;10;10;9;9;Sassuolo;147.5;36;sinistro;Scozia;21/09/2002 00:00:00;https://content.fantacalcio.it/web/campioncini/21/card/7347.png?v=647;;;;14;5.96;6.79;4;0;0;0;0;0;0;1;0;24
+7347;Bowie;Bowie;A;Pc;10;10;9;9;Sassuolo;147.5;36;sinistro;Scozia;21/09/2002 00:00:00;https://content.fantacalcio.it/web/campioncini/21/card/7347.png?v=647;;;;14;5.96;6.79;4;0;0;0;0;0;0;1;0;23
 7554;Romero D.;Romero D.;A;Pc;10;10;;;Parma;40.0;;;;;;;;;0;0.0;0.0;0;0;0;0;0;0;0;0;0;5
 6530;Ghedjemis;Ghedjemis;A;"W;A";9;9;10;10;Frosinone;36.0;32;sinistro;"Francia;Algeria";06/09/2002 00:00:00;https://content.fantacalcio.it/web/campioncini/21/card/6530.png?v=647;;;;0;0.0;0.0;0;0;0;0;0;0;0;0;0;5
 5544;David;David;A;Pc;9;9;8;8;Juventus;134.0;37;ambidestro;"Canada;Stati Uniti";14/01/2000 00:00:00;https://content.fantacalcio.it/web/campioncini/21/card/5544.png?v=647;;;;30;5.77;6.33;6;0;0;1;0;1;2;0;0;21
@@ -455,7 +455,7 @@ Id;Nome_Breve;Nome;R;Ruolo_Esteso;Qt.A;Qt.I;Qt.M;Diff.M;Squadra;FVM;FVM.M;Piede;
 2155;Cutrone;Cutrone;A;Pc;9;9;8;8;Monza;99.3;30;destro;Italia;03/01/1998 00:00:00;https://content.fantacalcio.it/web/campioncini/21/card/2155.png?v=647;;;;14;5.71;5.93;1;0;0;0;0;0;0;0;0;14
 6646;Adams C.;Adams C.;A;A;9;9;10;10;Torino;130.6;34;destro;"Scozia;Inghilterra";13/07/1996 00:00:00;https://content.fantacalcio.it/web/campioncini/21/card/6646.png?v=647;;;;32;5.98;6.64;6;0;0;0;0;0;3;0;0;20
 6643;Dallinga;Dallinga;A;Pc;8;8;7;7;Bologna;113.8;10;destro;Olanda;03/08/2000 00:00:00;https://content.fantacalcio.it/web/campioncini/21/card/6643.png?v=647;;;;19;5.82;6.13;2;0;0;0;0;0;1;2;0;17
-4359;Piccoli;Piccoli;A;Pc;8;8;7;7;Fiorentina;117.7;28;destro;Italia;27/01/2001 00:00:00;https://content.fantacalcio.it/web/campioncini/21/card/4359.png?v=647;;;;27;5.78;6.24;4;0;0;0;0;0;1;1;0;18
+4359;Piccoli;Piccoli;A;Pc;8;8;7;7;Bologna;117.7;28;destro;Italia;27/01/2001 00:00:00;https://content.fantacalcio.it/web/campioncini/21/card/4359.png?v=647;;;;27;5.78;6.24;4;0;0;0;0;0;1;1;0;18
 6164;Vitinha O.;Vitinha O.;A;A;8;8;8;8;Genoa;105.3;21;destro;Portogallo;15/03/2000 00:00:00;https://content.fantacalcio.it/web/campioncini/21/card/6164.png?v=647;;;;31;5.95;6.39;5;0;0;0;0;0;1;5;0;15
 6904;Yeboah J.;Yeboah J.;A;A;8;8;8;8;Venezia;32.0;29;sinistro;"Ecuador;Germania";23/06/2000 00:00:00;https://content.fantacalcio.it/web/campioncini/21/card/6904.png?v=647;;;;0;0.0;0.0;0;0;0;0;0;0;0;0;0;4
 7449;Rrahmani Al.;Rrahmani Al.;A;Pc;8;8;7;7;Venezia;32.0;17;ambidestro;Kosovo;31/08/2000 00:00:00;https://content.fantacalcio.it/web/campioncini/21/card/7449.png?v=647;;;;0;0.0;0.0;0;0;0;0;0;0;0;0;0;4
@@ -488,7 +488,7 @@ Id;Nome_Breve;Nome;R;Ruolo_Esteso;Qt.A;Qt.I;Qt.M;Diff.M;Squadra;FVM;FVM.M;Piede;
 7001;N'Dri;N'Dri;A;"W;A";3;3;4;4;Lecce;46.4;11;sinistro;Costa D''Avorio;27/10/2000 00:00:00;https://content.fantacalcio.it/web/campioncini/21/card/7001.png?v=647;;;;17;5.82;6.09;2;0;0;0;0;0;0;3;0;6
 7523;Varela G.;Varela G.;A;Pc;3;3;3;3;Monza;12.0;6;destro;Portogallo;30/01/2005 00:00:00;https://content.fantacalcio.it/web/campioncini/21/card/7523.png?v=647;;;;0;0.0;0.0;0;0;0;0;0;0;0;0;0;2
 7120;Lang;Lang;A;A;3;3;3;3;Napoli;56.5;10;destro;"Olanda;Suriname";17/06/1999 00:00:00;https://content.fantacalcio.it/web/campioncini/21/card/7120.png?v=647;;;;14;6.04;6.32;1;0;0;0;0;0;2;2;0;8
-6215;Lucca;Lucca;A;Pc;3;3;3;3;Napoli;47.6;9;destro;Italia;10/09/2000 00:00:00;https://content.fantacalcio.it/web/campioncini/21/card/6215.png?v=647;;;;9;5.72;6.0;1;0;0;0;0;0;0;1;0;7
+6215;Lucca;Lucca;A;Pc;3;3;3;3;Napoli;47.6;9;destro;Italia;10/09/2000 00:00:00;https://content.fantacalcio.it/web/campioncini/21/card/6215.png?v=647;;;;9;5.72;6.0;1;0;0;0;0;0;0;1;0;6
 7342;Elphege;Elphege;A;Pc;3;3;3;3;Parma;82.2;10;sinistro;"Francia;Camerun";09/01/2001 00:00:00;https://content.fantacalcio.it/web/campioncini/21/card/7342.png?v=647;;;;8;6.0;6.88;2;0;0;0;0;0;1;0;0;11
 383;Petagna;Petagna;A;Pc;2;2;2;2;Monza;8.0;5;sinistro;Italia;30/06/1995 00:00:00;https://content.fantacalcio.it/web/campioncini/21/card/383.png?v=647;;;;0;0.0;0.0;0;0;0;0;0;0;0;0;0;1
 7249;Buksa;Buksa;A;Pc;2;2;2;2;Udinese;42.0;4;sinistro;Polonia;12/07/1996 00:00:00;https://content.fantacalcio.it/web/campioncini/21/card/7249.png?v=647;;;;21;5.88;6.24;3;0;0;0;0;0;0;3;0;6
