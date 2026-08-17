@@ -349,8 +349,15 @@ class ScoutEngine:
             apps = st.get('games', {}).get('appearences') or 0
             if apps <= 0:
                 continue
-            lega = st.get('league', {}).get('name', '')
+            info_lega = st.get('league', {}) or {}
+            lega = info_lega.get('name', '')
             squadra = st.get('team', {}).get('name', '')
+
+            # Le competizioni per nazionali hanno country "World": vanno escluse,
+            # altrimenti la Turchia diventa una "seconda squadra" e il giocatore
+            # sembra trasferito a gennaio.
+            if str(info_lega.get('country', '')).strip().lower() == 'world':
+                continue
 
             # Somma su tutte le squadre e competizioni: e' cosi' che si scopre
             # chi ha poche presenze in Serie A solo perche' e' arrivato a gennaio.
