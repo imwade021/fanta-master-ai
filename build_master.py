@@ -30,9 +30,18 @@ K_SHRINK = 8
 BASELINE_DEFAULT = {'P': 5.40, 'D': 5.80, 'C': 6.00, 'A': 6.20}
 
 
+# Lettere che la normalizzazione standard cancella invece di convertire:
+# senza questa tabella "Hojlund" e "Hojlund" non si riconoscono fra loro.
+LETTERE_SPECIALI = str.maketrans({
+    'ø': 'o', 'Ø': 'O', 'đ': 'd', 'Đ': 'D', 'ł': 'l', 'Ł': 'L',
+    'ß': 'ss', 'æ': 'ae', 'Æ': 'AE', 'œ': 'oe', 'Œ': 'OE', 'ð': 'd', 'þ': 'th',
+})
+
+
 def normalize_str(s):
     if pd.isna(s): return ""
-    s = unicodedata.normalize('NFKD', str(s)).encode('ASCII', 'ignore').decode('utf-8')
+    s = str(s).translate(LETTERE_SPECIALI)
+    s = unicodedata.normalize('NFKD', s).encode('ASCII', 'ignore').decode('utf-8')
     s = re.sub(r"[^\w\s]", "", s).lower()
     return " ".join(s.split())
 
@@ -343,45 +352,61 @@ def main():
     # ------------------------------------------------------------------
     # SINCRONIZZAZIONE ROSE VIA API
     # ------------------------------------------------------------------
-    print("🌐 Sincronizzazione API con DEDUPLICAZIONE...")
+    print("🌐 Sincronizzazione rose via API...")
     try:
-        # Le squadre della stagione arrivano dal listone, non da una lista fissa
-        squadre_listone = sorted({str(s).strip() for s in df_listone['Squadra'] if str(s).strip()})
+        squadre_listone = sorted({str(x).strip() for x in df_listone['Squadra'] if str(x).strip()})
         scout.carica_squadre_serie_a(squadre_listone)
-        nuovi_giocatori_api = scout.sincronizza_rose_serie_a()
-        if nuovi_giocatori_api:
-            indice_nomi = {normalize_str(n): i for i, n in df_listone['Nome'].items()}
-            righe_nuove = []
+        giocatori_api = scout.sincronizza_rose_serie_a()
 
-            for g_api in nuovi_giocatori_api:
-                nome_api = g_api['nome']
-                norm_api = normalize_str(nome_api)
+        if giocatori_api:
+            # Indice a piu' chiavi: nome Fantacalcio, nome breve e solo cognome.
+            # I nomi del listone sono abbreviati ("Martinez L."), quelli dell'API
+            # completi ("Lautaro Martinez"): senza questo non si agganciano.
+            indice, per_cognome = {}, {}
+            for idx, riga in df_listone.iterrows():
+                ruolo_riga = str(riga.get('R', '')).strip().upper()
+                for campo in ('Nome', 'Nome_Breve'):
+                    chiave = normalize_str(riga.get(campo, ''))
+                    if not chiave:
+                        continue
+                    indice.setdefault(chiave, idx)
+                    cognome = chiave.split()[0]
+                    if len(cognome) > 2:
+                        per_cognome.setdefault(cognome, []).append((idx, ruolo_riga))
 
-                idx_match = indice_nomi.get(norm_api)
-                if idx_match is None:
-                    for nome_norm, i in indice_nomi.items():
-                        if match_nomi_abbreviati(nome_norm, norm_api):
-                            idx_match = i
+            aggiornati, non_trovati, ambigui = 0, [], 0
+            for g in giocatori_api:
+                norm = normalize_str(g['nome'])
+                idx = indice.get(norm)
+
+                if idx is None:
+                    # Match per cognome SOLO se non ambiguo: "Lautaro Martinez"
+                    # non deve finire su "Martinez Jo.", che e' un portiere.
+                    for parola in sorted(norm.split(), key=len, reverse=True):
+                        if len(parola) <= 2:
+                            continue
+                        candidati = per_cognome.get(parola, [])
+                        stesso_ruolo = [i for i, r in candidati if r == g['ruolo']]
+                        unici = set(stesso_ruolo)
+                        if len(unici) == 1:
+                            idx = stesso_ruolo[0]
+                            break
+                        if len(set(i for i, _ in candidati)) > 1:
+                            ambigui += 1
                             break
 
-                if idx_match is not None:
-                    df_listone.loc[idx_match, 'Squadra'] = g_api['squadra']
-                elif len(nome_api) > 4 and not nome_api.startswith('.'):
-                    righe_nuove.append({
-                        'Id': str(9000 + len(df_listone) + len(righe_nuove)),
-                        'Nome_Breve': nome_api,
-                        'Nome': nome_api,
-                        'R': g_api['ruolo'],
-                        'Ruolo_Esteso': g_api['ruolo'],
-                        'Qt.A': '1',
-                        'Qt.I': '1',
-                        'Squadra': g_api['squadra'],
-                        'FVM': '1.0'
-                    })
+                if idx is not None:
+                    if str(df_listone.loc[idx, 'Squadra']).strip() != g['squadra']:
+                        df_listone.loc[idx, 'Squadra'] = g['squadra']
+                        aggiornati += 1
+                else:
+                    non_trovati.append(g['nome'])
 
-            if righe_nuove:
-                df_listone = pd.concat([df_listone, pd.DataFrame(righe_nuove)], ignore_index=True)
-                print(f"➕ {len(righe_nuove)} giocatori aggiunti dall'API.")
+            # I giocatori assenti dalle quotazioni NON vengono aggiunti: all'asta
+            # si comprano solo quelli del listone Fantacalcio.
+            print(f"🔄 Squadra aggiornata per {aggiornati} giocatori.")
+            print(f"ℹ️ {len(non_trovati)} giocatori dell'API non sono nel listone "
+                  f"(non acquistabili all'asta, ignorati) | {ambigui} scartati per omonimia.")
     except Exception as e:
         print(f"⚠️ Avviso API: {e}")
 
