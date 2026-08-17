@@ -274,18 +274,21 @@ class ScoutEngine:
     # STATISTICHE INDIVIDUALI
     # ------------------------------------------------------------------
     def _stats_giocatore(self, nome):
-        chiave = normalize_str(nome)
+        # La chiave include la stagione: un "nessun dato" trovato sul 2024 non
+        # deve impedire di riprovare sul 2025 dopo un upgrade di piano.
+        chiave = f"{self.season_stats}:{normalize_str(nome)}"
         if chiave in self.cache["stats"]:
             return self.cache["stats"][chiave]
 
         if not self.api_key or self.quota_esaurita or self.chiamate >= MAX_LOOKUP:
             return None
 
-        player_id = self.mappa_api_id.get(chiave)
+        nome_normalizzato = normalize_str(nome)
+        player_id = self.mappa_api_id.get(nome_normalizzato)
 
         # L'API accetta solo lettere e spazi: "Martinez L." veniva rifiutato.
         # Si tengono le parole di almeno 3 lettere (via le iniziali puntate).
-        parole = [p for p in re.sub(r"[^a-z0-9 ]", " ", chiave).split() if len(p) >= 3]
+        parole = [p for p in re.sub(r"[^a-z0-9 ]", " ", nome_normalizzato).split() if len(p) >= 3]
         testo_ricerca = " ".join(parole)
 
         def costruisci(stagione):
@@ -327,7 +330,8 @@ class ScoutEngine:
             if migliore is None or candidato['presenze'] > migliore['presenze']:
                 migliore = candidato
 
-        self.cache["stats"][chiave] = migliore   # anche None: risposta valida, dato assente
+        # Se la stagione e' stata declassata durante la chiamata, salva su quella usata
+        self.cache["stats"][f"{self.season_stats}:{nome_normalizzato}"] = migliore
         return migliore
 
     def calcola_fantamedia_proiettata(self, nome_giocatore, ruolo):
