@@ -27,9 +27,15 @@ jobs:
         env:
           FOOTBALL_API_KEY: ${{ secrets.API_FOOTBALL_KEY }}
           API_FOOTBALL_KEY: ${{ secrets.API_FOOTBALL_KEY }}
-          # Piano free: 100 chiamate/giorno. ~22 se ne vanno in squadre e rose,
-          # le altre servono alle proiezioni dei nuovi arrivi.
-          FANTA_MAX_LOOKUP: '90'
+          # --- PIANO FREE (100 chiamate/giorno, 10 al minuto) ---
+          # FANTA_MAX_LOOKUP: '90'
+          # FANTA_PAUSA: '6.5'
+          #
+          # --- PIANO PRO (7.500 al giorno, 300 al minuto) ---
+          FANTA_MAX_LOOKUP: '600'
+          FANTA_PAUSA: '0.3'
+          # Stagione 2025/26: sbloccata solo dai piani a pagamento
+          FANTA_SEASON_STATS: '2025'
         run: python build_master.py
 
       - name: Salva il nuovo File Master su GitHub
