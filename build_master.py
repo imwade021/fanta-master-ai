@@ -369,16 +369,19 @@ def trova_stats(id_giocatore, nome, ruolo, stats_per_id, stats_per_nome):
 # ----------------------------------------------------------------------
 # CALCOLO FVM
 # ----------------------------------------------------------------------
-def calcola_fvm(best_qt, fm_val, ruolo, squadra, scout, nome):
+def calcola_fvm(best_qt, fm_val, ruolo, squadra, scout, nome, baseline=None):
     """fm_val e' gia' ponderata per le presenze (vedi fm_ponderata)."""
     if fm_val is None or fm_val <= 0:
         if best_qt <= 1:
             is_prospetto = scout.verifica_prospetto_giovanile(nome, squadra)
             base_fvm = 15.0 if is_prospetto else 1.0
             return round(min(1000.0, max(1.0, base_fvm)), 1), None
-        fm_val = 6.0
-        base_fvm = best_qt * 4.0
-        return round(min(1000.0, max(1.0, base_fvm)), 1), fm_val
+
+        # Senza statistiche si assume il rendimento MEDIO del suo ruolo, non un
+        # forfait: la quotazione di Fantacalcio contiene gia' un'aspettativa.
+        # Il vecchio "quotazione x 4" schiacciava a 5 crediti giocatori che il
+        # mercato paga 45 (es. un nuovo arrivo dall'estero).
+        fm_val = (baseline or BASELINE_DEFAULT).get(ruolo, 6.0)
 
     if ruolo == 'A':
         base_fvm = (best_qt * 9.5) + (max(0, fm_val - 5.5) ** 2.2) * 35
@@ -566,7 +569,8 @@ def main():
         base_ruolo = baseline.get(ruolo, 6.0)
         fm_per_fvm = fm_ponderata(fm_grezza, presenze_peso, base_ruolo)
 
-        fvm_finale, fm_usata = calcola_fvm(best_qt, fm_per_fvm, ruolo, squadra, scout, nome)
+        fvm_finale, fm_usata = calcola_fvm(best_qt, fm_per_fvm, ruolo, squadra,
+                                           scout, nome, baseline)
 
         colonne_out['FVM'].append(fvm_finale)
         for c in COLONNE_STATS:
