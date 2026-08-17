@@ -353,6 +353,12 @@ class ScoutEngine:
             lega = info_lega.get('name', '')
             squadra = st.get('team', {}).get('name', '')
 
+            # La ricerca per nome restituisce le statistiche di PIU' stagioni:
+            # senza questo filtro si sommavano annate diverse (82 presenze).
+            stagione_voce = info_lega.get('season')
+            if stagione_voce is not None and int(stagione_voce) != int(self.season_stats):
+                continue
+
             # Le competizioni per nazionali hanno country "World": vanno escluse,
             # altrimenti la Turchia diventa una "seconda squadra" e il giocatore
             # sembra trasferito a gennaio.
@@ -432,6 +438,49 @@ class ScoutEngine:
             }
         print(f"🚑 Infortunati/indisponibili rilevati: {len(fermi)}")
         return fermi
+
+    def storico_infortuni(self, season=None):
+        """
+        Gare saltate per infortunio nella stagione indicata, giocatore per
+        giocatore. L'endpoint restituisce una riga per ogni partita saltata:
+        contandole si sa QUANTO e' stato fermo, non solo che lo e' stato.
+        Una chiamata per squadra: 20 in tutto.
+        """
+        season = season or self.season_stats
+        if not self.serie_a_teams:
+            return {}
+
+        cache_key = f"infortuni_stagione_{season}"
+        if cache_key in self.cache:
+            return {int(k): v for k, v in self.cache[cache_key].items()}
+
+        storico = {}
+        for squadra, team_id in self.serie_a_teams.items():
+            if self.quota_esaurita:
+                break
+            risposta, stato = self._get("injuries", {'team': team_id, 'season': season})
+            if stato != 'ok':
+                continue
+
+            for voce in risposta:
+                giocatore = voce.get('player', {})
+                id_api = giocatore.get('id')
+                if not id_api:
+                    continue
+                record = storico.setdefault(id_api, {'gare': 0, 'motivi': {}})
+                record['gare'] += 1
+                motivo = giocatore.get('reason') or giocatore.get('type') or 'Infortunio'
+                record['motivi'][motivo] = record['motivi'].get(motivo, 0) + 1
+
+        # Si tiene il motivo piu' ricorrente, che di solito e' l'infortunio principale
+        for record in storico.values():
+            record['motivo'] = max(record['motivi'], key=record['motivi'].get) if record['motivi'] else ''
+            record.pop('motivi', None)
+
+        if storico:
+            self.cache[cache_key] = {str(k): v for k, v in storico.items()}
+            print(f"🏥 Storico infortuni {season}: {len(storico)} giocatori con gare saltate.")
+        return storico
 
     def presenze_stagione(self, nome_giocatore):
         """Presenze totali della stagione, su tutte le squadre e competizioni."""
