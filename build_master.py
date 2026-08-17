@@ -36,6 +36,8 @@ BASELINE_DEFAULT = {'P': 5.40, 'D': 5.80, 'C': 6.00, 'A': 6.20}
 LETTERE_SPECIALI = str.maketrans({
     'ø': 'o', 'Ø': 'O', 'đ': 'd', 'Đ': 'D', 'ł': 'l', 'Ł': 'L',
     'ß': 'ss', 'æ': 'ae', 'Æ': 'AE', 'œ': 'oe', 'Œ': 'OE', 'ð': 'd', 'þ': 'th',
+    'ı': 'i', 'İ': 'I',   # turco: la i senza punto veniva cancellata (Yildiz)
+    'ħ': 'h', 'ŧ': 't', 'ĸ': 'k',
 })
 
 
@@ -455,14 +457,24 @@ def main():
                         if len(parola) <= 2:
                             continue
                         candidati = per_cognome.get(parola, [])
-                        stesso_ruolo = [i for i, r in candidati if r == g['ruolo']]
-                        unici = set(stesso_ruolo)
+                        if not candidati:
+                            continue
+
+                        unici = set(i for i, _ in candidati)
                         if len(unici) == 1:
-                            idx = stesso_ruolo[0]
+                            # Cognome unico: si accetta anche se il ruolo differisce.
+                            # Fantacalcio e API classificano diversamente (Orsolini
+                            # e' centrocampista per uno, attaccante per l'altro).
+                            idx = candidati[0][0]
                             break
-                        if len(set(i for i, _ in candidati)) > 1:
-                            ambigui += 1
+
+                        # Piu' candidati: qui il ruolo serve a distinguerli
+                        stesso_ruolo = set(i for i, r in candidati if r == g['ruolo'])
+                        if len(stesso_ruolo) == 1:
+                            idx = stesso_ruolo.pop()
                             break
+                        ambigui += 1
+                        break
 
                 if idx is not None:
                     # Collega l'id API al nome del listone: serve alle proiezioni
