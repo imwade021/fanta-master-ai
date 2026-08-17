@@ -527,6 +527,24 @@ def main():
                   f"(non acquistabili all'asta, ignorati) | {ambigui} scartati per omonimia.")
             segnala_nuovi_arrivi(candidati_nuovi, scout)
 
+            # Quante gare ha saltato per infortunio la stagione scorsa: e' il
+            # dato che distingue chi si e' rotto da chi resta in panchina.
+            df_listone['GareSaltate'] = 0
+            df_listone['MotivoStop'] = ""
+            try:
+                storico = scout.storico_infortuni()
+            except Exception as e:
+                print(f"⚠️ Storico infortuni non recuperato: {e}")
+                storico = {}
+            for id_api, record in storico.items():
+                idx = id_api_riga.get(id_api)
+                if idx is None:
+                    continue
+                df_listone.loc[idx, 'GareSaltate'] = int(record.get('gare', 0))
+                df_listone.loc[idx, 'MotivoStop'] = str(record.get('motivo', ''))[:60]
+            if storico:
+                print(f"🏥 Gare saltate agganciate a {sum(1 for i in storico if i in id_api_riga)} giocatori.")
+
             # Infortunati di oggi: una chiamata per tutto il campionato
             df_listone['Infortunio'] = ""
             df_listone['InfortunioTipo'] = ""
@@ -654,9 +672,11 @@ def main():
     for col, valori in colonne_out.items():
         df_listone[col] = valori
 
-    for colonna in ('Infortunio', 'InfortunioTipo', 'InfortunioDal'):
+    for colonna in ('Infortunio', 'InfortunioTipo', 'InfortunioDal', 'MotivoStop'):
         if colonna not in df_listone.columns:
             df_listone[colonna] = ""
+    if 'GareSaltate' not in df_listone.columns:
+        df_listone['GareSaltate'] = 0
     df_listone['Aggiornato'] = datetime.date.today().isoformat()
     df_listone['Prezzo'] = calcola_prezzi(df_listone)
     df_listone = df_listone.fillna("")
