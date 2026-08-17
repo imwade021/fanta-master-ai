@@ -1,5 +1,6 @@
 import os
 import re
+import time
 import json
 import unicodedata
 import requests
@@ -16,6 +17,11 @@ SEASON_STATS = int(os.getenv("FANTA_SEASON_STATS", "2025"))
 SEASON_CORRENTE = int(os.getenv("FANTA_SEASON", "2026"))
 
 MAX_LOOKUP = int(os.getenv("FANTA_MAX_LOOKUP", "50"))
+
+# Il piano free consente ~10 chiamate al minuto: senza pausa si prende HTTP 429.
+PAUSA_CHIAMATE = float(os.getenv("FANTA_PAUSA", "6.5"))
+ATTESA_DOPO_429 = float(os.getenv("FANTA_ATTESA_429", "60"))
+MAX_429_CONSECUTIVI = 3
 CACHE_FILE = "scout_cache.json"
 
 # Le squadre NON sono piu' hardcoded: si ricavano dal listone Fantacalcio della
@@ -68,6 +74,8 @@ class ScoutEngine:
         self.season_stats = SEASON_STATS
         self.season_declassata = False
         self.quota_esaurita = False      # interruttore: si spegne tutto al primo "limit reached"
+        self.errori_429 = 0
+        self._ultima_chiamata = 0.0
         self.cache = self._carica_cache()
 
     # ------------------------------------------------------------------
@@ -100,6 +108,12 @@ class ScoutEngine:
         if not self.api_key or self.quota_esaurita:
             return [], 'errore'
 
+        # Rispetta il limite al minuto: aspetta se l'ultima chiamata e' troppo recente
+        trascorso = time.time() - self._ultima_chiamata
+        if self._ultima_chiamata and trascorso < PAUSA_CHIAMATE:
+            time.sleep(PAUSA_CHIAMATE - trascorso)
+        self._ultima_chiamata = time.time()
+
         self.chiamate += 1
         try:
             res = requests.get(
@@ -111,6 +125,18 @@ class ScoutEngine:
         except Exception as e:
             print(f"⚠️ Errore rete su /{endpoint}: {e}")
             return [], 'errore'
+
+        if res.status_code == 429:
+            # Troppe richieste al minuto: aspetta e riprova una volta sola
+            self.errori_429 += 1
+            if self.errori_429 >= MAX_429_CONSECUTIVI:
+                print("🛑 HTTP 429 ripetuti: limite di frequenza non gestibile, interrompo.")
+                self.quota_esaurita = True
+                return [], 'quota'
+            print(f"⏳ HTTP 429 su /{endpoint}: attendo {ATTESA_DOPO_429:.0f}s e riprovo...")
+            time.sleep(ATTESA_DOPO_429)
+            self._ultima_chiamata = time.time()
+            return self._get(endpoint, params, timeout)
 
         if res.status_code != 200:
             print(f"⚠️ /{endpoint}: HTTP {res.status_code}")
@@ -137,6 +163,7 @@ class ScoutEngine:
             print(f"⚠️ /{endpoint} errore API: {errori}")
             return [], 'errore'
 
+        self.errori_429 = 0      # una risposta buona azzera il contatore
         return data.get('response', []) or [], 'ok'
 
     # ------------------------------------------------------------------
