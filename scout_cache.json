@@ -1,5 +1,1507 @@
 {
  "infortuni": {},
+ "infortuni_stagione_2025": {
+  "10077": {
+   "gare": 1,
+   "motivo": "Thigh Injury"
+  },
+  "10097": {
+   "gare": 6,
+   "motivo": "Jumpers knee"
+  },
+  "1014": {
+   "gare": 2,
+   "motivo": "Inactive"
+  },
+  "10238": {
+   "gare": 2,
+   "motivo": "Muscle Injury"
+  },
+  "1084": {
+   "gare": 2,
+   "motivo": "Yellow Cards"
+  },
+  "10997": {
+   "gare": 3,
+   "motivo": "Jumpers knee"
+  },
+  "1134": {
+   "gare": 4,
+   "motivo": "International duty"
+  },
+  "116": {
+   "gare": 3,
+   "motivo": "Calf Injury"
+  },
+  "118956": {
+   "gare": 3,
+   "motivo": "Red card Suspended"
+  },
+  "1208": {
+   "gare": 4,
+   "motivo": "Sprained ankle"
+  },
+  "122468": {
+   "gare": 2,
+   "motivo": "International duty"
+  },
+  "125674": {
+   "gare": 16,
+   "motivo": "Thigh Injury"
+  },
+  "1266": {
+   "gare": 9,
+   "motivo": "Injury"
+  },
+  "127011": {
+   "gare": 2,
+   "motivo": "Red Card"
+  },
+  "127413": {
+   "gare": 6,
+   "motivo": "Injury"
+  },
+  "128338": {
+   "gare": 4,
+   "motivo": "International duty"
+  },
+  "129643": {
+   "gare": 28,
+   "motivo": "Ankle Injury"
+  },
+  "130423": {
+   "gare": 16,
+   "motivo": "Groin Injury"
+  },
+  "1314": {
+   "gare": 19,
+   "motivo": "Thigh Injury"
+  },
+  "134": {
+   "gare": 8,
+   "motivo": "Muscle Injury"
+  },
+  "134926": {
+   "gare": 3,
+   "motivo": "Thigh Injury"
+  },
+  "135519": {
+   "gare": 2,
+   "motivo": "Muscle Injury"
+  },
+  "135526": {
+   "gare": 1,
+   "motivo": "Yellow Cards"
+  },
+  "135863": {
+   "gare": 2,
+   "motivo": "Ankle Injury"
+  },
+  "136016": {
+   "gare": 15,
+   "motivo": "Inactive"
+  },
+  "136087": {
+   "gare": 8,
+   "motivo": "Inactive"
+  },
+  "137976": {
+   "gare": 9,
+   "motivo": "Thigh Injury"
+  },
+  "138777": {
+   "gare": 12,
+   "motivo": "Hip Injury"
+  },
+  "138815": {
+   "gare": 33,
+   "motivo": "Knee Injury"
+  },
+  "140831": {
+   "gare": 4,
+   "motivo": "Thigh Injury"
+  },
+  "1417": {
+   "gare": 4,
+   "motivo": "Muscle Injury"
+  },
+  "142442": {
+   "gare": 4,
+   "motivo": "International duty"
+  },
+  "14329": {
+   "gare": 15,
+   "motivo": "Muscle Injury"
+  },
+  "143648": {
+   "gare": 6,
+   "motivo": "Suspended"
+  },
+  "1442": {
+   "gare": 11,
+   "motivo": "Knee Injury"
+  },
+  "144740": {
+   "gare": 11,
+   "motivo": "Hamstring Injury"
+  },
+  "1454": {
+   "gare": 3,
+   "motivo": "Red Card"
+  },
+  "1457": {
+   "gare": 7,
+   "motivo": "Muscle Injury"
+  },
+  "147859": {
+   "gare": 10,
+   "motivo": "Knee Injury"
+  },
+  "156490": {
+   "gare": 7,
+   "motivo": "Muscle Injury"
+  },
+  "15811": {
+   "gare": 30,
+   "motivo": "Groin Injury"
+  },
+  "15881": {
+   "gare": 1,
+   "motivo": "Yellow Cards"
+  },
+  "1600": {
+   "gare": 2,
+   "motivo": "Illness"
+  },
+  "161585": {
+   "gare": 3,
+   "motivo": "Muscle bruise"
+  },
+  "161702": {
+   "gare": 1,
+   "motivo": "Yellow Cards"
+  },
+  "161859": {
+   "gare": 11,
+   "motivo": "Knee Injury"
+  },
+  "162032": {
+   "gare": 6,
+   "motivo": "Sprained ankle"
+  },
+  "162106": {
+   "gare": 1,
+   "motivo": "Yellow Cards"
+  },
+  "162188": {
+   "gare": 1,
+   "motivo": "Red Card"
+  },
+  "162907": {
+   "gare": 17,
+   "motivo": "Knee Injury"
+  },
+  "162952": {
+   "gare": 7,
+   "motivo": "Knee Injury"
+  },
+  "1632": {
+   "gare": 6,
+   "motivo": "Red Card"
+  },
+  "1639": {
+   "gare": 2,
+   "motivo": "Thigh Injury"
+  },
+  "1640": {
+   "gare": 15,
+   "motivo": "Calf Injury"
+  },
+  "1649": {
+   "gare": 1,
+   "motivo": "Inactive"
+  },
+  "17": {
+   "gare": 8,
+   "motivo": "Thigh Injury"
+  },
+  "1748": {
+   "gare": 4,
+   "motivo": "International duty"
+  },
+  "1775": {
+   "gare": 33,
+   "motivo": "Ankle Injury"
+  },
+  "180510": {
+   "gare": 1,
+   "motivo": "Red Card"
+  },
+  "1807": {
+   "gare": 7,
+   "motivo": "International duty"
+  },
+  "181806": {
+   "gare": 1,
+   "motivo": "Injury to the ankle"
+  },
+  "181808": {
+   "gare": 7,
+   "motivo": "Thigh Injury"
+  },
+  "1836": {
+   "gare": 2,
+   "motivo": "Thigh Injury"
+  },
+  "1841": {
+   "gare": 12,
+   "motivo": "Sprained ankle"
+  },
+  "1842": {
+   "gare": 2,
+   "motivo": "Unknown Injury"
+  },
+  "1844": {
+   "gare": 4,
+   "motivo": "Muscle Injury"
+  },
+  "1852": {
+   "gare": 7,
+   "motivo": "Groin Injury"
+  },
+  "1863": {
+   "gare": 21,
+   "motivo": "Thigh Injury"
+  },
+  "18767": {
+   "gare": 7,
+   "motivo": "International duty"
+  },
+  "18797": {
+   "gare": 1,
+   "motivo": "Yellow Cards"
+  },
+  "18799": {
+   "gare": 7,
+   "motivo": "International duty"
+  },
+  "18835": {
+   "gare": 1,
+   "motivo": "Shoulder Injury"
+  },
+  "189": {
+   "gare": 1,
+   "motivo": "Jumpers knee"
+  },
+  "18967": {
+   "gare": 6,
+   "motivo": "Knock"
+  },
+  "19053": {
+   "gare": 3,
+   "motivo": "Inactive"
+  },
+  "190958": {
+   "gare": 15,
+   "motivo": "Muscle Injury"
+  },
+  "19185": {
+   "gare": 9,
+   "motivo": "Thigh Injury"
+  },
+  "191979": {
+   "gare": 15,
+   "motivo": "Leg Injury"
+  },
+  "19209": {
+   "gare": 2,
+   "motivo": "Red Card"
+  },
+  "19263": {
+   "gare": 3,
+   "motivo": "Back Injury"
+  },
+  "1929": {
+   "gare": 9,
+   "motivo": "Injury"
+  },
+  "1938": {
+   "gare": 4,
+   "motivo": "Yellow Cards"
+  },
+  "1939": {
+   "gare": 3,
+   "motivo": "Injury"
+  },
+  "19524": {
+   "gare": 2,
+   "motivo": "Calf Injury"
+  },
+  "19824": {
+   "gare": 12,
+   "motivo": "Muscle Injury"
+  },
+  "199089": {
+   "gare": 1,
+   "motivo": "Red Card"
+  },
+  "199578": {
+   "gare": 12,
+   "motivo": "Finger Injury"
+  },
+  "199837": {
+   "gare": 4,
+   "motivo": "Muscle Injury"
+  },
+  "200": {
+   "gare": 2,
+   "motivo": "Injury"
+  },
+  "203474": {
+   "gare": 3,
+   "motivo": "Thigh Injury"
+  },
+  "203483": {
+   "gare": 14,
+   "motivo": "Groin Injury"
+  },
+  "2055": {
+   "gare": 4,
+   "motivo": "Calf Injury"
+  },
+  "211": {
+   "gare": 7,
+   "motivo": "Thigh Injury"
+  },
+  "215": {
+   "gare": 1,
+   "motivo": "Yellow Cards"
+  },
+  "21509": {
+   "gare": 9,
+   "motivo": "Thigh Injury"
+  },
+  "217": {
+   "gare": 6,
+   "motivo": "Calf Injury"
+  },
+  "219": {
+   "gare": 7,
+   "motivo": "Muscle Injury"
+  },
+  "22007": {
+   "gare": 10,
+   "motivo": "Injury"
+  },
+  "22015": {
+   "gare": 4,
+   "motivo": "International duty"
+  },
+  "22147": {
+   "gare": 9,
+   "motivo": "Muscle Injury"
+  },
+  "22221": {
+   "gare": 1,
+   "motivo": "Calf Injury"
+  },
+  "22222": {
+   "gare": 2,
+   "motivo": "Red Card"
+  },
+  "22236": {
+   "gare": 9,
+   "motivo": "Calf Injury"
+  },
+  "22254": {
+   "gare": 2,
+   "motivo": "Injury"
+  },
+  "226": {
+   "gare": 19,
+   "motivo": "Ankle Injury"
+  },
+  "227": {
+   "gare": 16,
+   "motivo": "Illness"
+  },
+  "2292": {
+   "gare": 5,
+   "motivo": "Broken jawbone"
+  },
+  "2299": {
+   "gare": 3,
+   "motivo": "Ankle Injury"
+  },
+  "23253": {
+   "gare": 15,
+   "motivo": "Knee Injury"
+  },
+  "243": {
+   "gare": 18,
+   "motivo": "Muscle Injury"
+  },
+  "2484": {
+   "gare": 8,
+   "motivo": "Contusion"
+  },
+  "249": {
+   "gare": 2,
+   "motivo": "Inactive"
+  },
+  "2495": {
+   "gare": 4,
+   "motivo": "Thigh Injury"
+  },
+  "24953": {
+   "gare": 3,
+   "motivo": "Thigh Injury"
+  },
+  "25079": {
+   "gare": 1,
+   "motivo": "Unknown Injury"
+  },
+  "2553": {
+   "gare": 2,
+   "motivo": "Yellow Cards"
+  },
+  "263177": {
+   "gare": 7,
+   "motivo": "Injury"
+  },
+  "263699": {
+   "gare": 4,
+   "motivo": "Jaw injury"
+  },
+  "264705": {
+   "gare": 8,
+   "motivo": "Calf Injury"
+  },
+  "264739": {
+   "gare": 10,
+   "motivo": "Injury"
+  },
+  "264857": {
+   "gare": 8,
+   "motivo": "Knee Injury"
+  },
+  "265722": {
+   "gare": 1,
+   "motivo": "Calf Injury"
+  },
+  "2669": {
+   "gare": 9,
+   "motivo": "Injury"
+  },
+  "268341": {
+   "gare": 7,
+   "motivo": "Knee Injury"
+  },
+  "268728": {
+   "gare": 17,
+   "motivo": "Knee Injury"
+  },
+  "269": {
+   "gare": 2,
+   "motivo": "Toe Injury"
+  },
+  "271350": {
+   "gare": 3,
+   "motivo": "Injury"
+  },
+  "272": {
+   "gare": 7,
+   "motivo": "Calf Injury"
+  },
+  "275651": {
+   "gare": 3,
+   "motivo": "Knee Injury"
+  },
+  "275776": {
+   "gare": 1,
+   "motivo": "Inactive"
+  },
+  "2763": {
+   "gare": 1,
+   "motivo": "Personal Reasons"
+  },
+  "277003": {
+   "gare": 7,
+   "motivo": "International duty"
+  },
+  "278095": {
+   "gare": 2,
+   "motivo": "Thigh Injury"
+  },
+  "2799": {
+   "gare": 2,
+   "motivo": "Injury"
+  },
+  "280431": {
+   "gare": 4,
+   "motivo": "Knee Injury"
+  },
+  "2807": {
+   "gare": 9,
+   "motivo": "Shoulder Injury"
+  },
+  "281096": {
+   "gare": 1,
+   "motivo": "Yellow Cards"
+  },
+  "281408": {
+   "gare": 2,
+   "motivo": "Yellow Cards"
+  },
+  "281495": {
+   "gare": 8,
+   "motivo": "Hamstring Injury"
+  },
+  "281826": {
+   "gare": 2,
+   "motivo": "Muscle Injury"
+  },
+  "284242": {
+   "gare": 14,
+   "motivo": "Wound"
+  },
+  "284570": {
+   "gare": 11,
+   "motivo": "Thigh Injury"
+  },
+  "286474": {
+   "gare": 7,
+   "motivo": "Muscle Injury"
+  },
+  "286475": {
+   "gare": 27,
+   "motivo": "Heart Problems"
+  },
+  "286639": {
+   "gare": 8,
+   "motivo": "Knee Injury"
+  },
+  "287564": {
+   "gare": 12,
+   "motivo": "Ankle Injury"
+  },
+  "288006": {
+   "gare": 3,
+   "motivo": "Thigh Injury"
+  },
+  "288769": {
+   "gare": 21,
+   "motivo": "Inactive"
+  },
+  "289761": {
+   "gare": 14,
+   "motivo": "Thigh Injury"
+  },
+  "291589": {
+   "gare": 14,
+   "motivo": "Knee Injury"
+  },
+  "291780": {
+   "gare": 33,
+   "motivo": "Muscle Injury"
+  },
+  "292172": {
+   "gare": 1,
+   "motivo": "Yellow Cards"
+  },
+  "292543": {
+   "gare": 38,
+   "motivo": "Knee Injury"
+  },
+  "2998": {
+   "gare": 22,
+   "motivo": "Muscle Injury"
+  },
+  "301924": {
+   "gare": 2,
+   "motivo": "Thigh Injury"
+  },
+  "30396": {
+   "gare": 3,
+   "motivo": "Illness"
+  },
+  "30414": {
+   "gare": 4,
+   "motivo": "Injury"
+  },
+  "30415": {
+   "gare": 22,
+   "motivo": "Groin Injury"
+  },
+  "30418": {
+   "gare": 1,
+   "motivo": "Thigh Injury"
+  },
+  "30420": {
+   "gare": 1,
+   "motivo": "Yellow Cards"
+  },
+  "30421": {
+   "gare": 4,
+   "motivo": "Injury"
+  },
+  "30422": {
+   "gare": 8,
+   "motivo": "Thigh Injury"
+  },
+  "30425": {
+   "gare": 4,
+   "motivo": "Red Card"
+  },
+  "30432": {
+   "gare": 3,
+   "motivo": "Red Card"
+  },
+  "30438": {
+   "gare": 11,
+   "motivo": "Muscle Injury"
+  },
+  "30440": {
+   "gare": 1,
+   "motivo": "Muscle Injury"
+  },
+  "30488": {
+   "gare": 2,
+   "motivo": "Muscle Injury"
+  },
+  "30497": {
+   "gare": 16,
+   "motivo": "Knee Injury"
+  },
+  "30498": {
+   "gare": 21,
+   "motivo": "Inactive"
+  },
+  "30509": {
+   "gare": 23,
+   "motivo": "Knee Injury"
+  },
+  "30518": {
+   "gare": 1,
+   "motivo": "Inactive"
+  },
+  "30519": {
+   "gare": 5,
+   "motivo": "Wrist Injury"
+  },
+  "30533": {
+   "gare": 1,
+   "motivo": "Yellow Cards"
+  },
+  "30537": {
+   "gare": 10,
+   "motivo": "Muscle Injury"
+  },
+  "30542": {
+   "gare": 3,
+   "motivo": "Thigh Injury"
+  },
+  "30543": {
+   "gare": 9,
+   "motivo": "Thigh Injury"
+  },
+  "30544": {
+   "gare": 9,
+   "motivo": "Knee Injury"
+  },
+  "30553": {
+   "gare": 11,
+   "motivo": "Hamstring Injury"
+  },
+  "30554": {
+   "gare": 3,
+   "motivo": "Knee Injury"
+  },
+  "30556": {
+   "gare": 17,
+   "motivo": "Calf Injury"
+  },
+  "30558": {
+   "gare": 4,
+   "motivo": "Muscle Injury"
+  },
+  "30561": {
+   "gare": 11,
+   "motivo": "Injury"
+  },
+  "30573": {
+   "gare": 12,
+   "motivo": "Knee Injury"
+  },
+  "30780": {
+   "gare": 12,
+   "motivo": "Calf Injury"
+  },
+  "30784": {
+   "gare": 23,
+   "motivo": "Groin Injury"
+  },
+  "30789": {
+   "gare": 12,
+   "motivo": "Knee Injury"
+  },
+  "30803": {
+   "gare": 2,
+   "motivo": "Wound"
+  },
+  "30810": {
+   "gare": 4,
+   "motivo": "Calf Injury"
+  },
+  "30853": {
+   "gare": 55,
+   "motivo": "Inactive"
+  },
+  "30866": {
+   "gare": 6,
+   "motivo": "Calf Injury"
+  },
+  "308836": {
+   "gare": 1,
+   "motivo": "Knee Injury"
+  },
+  "30937": {
+   "gare": 11,
+   "motivo": "Knee Injury"
+  },
+  "309388": {
+   "gare": 1,
+   "motivo": "Yellow Cards"
+  },
+  "31009": {
+   "gare": 3,
+   "motivo": "Yellow Cards"
+  },
+  "31010": {
+   "gare": 1,
+   "motivo": "injured"
+  },
+  "31037": {
+   "gare": 13,
+   "motivo": "Shoulder Injury"
+  },
+  "31042": {
+   "gare": 12,
+   "motivo": "Knee Injury"
+  },
+  "31094": {
+   "gare": 2,
+   "motivo": "Leg Injury"
+  },
+  "31098": {
+   "gare": 1,
+   "motivo": "Ankle Injury"
+  },
+  "31099": {
+   "gare": 17,
+   "motivo": "Calf Injury"
+  },
+  "311067": {
+   "gare": 1,
+   "motivo": "Illness"
+  },
+  "311360": {
+   "gare": 19,
+   "motivo": "Thigh Injury"
+  },
+  "31156": {
+   "gare": 3,
+   "motivo": "Muscle Injury"
+  },
+  "31173": {
+   "gare": 1,
+   "motivo": "Illness"
+  },
+  "312": {
+   "gare": 14,
+   "motivo": "Foot Injury"
+  },
+  "31226": {
+   "gare": 3,
+   "motivo": "Thigh Injury"
+  },
+  "31273": {
+   "gare": 5,
+   "motivo": "Thigh Injury"
+  },
+  "31352": {
+   "gare": 4,
+   "motivo": "Muscle Injury"
+  },
+  "31390": {
+   "gare": 6,
+   "motivo": "Concussion"
+  },
+  "314231": {
+   "gare": 3,
+   "motivo": "Inactive"
+  },
+  "31499": {
+   "gare": 10,
+   "motivo": "Thigh Injury"
+  },
+  "31507": {
+   "gare": 16,
+   "motivo": "Back Injury"
+  },
+  "315249": {
+   "gare": 5,
+   "motivo": "Thigh Injury"
+  },
+  "31543": {
+   "gare": 2,
+   "motivo": "Muscle Injury"
+  },
+  "31601": {
+   "gare": 3,
+   "motivo": "Inactive"
+  },
+  "31624": {
+   "gare": 2,
+   "motivo": "Ankle Injury"
+  },
+  "31631": {
+   "gare": 1,
+   "motivo": "Red Card"
+  },
+  "31642": {
+   "gare": 3,
+   "motivo": "Red Card"
+  },
+  "317": {
+   "gare": 6,
+   "motivo": "Inactive"
+  },
+  "31734": {
+   "gare": 24,
+   "motivo": "Knee Injury"
+  },
+  "318053": {
+   "gare": 1,
+   "motivo": "Muscle Injury"
+  },
+  "32034": {
+   "gare": 1,
+   "motivo": "Yellow Cards"
+  },
+  "32172": {
+   "gare": 8,
+   "motivo": "Hand Injury"
+  },
+  "321744": {
+   "gare": 2,
+   "motivo": "Yellow Cards"
+  },
+  "323936": {
+   "gare": 9,
+   "motivo": "Groin Injury"
+  },
+  "325": {
+   "gare": 5,
+   "motivo": "Injury"
+  },
+  "330599": {
+   "gare": 2,
+   "motivo": "International duty"
+  },
+  "333": {
+   "gare": 39,
+   "motivo": "Injury"
+  },
+  "333116": {
+   "gare": 1,
+   "motivo": "Red Card"
+  },
+  "335071": {
+   "gare": 24,
+   "motivo": "Thigh Injury"
+  },
+  "335101": {
+   "gare": 1,
+   "motivo": "Inactive"
+  },
+  "336567": {
+   "gare": 2,
+   "motivo": "Personal Reasons"
+  },
+  "336573": {
+   "gare": 1,
+   "motivo": "Red Card"
+  },
+  "336707": {
+   "gare": 1,
+   "motivo": "Hand Injury"
+  },
+  "339872": {
+   "gare": 2,
+   "motivo": "International duty"
+  },
+  "339883": {
+   "gare": 1,
+   "motivo": "Injury"
+  },
+  "3406": {
+   "gare": 17,
+   "motivo": "Thigh Injury"
+  },
+  "340700": {
+   "gare": 5,
+   "motivo": "Ankle Injury"
+  },
+  "342035": {
+   "gare": 2,
+   "motivo": "Thigh Injury"
+  },
+  "342055": {
+   "gare": 35,
+   "motivo": "Knee Injury"
+  },
+  "3430": {
+   "gare": 5,
+   "motivo": "Injury"
+  },
+  "343189": {
+   "gare": 4,
+   "motivo": "Thigh Injury"
+  },
+  "343332": {
+   "gare": 34,
+   "motivo": "Knee Injury"
+  },
+  "343538": {
+   "gare": 1,
+   "motivo": "Bruised Knee"
+  },
+  "343558": {
+   "gare": 1,
+   "motivo": "Contusion"
+  },
+  "343562": {
+   "gare": 1,
+   "motivo": "Illness"
+  },
+  "345808": {
+   "gare": 1,
+   "motivo": "Back Injury"
+  },
+  "347265": {
+   "gare": 12,
+   "motivo": "Hip Injury"
+  },
+  "347395": {
+   "gare": 7,
+   "motivo": "Foot Injury"
+  },
+  "347644": {
+   "gare": 5,
+   "motivo": "Thigh Injury"
+  },
+  "348205": {
+   "gare": 1,
+   "motivo": "Yellow Cards"
+  },
+  "348568": {
+   "gare": 6,
+   "motivo": "Leg Injury"
+  },
+  "349001": {
+   "gare": 9,
+   "motivo": "Red Card"
+  },
+  "349232": {
+   "gare": 1,
+   "motivo": "Injury"
+  },
+  "351970": {
+   "gare": 1,
+   "motivo": "Cruciate Ligament Surgery"
+  },
+  "353609": {
+   "gare": 8,
+   "motivo": "Knee Injury"
+  },
+  "362061": {
+   "gare": 14,
+   "motivo": "Knee Injury"
+  },
+  "362752": {
+   "gare": 1,
+   "motivo": "Red Card"
+  },
+  "36899": {
+   "gare": 1,
+   "motivo": "Yellow Cards"
+  },
+  "36916": {
+   "gare": 2,
+   "motivo": "Yellow Cards"
+  },
+  "3737": {
+   "gare": 3,
+   "motivo": "Wound"
+  },
+  "37604": {
+   "gare": 2,
+   "motivo": "Foot Injury"
+  },
+  "37651": {
+   "gare": 1,
+   "motivo": "Foot Injury"
+  },
+  "382947": {
+   "gare": 1,
+   "motivo": "Muscle Injury"
+  },
+  "383006": {
+   "gare": 2,
+   "motivo": "Illness"
+  },
+  "383026": {
+   "gare": 13,
+   "motivo": "Knee Injury"
+  },
+  "384422": {
+   "gare": 4,
+   "motivo": "Inactive"
+  },
+  "384423": {
+   "gare": 2,
+   "motivo": "Shoulder injury"
+  },
+  "386298": {
+   "gare": 3,
+   "motivo": "Finger Injury"
+  },
+  "387128": {
+   "gare": 7,
+   "motivo": "Inactive"
+  },
+  "38749": {
+   "gare": 2,
+   "motivo": "Yellow Cards"
+  },
+  "388547": {
+   "gare": 5,
+   "motivo": "Inactive"
+  },
+  "39143": {
+   "gare": 6,
+   "motivo": "Heel pain"
+  },
+  "39254": {
+   "gare": 4,
+   "motivo": "Lacking Match Fitness"
+  },
+  "39362": {
+   "gare": 2,
+   "motivo": "Muscle Injury"
+  },
+  "396380": {
+   "gare": 3,
+   "motivo": "Muscle Injury"
+  },
+  "40563": {
+   "gare": 18,
+   "motivo": "Knee Injury"
+  },
+  "40582": {
+   "gare": 6,
+   "motivo": "Leg Injury"
+  },
+  "40592": {
+   "gare": 1,
+   "motivo": "Illness"
+  },
+  "40594": {
+   "gare": 8,
+   "motivo": "Calf Injury"
+  },
+  "411171": {
+   "gare": 2,
+   "motivo": "Injury"
+  },
+  "41144": {
+   "gare": 2,
+   "motivo": "Yellow Cards"
+  },
+  "41371": {
+   "gare": 21,
+   "motivo": "Knee Injury"
+  },
+  "415": {
+   "gare": 1,
+   "motivo": "Yellow Cards"
+  },
+  "415155": {
+   "gare": 2,
+   "motivo": "Thigh Injury"
+  },
+  "41577": {
+   "gare": 6,
+   "motivo": "Calf Injury"
+  },
+  "416062": {
+   "gare": 14,
+   "motivo": "Inactive"
+  },
+  "41734": {
+   "gare": 2,
+   "motivo": "Injury"
+  },
+  "41748": {
+   "gare": 12,
+   "motivo": "Injury"
+  },
+  "417892": {
+   "gare": 10,
+   "motivo": "Thigh Injury"
+  },
+  "418940": {
+   "gare": 1,
+   "motivo": "International duty"
+  },
+  "419627": {
+   "gare": 2,
+   "motivo": "Muscle Injury"
+  },
+  "41964": {
+   "gare": 9,
+   "motivo": "Knee Injury"
+  },
+  "428237": {
+   "gare": 3,
+   "motivo": "Red Card"
+  },
+  "431413": {
+   "gare": 4,
+   "motivo": "Thigh Injury"
+  },
+  "435482": {
+   "gare": 3,
+   "motivo": "Inactive"
+  },
+  "436260": {
+   "gare": 14,
+   "motivo": "Injury"
+  },
+  "437093": {
+   "gare": 7,
+   "motivo": "Back Injury"
+  },
+  "44439": {
+   "gare": 4,
+   "motivo": "Thigh Injury"
+  },
+  "44814": {
+   "gare": 2,
+   "motivo": "Yellow Cards"
+  },
+  "45083": {
+   "gare": 11,
+   "motivo": "Finger Injury"
+  },
+  "451504": {
+   "gare": 2,
+   "motivo": "Foot Injury"
+  },
+  "452033": {
+   "gare": 4,
+   "motivo": "Inactive"
+  },
+  "452423": {
+   "gare": 12,
+   "motivo": "Inactive"
+  },
+  "453906": {
+   "gare": 1,
+   "motivo": "Red Card"
+  },
+  "455245": {
+   "gare": 6,
+   "motivo": "Knee Injury"
+  },
+  "455316": {
+   "gare": 1,
+   "motivo": "Yellow Cards"
+  },
+  "458543": {
+   "gare": 7,
+   "motivo": "Illness"
+  },
+  "46170": {
+   "gare": 9,
+   "motivo": "Back Injury"
+  },
+  "46731": {
+   "gare": 6,
+   "motivo": "Ankle Injury"
+  },
+  "46792": {
+   "gare": 1,
+   "motivo": "Calf Injury"
+  },
+  "46988": {
+   "gare": 2,
+   "motivo": "Personal Reasons"
+  },
+  "470975": {
+   "gare": 3,
+   "motivo": "Jumpers knee"
+  },
+  "47182": {
+   "gare": 4,
+   "motivo": "Foot Injury"
+  },
+  "47254": {
+   "gare": 2,
+   "motivo": "Injury"
+  },
+  "47439": {
+   "gare": 8,
+   "motivo": "Muscle Injury"
+  },
+  "47985": {
+   "gare": 12,
+   "motivo": "Foot Injury"
+  },
+  "48047": {
+   "gare": 2,
+   "motivo": "Yellow Cards"
+  },
+  "48119": {
+   "gare": 9,
+   "motivo": "Thigh Injury"
+  },
+  "48193": {
+   "gare": 10,
+   "motivo": "Thigh Injury"
+  },
+  "48392": {
+   "gare": 2,
+   "motivo": "Fitness"
+  },
+  "495": {
+   "gare": 1,
+   "motivo": "Inactive"
+  },
+  "499380": {
+   "gare": 3,
+   "motivo": "Red Card"
+  },
+  "5": {
+   "gare": 2,
+   "motivo": "Rest"
+  },
+  "507646": {
+   "gare": 1,
+   "motivo": "Inactive"
+  },
+  "50856": {
+   "gare": 7,
+   "motivo": "Thigh Injury"
+  },
+  "530": {
+   "gare": 28,
+   "motivo": "Knee Injury"
+  },
+  "535": {
+   "gare": 21,
+   "motivo": "Knee Injury"
+  },
+  "541": {
+   "gare": 6,
+   "motivo": "Leg Injury"
+  },
+  "552": {
+   "gare": 24,
+   "motivo": "Ankle Injury"
+  },
+  "56266": {
+   "gare": 4,
+   "motivo": "Ribs Injury"
+  },
+  "56287": {
+   "gare": 3,
+   "motivo": "Calf Injury"
+  },
+  "56396": {
+   "gare": 15,
+   "motivo": "Muscle Injury"
+  },
+  "56473": {
+   "gare": 6,
+   "motivo": "Muscle Injury"
+  },
+  "56851": {
+   "gare": 10,
+   "motivo": "Knee Injury"
+  },
+  "575285": {
+   "gare": 1,
+   "motivo": "Injury"
+  },
+  "59513": {
+   "gare": 12,
+   "motivo": "Hip Injury"
+  },
+  "6221": {
+   "gare": 6,
+   "motivo": "Thigh Injury"
+  },
+  "628": {
+   "gare": 9,
+   "motivo": "Muscle Injury"
+  },
+  "629": {
+   "gare": 23,
+   "motivo": "Thigh Injury"
+  },
+  "63934": {
+   "gare": 1,
+   "motivo": "Knee Injury"
+  },
+  "6409": {
+   "gare": 2,
+   "motivo": "Injury"
+  },
+  "656": {
+   "gare": 2,
+   "motivo": "Muscle Injury"
+  },
+  "665": {
+   "gare": 18,
+   "motivo": "Muscle Injury"
+  },
+  "697": {
+   "gare": 5,
+   "motivo": "Muscle Injury"
+  },
+  "7090": {
+   "gare": 23,
+   "motivo": "Jumpers knee"
+  },
+  "754": {
+   "gare": 4,
+   "motivo": "Broken cheekbone"
+  },
+  "7591": {
+   "gare": 2,
+   "motivo": "Wound"
+  },
+  "774": {
+   "gare": 2,
+   "motivo": "Injury"
+  },
+  "782": {
+   "gare": 11,
+   "motivo": "Thigh Injury"
+  },
+  "786": {
+   "gare": 6,
+   "motivo": "Back Injury"
+  },
+  "790": {
+   "gare": 1,
+   "motivo": "Foot Injury"
+  },
+  "791": {
+   "gare": 7,
+   "motivo": "Achilles Tendon Injury"
+  },
+  "81012": {
+   "gare": 8,
+   "motivo": "Inactive"
+  },
+  "842": {
+   "gare": 1,
+   "motivo": "Yellow Cards"
+  },
+  "8489": {
+   "gare": 1,
+   "motivo": "Groin Injury"
+  },
+  "849": {
+   "gare": 5,
+   "motivo": "Finger Injury"
+  },
+  "850": {
+   "gare": 15,
+   "motivo": "Calf Injury"
+  },
+  "861": {
+   "gare": 14,
+   "motivo": "Calf Injury"
+  },
+  "862": {
+   "gare": 5,
+   "motivo": "Hip Injury"
+  },
+  "873": {
+   "gare": 5,
+   "motivo": "Injury"
+  },
+  "875": {
+   "gare": 21,
+   "motivo": "Knee Injury"
+  },
+  "876": {
+   "gare": 1,
+   "motivo": "Yellow Cards"
+  },
+  "877": {
+   "gare": 15,
+   "motivo": "Calf Injury"
+  },
+  "887": {
+   "gare": 16,
+   "motivo": "Calf Injury"
+  },
+  "89520": {
+   "gare": 1,
+   "motivo": "Red Card"
+  },
+  "902": {
+   "gare": 2,
+   "motivo": "Red Card"
+  },
+  "903": {
+   "gare": 4,
+   "motivo": "Muscle Injury"
+  },
+  "907": {
+   "gare": 35,
+   "motivo": "Thigh Injury"
+  },
+  "91358": {
+   "gare": 4,
+   "motivo": "Ankle Injury"
+  },
+  "91422": {
+   "gare": 10,
+   "motivo": "Injury"
+  },
+  "91488": {
+   "gare": 17,
+   "motivo": "Wrist Injury"
+  },
+  "93016": {
+   "gare": 10,
+   "motivo": "Injury"
+  },
+  "94562": {
+   "gare": 17,
+   "motivo": "Ankle Injury"
+  },
+  "983": {
+   "gare": 14,
+   "motivo": "Thigh Injury"
+  }
+ },
  "stats": {
   "2025:a adams": {
    "assist": 3,
