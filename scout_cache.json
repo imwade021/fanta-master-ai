@@ -41,5 +41,10 @@
   "viery": null,
   "wisdom amey": null
  },
- "team_ids": {}
+ "team_ids": {
+  "frosinone": 512,
+  "monza": 1579,
+  "sassuolo": 488,
+  "venezia": 517
+ }
 }
