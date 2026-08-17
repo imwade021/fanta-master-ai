@@ -3,6 +3,7 @@ import numpy as np
 import os
 import re
 import glob
+import json
 import unicodedata
 from scout_engine import ScoutEngine
 
@@ -167,6 +168,73 @@ def carica_listone_base(percorso="Lista-FantaAsta-Fantacalcio.csv"):
     df['Id'] = df['Id'].apply(clean_id)
     df['R'] = df['R'].astype(str).str.strip().str.upper()
     return df[df['R'].isin(['P', 'D', 'C', 'A'])].reset_index(drop=True)
+
+
+PRESENZE_MINIME_AVVISO = int(os.getenv("FANTA_PRESENZE_AVVISO", "5"))
+MAX_VERIFICHE_AVVISO = int(os.getenv("FANTA_MAX_VERIFICHE", "300"))
+FILE_AVVISI = "avvisi.json"
+FILE_MESSAGGIO = "avviso.txt"
+
+
+def segnala_nuovi_arrivi(candidati, scout):
+    """
+    Fra i giocatori visti nelle rose ma assenti dal listone, tiene solo quelli
+    con un minimo di carriera vera: cosi' l'avviso non si riempie di primavera
+    e terzi portieri. Scrive avvisi.json, che l'Action usa per la notifica.
+    """
+    veri = []
+    for g in candidati[:MAX_VERIFICHE_AVVISO]:
+        try:
+            dati = scout._stats_giocatore(g['nome'])
+        except Exception:
+            dati = None
+        if dati and dati.get('presenze', 0) >= PRESENZE_MINIME_AVVISO:
+            veri.append({
+                'nome': g['nome'],
+                'squadra': g['squadra'],
+                'ruolo': g['ruolo'],
+                'presenze': dati['presenze'],
+                'gol': dati.get('gol', 0),
+                'lega': dati.get('lega', ''),
+            })
+
+    veri.sort(key=lambda x: (-x['gol'], -x['presenze']))
+    try:
+        with open(FILE_AVVISI, 'w', encoding='utf-8') as f:
+            json.dump(veri, f, ensure_ascii=False, indent=1)
+    except Exception as e:
+        print(f"⚠️ Impossibile scrivere {FILE_AVVISI}: {e}")
+
+    # Messaggio gia' pronto: il workflow deve solo spedirlo, senza script inline
+    if veri:
+        righe = ["⚠️ <b>Giocatori fuori dal listone</b>",
+                 "Sono nelle rose di Serie A ma non nelle tue quotazioni:", ""]
+        for g in veri[:15]:
+            righe.append(f"• <b>{g['nome']}</b> ({g['squadra']}, {g['ruolo']}) — "
+                         f"{g['presenze']} pres, {g['gol']} gol")
+        if len(veri) > 15:
+            righe.append(f"...e altri {len(veri) - 15}.")
+        righe += ["", "Scarica le quotazioni aggiornate da Fantacalcio "
+                      "e mandami il file qui in chat."]
+        testo = "\n".join(righe)
+    else:
+        testo = ""
+
+    try:
+        with open(FILE_MESSAGGIO, 'w', encoding='utf-8') as f:
+            f.write(testo)
+    except Exception:
+        pass
+
+    if veri:
+        print(f"🔔 {len(veri)} giocatori nelle rose ma NON nel listone "
+              f"(quotazioni forse da aggiornare):")
+        for g in veri[:10]:
+            print(f"   • {g['nome']} ({g['squadra']}, {g['ruolo']}) — "
+                  f"{g['presenze']} pres, {g['gol']} gol in {g['lega']}")
+    else:
+        print("✅ Nessun giocatore rilevante fuori dal listone.")
+    return veri
 
 
 def costruisci_listone(quotazioni, df_extra):
@@ -375,6 +443,7 @@ def main():
                         per_cognome.setdefault(cognome, []).append((idx, ruolo_riga))
 
             aggiornati, non_trovati, ambigui = 0, [], 0
+            candidati_nuovi = []
             for g in giocatori_api:
                 norm = normalize_str(g['nome'])
                 idx = indice.get(norm)
@@ -403,12 +472,14 @@ def main():
                         aggiornati += 1
                 else:
                     non_trovati.append(g['nome'])
+                    candidati_nuovi.append(g)
 
             # I giocatori assenti dalle quotazioni NON vengono aggiunti: all'asta
             # si comprano solo quelli del listone Fantacalcio.
             print(f"🔄 Squadra aggiornata per {aggiornati} giocatori.")
             print(f"ℹ️ {len(non_trovati)} giocatori dell'API non sono nel listone "
                   f"(non acquistabili all'asta, ignorati) | {ambigui} scartati per omonimia.")
+            segnala_nuovi_arrivi(candidati_nuovi, scout)
     except Exception as e:
         print(f"⚠️ Avviso API: {e}")
 
