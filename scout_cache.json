@@ -1,12 +1,57 @@
 {
  "stats": {
+  "abankwah": {
+   "assist": 0,
+   "gol": 0,
+   "lega": "Friendlies",
+   "presenze": 35
+  },
+  "adams a": {
+   "assist": 2,
+   "gol": 6,
+   "lega": "Serie A",
+   "presenze": 33
+  },
+  "adorante": {
+   "assist": 1,
+   "gol": 17,
+   "lega": "Serie B",
+   "presenze": 33
+  },
   "adrian lahdo": null,
   "akpoguma": null,
+  "alajbegovic": null,
   "alan sherri": null,
   "alessandro romano": null,
   "alhassane": null,
+  "amey": {
+   "assist": 0,
+   "gol": 0,
+   "lega": "World Cup - U20",
+   "presenze": 1
+  },
+  "amondarain": {
+   "assist": 0,
+   "gol": 0,
+   "lega": "Liga Profesional Argentina",
+   "presenze": 12
+  },
   "andres cuenca": null,
   "anthony oyono": null,
+  "antov": {
+   "assist": 0,
+   "gol": 1,
+   "lega": "Friendlies",
+   "presenze": 8
+  },
+  "aurelio": null,
+  "azon": null,
+  "bakoune": {
+   "assist": 3,
+   "gol": 0,
+   "lega": "Serie B",
+   "presenze": 22
+  },
   "birindelli": {
    "assist": 0,
    "gol": 3,
@@ -14,33 +59,156 @@
    "presenze": 24
   },
   "bracaglia": null,
+  "busio": {
+   "assist": 4,
+   "gol": 7,
+   "lega": "Serie B",
+   "presenze": 37
+  },
+  "cacciamani": null,
+  "calo": {
+   "assist": 15,
+   "gol": 10,
+   "lega": "Serie B",
+   "presenze": 37
+  },
   "calvani": null,
+  "camara a": {
+   "assist": 0,
+   "gol": 0,
+   "lega": "UEFA U17 Championship - Qualification",
+   "presenze": 5
+  },
+  "chakvetadze": {
+   "assist": 3,
+   "gol": 0,
+   "lega": "Championship",
+   "presenze": 29
+  },
+  "chalobah t": null,
   "christ inao oulai": null,
+  "cichella": {
+   "assist": 4,
+   "gol": 2,
+   "lega": "Serie B",
+   "presenze": 36
+  },
   "cittadini": null,
+  "ciurria": null,
+  "colpani": {
+   "assist": 1,
+   "gol": 2,
+   "lega": "Serie B",
+   "presenze": 27
+  },
   "comert": null,
   "contini": null,
+  "corrado": {
+   "assist": 0,
+   "gol": 3,
+   "lega": "Serie B",
+   "presenze": 16
+  },
+  "correia t": {
+   "assist": 2,
+   "gol": 0,
+   "lega": "La Liga",
+   "presenze": 24
+  },
   "couto": null,
   "daffara": null,
+  "dagasso": {
+   "assist": 4,
+   "gol": 1,
+   "lega": "Serie B",
+   "presenze": 19
+  },
   "de marzi": null,
   "delli carri": null,
   "desplanches": null,
+  "diallo o": null,
+  "diawara s": null,
   "doekhi": null,
+  "douglas luiz": {
+   "assist": 0,
+   "gol": 1,
+   "lega": "Premier League",
+   "presenze": 13
+  },
   "dragusin": null,
+  "duncan": {
+   "assist": 1,
+   "gol": 1,
+   "lega": "Serie B",
+   "presenze": 17
+  },
   "edoardo goldaniga": null,
+  "el azzouzi a": null,
+  "el azzouzi o": null,
   "eldin lolic": null,
+  "fitzjim": {
+   "assist": 0,
+   "gol": 1,
+   "lega": "Eredivisie",
+   "presenze": 17
+  },
   "francesco rossi": null,
+  "franjic": null,
+  "frigan": {
+   "assist": 0,
+   "gol": 0,
+   "lega": "UEFA U21 Championship - Qualification",
+   "presenze": 6
+  },
   "gabriele bracaglia": null,
   "gabriele calvani": null,
+  "gelli f": {
+   "assist": 1,
+   "gol": 1,
+   "lega": "Serie B",
+   "presenze": 25
+  },
+  "gelli j": {
+   "assist": 0,
+   "gol": 0,
+   "lega": "Serie B",
+   "presenze": 17
+  },
+  "geubbels": {
+   "assist": 0,
+   "gol": 5,
+   "lega": "Ligue 1",
+   "presenze": 24
+  },
+  "ghedjemis": {
+   "assist": 3,
+   "gol": 15,
+   "lega": "Serie B",
+   "presenze": 37
+  },
   "giacomo calo": null,
   "giorgio cittadini": null,
   "giuseppe ciocci": null,
+  "goldaniga": {
+   "assist": 0,
+   "gol": 0,
+   "lega": "Serie A",
+   "presenze": 2
+  },
   "gollini": {
    "assist": 0,
    "gol": 0,
    "lega": "Serie A",
    "presenze": 15
   },
+  "gomes": {
+   "assist": 0,
+   "gol": 0,
+   "lega": "Segunda División",
+   "presenze": 13
+  },
   "grandi": null,
+  "grillitsch": null,
   "hainaut": {
    "assist": 0,
    "gol": 2,
@@ -56,6 +224,18 @@
    "presenze": 25
   },
   "harry winks": null,
+  "hasa": {
+   "assist": 4,
+   "gol": 5,
+   "lega": "Serie B",
+   "presenze": 31
+  },
+  "havel": {
+   "assist": 3,
+   "gol": 13,
+   "lega": "Bundesliga",
+   "presenze": 30
+  },
   "ilario monterisi": null,
   "ivan azon": null,
   "jacopo gelli": null,
@@ -63,10 +243,49 @@
   "kaiki": null,
   "kaiki bruno da silva": null,
   "kevin akpoguma": null,
+  "kevin carlos": null,
   "kingstone mutandwa": null,
   "kofler": null,
+  "kolo muani": {
+   "assist": 1,
+   "gol": 1,
+   "lega": "Premier League",
+   "presenze": 30
+  },
+  "kone b": {
+   "assist": 3,
+   "gol": 2,
+   "lega": "Serie A",
+   "presenze": 29
+  },
   "koulierakis": null,
+  "koutsoupias": {
+   "assist": 4,
+   "gol": 8,
+   "lega": "Serie B",
+   "presenze": 34
+  },
+  "kvernadze": {
+   "assist": 5,
+   "gol": 5,
+   "lega": "Serie B",
+   "presenze": 36
+  },
+  "lahdo": null,
+  "lauberbach": {
+   "assist": 1,
+   "gol": 6,
+   "lega": "Jupiler Pro League",
+   "presenze": 22
+  },
   "lezzerini": null,
+  "liberali": null,
+  "lisman": {
+   "assist": 1,
+   "gol": 0,
+   "lega": "Ekstraklasa",
+   "presenze": 13
+  },
   "lolic": null,
   "lorenzo palmisani": null,
   "luca lezzerini": null,
@@ -79,16 +298,59 @@
    "presenze": 38
   },
   "mangas": null,
+  "marin r": {
+   "assist": 0,
+   "gol": 1,
+   "lega": "La Liga",
+   "presenze": 23
+  },
   "mascardi": null,
+  "mastantuono": null,
   "mattia liberali": null,
+  "matturro": null,
   "mauro vigorito": null,
+  "meichtry": {
+   "assist": 3,
+   "gol": 8,
+   "lega": "Super League",
+   "presenze": 35
+  },
   "mikel amondarain": null,
+  "milla": null,
+  "missori": {
+   "assist": 2,
+   "gol": 2,
+   "lega": "Serie B",
+   "presenze": 32
+  },
   "mitaj": null,
+  "molina n": null,
   "monterisi": null,
+  "moreno m": {
+   "assist": 0,
+   "gol": 0,
+   "lega": "La Liga",
+   "presenze": 28
+  },
+  "mota": {
+   "assist": 2,
+   "gol": 5,
+   "lega": "Serie B",
+   "presenze": 34
+  },
+  "mutandwa": {
+   "assist": 2,
+   "gol": 16,
+   "lega": "Bundesliga",
+   "presenze": 32
+  },
   "niccolo corrado": null,
   "noel tornqvist": null,
   "othniel raterink": null,
+  "oulai": null,
   "oussama el azzouzi": null,
+  "oyono a": null,
+  "oyono j": null,
   "palmisani": null,
   "pedraza": {
    "assist": 2,
@@ -97,7 +359,26 @@
    "presenze": 12
   },
   "penev": null,
+  "perez k": {
+   "assist": 7,
+   "gol": 3,
+   "lega": "Serie B",
+   "presenze": 35
+  },
+  "pessina": {
+   "assist": 1,
+   "gol": 5,
+   "lega": "Serie B",
+   "presenze": 37
+  },
+  "petagna": {
+   "assist": 4,
+   "gol": 9,
+   "lega": "Serie B",
+   "presenze": 31
+  },
   "piana": null,
+  "pieragnolo": null,
   "pinsoglio": null,
   "pisseri": null,
   "pizzignacco": {
@@ -107,12 +388,46 @@
    "presenze": 38
   },
   "pozzi": null,
+  "przyborek": {
+   "assist": 0,
+   "gol": 0,
+   "lega": "Serie A",
+   "presenze": 1
+  },
   "puczka": null,
   "radu dragusin": null,
   "radunovic": null,
   "rahim alhassane": null,
+  "raimondo": null,
+  "ramos g": {
+   "assist": 1,
+   "gol": 6,
+   "lega": "Ligue 1",
+   "presenze": 30
+  },
   "raphael kofler": null,
   "renzetti": null,
+  "robinson j": null,
+  "romano": {
+   "assist": 1,
+   "gol": 0,
+   "lega": "Serie B",
+   "presenze": 19
+  },
+  "romero d": null,
+  "rrahmani al": {
+   "assist": 3,
+   "gol": 11,
+   "lega": "Czech Liga",
+   "presenze": 34
+  },
+  "russo a": null,
+  "sagrado": {
+   "assist": 1,
+   "gol": 1,
+   "lega": "Serie B",
+   "presenze": 29
+  },
   "satalino": null,
   "schingtienne": {
    "assist": 0,
@@ -120,6 +435,7 @@
    "lega": "Serie A",
    "presenze": 32
   },
+  "schmid": null,
   "sebastiano desplanches": null,
   "sherri": {
    "assist": 0,
@@ -129,6 +445,12 @@
   },
   "siviero": null,
   "spence": null,
+  "stankovic f": {
+   "assist": 0,
+   "gol": 0,
+   "lega": "Serie B",
+   "presenze": 38
+  },
   "stolz": null,
   "stones": null,
   "strajnar": null,
@@ -142,13 +464,44 @@
   "thiam": null,
   "tornqvist": null,
   "torriani": null,
+  "toure e": {
+   "assist": 4,
+   "gol": 5,
+   "lega": "Süper Lig",
+   "presenze": 22
+  },
+  "traore hj": {
+   "assist": 1,
+   "gol": 2,
+   "lega": "Ligue 1",
+   "presenze": 13
+  },
   "ukko happonen": null,
+  "unai gomez": {
+   "assist": 1,
+   "gol": 1,
+   "lega": "La Liga",
+   "presenze": 26
+  },
   "valdepenas": null,
+  "varela g": {
+   "assist": 3,
+   "gol": 6,
+   "lega": "Primeira Liga",
+   "presenze": 32
+  },
   "victor valdepenas": null,
   "viery": null,
   "vigorito": null,
   "vismara": null,
-  "wisdom amey": null
+  "winks": {
+   "assist": 2,
+   "gol": 1,
+   "lega": "Championship",
+   "presenze": 34
+  },
+  "wisdom amey": null,
+  "yeboah j": null
  },
  "team_ids": {
   "frosinone": 512,
