@@ -261,6 +261,15 @@ class ScoutEngine:
               f"{len(self.serie_a_teams) - len(vuote)} squadre.")
         return nuovi_giocatori
 
+    def associa(self, nome_listone, api_id):
+        """
+        Collega il nome usato da Fantacalcio ("Martinez L.") all'id API trovato
+        durante la scansione rose. Cosi' le statistiche si chiedono per id,
+        senza ricerche per nome che sbagliano o vengono rifiutate.
+        """
+        if nome_listone and api_id:
+            self.mappa_api_id[normalize_str(nome_listone)] = api_id
+
     # ------------------------------------------------------------------
     # STATISTICHE INDIVIDUALI
     # ------------------------------------------------------------------
@@ -274,11 +283,16 @@ class ScoutEngine:
 
         player_id = self.mappa_api_id.get(chiave)
 
+        # L'API accetta solo lettere e spazi: "Martinez L." veniva rifiutato.
+        # Si tengono le parole di almeno 3 lettere (via le iniziali puntate).
+        parole = [p for p in re.sub(r"[^a-z0-9 ]", " ", chiave).split() if len(p) >= 3]
+        testo_ricerca = " ".join(parole)
+
         def costruisci(stagione):
             if player_id:
                 return {'id': player_id, 'season': stagione}
-            if len(chiave) >= 4:
-                return {'search': nome, 'league': LEAGUE_SERIE_A, 'season': stagione}
+            if len(testo_ricerca) >= 4:
+                return {'search': testo_ricerca, 'league': LEAGUE_SERIE_A, 'season': stagione}
             return None
 
         params = costruisci(self.season_stats)
