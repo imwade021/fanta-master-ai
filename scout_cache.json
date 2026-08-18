@@ -1669,6 +1669,7 @@
    "lega": "Serie A",
    "presenze": 32
   },
+  "2025:a zouin": null,
   "2025:abankwah": {
    "assist": 0,
    "gol": 0,
@@ -2303,6 +2304,7 @@
    "lega": "Serie B",
    "presenze": 28
   },
+  "2025:c corradi": null,
   "2025:c de ketelaere": {
    "assist": 5,
    "gol": 3,
@@ -3043,6 +3045,7 @@
   },
   "2025:f cassa": null,
   "2025:f castaldo": null,
+  "2025:f croci": null,
   "2025:f esposito": {
    "assist": 3,
    "gol": 7,
@@ -5588,6 +5591,20 @@
    "minuti": 175,
    "presenze": 2,
    "presenze_totali": 2,
+   "squadre_stagione": 1
+  },
+  "2025:sow": {
+   "assist": 4,
+   "campionati": [
+    "Copa del Rey",
+    "La Liga"
+   ],
+   "da_titolare": 28,
+   "gol": 5,
+   "lega": "La Liga",
+   "minuti": 2289,
+   "presenze": 33,
+   "presenze_totali": 35,
    "squadre_stagione": 1
   },
   "2025:spence": null,
