@@ -1,5 +1,37 @@
 [
  {
+  "nome": "G. Artistico",
+  "squadra": "Lazio",
+  "ruolo": "A",
+  "presenze": 31,
+  "gol": 13,
+  "lega": "Serie B"
+ },
+ {
+  "nome": "A. Kostić",
+  "squadra": "Milan",
+  "ruolo": "A",
+  "presenze": 35,
+  "gol": 11,
+  "lega": "Super Liga"
+ },
+ {
+  "nome": "A. Cissè",
+  "squadra": "Milan",
+  "ruolo": "A",
+  "presenze": 22,
+  "gol": 6,
+  "lega": "Serie B"
+ },
+ {
+  "nome": "L. Banda",
+  "squadra": "Lecce",
+  "ruolo": "A",
+  "presenze": 32,
+  "gol": 5,
+  "lega": "Serie A"
+ },
+ {
   "nome": "L. Banovec",
   "squadra": "Como",
   "ruolo": "C",
@@ -16,11 +48,59 @@
   "lega": "Eerste Divisie"
  },
  {
+  "nome": "W. Cheddira",
+  "squadra": "Napoli",
+  "ruolo": "A",
+  "presenze": 17,
+  "gol": 3,
+  "lega": "Serie A"
+ },
+ {
   "nome": "M&apos;Bala Nzola",
   "squadra": "Fiorentina",
   "ruolo": "A",
   "presenze": 16,
   "gol": 3,
+  "lega": "Serie A"
+ },
+ {
+  "nome": "F. Terracciano",
+  "squadra": "Milan",
+  "ruolo": "C",
+  "presenze": 36,
+  "gol": 2,
+  "lega": "Serie A"
+ },
+ {
+  "nome": "Z. Athekame",
+  "squadra": "Milan",
+  "ruolo": "D",
+  "presenze": 27,
+  "gol": 2,
+  "lega": "Serie A"
+ },
+ {
+  "nome": "K. Baldé",
+  "squadra": "Monza",
+  "ruolo": "A",
+  "presenze": 21,
+  "gol": 2,
+  "lega": "Serie B"
+ },
+ {
+  "nome": "J. Rouhi",
+  "squadra": "Juventus",
+  "ruolo": "D",
+  "presenze": 15,
+  "gol": 1,
+  "lega": "Serie B"
+ },
+ {
+  "nome": "R. Lukaku",
+  "squadra": "Napoli",
+  "ruolo": "A",
+  "presenze": 5,
+  "gol": 1,
   "lega": "Serie A"
  },
  {
@@ -32,12 +112,68 @@
   "lega": "Serie A"
  },
  {
+  "nome": "N. Obaretin",
+  "squadra": "Napoli",
+  "ruolo": "D",
+  "presenze": 29,
+  "gol": 0,
+  "lega": "Serie B"
+ },
+ {
+  "nome": "C. Comotto",
+  "squadra": "Milan",
+  "ruolo": "C",
+  "presenze": 28,
+  "gol": 0,
+  "lega": "Serie B"
+ },
+ {
   "nome": "N. Fortini",
   "squadra": "Fiorentina",
   "ruolo": "D",
   "presenze": 16,
   "gol": 0,
   "lega": "Serie A"
+ },
+ {
+  "nome": "J. Lindstrøm",
+  "squadra": "Napoli",
+  "ruolo": "C",
+  "presenze": 15,
+  "gol": 0,
+  "lega": "Bundesliga"
+ },
+ {
+  "nome": "S. Bocoum",
+  "squadra": "Milan",
+  "ruolo": "D",
+  "presenze": 14,
+  "gol": 0,
+  "lega": "Ligue 2"
+ },
+ {
+  "nome": "A. Brorsson",
+  "squadra": "Monza",
+  "ruolo": "D",
+  "presenze": 12,
+  "gol": 0,
+  "lega": "Serie B"
+ },
+ {
+  "nome": "N. Galazzi",
+  "squadra": "Monza",
+  "ruolo": "C",
+  "presenze": 11,
+  "gol": 0,
+  "lega": "Serie B"
+ },
+ {
+  "nome": "S. Wiafe",
+  "squadra": "Genoa",
+  "ruolo": "C",
+  "presenze": 9,
+  "gol": 0,
+  "lega": "Serie B"
  },
  {
   "nome": "N. Cavuoti",
