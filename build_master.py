@@ -684,8 +684,9 @@ def main():
 
     print("🌐 Sincronizzazione con API-Football...")
     candidati_nuovi = sincronizza_con_api(df, scout)
-    if candidati_nuovi:
-        segnala_nuovi_arrivi(candidati_nuovi, scout)
+    # Si chiama SEMPRE, anche senza candidati: cosi' avviso.txt viene riscritto
+    # (vuoto) e la notifica di ieri non parte una seconda volta.
+    segnala_nuovi_arrivi(candidati_nuovi, scout)
 
     baseline = calcola_baseline_ruoli(stats_per_id)
     conteggio = {'id': 0, 'nome': 0, 'scout': 0, 'nessuno': 0}
