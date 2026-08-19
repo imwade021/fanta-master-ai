@@ -265,6 +265,14 @@ def costruisci_listone(quotazioni, df_extra):
         righe.append(riga)
 
     df = pd.DataFrame(righe, columns=COLONNE_MASTER)
+
+    # Le colonne nascono tutte come stringa vuota. Le versioni recenti di pandas
+    # bloccano l'assegnazione di un intero dentro una colonna di tipo stringa
+    # ("Invalid value '9' for dtype 'str'"): le gare saltate vanno dichiarate
+    # numeriche subito, prima che l'API provi a scriverci dentro.
+    for colonna in ('GareSaltate', 'GareSaltateAltro'):
+        df[colonna] = 0
+
     arricchiti = sum(1 for pid in quotazioni if pid in extra_per_id)
     print(f"✅ Listone: {len(df)} giocatori ({arricchiti} con anagrafica).")
     return df
