@@ -1,0 +1,50 @@
+[
+ {
+  "nome": "L. Banovec",
+  "squadra": "Como",
+  "ruolo": "C",
+  "presenze": 31,
+  "gol": 3,
+  "lega": "HNL"
+ },
+ {
+  "nome": "O. Raterink",
+  "squadra": "Cagliari",
+  "ruolo": "C",
+  "presenze": 23,
+  "gol": 3,
+  "lega": "Eerste Divisie"
+ },
+ {
+  "nome": "M&apos;Bala Nzola",
+  "squadra": "Fiorentina",
+  "ruolo": "A",
+  "presenze": 16,
+  "gol": 3,
+  "lega": "Serie A"
+ },
+ {
+  "nome": "B. Djimsiti",
+  "squadra": "Atalanta",
+  "ruolo": "D",
+  "presenze": 34,
+  "gol": 0,
+  "lega": "Serie A"
+ },
+ {
+  "nome": "N. Fortini",
+  "squadra": "Fiorentina",
+  "ruolo": "D",
+  "presenze": 16,
+  "gol": 0,
+  "lega": "Serie A"
+ },
+ {
+  "nome": "N. Cavuoti",
+  "squadra": "Cagliari",
+  "ruolo": "C",
+  "presenze": 7,
+  "gol": 0,
+  "lega": "Serie B"
+ }
+]
