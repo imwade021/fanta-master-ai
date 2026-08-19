@@ -1,1 +1,98 @@
+name: Aggiorna Lista_Finale_Master
 
+on:
+  schedule:
+    # 01:00 UTC = 03:00 in Italia d'estate, 02:00 d'inverno.
+    # FantaBot scarica alle 05:00 italiane: cosi' c'e' sempre almeno un'ora
+    # di margine, anche quando GitHub fa partire il job in ritardo.
+    - cron: '0 1 * * *'
+  workflow_dispatch:
+
+# Due run in parallelo si sovrascriverebbero il commit a vicenda.
+concurrency:
+  group: master-engine
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: pip
+
+      - name: Installa librerie
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Esegui il motore
+        env:
+          FOOTBALL_API_KEY: ${{ secrets.API_FOOTBALL_KEY }}
+          API_FOOTBALL_KEY: ${{ secrets.API_FOOTBALL_KEY }}
+
+          # --- PIANO PRO (7.500 chiamate/giorno, 300/minuto) ---
+          FANTA_MAX_LOOKUP: '600'
+          FANTA_PAUSA: '0.3'
+          # --- PIANO FREE: scommenta questi due e commenta i due sopra ---
+          # FANTA_MAX_LOOKUP: '60'
+          # FANTA_PAUSA: '6.5'
+
+          FANTA_SEASON_STATS: '2025'   # stagione conclusa (2025 = 2025/26)
+          FANTA_SEASON: '2026'         # stagione in corso, per gli infortuni
+
+          FANTA_SQUADRE_LEGA: '8'
+          FANTA_BUDGET: '500'
+          FANTA_FVM: 'ufficiale'       # ufficiale | stima | misto
+          FANTA_ESPONENTE: '1.0'       # >1 rende i top piu' cari
+
+          # 1 = il job FALLISCE se mancano le fonti o i controlli non passano.
+          # Meglio una mail di errore che un listone sbagliato pubblicato.
+          FANTA_STRICT: '1'
+        run: python build_master.py
+
+      - name: Commit del nuovo Master
+        run: |
+          git config --global user.name "GitHub Action Bot"
+          git config --global user.email "action@github.com"
+          # 'git add' su un percorso inesistente fa fallire lo step: avvisi.json
+          # e avviso.txt ci sono solo se c'e' qualcosa da segnalare.
+          for f in Lista_Finale_Master.csv scout_cache.json avvisi.json avviso.txt; do
+            [ -e "$f" ] && git add -A "$f"
+          done
+          if git diff --staged --quiet; then
+            echo "Nessuna modifica da salvare."
+          else
+            git commit -m "🤖 Master aggiornato ($(date +%d/%m/%Y))"
+            git push
+          fi
+
+      - name: Avvisa su Telegram se ci sono giocatori fuori dal listone
+        # Opzionale: funziona solo se aggiungi i secret TELEGRAM_TOKEN e
+        # TELEGRAM_CHAT_ID. Senza, lo step si salta da solo senza errori.
+        env:
+          TG_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
+          TG_CHAT: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: |
+          if [ -z "$TG_TOKEN" ]; then
+            echo "Nessun token Telegram configurato: salto."
+            exit 0
+          fi
+          if [ -s avviso.txt ]; then
+            curl -s -X POST "https://api.telegram.org/bot${TG_TOKEN}/sendMessage" \
+              -d chat_id="${TG_CHAT}" \
+              -d parse_mode="HTML" \
+              --data-urlencode "text@avviso.txt" > /dev/null
+            echo "Avviso inviato."
+          else
+            echo "Nessun avviso da inviare."
+          fi
