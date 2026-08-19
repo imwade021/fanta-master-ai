@@ -2,20 +2,20 @@
 Sono nelle rose di Serie A ma non nelle tue quotazioni:
 
 • <b>G. Artistico</b> (Lazio, A) — 31 pres, 13 gol
+• <b>P. Nuamah</b> (Sassuolo, A) — 28 pres, 13 gol
 • <b>A. Kostić</b> (Milan, A) — 35 pres, 11 gol
 • <b>A. Cissè</b> (Milan, A) — 22 pres, 6 gol
+• <b>R. Ciervo</b> (Sassuolo, C) — 37 pres, 5 gol
 • <b>L. Banda</b> (Lecce, A) — 32 pres, 5 gol
 • <b>L. Banovec</b> (Como, C) — 31 pres, 3 gol
+• <b>E. Ndicka</b> (Roma, D) — 31 pres, 3 gol
 • <b>O. Raterink</b> (Cagliari, C) — 23 pres, 3 gol
+• <b>A. Joujou</b> (Parma, A) — 23 pres, 3 gol
 • <b>W. Cheddira</b> (Napoli, A) — 17 pres, 3 gol
 • <b>M&apos;Bala Nzola</b> (Fiorentina, A) — 16 pres, 3 gol
 • <b>F. Terracciano</b> (Milan, C) — 36 pres, 2 gol
-• <b>Z. Athekame</b> (Milan, D) — 27 pres, 2 gol
-• <b>K. Baldé</b> (Monza, A) — 21 pres, 2 gol
-• <b>J. Rouhi</b> (Juventus, D) — 15 pres, 1 gol
-• <b>R. Lukaku</b> (Napoli, A) — 5 pres, 1 gol
-• <b>B. Djimsiti</b> (Atalanta, D) — 34 pres, 0 gol
-• <b>N. Obaretin</b> (Napoli, D) — 29 pres, 0 gol
-...e altri 8.
+• <b>E. Del Prato</b> (Parma, D) — 35 pres, 2 gol
+• <b>L. Cherubini</b> (Roma, A) — 35 pres, 2 gol
+...e altri 18.
 
 Scarica le quotazioni aggiornate da Fantacalcio e caricale in <code>fanta-master-ai</code>: il motore le usa dalla notte dopo.
