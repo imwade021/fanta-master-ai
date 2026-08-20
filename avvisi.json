@@ -64,14 +64,6 @@
   "lega": "Serie A"
  },
  {
-  "nome": "O. Raterink",
-  "squadra": "Cagliari",
-  "ruolo": "C",
-  "presenze": 23,
-  "gol": 3,
-  "lega": "Eerste Divisie"
- },
- {
   "nome": "A. Joujou",
   "squadra": "Parma",
   "ruolo": "A",
@@ -120,14 +112,6 @@
   "lega": "Serie B"
  },
  {
-  "nome": "Z. Athekame",
-  "squadra": "Milan",
-  "ruolo": "D",
-  "presenze": 27,
-  "gol": 2,
-  "lega": "Serie A"
- },
- {
   "nome": "K. Baldé",
   "squadra": "Monza",
   "ruolo": "A",
@@ -158,22 +142,6 @@
   "presenze": 15,
   "gol": 1,
   "lega": "Serie B"
- },
- {
-  "nome": "R. Lukaku",
-  "squadra": "Napoli",
-  "ruolo": "A",
-  "presenze": 5,
-  "gol": 1,
-  "lega": "Serie A"
- },
- {
-  "nome": "B. Djimsiti",
-  "squadra": "Atalanta",
-  "ruolo": "D",
-  "presenze": 34,
-  "gol": 0,
-  "lega": "Serie A"
  },
  {
   "nome": "N. Obaretin",
@@ -224,6 +192,14 @@
   "lega": "Ligue 2"
  },
  {
+  "nome": "A. Dembélé",
+  "squadra": "Torino",
+  "ruolo": "D",
+  "presenze": 14,
+  "gol": 0,
+  "lega": "Serie B"
+ },
+ {
   "nome": "A. Brorsson",
   "squadra": "Monza",
   "ruolo": "D",
@@ -248,12 +224,28 @@
   "lega": "Serie A"
  },
  {
+  "nome": "N. Pierini",
+  "squadra": "Sassuolo",
+  "ruolo": "A",
+  "presenze": 11,
+  "gol": 0,
+  "lega": "Serie A"
+ },
+ {
   "nome": "S. Wiafe",
   "squadra": "Genoa",
   "ruolo": "C",
   "presenze": 9,
   "gol": 0,
   "lega": "Serie B"
+ },
+ {
+  "nome": "F. Israel",
+  "squadra": "Torino",
+  "ruolo": "P",
+  "presenze": 9,
+  "gol": 0,
+  "lega": "Serie A"
  },
  {
   "nome": "N. Cavuoti",

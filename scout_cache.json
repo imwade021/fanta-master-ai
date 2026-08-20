@@ -2307,6 +2307,21 @@
    "presenze_totali": 22,
    "squadre_stagione": 1
   },
+  "2025:a dembele": {
+   "assist": 0,
+   "campionati": [
+    "Coppa Italia",
+    "Serie A",
+    "Serie B"
+   ],
+   "da_titolare": 15,
+   "gol": 0,
+   "lega": "Serie B",
+   "minuti": 1288,
+   "presenze": 14,
+   "presenze_totali": 18,
+   "squadre_stagione": 2
+  },
   "2025:a furlanetto": {
    "assist": 0,
    "campionati": [
@@ -3099,6 +3114,19 @@
    "squadre_stagione": 2
   },
   "2025:c b doumbia": "vuoto",
+  "2025:c bianay balcot": {
+   "assist": 0,
+   "campionati": [
+    "Serie B"
+   ],
+   "da_titolare": 0,
+   "gol": 0,
+   "lega": "Serie B",
+   "minuti": 8,
+   "presenze": 2,
+   "presenze_totali": 2,
+   "squadre_stagione": 1
+  },
   "2025:c comotto": {
    "assist": 0,
    "campionati": [
@@ -3718,6 +3746,20 @@
   "2025:f castaldo": "vuoto",
   "2025:f croci": "vuoto",
   "2025:f gelo": "vuoto",
+  "2025:f israel": {
+   "assist": 0,
+   "campionati": [
+    "Coppa Italia",
+    "Serie A"
+   ],
+   "da_titolare": 9,
+   "gol": 0,
+   "lega": "Serie A",
+   "minuti": 810,
+   "presenze": 9,
+   "presenze_totali": 10,
+   "squadre_stagione": 1
+  },
   "2025:f nardin": "vuoto",
   "2025:f ondoa": "vuoto",
   "2025:f reale": {
@@ -5407,6 +5449,7 @@
    "squadre_stagione": 1
   },
   "2025:m mout": "vuoto",
+  "2025:m pellini": "vuoto",
   "2025:m pittarella": "vuoto",
   "2025:m plehan": "vuoto",
   "2025:m seck": "vuoto",
@@ -5770,6 +5813,21 @@
    "presenze": 29,
    "presenze_totali": 29,
    "squadre_stagione": 1
+  },
+  "2025:n pierini": {
+   "assist": 0,
+   "campionati": [
+    "Coppa Italia",
+    "Serie A",
+    "Serie B"
+   ],
+   "da_titolare": 7,
+   "gol": 0,
+   "lega": "Serie A",
+   "minuti": 780,
+   "presenze": 11,
+   "presenze_totali": 22,
+   "squadre_stagione": 2
   },
   "2025:n rak": "vuoto",
   "2025:n rizzo": "vuoto",
@@ -7058,6 +7116,7 @@
    "presenze_totali": 21,
    "squadre_stagione": 2
   },
+  "2025:w acquah": "vuoto",
   "2025:w cheddira": {
    "assist": 1,
    "campionati": [
