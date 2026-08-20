@@ -1,5 +1,94 @@
 {
- "infortuni": {},
+ "infortuni": {
+  "1457": {
+   "dal": "2026-08-20",
+   "motivo": "Suspended"
+  },
+  "162907": {
+   "dal": "2026-08-20",
+   "motivo": "Knee Injury"
+  },
+  "180763": {
+   "dal": "2026-08-20",
+   "motivo": "Health problems"
+  },
+  "18797": {
+   "dal": "2026-08-20",
+   "motivo": "Red Card"
+  },
+  "194905": {
+   "dal": "2026-08-20",
+   "motivo": "Muscle Injury"
+  },
+  "215": {
+   "dal": "2026-08-20",
+   "motivo": "Injury"
+  },
+  "30436": {
+   "dal": "2026-08-20",
+   "motivo": "Knee Injury"
+  },
+  "30603": {
+   "dal": "2026-08-20",
+   "motivo": "Suspended"
+  },
+  "31057": {
+   "dal": "2026-08-20",
+   "motivo": "Muscle Injury"
+  },
+  "31191": {
+   "dal": "2026-08-20",
+   "motivo": "Suspended"
+  },
+  "31226": {
+   "dal": "2026-08-20",
+   "motivo": "Knee Injury"
+  },
+  "354533": {
+   "dal": "2026-08-20",
+   "motivo": "Achilles Tendon Injury"
+  },
+  "362061": {
+   "dal": "2026-08-20",
+   "motivo": "Knee Injury"
+  },
+  "37604": {
+   "dal": "2026-08-20",
+   "motivo": "Achilles Tendon Injury"
+  },
+  "383026": {
+   "dal": "2026-08-20",
+   "motivo": "Knee Injury"
+  },
+  "388547": {
+   "dal": "2026-08-20",
+   "motivo": "Knee Injury"
+  },
+  "452033": {
+   "dal": "2026-08-20",
+   "motivo": "Knee Injury"
+  },
+  "499380": {
+   "dal": "2026-08-20",
+   "motivo": "Yellow Cards"
+  },
+  "552": {
+   "dal": "2026-08-20",
+   "motivo": "Ankle Injury"
+  },
+  "584116": {
+   "dal": "2026-08-20",
+   "motivo": "Injury"
+  },
+  "8481": {
+   "dal": "2026-08-20",
+   "motivo": "Foot Injury"
+  },
+  "881": {
+   "dal": "2026-08-20",
+   "motivo": "Muscle Injury"
+  }
+ },
  "infortuni_stagione_2025": {
   "10077": {
    "gare_altro": 0,
@@ -2266,149 +2355,22 @@
    "presenze_totali": 1,
    "squadre_stagione": 1
   },
-  "2025:a arena": {
-   "assist": 0,
-   "campionati": [
-    "Coppa Italia",
-    "Serie A"
-   ],
-   "da_titolare": 0,
-   "gol": 0,
-   "lega": "Serie A",
-   "minuti": 35,
-   "presenze": 2,
-   "presenze_totali": 3,
-   "squadre_stagione": 1
-  },
-  "2025:a brorsson": {
-   "assist": 0,
-   "campionati": [
-    "Coppa Italia",
-    "Serie B"
-   ],
-   "da_titolare": 5,
-   "gol": 0,
-   "lega": "Serie B",
-   "minuti": 486,
-   "presenze": 12,
-   "presenze_totali": 13,
-   "squadre_stagione": 1
-  },
-  "2025:a cisse": {
-   "assist": 1,
-   "campionati": [
-    "Serie B"
-   ],
-   "da_titolare": 21,
-   "gol": 6,
-   "lega": "Serie B",
-   "minuti": 1715,
-   "presenze": 22,
-   "presenze_totali": 22,
-   "squadre_stagione": 1
-  },
-  "2025:a dembele": {
-   "assist": 0,
-   "campionati": [
-    "Coppa Italia",
-    "Serie A",
-    "Serie B"
-   ],
-   "da_titolare": 15,
-   "gol": 0,
-   "lega": "Serie B",
-   "minuti": 1288,
-   "presenze": 14,
-   "presenze_totali": 18,
-   "squadre_stagione": 2
-  },
-  "2025:a furlanetto": {
-   "assist": 0,
-   "campionati": [
-    "Serie A"
-   ],
-   "da_titolare": 2,
-   "gol": 0,
-   "lega": "Serie A",
-   "minuti": 180,
-   "presenze": 2,
-   "presenze_totali": 2,
-   "squadre_stagione": 1
-  },
-  "2025:a ghion": {
-   "assist": 1,
-   "campionati": [
-    "Coppa Italia",
-    "Serie A",
-    "Serie B"
-   ],
-   "da_titolare": 21,
-   "gol": 0,
-   "lega": "Serie B",
-   "minuti": 1799,
-   "presenze": 26,
-   "presenze_totali": 28,
-   "squadre_stagione": 2
-  },
-  "2025:a joujou": {
-   "assist": 1,
-   "campionati": [
-    "Primeira Liga",
-    "Taça de Portugal"
-   ],
-   "da_titolare": 12,
-   "gol": 3,
-   "lega": "Primeira Liga",
-   "minuti": 594,
-   "presenze": 23,
-   "presenze_totali": 26,
-   "squadre_stagione": 1
-  },
-  "2025:a kostic": {
-   "assist": 1,
-   "campionati": [
-    "Super Liga"
-   ],
-   "da_titolare": 13,
-   "gol": 11,
-   "lega": "Super Liga",
-   "minuti": 1244,
-   "presenze": 35,
-   "presenze_totali": 35,
-   "squadre_stagione": 1
-  },
   "2025:a manzoni": "vuoto",
-  "2025:a mazzocchi": "vuoto",
-  "2025:a milik": {
-   "assist": 0,
-   "campionati": [
-    "Serie A"
-   ],
-   "da_titolare": 0,
-   "gol": 0,
-   "lega": "Serie A",
-   "minuti": 34,
-   "presenze": 2,
-   "presenze_totali": 2,
-   "squadre_stagione": 1
-  },
-  "2025:a n apos diaye": {
-   "assist": 0,
+  "2025:a russo": "vuoto",
+  "2025:aaron martin": {
+   "assist": 5,
    "campionati": [
     "Coppa Italia",
     "Serie A"
    ],
-   "da_titolare": 10,
-   "gol": 0,
+   "da_titolare": 27,
+   "gol": 1,
    "lega": "Serie A",
-   "minuti": 875,
-   "presenze": 11,
-   "presenze_totali": 12,
+   "minuti": 2369,
+   "presenze": 33,
+   "presenze_totali": 34,
    "squadre_stagione": 1
   },
-  "2025:a russo": "vuoto",
-  "2025:a zouin": "vuoto",
-  "2025:abdou konate": "vuoto",
   "2025:abdoulaye camara": {
    "assist": 0,
    "campionati": [
@@ -2467,6 +2429,48 @@
    "presenze_totali": 30,
    "squadre_stagione": 2
   },
+  "2025:adam marusic": {
+   "assist": 2,
+   "campionati": [
+    "Coppa Italia",
+    "Serie A"
+   ],
+   "da_titolare": 37,
+   "gol": 1,
+   "lega": "Serie A",
+   "minuti": 3192,
+   "presenze": 33,
+   "presenze_totali": 38,
+   "squadre_stagione": 1
+  },
+  "2025:adam obert": {
+   "assist": 3,
+   "campionati": [
+    "Coppa Italia",
+    "Serie A"
+   ],
+   "da_titolare": 35,
+   "gol": 0,
+   "lega": "Serie A",
+   "minuti": 2967,
+   "presenze": 35,
+   "presenze_totali": 37,
+   "squadre_stagione": 1
+  },
+  "2025:adrian bernabe": {
+   "assist": 1,
+   "campionati": [
+    "Coppa Italia",
+    "Serie A"
+   ],
+   "da_titolare": 32,
+   "gol": 3,
+   "lega": "Serie A",
+   "minuti": 2570,
+   "presenze": 32,
+   "presenze_totali": 34,
+   "squadre_stagione": 1
+  },
   "2025:adrian lahdo": "vuoto",
   "2025:adrian przyborek": {
    "assist": 2,
@@ -2480,6 +2484,22 @@
    "minuti": 971,
    "presenze": 17,
    "presenze_totali": 18,
+   "squadre_stagione": 2
+  },
+  "2025:adrien rabiot": {
+   "assist": 4,
+   "campionati": [
+    "Coppa Italia",
+    "Ligue 1",
+    "Serie A",
+    "Super Cup"
+   ],
+   "da_titolare": 32,
+   "gol": 6,
+   "lega": "Serie A",
+   "minuti": 2910,
+   "presenze": 29,
+   "presenze_totali": 33,
    "squadre_stagione": 2
   },
   "2025:agustin albarracin": {
@@ -2524,6 +2544,34 @@
    "presenze_totali": 1,
    "squadre_stagione": 1
   },
+  "2025:albert gudmundsson": {
+   "assist": 4,
+   "campionati": [
+    "Coppa Italia",
+    "Serie A"
+   ],
+   "da_titolare": 27,
+   "gol": 5,
+   "lega": "Serie A",
+   "minuti": 2286,
+   "presenze": 33,
+   "presenze_totali": 34,
+   "squadre_stagione": 1
+  },
+  "2025:alberto paleari": {
+   "assist": 0,
+   "campionati": [
+    "Coppa Italia",
+    "Serie A"
+   ],
+   "da_titolare": 32,
+   "gol": 0,
+   "lega": "Serie A",
+   "minuti": 2887,
+   "presenze": 29,
+   "presenze_totali": 32,
+   "squadre_stagione": 1
+  },
   "2025:albion rrahmani": {
    "assist": 3,
    "campionati": [
@@ -2563,6 +2611,49 @@
    "presenze_totali": 39,
    "squadre_stagione": 1
   },
+  "2025:alessandro bastoni": {
+   "assist": 4,
+   "campionati": [
+    "Coppa Italia",
+    "Serie A",
+    "Super Cup"
+   ],
+   "da_titolare": 31,
+   "gol": 1,
+   "lega": "Serie A",
+   "minuti": 2512,
+   "presenze": 28,
+   "presenze_totali": 31,
+   "squadre_stagione": 1
+  },
+  "2025:alessandro buongiorno": {
+   "assist": 1,
+   "campionati": [
+    "Coppa Italia",
+    "Serie A",
+    "Super Cup"
+   ],
+   "da_titolare": 28,
+   "gol": 0,
+   "lega": "Serie A",
+   "minuti": 2554,
+   "presenze": 33,
+   "presenze_totali": 35,
+   "squadre_stagione": 1
+  },
+  "2025:alessandro circati": {
+   "assist": 0,
+   "campionati": [
+    "Serie A"
+   ],
+   "da_titolare": 0,
+   "gol": 0,
+   "lega": "Serie A",
+   "minuti": 45,
+   "presenze": 1,
+   "presenze_totali": 1,
+   "squadre_stagione": 1
+  },
   "2025:alessandro deiola": {
    "assist": 2,
    "campionati": [
@@ -2575,6 +2666,20 @@
    "minuti": 1664,
    "presenze": 20,
    "presenze_totali": 23,
+   "squadre_stagione": 1
+  },
+  "2025:alessandro marcandalli": {
+   "assist": 2,
+   "campionati": [
+    "Coppa Italia",
+    "Serie A"
+   ],
+   "da_titolare": 30,
+   "gol": 0,
+   "lega": "Serie A",
+   "minuti": 2815,
+   "presenze": 32,
+   "presenze_totali": 34,
    "squadre_stagione": 1
   },
   "2025:alessandro romano": {
@@ -2621,6 +2726,34 @@
    "squadre_stagione": 2
   },
   "2025:alessio pozzi": "vuoto",
+  "2025:alessio romagnoli": {
+   "assist": 0,
+   "campionati": [
+    "Coppa Italia",
+    "Serie A"
+   ],
+   "da_titolare": 36,
+   "gol": 0,
+   "lega": "Serie A",
+   "minuti": 3153,
+   "presenze": 32,
+   "presenze_totali": 37,
+   "squadre_stagione": 1
+  },
+  "2025:alessio zerbin": {
+   "assist": 3,
+   "campionati": [
+    "Coppa Italia",
+    "Serie A"
+   ],
+   "da_titolare": 22,
+   "gol": 0,
+   "lega": "Serie A",
+   "minuti": 2062,
+   "presenze": 32,
+   "presenze_totali": 37,
+   "squadre_stagione": 2
+  },
   "2025:alex jimenez": {
    "assist": 0,
    "campionati": [
@@ -2649,6 +2782,34 @@
    "presenze_totali": 11,
    "squadre_stagione": 1
   },
+  "2025:alex valle": {
+   "assist": 4,
+   "campionati": [
+    "Serie A"
+   ],
+   "da_titolare": 23,
+   "gol": 1,
+   "lega": "Serie A",
+   "minuti": 2025,
+   "presenze": 28,
+   "presenze_totali": 28,
+   "squadre_stagione": 1
+  },
+  "2025:alexis saelemaekers": {
+   "assist": 3,
+   "campionati": [
+    "Coppa Italia",
+    "Serie A",
+    "Super Cup"
+   ],
+   "da_titolare": 37,
+   "gol": 3,
+   "lega": "Serie A",
+   "minuti": 3073,
+   "presenze": 35,
+   "presenze_totali": 39,
+   "squadre_stagione": 1
+  },
   "2025:alexsandro amorim": {
    "assist": 0,
    "campionati": [
@@ -2656,14 +2817,16 @@
     "Mineiro - 1",
     "Primeira Liga",
     "Serie A",
-    "Serie B"
+    "Serie B",
+    "Taça da Liga",
+    "Taça de Portugal"
    ],
-   "da_titolare": 51,
+   "da_titolare": 40,
    "gol": 2,
    "lega": "Primeira Liga",
-   "minuti": 4167,
+   "minuti": 3072,
    "presenze": 19,
-   "presenze_totali": 58,
+   "presenze_totali": 57,
    "squadre_stagione": 3
   },
   "2025:alfonso pedraza": {
@@ -2755,6 +2918,7 @@
    "presenze_totali": 24,
    "squadre_stagione": 1
   },
+  "2025:anastasios douvikas": "vuoto",
   "2025:andre zambo anguissa": {
    "assist": 1,
    "campionati": [
@@ -2781,6 +2945,20 @@
    "minuti": 2244,
    "presenze": 33,
    "presenze_totali": 35,
+   "squadre_stagione": 1
+  },
+  "2025:andrea cambiaso": {
+   "assist": 4,
+   "campionati": [
+    "Coppa Italia",
+    "Serie A"
+   ],
+   "da_titolare": 36,
+   "gol": 3,
+   "lega": "Serie A",
+   "minuti": 2965,
+   "presenze": 36,
+   "presenze_totali": 37,
    "squadre_stagione": 1
   },
   "2025:andrea carboni": {
@@ -2823,6 +3001,20 @@
    "presenze_totali": 31,
    "squadre_stagione": 1
   },
+  "2025:andrea pinamonti": {
+   "assist": 3,
+   "campionati": [
+    "Coppa Italia",
+    "Serie A"
+   ],
+   "da_titolare": 32,
+   "gol": 9,
+   "lega": "Serie A",
+   "minuti": 2607,
+   "presenze": 36,
+   "presenze_totali": 37,
+   "squadre_stagione": 1
+  },
   "2025:andres cuenca": {
    "assist": 1,
    "campionati": [
@@ -2851,6 +3043,21 @@
    "presenze": 19,
    "presenze_totali": 26,
    "squadre_stagione": 2
+  },
+  "2025:ange yoan bonny": {
+   "assist": 4,
+   "campionati": [
+    "Coppa Italia",
+    "Serie A",
+    "Super Cup"
+   ],
+   "da_titolare": 13,
+   "gol": 5,
+   "lega": "Serie A",
+   "minuti": 1431,
+   "presenze": 33,
+   "presenze_totali": 38,
+   "squadre_stagione": 1
   },
   "2025:anouar el azzouzi": {
    "assist": 1,
@@ -2891,6 +3098,20 @@
    "gol": 5,
    "lega": "Serie B",
    "minuti": 3088,
+   "presenze": 37,
+   "presenze_totali": 39,
+   "squadre_stagione": 1
+  },
+  "2025:antonino gallo": {
+   "assist": 4,
+   "campionati": [
+    "Coppa Italia",
+    "Serie A"
+   ],
+   "da_titolare": 35,
+   "gol": 0,
+   "lega": "Serie A",
+   "minuti": 3181,
    "presenze": 37,
    "presenze_totali": 39,
    "squadre_stagione": 1
@@ -2941,6 +3162,34 @@
    "presenze_totali": 18,
    "squadre_stagione": 2
   },
+  "2025:arijanet muric": {
+   "assist": 0,
+   "campionati": [
+    "Championship",
+    "Serie A"
+   ],
+   "da_titolare": 35,
+   "gol": 0,
+   "lega": "Serie A",
+   "minuti": 3150,
+   "presenze": 32,
+   "presenze_totali": 36,
+   "squadre_stagione": 2
+  },
+  "2025:armand lauriente": {
+   "assist": 9,
+   "campionati": [
+    "Coppa Italia",
+    "Serie A"
+   ],
+   "da_titolare": 34,
+   "gol": 7,
+   "lega": "Serie A",
+   "minuti": 2682,
+   "presenze": 38,
+   "presenze_totali": 39,
+   "squadre_stagione": 1
+  },
   "2025:armel bella kotchap": {
    "assist": 0,
    "campionati": [
@@ -2969,6 +3218,19 @@
    "presenze_totali": 14,
    "squadre_stagione": 1
   },
+  "2025:arthur atta": {
+   "assist": 0,
+   "campionati": [
+    "Serie A"
+   ],
+   "da_titolare": 13,
+   "gol": 0,
+   "lega": "Serie A",
+   "minuti": 1105,
+   "presenze": 13,
+   "presenze_totali": 13,
+   "squadre_stagione": 1
+  },
   "2025:assane diao": {
    "assist": 1,
    "campionati": [
@@ -2983,21 +3245,6 @@
    "squadre_stagione": 1
   },
   "2025:b bogdanovic": "vuoto",
-  "2025:b djimsiti": {
-   "assist": 0,
-   "campionati": [
-    "Coppa Italia",
-    "Serie A"
-   ],
-   "da_titolare": 31,
-   "gol": 0,
-   "lega": "Serie A",
-   "minuti": 2803,
-   "presenze": 34,
-   "presenze_totali": 36,
-   "squadre_stagione": 1
-  },
-  "2025:b galassi": "vuoto",
   "2025:bartol franjic": {
    "assist": 2,
    "campionati": [
@@ -3113,64 +3360,106 @@
    "presenze_totali": 22,
    "squadre_stagione": 2
   },
-  "2025:c b doumbia": "vuoto",
-  "2025:c bianay balcot": {
-   "assist": 0,
+  "2025:brooke norton cuffy": {
+   "assist": 1,
    "campionati": [
-    "Serie B"
+    "Coppa Italia",
+    "Serie A"
    ],
-   "da_titolare": 0,
-   "gol": 0,
-   "lega": "Serie B",
-   "minuti": 8,
-   "presenze": 2,
-   "presenze_totali": 2,
+   "da_titolare": 27,
+   "gol": 2,
+   "lega": "Serie A",
+   "minuti": 2382,
+   "presenze": 27,
+   "presenze_totali": 29,
    "squadre_stagione": 1
   },
-  "2025:c comotto": {
+  "2025:bryan cristante": {
+   "assist": 1,
+   "campionati": [
+    "Coppa Italia",
+    "Serie A"
+   ],
+   "da_titolare": 38,
+   "gol": 2,
+   "lega": "Serie A",
+   "minuti": 3193,
+   "presenze": 37,
+   "presenze_totali": 38,
+   "squadre_stagione": 1
+  },
+  "2025:c b doumbia": "vuoto",
+  "2025:carlo pinsoglio": "vuoto",
+  "2025:carlos augusto": {
+   "assist": 1,
+   "campionati": [
+    "Coppa Italia",
+    "Serie A"
+   ],
+   "da_titolare": 22,
+   "gol": 1,
+   "lega": "Serie A",
+   "minuti": 2144,
+   "presenze": 34,
+   "presenze_totali": 39,
+   "squadre_stagione": 1
+  },
+  "2025:cesare casadei": {
    "assist": 0,
    "campionati": [
     "Coppa Italia",
-    "Serie B"
-   ],
-   "da_titolare": 10,
-   "gol": 0,
-   "lega": "Serie B",
-   "minuti": 1370,
-   "presenze": 28,
-   "presenze_totali": 30,
-   "squadre_stagione": 1
-  },
-  "2025:c corradi": "vuoto",
-  "2025:c frangella": {
-   "assist": 0,
-   "campionati": [
     "Serie A"
    ],
-   "da_titolare": 0,
-   "gol": 0,
+   "da_titolare": 21,
+   "gol": 6,
    "lega": "Serie A",
-   "minuti": 9,
-   "presenze": 1,
-   "presenze_totali": 1,
+   "minuti": 2197,
+   "presenze": 33,
+   "presenze_totali": 36,
    "squadre_stagione": 1
   },
-  "2025:c garofalo": "vuoto",
-  "2025:c odenthal": {
+  "2025:charles de ketelaere": {
+   "assist": 5,
+   "campionati": [
+    "Coppa Italia",
+    "Serie A"
+   ],
+   "da_titolare": 28,
+   "gol": 3,
+   "lega": "Serie A",
+   "minuti": 2452,
+   "presenze": 31,
+   "presenze_totali": 33,
+   "squadre_stagione": 1
+  },
+  "2025:che adams": {
+   "assist": 2,
+   "campionati": [
+    "Coppa Italia",
+    "Serie A"
+   ],
+   "da_titolare": 22,
+   "gol": 6,
+   "lega": "Serie A",
+   "minuti": 2109,
+   "presenze": 33,
+   "presenze_totali": 36,
+   "squadre_stagione": 1
+  },
+  "2025:cher ndour": {
    "assist": 0,
    "campionati": [
-    "Serie A",
-    "Serie B"
+    "Coppa Italia",
+    "Serie A"
    ],
-   "da_titolare": 18,
-   "gol": 1,
-   "lega": "Serie B",
-   "minuti": 1581,
-   "presenze": 18,
-   "presenze_totali": 19,
-   "squadre_stagione": 2
+   "da_titolare": 28,
+   "gol": 3,
+   "lega": "Serie A",
+   "minuti": 1951,
+   "presenze": 33,
+   "presenze_totali": 34,
+   "squadre_stagione": 1
   },
-  "2025:carlo pinsoglio": "vuoto",
   "2025:christ inao oulai": {
    "assist": 4,
    "campionati": [
@@ -3182,6 +3471,20 @@
    "lega": "Süper Lig",
    "minuti": 2239,
    "presenze": 25,
+   "presenze_totali": 31,
+   "squadre_stagione": 1
+  },
+  "2025:christian kabasele": {
+   "assist": 0,
+   "campionati": [
+    "Coppa Italia",
+    "Serie A"
+   ],
+   "da_titolare": 29,
+   "gol": 3,
+   "lega": "Serie A",
+   "minuti": 2327,
+   "presenze": 30,
    "presenze_totali": 31,
    "squadre_stagione": 1
   },
@@ -3200,6 +3503,36 @@
    "presenze": 28,
    "presenze_totali": 46,
    "squadre_stagione": 2
+  },
+  "2025:christian pulisic": {
+   "assist": 4,
+   "campionati": [
+    "Coppa Italia",
+    "Serie A",
+    "Super Cup"
+   ],
+   "da_titolare": 20,
+   "gol": 8,
+   "lega": "Serie A",
+   "minuti": 1806,
+   "presenze": 30,
+   "presenze_totali": 34,
+   "squadre_stagione": 1
+  },
+  "2025:christopher nkunku": {
+   "assist": 3,
+   "campionati": [
+    "Coppa Italia",
+    "Serie A",
+    "Super Cup"
+   ],
+   "da_titolare": 17,
+   "gol": 7,
+   "lega": "Serie A",
+   "minuti": 1554,
+   "presenze": 32,
+   "presenze_totali": 35,
+   "squadre_stagione": 1
   },
   "2025:christos mandas": {
    "assist": 0,
@@ -3258,23 +3591,7 @@
    "squadre_stagione": 1
   },
   "2025:d baroncioni": "vuoto",
-  "2025:d drobnic": "vuoto",
-  "2025:d elimoghale": "vuoto",
   "2025:d magdic": "vuoto",
-  "2025:d odogu": {
-   "assist": 0,
-   "campionati": [
-    "Coppa Italia",
-    "Serie A"
-   ],
-   "da_titolare": 0,
-   "gol": 0,
-   "lega": "Serie A",
-   "minuti": 20,
-   "presenze": 2,
-   "presenze_totali": 3,
-   "squadre_stagione": 1
-  },
   "2025:d resetar": "vuoto",
   "2025:daniel boloca": "vuoto",
   "2025:daniel maldini": {
@@ -3346,6 +3663,34 @@
    "presenze_totali": 37,
    "squadre_stagione": 1
   },
+  "2025:danilo cataldi": {
+   "assist": 3,
+   "campionati": [
+    "Coppa Italia",
+    "Serie A"
+   ],
+   "da_titolare": 25,
+   "gol": 3,
+   "lega": "Serie A",
+   "minuti": 2148,
+   "presenze": 27,
+   "presenze_totali": 30,
+   "squadre_stagione": 1
+  },
+  "2025:danilo veiga": {
+   "assist": 1,
+   "campionati": [
+    "Coppa Italia",
+    "Serie A"
+   ],
+   "da_titolare": 35,
+   "gol": 0,
+   "lega": "Serie A",
+   "minuti": 3056,
+   "presenze": 36,
+   "presenze_totali": 37,
+   "squadre_stagione": 1
+  },
   "2025:dany mota": {
    "assist": 2,
    "campionati": [
@@ -3375,6 +3720,19 @@
    "presenze_totali": 15,
    "squadre_stagione": 2
   },
+  "2025:david de gea": {
+   "assist": 0,
+   "campionati": [
+    "Serie A"
+   ],
+   "da_titolare": 37,
+   "gol": 0,
+   "lega": "Serie A",
+   "minuti": 3330,
+   "presenze": 37,
+   "presenze_totali": 37,
+   "squadre_stagione": 1
+  },
   "2025:david neres": {
    "assist": 3,
    "campionati": [
@@ -3389,8 +3747,50 @@
    "squadre_stagione": 1
   },
   "2025:david puczka": "vuoto",
-  "2025:davide frattesi": "vuoto",
+  "2025:davide bartesaghi": {
+   "assist": 0,
+   "campionati": [
+    "Coppa Italia",
+    "Serie A"
+   ],
+   "da_titolare": 28,
+   "gol": 2,
+   "lega": "Serie A",
+   "minuti": 2540,
+   "presenze": 31,
+   "presenze_totali": 33,
+   "squadre_stagione": 1
+  },
+  "2025:davide frattesi": {
+   "assist": 0,
+   "campionati": [
+    "Coppa Italia",
+    "Serie A",
+    "Super Cup"
+   ],
+   "da_titolare": 6,
+   "gol": 0,
+   "lega": "Serie A",
+   "minuti": 864,
+   "presenze": 22,
+   "presenze_totali": 26,
+   "squadre_stagione": 1
+  },
   "2025:davide renzetti": "vuoto",
+  "2025:davide zappacosta": {
+   "assist": 3,
+   "campionati": [
+    "Coppa Italia",
+    "Serie A"
+   ],
+   "da_titolare": 32,
+   "gol": 3,
+   "lega": "Serie A",
+   "minuti": 2860,
+   "presenze": 35,
+   "presenze_totali": 37,
+   "squadre_stagione": 1
+  },
   "2025:demba thiam": {
    "assist": 0,
    "campionati": [
@@ -3447,6 +3847,33 @@
    "presenze_totali": 35,
    "squadre_stagione": 1
   },
+  "2025:dodo": {
+   "assist": 2,
+   "campionati": [
+    "Serie A"
+   ],
+   "da_titolare": 36,
+   "gol": 1,
+   "lega": "Serie A",
+   "minuti": 3139,
+   "presenze": 36,
+   "presenze_totali": 36,
+   "squadre_stagione": 1
+  },
+  "2025:domenico berardi": {
+   "assist": 1,
+   "campionati": [
+    "Coppa Italia",
+    "Serie B"
+   ],
+   "da_titolare": 2,
+   "gol": 0,
+   "lega": "Serie B",
+   "minuti": 450,
+   "presenze": 15,
+   "presenze_totali": 17,
+   "squadre_stagione": 1
+  },
   "2025:donyell malen": {
    "assist": 1,
    "campionati": [
@@ -3492,21 +3919,6 @@
    "presenze_totali": 30,
    "squadre_stagione": 1
   },
-  "2025:e borsani": "vuoto",
-  "2025:e del prato": {
-   "assist": 0,
-   "campionati": [
-    "Coppa Italia",
-    "Serie A"
-   ],
-   "da_titolare": 37,
-   "gol": 2,
-   "lega": "Serie A",
-   "minuti": 3178,
-   "presenze": 35,
-   "presenze_totali": 38,
-   "squadre_stagione": 1
-  },
   "2025:e kospo": {
    "assist": 0,
    "campionati": [
@@ -3518,36 +3930,6 @@
    "minuti": 0,
    "presenze": 1,
    "presenze_totali": 1,
-   "squadre_stagione": 1
-  },
-  "2025:e larsen": "vuoto",
-  "2025:e lulli": "vuoto",
-  "2025:e ndicka": {
-   "assist": 0,
-   "campionati": [
-    "Africa Cup of Nations Qualification",
-    "Coppa Italia",
-    "Serie A"
-   ],
-   "da_titolare": 36,
-   "gol": 3,
-   "lega": "Serie A",
-   "minuti": 3178,
-   "presenze": 31,
-   "presenze_totali": 37,
-   "squadre_stagione": 2
-  },
-  "2025:e plicco": {
-   "assist": 0,
-   "campionati": [
-    "Coppa Italia"
-   ],
-   "da_titolare": 0,
-   "gol": 0,
-   "lega": "Coppa Italia",
-   "minuti": 32,
-   "presenze": 2,
-   "presenze_totali": 2,
    "squadre_stagione": 1
   },
   "2025:e stojak": "vuoto",
@@ -3576,6 +3958,20 @@
    "minuti": 80,
    "presenze": 3,
    "presenze_totali": 3,
+   "squadre_stagione": 1
+  },
+  "2025:ederson da silva": {
+   "assist": 1,
+   "campionati": [
+    "Coppa Italia",
+    "Serie A"
+   ],
+   "da_titolare": 27,
+   "gol": 2,
+   "lega": "Serie A",
+   "minuti": 2445,
+   "presenze": 30,
+   "presenze_totali": 31,
    "squadre_stagione": 1
   },
   "2025:edoardo corvi": {
@@ -3669,6 +4065,20 @@
    "squadre_stagione": 2
   },
   "2025:eldin lolic": "vuoto",
+  "2025:elia caprile": {
+   "assist": 0,
+   "campionati": [
+    "Coppa Italia",
+    "Serie A"
+   ],
+   "da_titolare": 40,
+   "gol": 0,
+   "lega": "Serie A",
+   "minuti": 3609,
+   "presenze": 38,
+   "presenze_totali": 40,
+   "squadre_stagione": 1
+  },
   "2025:elia spicuglia": "vuoto",
   "2025:elias havel": {
    "assist": 3,
@@ -3682,6 +4092,20 @@
    "presenze": 30,
    "presenze_totali": 37,
    "squadre_stagione": 2
+  },
+  "2025:emanuele valeri": {
+   "assist": 2,
+   "campionati": [
+    "Coppa Italia",
+    "Serie A"
+   ],
+   "da_titolare": 30,
+   "gol": 0,
+   "lega": "Serie A",
+   "minuti": 2735,
+   "presenze": 34,
+   "presenze_totali": 35,
+   "squadre_stagione": 1
   },
   "2025:emil holm": {
    "assist": 4,
@@ -3712,6 +4136,7 @@
    "presenze_totali": 22,
    "squadre_stagione": 1
   },
+  "2025:enrico delprato": "vuoto",
   "2025:enzo ebosse": {
    "assist": 1,
    "campionati": [
@@ -3740,59 +4165,14 @@
    "presenze_totali": 21,
    "squadre_stagione": 1
   },
-  "2025:f barido": "vuoto",
-  "2025:f bordon": "vuoto",
+  "2025:evan n dicka": "vuoto",
   "2025:f cassa": "vuoto",
   "2025:f castaldo": "vuoto",
   "2025:f croci": "vuoto",
   "2025:f gelo": "vuoto",
-  "2025:f israel": {
-   "assist": 0,
-   "campionati": [
-    "Coppa Italia",
-    "Serie A"
-   ],
-   "da_titolare": 9,
-   "gol": 0,
-   "lega": "Serie A",
-   "minuti": 810,
-   "presenze": 9,
-   "presenze_totali": 10,
-   "squadre_stagione": 1
-  },
-  "2025:f nardin": "vuoto",
-  "2025:f ondoa": "vuoto",
-  "2025:f reale": {
-   "assist": 0,
-   "campionati": [
-    "Serie B"
-   ],
-   "da_titolare": 4,
-   "gol": 0,
-   "lega": "Serie B",
-   "minuti": 310,
-   "presenze": 3,
-   "presenze_totali": 5,
-   "squadre_stagione": 2
-  },
   "2025:f rossi": "vuoto",
-  "2025:f serra": "vuoto",
   "2025:f soldo": "vuoto",
   "2025:f steffanoni": "vuoto",
-  "2025:f terracciano": {
-   "assist": 0,
-   "campionati": [
-    "Coppa Italia",
-    "Serie A"
-   ],
-   "da_titolare": 38,
-   "gol": 2,
-   "lega": "Serie A",
-   "minuti": 3468,
-   "presenze": 36,
-   "presenze_totali": 41,
-   "squadre_stagione": 2
-  },
   "2025:fabiano parisi": {
    "assist": 1,
    "campionati": [
@@ -3877,6 +4257,21 @@
    "presenze_totali": 47,
    "squadre_stagione": 2
   },
+  "2025:federico dimarco": {
+   "assist": 16,
+   "campionati": [
+    "Coppa Italia",
+    "Serie A",
+    "Super Cup"
+   ],
+   "da_titolare": 33,
+   "gol": 7,
+   "lega": "Serie A",
+   "minuti": 2956,
+   "presenze": 35,
+   "presenze_totali": 38,
+   "squadre_stagione": 1
+  },
   "2025:federico gatti": {
    "assist": 0,
    "campionati": [
@@ -3889,6 +4284,21 @@
    "minuti": 1220,
    "presenze": 21,
    "presenze_totali": 22,
+   "squadre_stagione": 1
+  },
+  "2025:fikayo tomori": {
+   "assist": 2,
+   "campionati": [
+    "Coppa Italia",
+    "Serie A",
+    "Super Cup"
+   ],
+   "da_titolare": 35,
+   "gol": 0,
+   "lega": "Serie A",
+   "minuti": 2928,
+   "presenze": 33,
+   "presenze_totali": 37,
    "squadre_stagione": 1
   },
   "2025:filip stankovic": {
@@ -3945,7 +4355,21 @@
    "presenze_totali": 31,
    "squadre_stagione": 2
   },
-  "2025:florian grillitsch": "vuoto",
+  "2025:florian grillitsch": {
+   "assist": 1,
+   "campionati": [
+    "Primeira Liga",
+    "Taça da Liga",
+    "Taça de Portugal"
+   ],
+   "da_titolare": 16,
+   "gol": 1,
+   "lega": "Primeira Liga",
+   "minuti": 1129,
+   "presenze": 20,
+   "presenze_totali": 26,
+   "squadre_stagione": 1
+  },
   "2025:francesco camarda": {
    "assist": 0,
    "campionati": [
@@ -3972,6 +4396,34 @@
    "minuti": 1160,
    "presenze": 25,
    "presenze_totali": 26,
+   "squadre_stagione": 1
+  },
+  "2025:francesco pio esposito": {
+   "assist": 3,
+   "campionati": [
+    "Coppa Italia",
+    "Serie A"
+   ],
+   "da_titolare": 17,
+   "gol": 7,
+   "lega": "Serie A",
+   "minuti": 1758,
+   "presenze": 35,
+   "presenze_totali": 39,
+   "squadre_stagione": 1
+  },
+  "2025:francisco conceicao": {
+   "assist": 5,
+   "campionati": [
+    "Coppa Italia",
+    "Serie A"
+   ],
+   "da_titolare": 31,
+   "gol": 3,
+   "lega": "Serie A",
+   "minuti": 2194,
+   "presenze": 31,
+   "presenze_totali": 33,
    "squadre_stagione": 1
   },
   "2025:franco carboni": {
@@ -4034,38 +4486,9 @@
    "presenze_totali": 22,
    "squadre_stagione": 2
   },
-  "2025:g artistico": {
-   "assist": 1,
-   "campionati": [
-    "Coppa Italia",
-    "Serie B"
-   ],
-   "da_titolare": 22,
-   "gol": 13,
-   "lega": "Serie B",
-   "minuti": 2102,
-   "presenze": 31,
-   "presenze_totali": 33,
-   "squadre_stagione": 1
-  },
-  "2025:g astaldi": "vuoto",
   "2025:g bertolini": "vuoto",
-  "2025:g ciocci": {
-   "assist": 0,
-   "campionati": [
-    "Coppa Italia"
-   ],
-   "da_titolare": 1,
-   "gol": 0,
-   "lega": "Coppa Italia",
-   "minuti": 90,
-   "presenze": 1,
-   "presenze_totali": 1,
-   "squadre_stagione": 1
-  },
   "2025:g puzzoli": "vuoto",
   "2025:g stojak": "vuoto",
-  "2025:g vezzosi": "vuoto",
   "2025:gabriele bracaglia": {
    "assist": 1,
    "campionati": [
@@ -4094,7 +4517,6 @@
    "presenze_totali": 37,
    "squadre_stagione": 1
   },
-  "2025:gabriele casentini": "vuoto",
   "2025:gabriele zappa": {
    "assist": 3,
    "campionati": [
@@ -4150,6 +4572,20 @@
    "presenze_totali": 24,
    "squadre_stagione": 2
   },
+  "2025:gennaro borrelli": {
+   "assist": 1,
+   "campionati": [
+    "Coppa Italia",
+    "Serie A"
+   ],
+   "da_titolare": 14,
+   "gol": 5,
+   "lega": "Serie A",
+   "minuti": 1398,
+   "presenze": 27,
+   "presenze_totali": 29,
+   "squadre_stagione": 1
+  },
   "2025:giacomo calo": {
    "assist": 15,
    "campionati": [
@@ -4193,6 +4629,33 @@
    "minuti": 3291,
    "presenze": 37,
    "presenze_totali": 38,
+   "squadre_stagione": 1
+  },
+  "2025:gianluca gaetano": {
+   "assist": 4,
+   "campionati": [
+    "Coppa Italia",
+    "Serie A"
+   ],
+   "da_titolare": 23,
+   "gol": 2,
+   "lega": "Serie A",
+   "minuti": 2044,
+   "presenze": 33,
+   "presenze_totali": 35,
+   "squadre_stagione": 1
+  },
+  "2025:gianluca mancini": {
+   "assist": 2,
+   "campionati": [
+    "Serie A"
+   ],
+   "da_titolare": 36,
+   "gol": 4,
+   "lega": "Serie A",
+   "minuti": 3066,
+   "presenze": 36,
+   "presenze_totali": 36,
    "squadre_stagione": 1
   },
   "2025:gianluca scamacca": {
@@ -4265,6 +4728,21 @@
    "presenze_totali": 26,
    "squadre_stagione": 1
   },
+  "2025:giovane": {
+   "assist": 4,
+   "campionati": [
+    "Coppa Italia",
+    "Paulista - A1",
+    "Serie A"
+   ],
+   "da_titolare": 25,
+   "gol": 3,
+   "lega": "Serie A",
+   "minuti": 2003,
+   "presenze": 21,
+   "presenze_totali": 38,
+   "squadre_stagione": 3
+  },
   "2025:giovanni daffara": {
    "assist": 0,
    "campionati": [
@@ -4276,6 +4754,20 @@
    "minuti": 2250,
    "presenze": 25,
    "presenze_totali": 25,
+   "squadre_stagione": 1
+  },
+  "2025:giovanni di lorenzo": {
+   "assist": 1,
+   "campionati": [
+    "Serie A",
+    "Super Cup"
+   ],
+   "da_titolare": 28,
+   "gol": 2,
+   "lega": "Serie A",
+   "minuti": 2463,
+   "presenze": 26,
+   "presenze_totali": 28,
    "squadre_stagione": 1
   },
   "2025:giovanni fabbian": {
@@ -4293,7 +4785,47 @@
    "presenze_totali": 32,
    "squadre_stagione": 2
   },
-  "2025:giuseppe aurelio": "vuoto",
+  "2025:giovanni simeone": {
+   "assist": 0,
+   "campionati": [
+    "Coppa Italia",
+    "Serie A"
+   ],
+   "da_titolare": 28,
+   "gol": 11,
+   "lega": "Serie A",
+   "minuti": 2378,
+   "presenze": 32,
+   "presenze_totali": 35,
+   "squadre_stagione": 1
+  },
+  "2025:giuseppe aurelio": {
+   "assist": 3,
+   "campionati": [
+    "Coppa Italia",
+    "Serie B"
+   ],
+   "da_titolare": 27,
+   "gol": 6,
+   "lega": "Serie B",
+   "minuti": 2468,
+   "presenze": 33,
+   "presenze_totali": 35,
+   "squadre_stagione": 1
+  },
+  "2025:gleison bremer": {
+   "assist": 3,
+   "campionati": [
+    "Serie A"
+   ],
+   "da_titolare": 25,
+   "gol": 4,
+   "lega": "Serie A",
+   "minuti": 2175,
+   "presenze": 26,
+   "presenze_totali": 26,
+   "squadre_stagione": 1
+  },
   "2025:goncalo ramos": {
    "assist": 1,
    "campionati": [
@@ -4309,6 +4841,20 @@
    "presenze_totali": 33,
    "squadre_stagione": 1
   },
+  "2025:gustav isaksen": {
+   "assist": 1,
+   "campionati": [
+    "Coppa Italia",
+    "Serie A"
+   ],
+   "da_titolare": 22,
+   "gol": 5,
+   "lega": "Serie A",
+   "minuti": 1945,
+   "presenze": 30,
+   "presenze_totali": 35,
+   "squadre_stagione": 1
+  },
   "2025:gustavo varela": {
    "assist": 3,
    "campionati": [
@@ -4321,6 +4867,20 @@
    "minuti": 1433,
    "presenze": 31,
    "presenze_totali": 32,
+   "squadre_stagione": 1
+  },
+  "2025:gvidas gineitis": {
+   "assist": 1,
+   "campionati": [
+    "Coppa Italia",
+    "Serie A"
+   ],
+   "da_titolare": 25,
+   "gol": 0,
+   "lega": "Serie A",
+   "minuti": 1912,
+   "presenze": 29,
+   "presenze_totali": 31,
    "squadre_stagione": 1
   },
   "2025:hakan calhanoglu": {
@@ -4384,7 +4944,35 @@
    "presenze_totali": 36,
    "squadre_stagione": 1
   },
-  "2025:hjalte laerke": "vuoto",
+  "2025:hassane kamara": {
+   "assist": 2,
+   "campionati": [
+    "Coppa Italia",
+    "Serie A"
+   ],
+   "da_titolare": 23,
+   "gol": 0,
+   "lega": "Serie A",
+   "minuti": 1959,
+   "presenze": 26,
+   "presenze_totali": 27,
+   "squadre_stagione": 1
+  },
+  "2025:henrikh mkhitaryan": {
+   "assist": 1,
+   "campionati": [
+    "Coppa Italia",
+    "Serie A",
+    "Super Cup"
+   ],
+   "da_titolare": 18,
+   "gol": 4,
+   "lega": "Serie A",
+   "minuti": 1764,
+   "presenze": 30,
+   "presenze_totali": 35,
+   "squadre_stagione": 1
+  },
   "2025:hjuan arizala": {
    "assist": 1,
    "campionati": [
@@ -4475,6 +5063,34 @@
    "presenze_totali": 36,
    "squadre_stagione": 1
   },
+  "2025:isak hien": {
+   "assist": 0,
+   "campionati": [
+    "Coppa Italia",
+    "Serie A"
+   ],
+   "da_titolare": 22,
+   "gol": 1,
+   "lega": "Serie A",
+   "minuti": 2145,
+   "presenze": 28,
+   "presenze_totali": 30,
+   "squadre_stagione": 1
+  },
+  "2025:ismael kone": {
+   "assist": 0,
+   "campionati": [
+    "Coppa Italia",
+    "Serie A"
+   ],
+   "da_titolare": 34,
+   "gol": 6,
+   "lega": "Serie A",
+   "minuti": 2840,
+   "presenze": 35,
+   "presenze_totali": 36,
+   "squadre_stagione": 1
+  },
   "2025:ivan azon": "vuoto",
   "2025:ivan ilic": {
    "assist": 0,
@@ -4489,35 +5105,35 @@
    "presenze_totali": 8,
    "squadre_stagione": 1
   },
-  "2025:ivan smolcic": "vuoto",
-  "2025:j idele": "vuoto",
-  "2025:j lindstrom": {
+  "2025:ivan provedel": {
    "assist": 0,
    "campionati": [
-    "Bundesliga"
+    "Coppa Italia",
+    "Serie A"
    ],
-   "da_titolare": 4,
+   "da_titolare": 29,
    "gol": 0,
-   "lega": "Bundesliga",
-   "minuti": 437,
-   "presenze": 15,
-   "presenze_totali": 15,
+   "lega": "Serie A",
+   "minuti": 2610,
+   "presenze": 27,
+   "presenze_totali": 29,
    "squadre_stagione": 1
   },
-  "2025:j rouhi": {
-   "assist": 1,
+  "2025:ivan smolcic": "vuoto",
+  "2025:j idele": "vuoto",
+  "2025:jacobo ramon": {
+   "assist": 0,
    "campionati": [
-    "Serie B"
+    "Serie A"
    ],
-   "da_titolare": 8,
-   "gol": 1,
-   "lega": "Serie B",
-   "minuti": 662,
-   "presenze": 15,
-   "presenze_totali": 15,
+   "da_titolare": 30,
+   "gol": 2,
+   "lega": "Serie A",
+   "minuti": 2743,
+   "presenze": 32,
+   "presenze_totali": 32,
    "squadre_stagione": 1
   },
-  "2025:j sardo": "vuoto",
   "2025:jacopo fazzini": {
    "assist": 0,
    "campionati": [
@@ -4544,6 +5160,33 @@
    "minuti": 964,
    "presenze": 17,
    "presenze_totali": 18,
+   "squadre_stagione": 1
+  },
+  "2025:jaj idzes": {
+   "assist": 0,
+   "campionati": [
+    "Serie A"
+   ],
+   "da_titolare": 35,
+   "gol": 0,
+   "lega": "Serie A",
+   "minuti": 3063,
+   "presenze": 35,
+   "presenze_totali": 35,
+   "squadre_stagione": 1
+  },
+  "2025:jakub piotrowski": {
+   "assist": 1,
+   "campionati": [
+    "Coppa Italia",
+    "Serie A"
+   ],
+   "da_titolare": 21,
+   "gol": 1,
+   "lega": "Serie A",
+   "minuti": 1812,
+   "presenze": 33,
+   "presenze_totali": 35,
    "squadre_stagione": 1
   },
   "2025:james abankwah": {
@@ -4591,7 +5234,6 @@
    "presenze_totali": 21,
    "squadre_stagione": 2
   },
-  "2025:javier gil": "vuoto",
   "2025:jay robinson": {
    "assist": 1,
    "campionati": [
@@ -4608,6 +5250,7 @@
    "squadre_stagione": 1
   },
   "2025:jayden addai": "vuoto",
+  "2025:jean butez": "vuoto",
   "2025:jeff ekhator": {
    "assist": 0,
    "campionati": [
@@ -4667,6 +5310,48 @@
    "presenze_totali": 18,
    "squadre_stagione": 2
   },
+  "2025:jesper karlstrom": {
+   "assist": 0,
+   "campionati": [
+    "Coppa Italia",
+    "Serie A"
+   ],
+   "da_titolare": 38,
+   "gol": 1,
+   "lega": "Serie A",
+   "minuti": 3323,
+   "presenze": 36,
+   "presenze_totali": 38,
+   "squadre_stagione": 1
+  },
+  "2025:jesus rodriguez": {
+   "assist": 9,
+   "campionati": [
+    "Serie A"
+   ],
+   "da_titolare": 18,
+   "gol": 2,
+   "lega": "Serie A",
+   "minuti": 1734,
+   "presenze": 31,
+   "presenze_totali": 31,
+   "squadre_stagione": 1
+  },
+  "2025:jhon lucumi": {
+   "assist": 0,
+   "campionati": [
+    "Coppa Italia",
+    "Serie A",
+    "Super Cup"
+   ],
+   "da_titolare": 30,
+   "gol": 1,
+   "lega": "Serie A",
+   "minuti": 2661,
+   "presenze": 29,
+   "presenze_totali": 33,
+   "squadre_stagione": 1
+  },
   "2025:joao mario neto lopes": {
    "assist": 0,
    "campionati": [
@@ -4692,6 +5377,20 @@
    "lega": "Serie B",
    "minuti": 3259,
    "presenze": 35,
+   "presenze_totali": 38,
+   "squadre_stagione": 1
+  },
+  "2025:johan vasquez": {
+   "assist": 0,
+   "campionati": [
+    "Coppa Italia",
+    "Serie A"
+   ],
+   "da_titolare": 38,
+   "gol": 1,
+   "lega": "Serie A",
+   "minuti": 3491,
+   "presenze": 36,
    "presenze_totali": 38,
    "squadre_stagione": 1
   },
@@ -4724,6 +5423,36 @@
    "presenze_totali": 36,
    "squadre_stagione": 1
   },
+  "2025:jonathan david": {
+   "assist": 4,
+   "campionati": [
+    "Coppa Italia",
+    "Serie A"
+   ],
+   "da_titolare": 21,
+   "gol": 6,
+   "lega": "Serie A",
+   "minuti": 1943,
+   "presenze": 35,
+   "presenze_totali": 36,
+   "squadre_stagione": 1
+  },
+  "2025:jonathan rowe": {
+   "assist": 2,
+   "campionati": [
+    "Coppa Italia",
+    "Ligue 1",
+    "Serie A",
+    "Super Cup"
+   ],
+   "da_titolare": 19,
+   "gol": 3,
+   "lega": "Serie A",
+   "minuti": 1826,
+   "presenze": 28,
+   "presenze_totali": 32,
+   "squadre_stagione": 2
+  },
   "2025:josep martinez": {
    "assist": 0,
    "campionati": [
@@ -4752,6 +5481,20 @@
    "presenze_totali": 4,
    "squadre_stagione": 1
   },
+  "2025:josh doig": {
+   "assist": 0,
+   "campionati": [
+    "Coppa Italia",
+    "Serie A"
+   ],
+   "da_titolare": 23,
+   "gol": 0,
+   "lega": "Serie A",
+   "minuti": 2016,
+   "presenze": 30,
+   "presenze_totali": 31,
+   "squadre_stagione": 1
+  },
   "2025:juan cabal": {
    "assist": 0,
    "campionati": [
@@ -4764,6 +5507,21 @@
    "minuti": 369,
    "presenze": 12,
    "presenze_totali": 13,
+   "squadre_stagione": 1
+  },
+  "2025:juan miranda": {
+   "assist": 3,
+   "campionati": [
+    "Coppa Italia",
+    "Serie A",
+    "Super Cup"
+   ],
+   "da_titolare": 32,
+   "gol": 1,
+   "lega": "Serie A",
+   "minuti": 2854,
+   "presenze": 32,
+   "presenze_totali": 35,
    "squadre_stagione": 1
   },
   "2025:juan rodriguez": {
@@ -4794,6 +5552,20 @@
    "presenze_totali": 20,
    "squadre_stagione": 1
   },
+  "2025:jurgen ekkelenkamp": {
+   "assist": 3,
+   "campionati": [
+    "Coppa Italia",
+    "Serie A"
+   ],
+   "da_titolare": 27,
+   "gol": 5,
+   "lega": "Serie A",
+   "minuti": 2242,
+   "presenze": 31,
+   "presenze_totali": 33,
+   "squadre_stagione": 1
+  },
   "2025:justin bijlow": {
    "assist": 0,
    "campionati": [
@@ -4807,20 +5579,6 @@
    "presenze": 16,
    "presenze_totali": 17,
    "squadre_stagione": 2
-  },
-  "2025:k balde": {
-   "assist": 2,
-   "campionati": [
-    "Coppa Italia",
-    "Serie B"
-   ],
-   "da_titolare": 12,
-   "gol": 2,
-   "lega": "Serie B",
-   "minuti": 1015,
-   "presenze": 21,
-   "presenze_totali": 22,
-   "squadre_stagione": 1
   },
   "2025:k barcella": {
    "assist": 0,
@@ -4849,6 +5607,34 @@
    "minuti": 1063,
    "presenze": 25,
    "presenze_totali": 27,
+   "squadre_stagione": 1
+  },
+  "2025:keinan davis": {
+   "assist": 4,
+   "campionati": [
+    "Coppa Italia",
+    "Serie A"
+   ],
+   "da_titolare": 28,
+   "gol": 10,
+   "lega": "Serie A",
+   "minuti": 2170,
+   "presenze": 30,
+   "presenze_totali": 32,
+   "squadre_stagione": 1
+  },
+  "2025:kenan yildiz": {
+   "assist": 6,
+   "campionati": [
+    "Coppa Italia",
+    "Serie A"
+   ],
+   "da_titolare": 34,
+   "gol": 10,
+   "lega": "Serie A",
+   "minuti": 2922,
+   "presenze": 36,
+   "presenze_totali": 37,
    "squadre_stagione": 1
   },
   "2025:kenneth taylor": {
@@ -4919,6 +5705,19 @@
    "minuti": 1169,
    "presenze": 18,
    "presenze_totali": 18,
+   "squadre_stagione": 1
+  },
+  "2025:khephren thuram": {
+   "assist": 3,
+   "campionati": [
+    "Serie A"
+   ],
+   "da_titolare": 30,
+   "gol": 3,
+   "lega": "Serie A",
+   "minuti": 2453,
+   "presenze": 35,
+   "presenze_totali": 35,
    "squadre_stagione": 1
   },
   "2025:kialonda gaspar": {
@@ -5038,20 +5837,19 @@
    "squadre_stagione": 1
   },
   "2025:kris gecaj": "vuoto",
-  "2025:l banda": {
+  "2025:kristian thorstvedt": {
    "assist": 4,
    "campionati": [
-    "Africa Cup of Nations Qualification",
     "Coppa Italia",
     "Serie A"
    ],
-   "da_titolare": 24,
-   "gol": 5,
+   "da_titolare": 27,
+   "gol": 4,
    "lega": "Serie A",
-   "minuti": 1945,
+   "minuti": 2479,
    "presenze": 32,
-   "presenze_totali": 35,
-   "squadre_stagione": 2
+   "presenze_totali": 33,
+   "squadre_stagione": 1
   },
   "2025:l banovec": {
    "assist": 4,
@@ -5064,32 +5862,6 @@
    "minuti": 1999,
    "presenze": 31,
    "presenze_totali": 31,
-   "squadre_stagione": 1
-  },
-  "2025:l bovo": {
-   "assist": 0,
-   "campionati": [
-    "Coppa Italia"
-   ],
-   "da_titolare": 0,
-   "gol": 0,
-   "lega": "Coppa Italia",
-   "minuti": 11,
-   "presenze": 1,
-   "presenze_totali": 1,
-   "squadre_stagione": 1
-  },
-  "2025:l cherubini": {
-   "assist": 1,
-   "campionati": [
-    "Serie B"
-   ],
-   "da_titolare": 25,
-   "gol": 2,
-   "lega": "Serie B",
-   "minuti": 2183,
-   "presenze": 35,
-   "presenze_totali": 35,
    "squadre_stagione": 1
   },
   "2025:l dumancic": {
@@ -5107,22 +5879,52 @@
   },
   "2025:l kovac": "vuoto",
   "2025:l lukia": "vuoto",
-  "2025:l nyarko": "vuoto",
-  "2025:l topalovic": {
-   "assist": 1,
-   "campionati": [
-    "Serie A"
-   ],
-   "da_titolare": 0,
-   "gol": 0,
-   "lega": "Serie A",
-   "minuti": 9,
-   "presenze": 1,
-   "presenze_totali": 1,
-   "squadre_stagione": 1
-  },
   "2025:l uzelac": "vuoto",
   "2025:lapo siviero": "vuoto",
+  "2025:lassana coulibaly": {
+   "assist": 1,
+   "campionati": [
+    "Africa Cup of Nations Qualification",
+    "Coppa Italia",
+    "Serie A"
+   ],
+   "da_titolare": 34,
+   "gol": 3,
+   "lega": "Serie A",
+   "minuti": 2888,
+   "presenze": 33,
+   "presenze_totali": 38,
+   "squadre_stagione": 2
+  },
+  "2025:lautaro martinez": {
+   "assist": 6,
+   "campionati": [
+    "Coppa Italia",
+    "Serie A",
+    "Super Cup"
+   ],
+   "da_titolare": 28,
+   "gol": 17,
+   "lega": "Serie A",
+   "minuti": 2314,
+   "presenze": 30,
+   "presenze_totali": 33,
+   "squadre_stagione": 1
+  },
+  "2025:lautaro valenti": {
+   "assist": 0,
+   "campionati": [
+    "Coppa Italia",
+    "Serie A"
+   ],
+   "da_titolare": 26,
+   "gol": 0,
+   "lega": "Serie A",
+   "minuti": 2341,
+   "presenze": 27,
+   "presenze_totali": 28,
+   "squadre_stagione": 1
+  },
   "2025:lazar samardzic": {
    "assist": 1,
    "campionati": [
@@ -5151,6 +5953,20 @@
    "presenze_totali": 26,
    "squadre_stagione": 1
   },
+  "2025:leo ostigard": {
+   "assist": 1,
+   "campionati": [
+    "Coppa Italia",
+    "Serie A"
+   ],
+   "da_titolare": 30,
+   "gol": 5,
+   "lega": "Serie A",
+   "minuti": 2644,
+   "presenze": 30,
+   "presenze_totali": 31,
+   "squadre_stagione": 1
+  },
   "2025:leonardo colombo": {
    "assist": 3,
    "campionati": [
@@ -5163,6 +5979,21 @@
    "minuti": 1447,
    "presenze": 30,
    "presenze_totali": 31,
+   "squadre_stagione": 1
+  },
+  "2025:leonardo spinazzola": {
+   "assist": 3,
+   "campionati": [
+    "Coppa Italia",
+    "Serie A",
+    "Super Cup"
+   ],
+   "da_titolare": 25,
+   "gol": 3,
+   "lega": "Serie A",
+   "minuti": 2177,
+   "presenze": 32,
+   "presenze_totali": 36,
    "squadre_stagione": 1
   },
   "2025:lewis ferguson": {
@@ -5194,6 +6025,20 @@
    "presenze_totali": 34,
    "squadre_stagione": 2
   },
+  "2025:lloyd kelly": {
+   "assist": 1,
+   "campionati": [
+    "Coppa Italia",
+    "Serie A"
+   ],
+   "da_titolare": 34,
+   "gol": 1,
+   "lega": "Serie A",
+   "minuti": 3178,
+   "presenze": 35,
+   "presenze_totali": 36,
+   "squadre_stagione": 1
+  },
   "2025:lorenzo bernasconi": {
    "assist": 3,
    "campionati": [
@@ -5208,6 +6053,7 @@
    "presenze_totali": 26,
    "squadre_stagione": 1
   },
+  "2025:lorenzo colombo": "vuoto",
   "2025:lorenzo de silvestri": "vuoto",
   "2025:lorenzo lucca": {
    "assist": 0,
@@ -5350,6 +6196,21 @@
    "presenze_totali": 26,
    "squadre_stagione": 1
   },
+  "2025:luca ranieri": {
+   "assist": 0,
+   "campionati": [
+    "Coppa Italia",
+    "Serie A"
+   ],
+   "da_titolare": 30,
+   "gol": 1,
+   "lega": "Serie A",
+   "minuti": 2569,
+   "presenze": 34,
+   "presenze_totali": 35,
+   "squadre_stagione": 1
+  },
+  "2025:lucas da cunha": "vuoto",
   "2025:luis hasa": {
    "assist": 4,
    "campionati": [
@@ -5361,6 +6222,21 @@
    "minuti": 2292,
    "presenze": 31,
    "presenze_totali": 31,
+   "squadre_stagione": 1
+  },
+  "2025:luis henrique": {
+   "assist": 2,
+   "campionati": [
+    "Coppa Italia",
+    "Serie A",
+    "Super Cup"
+   ],
+   "da_titolare": 21,
+   "gol": 1,
+   "lega": "Serie A",
+   "minuti": 1902,
+   "presenze": 30,
+   "presenze_totali": 36,
    "squadre_stagione": 1
   },
   "2025:luis milla": {
@@ -5375,6 +6251,21 @@
    "minuti": 3317,
    "presenze": 37,
    "presenze_totali": 38,
+   "squadre_stagione": 1
+  },
+  "2025:luka modric": {
+   "assist": 3,
+   "campionati": [
+    "Coppa Italia",
+    "Serie A",
+    "Super Cup"
+   ],
+   "da_titolare": 32,
+   "gol": 2,
+   "lega": "Serie A",
+   "minuti": 2874,
+   "presenze": 34,
+   "presenze_totali": 37,
    "squadre_stagione": 1
   },
   "2025:lukasz skorupski": {
@@ -5406,7 +6297,6 @@
    "presenze_totali": 36,
    "squadre_stagione": 4
   },
-  "2025:m bah": "vuoto",
   "2025:m bakker": {
    "assist": 0,
    "campionati": [
@@ -5422,68 +6312,65 @@
   },
   "2025:m barbini": "vuoto",
   "2025:m bencic": "vuoto",
-  "2025:m lavelli": {
-   "assist": 0,
-   "campionati": [
-    "Serie A"
-   ],
-   "da_titolare": 0,
-   "gol": 0,
-   "lega": "Serie A",
-   "minuti": 12,
-   "presenze": 1,
-   "presenze_totali": 1,
-   "squadre_stagione": 1
-  },
-  "2025:m mosconi": {
-   "assist": 0,
-   "campionati": [
-    "Serie A"
-   ],
-   "da_titolare": 0,
-   "gol": 0,
-   "lega": "Serie A",
-   "minuti": 25,
-   "presenze": 2,
-   "presenze_totali": 2,
-   "squadre_stagione": 1
-  },
-  "2025:m mout": "vuoto",
-  "2025:m pellini": "vuoto",
-  "2025:m pittarella": "vuoto",
   "2025:m plehan": "vuoto",
-  "2025:m seck": "vuoto",
-  "2025:m spinacce": {
-   "assist": 0,
-   "campionati": [
-    "Coppa Italia"
-   ],
-   "da_titolare": 0,
-   "gol": 0,
-   "lega": "Coppa Italia",
-   "minuti": 11,
-   "presenze": 1,
-   "presenze_totali": 1,
-   "squadre_stagione": 1
-  },
-  "2025:m ubani": "vuoto",
   "2025:m uzelac": "vuoto",
-  "2025:m valletta": {
+  "2025:maduka okoye": {
    "assist": 0,
    "campionati": [
-    "Coppa Italia",
-    "Eerste Divisie",
+    "Africa Cup of Nations Qualification",
     "Serie A"
    ],
-   "da_titolare": 0,
+   "da_titolare": 31,
    "gol": 0,
    "lega": "Serie A",
-   "minuti": 47,
-   "presenze": 2,
-   "presenze_totali": 4,
+   "minuti": 2707,
+   "presenze": 30,
+   "presenze_totali": 31,
    "squadre_stagione": 2
   },
   "2025:mamedi doucoure": "vuoto",
+  "2025:mandela keita": {
+   "assist": 1,
+   "campionati": [
+    "Coppa Italia",
+    "Serie A"
+   ],
+   "da_titolare": 38,
+   "gol": 1,
+   "lega": "Serie A",
+   "minuti": 3176,
+   "presenze": 37,
+   "presenze_totali": 40,
+   "squadre_stagione": 1
+  },
+  "2025:manu kouadio kone": {
+   "assist": 3,
+   "campionati": [
+    "Coppa Italia",
+    "Serie A"
+   ],
+   "da_titolare": 28,
+   "gol": 2,
+   "lega": "Serie A",
+   "minuti": 2492,
+   "presenze": 29,
+   "presenze_totali": 30,
+   "squadre_stagione": 1
+  },
+  "2025:manuel akanji": {
+   "assist": 0,
+   "campionati": [
+    "Coppa Italia",
+    "Serie A"
+   ],
+   "da_titolare": 33,
+   "gol": 2,
+   "lega": "Serie A",
+   "minuti": 3006,
+   "presenze": 33,
+   "presenze_totali": 35,
+   "squadre_stagione": 1
+  },
   "2025:manuel lazzari": {
    "assist": 0,
    "campionati": [
@@ -5498,6 +6385,21 @@
    "presenze_totali": 25,
    "squadre_stagione": 1
   },
+  "2025:manuel locatelli": {
+   "assist": 2,
+   "campionati": [
+    "Coppa Italia",
+    "Serie A"
+   ],
+   "da_titolare": 36,
+   "gol": 1,
+   "lega": "Serie A",
+   "minuti": 3113,
+   "presenze": 36,
+   "presenze_totali": 37,
+   "squadre_stagione": 1
+  },
+  "2025:marc oliver kempf": "vuoto",
   "2025:marco brescianini": {
    "assist": 1,
    "campionati": [
@@ -5512,6 +6414,20 @@
    "presenze_totali": 28,
    "squadre_stagione": 2
   },
+  "2025:marco carnesecchi": {
+   "assist": 0,
+   "campionati": [
+    "Coppa Italia",
+    "Serie A"
+   ],
+   "da_titolare": 39,
+   "gol": 0,
+   "lega": "Serie A",
+   "minuti": 3630,
+   "presenze": 37,
+   "presenze_totali": 39,
+   "squadre_stagione": 1
+  },
   "2025:marco sportiello": {
    "assist": 0,
    "campionati": [
@@ -5524,6 +6440,35 @@
    "minuti": 180,
    "presenze": 1,
    "presenze_totali": 2,
+   "squadre_stagione": 1
+  },
+  "2025:marcus pedersen": {
+   "assist": 2,
+   "campionati": [
+    "Coppa Italia",
+    "Serie A"
+   ],
+   "da_titolare": 26,
+   "gol": 1,
+   "lega": "Serie A",
+   "minuti": 2341,
+   "presenze": 29,
+   "presenze_totali": 32,
+   "squadre_stagione": 1
+  },
+  "2025:marcus thuram": {
+   "assist": 6,
+   "campionati": [
+    "Coppa Italia",
+    "Serie A",
+    "Super Cup"
+   ],
+   "da_titolare": 29,
+   "gol": 13,
+   "lega": "Serie A",
+   "minuti": 2304,
+   "presenze": 29,
+   "presenze_totali": 35,
    "squadre_stagione": 1
   },
   "2025:mariano troilo": {
@@ -5542,6 +6487,20 @@
    "presenze_totali": 42,
    "squadre_stagione": 2
   },
+  "2025:marin pongracic": {
+   "assist": 0,
+   "campionati": [
+    "Coppa Italia",
+    "Serie A"
+   ],
+   "da_titolare": 33,
+   "gol": 0,
+   "lega": "Serie A",
+   "minuti": 2928,
+   "presenze": 35,
+   "presenze_totali": 36,
+   "squadre_stagione": 1
+  },
   "2025:marin sverko": {
    "assist": 1,
    "campionati": [
@@ -5556,6 +6515,34 @@
    "presenze_totali": 26,
    "squadre_stagione": 1
   },
+  "2025:mario gila": {
+   "assist": 0,
+   "campionati": [
+    "Coppa Italia",
+    "Serie A"
+   ],
+   "da_titolare": 36,
+   "gol": 0,
+   "lega": "Serie A",
+   "minuti": 2925,
+   "presenze": 31,
+   "presenze_totali": 36,
+   "squadre_stagione": 1
+  },
+  "2025:mario hermoso": {
+   "assist": 2,
+   "campionati": [
+    "Coppa Italia",
+    "Serie A"
+   ],
+   "da_titolare": 25,
+   "gol": 3,
+   "lega": "Serie A",
+   "minuti": 2140,
+   "presenze": 27,
+   "presenze_totali": 28,
+   "squadre_stagione": 1
+  },
   "2025:mario mitaj": {
    "assist": 2,
    "campionati": [
@@ -5567,6 +6554,34 @@
    "minuti": 1879,
    "presenze": 21,
    "presenze_totali": 21,
+   "squadre_stagione": 1
+  },
+  "2025:mario pasalic": {
+   "assist": 4,
+   "campionati": [
+    "Coppa Italia",
+    "Serie A"
+   ],
+   "da_titolare": 23,
+   "gol": 3,
+   "lega": "Serie A",
+   "minuti": 2172,
+   "presenze": 33,
+   "presenze_totali": 36,
+   "squadre_stagione": 1
+  },
+  "2025:marten de roon": {
+   "assist": 2,
+   "campionati": [
+    "Coppa Italia",
+    "Serie A"
+   ],
+   "da_titolare": 35,
+   "gol": 1,
+   "lega": "Serie A",
+   "minuti": 3019,
+   "presenze": 34,
+   "presenze_totali": 37,
    "squadre_stagione": 1
   },
   "2025:martin baturina": "vuoto",
@@ -5597,6 +6612,21 @@
    "presenze_totali": 4,
    "squadre_stagione": 1
   },
+  "2025:mateo pellegrino": {
+   "assist": 1,
+   "campionati": [
+    "Coppa Italia",
+    "Liga Profesional Argentina",
+    "Serie A"
+   ],
+   "da_titolare": 36,
+   "gol": 9,
+   "lega": "Serie A",
+   "minuti": 3197,
+   "presenze": 37,
+   "presenze_totali": 40,
+   "squadre_stagione": 2
+  },
   "2025:mathias olivera": {
    "assist": 0,
    "campionati": [
@@ -5625,6 +6655,20 @@
    "presenze_totali": 29,
    "squadre_stagione": 1
   },
+  "2025:matias soule": {
+   "assist": 5,
+   "campionati": [
+    "Coppa Italia",
+    "Serie A"
+   ],
+   "da_titolare": 29,
+   "gol": 6,
+   "lega": "Serie A",
+   "minuti": 2225,
+   "presenze": 33,
+   "presenze_totali": 34,
+   "squadre_stagione": 1
+  },
   "2025:matija frigan": {
    "assist": 0,
    "campionati": [
@@ -5638,6 +6682,20 @@
    "presenze": 3,
    "presenze_totali": 4,
    "squadre_stagione": 2
+  },
+  "2025:matteo cancellieri": {
+   "assist": 2,
+   "campionati": [
+    "Coppa Italia",
+    "Serie A"
+   ],
+   "da_titolare": 22,
+   "gol": 4,
+   "lega": "Serie A",
+   "minuti": 1883,
+   "presenze": 30,
+   "presenze_totali": 35,
+   "squadre_stagione": 1
   },
   "2025:matteo cichella": {
    "assist": 4,
@@ -5666,6 +6724,20 @@
    "presenze": 19,
    "presenze_totali": 32,
    "squadre_stagione": 2
+  },
+  "2025:matteo gabbia": {
+   "assist": 0,
+   "campionati": [
+    "Coppa Italia",
+    "Serie A"
+   ],
+   "da_titolare": 29,
+   "gol": 0,
+   "lega": "Serie A",
+   "minuti": 2626,
+   "presenze": 30,
+   "presenze_totali": 31,
+   "squadre_stagione": 1
   },
   "2025:matteo grandi": {
    "assist": 0,
@@ -5709,6 +6781,35 @@
    "presenze_totali": 38,
    "squadre_stagione": 1
   },
+  "2025:matteo politano": {
+   "assist": 5,
+   "campionati": [
+    "Coppa Italia",
+    "Serie A",
+    "Super Cup"
+   ],
+   "da_titolare": 29,
+   "gol": 2,
+   "lega": "Serie A",
+   "minuti": 2506,
+   "presenze": 34,
+   "presenze_totali": 38,
+   "squadre_stagione": 1
+  },
+  "2025:matteo prati": {
+   "assist": 0,
+   "campionati": [
+    "Coppa Italia",
+    "Serie A"
+   ],
+   "da_titolare": 24,
+   "gol": 1,
+   "lega": "Serie A",
+   "minuti": 2090,
+   "presenze": 20,
+   "presenze_totali": 36,
+   "squadre_stagione": 2
+  },
   "2025:mattia felici": {
    "assist": 1,
    "campionati": [
@@ -5737,8 +6838,109 @@
    "presenze_totali": 9,
    "squadre_stagione": 1
   },
+  "2025:mattia zaccagni": {
+   "assist": 0,
+   "campionati": [
+    "Coppa Italia",
+    "Serie A"
+   ],
+   "da_titolare": 30,
+   "gol": 3,
+   "lega": "Serie A",
+   "minuti": 2448,
+   "presenze": 26,
+   "presenze_totali": 30,
+   "squadre_stagione": 1
+  },
   "2025:mauro vigorito": "vuoto",
+  "2025:maxence caqueret": "vuoto",
+  "2025:maximo perrone": "vuoto",
   "2025:medon berisha": "vuoto",
+  "2025:mergim vojvoda": {
+   "assist": 2,
+   "campionati": [
+    "Coppa Italia",
+    "Serie A"
+   ],
+   "da_titolare": 21,
+   "gol": 2,
+   "lega": "Serie A",
+   "minuti": 1821,
+   "presenze": 30,
+   "presenze_totali": 34,
+   "squadre_stagione": 1
+  },
+  "2025:michael folorunsho": {
+   "assist": 0,
+   "campionati": [
+    "Coppa Italia",
+    "Serie A"
+   ],
+   "da_titolare": 29,
+   "gol": 2,
+   "lega": "Serie A",
+   "minuti": 2458,
+   "presenze": 27,
+   "presenze_totali": 32,
+   "squadre_stagione": 2
+  },
+  "2025:michel adopo": {
+   "assist": 2,
+   "campionati": [
+    "Coppa Italia",
+    "Serie A"
+   ],
+   "da_titolare": 35,
+   "gol": 1,
+   "lega": "Serie A",
+   "minuti": 3266,
+   "presenze": 38,
+   "presenze_totali": 41,
+   "squadre_stagione": 1
+  },
+  "2025:michele di gregorio": {
+   "assist": 0,
+   "campionati": [
+    "Coppa Italia",
+    "Serie A"
+   ],
+   "da_titolare": 30,
+   "gol": 0,
+   "lega": "Serie A",
+   "minuti": 2745,
+   "presenze": 30,
+   "presenze_totali": 31,
+   "squadre_stagione": 1
+  },
+  "2025:mikael egill ellertsson": {
+   "assist": 1,
+   "campionati": [
+    "Coppa Italia",
+    "Serie A"
+   ],
+   "da_titolare": 32,
+   "gol": 1,
+   "lega": "Serie A",
+   "minuti": 2867,
+   "presenze": 36,
+   "presenze_totali": 37,
+   "squadre_stagione": 1
+  },
+  "2025:mike maignan": {
+   "assist": 0,
+   "campionati": [
+    "Coppa Italia",
+    "Serie A",
+    "Super Cup"
+   ],
+   "da_titolare": 41,
+   "gol": 0,
+   "lega": "Serie A",
+   "minuti": 3661,
+   "presenze": 37,
+   "presenze_totali": 41,
+   "squadre_stagione": 1
+  },
   "2025:mikel amondarain": {
    "assist": 0,
    "campionati": [
@@ -5752,10 +6954,49 @@
    "presenze_totali": 12,
    "squadre_stagione": 1
   },
+  "2025:mile svilar": {
+   "assist": 0,
+   "campionati": [
+    "Coppa Italia",
+    "Serie A"
+   ],
+   "da_titolare": 39,
+   "gol": 0,
+   "lega": "Serie A",
+   "minuti": 3510,
+   "presenze": 38,
+   "presenze_totali": 39,
+   "squadre_stagione": 1
+  },
   "2025:mohamed kaba": "vuoto",
+  "2025:moise kean": {
+   "assist": 1,
+   "campionati": [
+    "Serie A"
+   ],
+   "da_titolare": 23,
+   "gol": 8,
+   "lega": "Serie A",
+   "minuti": 2047,
+   "presenze": 26,
+   "presenze_totali": 26,
+   "squadre_stagione": 1
+  },
+  "2025:morten frendrup": {
+   "assist": 0,
+   "campionati": [
+    "Coppa Italia",
+    "Serie A"
+   ],
+   "da_titolare": 37,
+   "gol": 1,
+   "lega": "Serie A",
+   "minuti": 3316,
+   "presenze": 36,
+   "presenze_totali": 38,
+   "squadre_stagione": 1
+  },
   "2025:muhammed colley": "vuoto",
-  "2025:n baffoh": "vuoto",
-  "2025:n ballabio": "vuoto",
   "2025:n cavuoti": {
    "assist": 1,
    "campionati": [
@@ -5785,53 +7026,23 @@
    "presenze_totali": 17,
    "squadre_stagione": 1
   },
-  "2025:n galazzi": {
-   "assist": 0,
-   "campionati": [
-    "Coppa Italia",
-    "Serie B"
-   ],
-   "da_titolare": 4,
-   "gol": 0,
-   "lega": "Serie B",
-   "minuti": 452,
-   "presenze": 11,
-   "presenze_totali": 12,
-   "squadre_stagione": 1
-  },
   "2025:n grandu": "vuoto",
-  "2025:n kovac": "vuoto",
-  "2025:n obaretin": {
-   "assist": 1,
-   "campionati": [
-    "Serie B"
-   ],
-   "da_titolare": 28,
-   "gol": 0,
-   "lega": "Serie B",
-   "minuti": 2350,
-   "presenze": 29,
-   "presenze_totali": 29,
-   "squadre_stagione": 1
-  },
-  "2025:n pierini": {
-   "assist": 0,
+  "2025:n rak": "vuoto",
+  "2025:n vukasovic": "vuoto",
+  "2025:nadir zortea": {
+   "assist": 2,
    "campionati": [
     "Coppa Italia",
-    "Serie A",
-    "Serie B"
+    "Serie A"
    ],
-   "da_titolare": 7,
+   "da_titolare": 18,
    "gol": 0,
    "lega": "Serie A",
-   "minuti": 780,
-   "presenze": 11,
-   "presenze_totali": 22,
+   "minuti": 2007,
+   "presenze": 32,
+   "presenze_totali": 34,
    "squadre_stagione": 2
   },
-  "2025:n rak": "vuoto",
-  "2025:n rizzo": "vuoto",
-  "2025:n vukasovic": "vuoto",
   "2025:nahuel molina": {
    "assist": 2,
    "campionati": [
@@ -5857,6 +7068,19 @@
    "minuti": 996,
    "presenze": 25,
    "presenze_totali": 25,
+   "squadre_stagione": 1
+  },
+  "2025:nemanja matic": {
+   "assist": 1,
+   "campionati": [
+    "Serie A"
+   ],
+   "da_titolare": 33,
+   "gol": 1,
+   "lega": "Serie A",
+   "minuti": 2669,
+   "presenze": 34,
+   "presenze_totali": 34,
    "squadre_stagione": 1
   },
   "2025:nesta elphege": {
@@ -5901,7 +7125,37 @@
    "presenze_totali": 26,
    "squadre_stagione": 1
   },
+  "2025:nico paz": "vuoto",
+  "2025:nicola zalewski": {
+   "assist": 4,
+   "campionati": [
+    "Coppa Italia",
+    "Serie A"
+   ],
+   "da_titolare": 27,
+   "gol": 2,
+   "lega": "Serie A",
+   "minuti": 2161,
+   "presenze": 33,
+   "presenze_totali": 36,
+   "squadre_stagione": 1
+  },
   "2025:nicolas kuhn": "vuoto",
+  "2025:nicolo barella": {
+   "assist": 8,
+   "campionati": [
+    "Coppa Italia",
+    "Serie A",
+    "Super Cup"
+   ],
+   "da_titolare": 34,
+   "gol": 3,
+   "lega": "Serie A",
+   "minuti": 2815,
+   "presenze": 34,
+   "presenze_totali": 37,
+   "squadre_stagione": 1
+  },
   "2025:nicolo bertola": {
    "assist": 1,
    "campionati": [
@@ -5944,7 +7198,20 @@
    "presenze_totali": 12,
    "squadre_stagione": 1
   },
-  "2025:nicolo pannozzo": "vuoto",
+  "2025:nicolo fagioli": {
+   "assist": 3,
+   "campionati": [
+    "Coppa Italia",
+    "Serie A"
+   ],
+   "da_titolare": 30,
+   "gol": 2,
+   "lega": "Serie A",
+   "minuti": 2588,
+   "presenze": 33,
+   "presenze_totali": 34,
+   "squadre_stagione": 1
+  },
   "2025:nicolo rovella": {
    "assist": 1,
    "campionati": [
@@ -5959,6 +7226,21 @@
    "presenze_totali": 13,
    "squadre_stagione": 1
   },
+  "2025:nicolo zaniolo": {
+   "assist": 6,
+   "campionati": [
+    "Coppa Italia",
+    "Serie A",
+    "Süper Lig"
+   ],
+   "da_titolare": 30,
+   "gol": 5,
+   "lega": "Serie A",
+   "minuti": 2455,
+   "presenze": 32,
+   "presenze_totali": 38,
+   "squadre_stagione": 2
+  },
   "2025:nikita contini": {
    "assist": 0,
    "campionati": [
@@ -5970,6 +7252,63 @@
    "minuti": 10,
    "presenze": 1,
    "presenze_totali": 1,
+   "squadre_stagione": 1
+  },
+  "2025:nikola krstovic": {
+   "assist": 5,
+   "campionati": [
+    "Coppa Italia",
+    "Serie A"
+   ],
+   "da_titolare": 21,
+   "gol": 10,
+   "lega": "Serie A",
+   "minuti": 2047,
+   "presenze": 33,
+   "presenze_totali": 36,
+   "squadre_stagione": 2
+  },
+  "2025:nikola moro": {
+   "assist": 0,
+   "campionati": [
+    "Coppa Italia",
+    "Serie A",
+    "Super Cup"
+   ],
+   "da_titolare": 21,
+   "gol": 1,
+   "lega": "Serie A",
+   "minuti": 2004,
+   "presenze": 30,
+   "presenze_totali": 33,
+   "squadre_stagione": 1
+  },
+  "2025:nikola stulic": {
+   "assist": 0,
+   "campionati": [
+    "Jupiler Pro League",
+    "Serie A"
+   ],
+   "da_titolare": 23,
+   "gol": 4,
+   "lega": "Serie A",
+   "minuti": 1942,
+   "presenze": 34,
+   "presenze_totali": 37,
+   "squadre_stagione": 2
+  },
+  "2025:nikola vlasic": {
+   "assist": 3,
+   "campionati": [
+    "Coppa Italia",
+    "Serie A"
+   ],
+   "da_titolare": 39,
+   "gol": 8,
+   "lega": "Serie A",
+   "minuti": 3355,
+   "presenze": 37,
+   "presenze_totali": 41,
    "squadre_stagione": 1
   },
   "2025:noa lang": {
@@ -6004,36 +7343,21 @@
    "presenze_totali": 28,
    "squadre_stagione": 1
   },
-  "2025:o forson": "vuoto",
-  "2025:o raterink": {
-   "assist": 4,
-   "campionati": [
-    "Eerste Divisie",
-    "KNVB Beker",
-    "Serie A"
-   ],
-   "da_titolare": 24,
-   "gol": 3,
-   "lega": "Eerste Divisie",
-   "minuti": 1877,
-   "presenze": 23,
-   "presenze_totali": 25,
-   "squadre_stagione": 2
-  },
   "2025:obrador": {
    "assist": 3,
    "campionati": [
     "Coppa Italia",
     "Primeira Liga",
+    "Segunda Liga",
     "Serie A"
    ],
-   "da_titolare": 16,
+   "da_titolare": 17,
    "gol": 1,
    "lega": "Serie A",
    "minuti": 1277,
    "presenze": 16,
-   "presenze_totali": 18,
-   "squadre_stagione": 2
+   "presenze_totali": 20,
+   "squadre_stagione": 3
   },
   "2025:odilon kossounou": {
    "assist": 0,
@@ -6107,6 +7431,21 @@
    "presenze_totali": 27,
    "squadre_stagione": 1
   },
+  "2025:oliver sorensen": {
+   "assist": 1,
+   "campionati": [
+    "Coppa Italia",
+    "Serie A",
+    "Superliga"
+   ],
+   "da_titolare": 22,
+   "gol": 1,
+   "lega": "Serie A",
+   "minuti": 2081,
+   "presenze": 34,
+   "presenze_totali": 39,
+   "squadre_stagione": 2
+  },
   "2025:omri gandelman": {
    "assist": 1,
    "campionati": [
@@ -6137,6 +7476,20 @@
    "presenze_totali": 43,
    "squadre_stagione": 4
   },
+  "2025:oumar solet": {
+   "assist": 1,
+   "campionati": [
+    "Coppa Italia",
+    "Serie A"
+   ],
+   "da_titolare": 37,
+   "gol": 3,
+   "lega": "Serie A",
+   "minuti": 3222,
+   "presenze": 35,
+   "presenze_totali": 38,
+   "squadre_stagione": 1
+  },
   "2025:ousmane diallo": "vuoto",
   "2025:oussama el azzouzi": {
    "assist": 0,
@@ -6152,22 +7505,7 @@
    "squadre_stagione": 1
   },
   "2025:p bonanno": "vuoto",
-  "2025:p nuamah": {
-   "assist": 10,
-   "campionati": [
-    "Coppa Italia",
-    "Serie B"
-   ],
-   "da_titolare": 9,
-   "gol": 13,
-   "lega": "Serie B",
-   "minuti": 3242,
-   "presenze": 28,
-   "presenze_totali": 30,
-   "squadre_stagione": 2
-  },
   "2025:p pardel": "vuoto",
-  "2025:paco esteban": "vuoto",
   "2025:paolo vismara": "vuoto",
   "2025:pasquale mazzocchi": {
    "assist": 1,
@@ -6227,7 +7565,20 @@
    "presenze_totali": 37,
    "squadre_stagione": 2
   },
-  "2025:patrizio masini": "vuoto",
+  "2025:patrizio masini": {
+   "assist": 1,
+   "campionati": [
+    "Coppa Italia",
+    "Serie A"
+   ],
+   "da_titolare": 15,
+   "gol": 0,
+   "lega": "Serie A",
+   "minuti": 1639,
+   "presenze": 28,
+   "presenze_totali": 30,
+   "squadre_stagione": 1
+  },
   "2025:paul mendy": {
    "assist": 0,
    "campionati": [
@@ -6284,7 +7635,36 @@
    "presenze_totali": 25,
    "squadre_stagione": 2
   },
+  "2025:petar sucic": {
+   "assist": 2,
+   "campionati": [
+    "Coppa Italia",
+    "Serie A",
+    "Super Cup"
+   ],
+   "da_titolare": 24,
+   "gol": 2,
+   "lega": "Serie A",
+   "minuti": 2094,
+   "presenze": 34,
+   "presenze_totali": 40,
+   "squadre_stagione": 1
+  },
   "2025:pierluigi gollini": "vuoto",
+  "2025:pierre kalulu": {
+   "assist": 4,
+   "campionati": [
+    "Coppa Italia",
+    "Serie A"
+   ],
+   "da_titolare": 38,
+   "gol": 2,
+   "lega": "Serie A",
+   "minuti": 3462,
+   "presenze": 37,
+   "presenze_totali": 38,
+   "squadre_stagione": 1
+  },
   "2025:pietro comuzzo": {
    "assist": 0,
    "campionati": [
@@ -6310,6 +7690,21 @@
    "minuti": 124,
    "presenze": 2,
    "presenze_totali": 2,
+   "squadre_stagione": 1
+  },
+  "2025:piotr zielinski": {
+   "assist": 3,
+   "campionati": [
+    "Coppa Italia",
+    "Serie A",
+    "Super Cup"
+   ],
+   "da_titolare": 26,
+   "gol": 6,
+   "lega": "Serie A",
+   "minuti": 2374,
+   "presenze": 34,
+   "presenze_totali": 39,
    "squadre_stagione": 1
   },
   "2025:pirro": "vuoto",
@@ -6342,51 +7737,7 @@
    "presenze_totali": 14,
    "squadre_stagione": 1
   },
-  "2025:r ciervo": {
-   "assist": 3,
-   "campionati": [
-    "Coppa Italia",
-    "Serie B"
-   ],
-   "da_titolare": 35,
-   "gol": 5,
-   "lega": "Serie B",
-   "minuti": 2909,
-   "presenze": 37,
-   "presenze_totali": 38,
-   "squadre_stagione": 1
-  },
-  "2025:r kouda": {
-   "assist": 1,
-   "campionati": [
-    "Coppa Italia",
-    "Serie B"
-   ],
-   "da_titolare": 24,
-   "gol": 1,
-   "lega": "Serie B",
-   "minuti": 2058,
-   "presenze": 15,
-   "presenze_totali": 32,
-   "squadre_stagione": 2
-  },
-  "2025:r lukaku": {
-   "assist": 0,
-   "campionati": [
-    "Coppa Italia",
-    "Serie A"
-   ],
-   "da_titolare": 0,
-   "gol": 1,
-   "lega": "Serie A",
-   "minuti": 66,
-   "presenze": 5,
-   "presenze_totali": 6,
-   "squadre_stagione": 1
-  },
-  "2025:r malfitano": "vuoto",
   "2025:r obria": "vuoto",
-  "2025:r radu": "vuoto",
   "2025:radu dragusin": {
    "assist": 0,
    "campionati": [
@@ -6425,6 +7776,20 @@
    "minuti": 2281,
    "presenze": 23,
    "presenze_totali": 26,
+   "squadre_stagione": 1
+  },
+  "2025:rafael leao": {
+   "assist": 3,
+   "campionati": [
+    "Coppa Italia",
+    "Serie A"
+   ],
+   "da_titolare": 28,
+   "gol": 9,
+   "lega": "Serie A",
+   "minuti": 1949,
+   "presenze": 29,
+   "presenze_totali": 30,
    "squadre_stagione": 1
   },
   "2025:raffaele di gennaro": {
@@ -6498,6 +7863,22 @@
    "presenze_totali": 29,
    "squadre_stagione": 1
   },
+  "2025:rasmus hojlund": {
+   "assist": 5,
+   "campionati": [
+    "Coppa Italia",
+    "Premier League - Summer Series",
+    "Serie A",
+    "Super Cup"
+   ],
+   "da_titolare": 36,
+   "gol": 12,
+   "lega": "Serie A",
+   "minuti": 3106,
+   "presenze": 33,
+   "presenze_totali": 38,
+   "squadre_stagione": 2
+  },
   "2025:reda belahyane": {
    "assist": 2,
    "campionati": [
@@ -6543,6 +7924,21 @@
    "squadre_stagione": 2
   },
   "2025:riccardo gnudi": "vuoto",
+  "2025:riccardo orsolini": {
+   "assist": 1,
+   "campionati": [
+    "Coppa Italia",
+    "Serie A",
+    "Super Cup"
+   ],
+   "da_titolare": 29,
+   "gol": 10,
+   "lega": "Serie A",
+   "minuti": 2364,
+   "presenze": 35,
+   "presenze_totali": 38,
+   "squadre_stagione": 1
+  },
   "2025:richie sagrado": {
    "assist": 1,
    "campionati": [
@@ -6585,6 +7981,20 @@
    "presenze_totali": 26,
    "squadre_stagione": 1
   },
+  "2025:roberto piccoli": {
+   "assist": 1,
+   "campionati": [
+    "Coppa Italia",
+    "Serie A"
+   ],
+   "da_titolare": 18,
+   "gol": 4,
+   "lega": "Serie A",
+   "minuti": 1841,
+   "presenze": 32,
+   "presenze_totali": 34,
+   "squadre_stagione": 2
+  },
   "2025:robinio vaz": {
    "assist": 2,
    "campionati": [
@@ -6600,6 +8010,19 @@
    "presenze_totali": 27,
    "squadre_stagione": 2
   },
+  "2025:rolando mandragora": {
+   "assist": 3,
+   "campionati": [
+    "Serie A"
+   ],
+   "da_titolare": 30,
+   "gol": 7,
+   "lega": "Serie A",
+   "minuti": 2438,
+   "presenze": 34,
+   "presenze_totali": 34,
+   "squadre_stagione": 1
+  },
   "2025:romano floriani mussolini": {
    "assist": 1,
    "campionati": [
@@ -6614,7 +8037,20 @@
    "presenze_totali": 29,
    "squadre_stagione": 1
   },
-  "2025:romano schmid": "vuoto",
+  "2025:romano schmid": {
+   "assist": 8,
+   "campionati": [
+    "Bundesliga",
+    "DFB Pokal"
+   ],
+   "da_titolare": 35,
+   "gol": 4,
+   "lega": "Bundesliga",
+   "minuti": 3078,
+   "presenze": 34,
+   "presenze_totali": 35,
+   "squadre_stagione": 1
+  },
   "2025:romero d": {
    "assist": 2,
    "campionati": [
@@ -6644,40 +8080,8 @@
    "presenze_totali": 32,
    "squadre_stagione": 1
   },
-  "2025:s bocoum": {
-   "assist": 1,
-   "campionati": [
-    "Coupe de France",
-    "Ligue 2"
-   ],
-   "da_titolare": 13,
-   "gol": 0,
-   "lega": "Ligue 2",
-   "minuti": 1138,
-   "presenze": 14,
-   "presenze_totali": 15,
-   "squadre_stagione": 1
-  },
-  "2025:s cinquegrano": "vuoto",
   "2025:s di paolo": "vuoto",
-  "2025:s fernandes": "vuoto",
-  "2025:s gigot": "vuoto",
   "2025:s levak": "vuoto",
-  "2025:s lontani": "vuoto",
-  "2025:s loubao": {
-   "assist": 0,
-   "campionati": [
-    "Coupe de France"
-   ],
-   "da_titolare": 1,
-   "gol": 0,
-   "lega": "Coupe de France",
-   "minuti": 83,
-   "presenze": 2,
-   "presenze_totali": 2,
-   "squadre_stagione": 1
-  },
-  "2025:s vos": "vuoto",
   "2025:s wiafe": {
    "assist": 1,
    "campionati": [
@@ -6751,6 +8155,20 @@
    "presenze_totali": 38,
    "squadre_stagione": 1
   },
+  "2025:samuele ricci": {
+   "assist": 4,
+   "campionati": [
+    "Coppa Italia",
+    "Serie A"
+   ],
+   "da_titolare": 14,
+   "gol": 1,
+   "lega": "Serie A",
+   "minuti": 1506,
+   "presenze": 31,
+   "presenze_totali": 34,
+   "squadre_stagione": 1
+  },
   "2025:sandro kulenovic": {
    "assist": 0,
    "campionati": [
@@ -6767,6 +8185,21 @@
    "squadre_stagione": 2
   },
   "2025:sankhoun diawara": "vuoto",
+  "2025:santiago castro": {
+   "assist": 2,
+   "campionati": [
+    "Coppa Italia",
+    "Serie A",
+    "Super Cup"
+   ],
+   "da_titolare": 29,
+   "gol": 7,
+   "lega": "Serie A",
+   "minuti": 2619,
+   "presenze": 35,
+   "presenze_totali": 39,
+   "squadre_stagione": 1
+  },
   "2025:santiago gimenez": {
    "assist": 1,
    "campionati": [
@@ -6779,6 +8212,65 @@
    "minuti": 1042,
    "presenze": 16,
    "presenze_totali": 18,
+   "squadre_stagione": 1
+  },
+  "2025:santiago pierotti": {
+   "assist": 2,
+   "campionati": [
+    "Coppa Italia",
+    "Serie A"
+   ],
+   "da_titolare": 32,
+   "gol": 1,
+   "lega": "Serie A",
+   "minuti": 2741,
+   "presenze": 37,
+   "presenze_totali": 39,
+   "squadre_stagione": 1
+  },
+  "2025:sascha britschgi": {
+   "assist": 2,
+   "campionati": [
+    "Coppa Italia",
+    "Serie A",
+    "Super League"
+   ],
+   "da_titolare": 27,
+   "gol": 0,
+   "lega": "Serie A",
+   "minuti": 2543,
+   "presenze": 29,
+   "presenze_totali": 34,
+   "squadre_stagione": 2
+  },
+  "2025:saul coco": {
+   "assist": 1,
+   "campionati": [
+    "Africa Cup of Nations Qualification",
+    "Coppa Italia",
+    "Serie A"
+   ],
+   "da_titolare": 41,
+   "gol": 1,
+   "lega": "Serie A",
+   "minuti": 3637,
+   "presenze": 35,
+   "presenze_totali": 41,
+   "squadre_stagione": 2
+  },
+  "2025:scott mctominay": {
+   "assist": 3,
+   "campionati": [
+    "Coppa Italia",
+    "Serie A",
+    "Super Cup"
+   ],
+   "da_titolare": 33,
+   "gol": 10,
+   "lega": "Serie A",
+   "minuti": 3007,
+   "presenze": 33,
+   "presenze_totali": 36,
    "squadre_stagione": 1
   },
   "2025:sead kolasinac": {
@@ -6809,6 +8301,20 @@
    "presenze_totali": 14,
    "squadre_stagione": 1
   },
+  "2025:sebastian walukiewicz": {
+   "assist": 1,
+   "campionati": [
+    "Coppa Italia",
+    "Serie A"
+   ],
+   "da_titolare": 37,
+   "gol": 0,
+   "lega": "Serie A",
+   "minuti": 3190,
+   "presenze": 34,
+   "presenze_totali": 39,
+   "squadre_stagione": 2
+  },
   "2025:sebastiano desplanches": {
    "assist": 0,
    "campionati": [
@@ -6822,6 +8328,20 @@
    "presenze": 25,
    "presenze_totali": 27,
    "squadre_stagione": 1
+  },
+  "2025:sebastiano esposito": {
+   "assist": 5,
+   "campionati": [
+    "Coppa Italia",
+    "Serie A"
+   ],
+   "da_titolare": 38,
+   "gol": 7,
+   "lega": "Serie A",
+   "minuti": 3042,
+   "presenze": 36,
+   "presenze_totali": 43,
+   "squadre_stagione": 2
   },
   "2025:semuel pizzignacco": "vuoto",
   "2025:seydou fini": {
@@ -6868,6 +8388,21 @@
    "presenze_totali": 33,
    "squadre_stagione": 1
   },
+  "2025:stanislav lobotka": {
+   "assist": 1,
+   "campionati": [
+    "Coppa Italia",
+    "Serie A",
+    "Super Cup"
+   ],
+   "da_titolare": 32,
+   "gol": 1,
+   "lega": "Serie A",
+   "minuti": 2716,
+   "presenze": 32,
+   "presenze_totali": 35,
+   "squadre_stagione": 1
+  },
   "2025:stefano sabelli": {
    "assist": 0,
    "campionati": [
@@ -6895,17 +8430,19 @@
    "presenze_totali": 8,
    "squadre_stagione": 1
   },
-  "2025:t macchioni": {
-   "assist": 0,
+  "2025:strahinja pavlovic": {
+   "assist": 1,
    "campionati": [
-    "Serie A"
+    "Coppa Italia",
+    "Serie A",
+    "Super Cup"
    ],
-   "da_titolare": 1,
-   "gol": 0,
+   "da_titolare": 37,
+   "gol": 5,
    "lega": "Serie A",
-   "minuti": 90,
-   "presenze": 1,
-   "presenze_totali": 1,
+   "minuti": 3224,
+   "presenze": 34,
+   "presenze_totali": 38,
    "squadre_stagione": 1
   },
   "2025:t mazalovic": "vuoto",
@@ -6920,6 +8457,20 @@
    "minuti": 1017,
    "presenze": 21,
    "presenze_totali": 21,
+   "squadre_stagione": 1
+  },
+  "2025:teun koopmeiners": {
+   "assist": 0,
+   "campionati": [
+    "Coppa Italia",
+    "Serie A"
+   ],
+   "da_titolare": 19,
+   "gol": 0,
+   "lega": "Serie A",
+   "minuti": 1935,
+   "presenze": 33,
+   "presenze_totali": 34,
    "squadre_stagione": 1
   },
   "2025:thierry correia": {
@@ -6951,6 +8502,20 @@
    "presenze_totali": 26,
    "squadre_stagione": 1
   },
+  "2025:thomas kristensen": {
+   "assist": 0,
+   "campionati": [
+    "Coppa Italia",
+    "Serie A"
+   ],
+   "da_titolare": 29,
+   "gol": 3,
+   "lega": "Serie A",
+   "minuti": 2599,
+   "presenze": 28,
+   "presenze_totali": 31,
+   "squadre_stagione": 1
+  },
   "2025:thorir johann helgason": {
    "assist": 0,
    "campionati": [
@@ -6963,6 +8528,20 @@
    "minuti": 246,
    "presenze": 8,
    "presenze_totali": 10,
+   "squadre_stagione": 1
+  },
+  "2025:tiago gabriel": {
+   "assist": 0,
+   "campionati": [
+    "Coppa Italia",
+    "Serie A"
+   ],
+   "da_titolare": 38,
+   "gol": 2,
+   "lega": "Serie A",
+   "minuti": 3310,
+   "presenze": 37,
+   "presenze_totali": 38,
    "squadre_stagione": 1
   },
   "2025:tijjani noslin": {
@@ -7054,9 +8633,6 @@
    "presenze_totali": 30,
    "squadre_stagione": 1
   },
-  "2025:v farcomeni": "vuoto",
-  "2025:v prisco": "vuoto",
-  "2025:v vladimirov": "vuoto",
   "2025:vakoun bayo": {
    "assist": 2,
    "campionati": [
@@ -7084,6 +8660,21 @@
    "presenze": 2,
    "presenze_totali": 2,
    "squadre_stagione": 1
+  },
+  "2025:vanja milinkovic savic": {
+   "assist": 1,
+   "campionati": [
+    "Coppa Italia",
+    "Serie A",
+    "Super Cup"
+   ],
+   "da_titolare": 33,
+   "gol": 0,
+   "lega": "Serie A",
+   "minuti": 2885,
+   "presenze": 27,
+   "presenze_totali": 34,
+   "squadre_stagione": 2
   },
   "2025:vasilije adzic": {
    "assist": 0,
@@ -7116,20 +8707,50 @@
    "presenze_totali": 21,
    "squadre_stagione": 2
   },
-  "2025:w acquah": "vuoto",
-  "2025:w cheddira": {
+  "2025:vitinha carvalho olivera": {
    "assist": 1,
    "campionati": [
     "Coppa Italia",
     "Serie A"
    ],
-   "da_titolare": 13,
-   "gol": 3,
+   "da_titolare": 31,
+   "gol": 5,
    "lega": "Serie A",
-   "minuti": 1316,
-   "presenze": 17,
-   "presenze_totali": 34,
+   "minuti": 2275,
+   "presenze": 35,
+   "presenze_totali": 36,
+   "squadre_stagione": 1
+  },
+  "2025:wesley": {
+   "assist": 0,
+   "campionati": [
+    "Carioca - 1",
+    "Copa Do Brasil",
+    "Coppa Italia",
+    "Serie A",
+    "Supercopa do Brasil"
+   ],
+   "da_titolare": 49,
+   "gol": 5,
+   "lega": "Serie A",
+   "minuti": 4349,
+   "presenze": 30,
+   "presenze_totali": 52,
    "squadre_stagione": 2
+  },
+  "2025:weston mckennie": {
+   "assist": 5,
+   "campionati": [
+    "Coppa Italia",
+    "Serie A"
+   ],
+   "da_titolare": 33,
+   "gol": 5,
+   "lega": "Serie A",
+   "minuti": 3021,
+   "presenze": 36,
+   "presenze_totali": 37,
+   "squadre_stagione": 1
   },
   "2025:willem geubbels": {
    "assist": 0,
@@ -7147,6 +8768,20 @@
    "squadre_stagione": 2
   },
   "2025:wisdom amey": "vuoto",
+  "2025:wladimiro falcone": {
+   "assist": 0,
+   "campionati": [
+    "Coppa Italia",
+    "Serie A"
+   ],
+   "da_titolare": 39,
+   "gol": 0,
+   "lega": "Serie A",
+   "minuti": 3510,
+   "presenze": 38,
+   "presenze_totali": 39,
+   "squadre_stagione": 1
+  },
   "2025:y maye": "vuoto",
   "2025:yael trepy": {
    "assist": 0,
@@ -7190,6 +8825,20 @@
    "presenze_totali": 29,
    "squadre_stagione": 1
   },
+  "2025:yerry mina": {
+   "assist": 0,
+   "campionati": [
+    "Coppa Italia",
+    "Serie A"
+   ],
+   "da_titolare": 27,
+   "gol": 2,
+   "lega": "Serie A",
+   "minuti": 2252,
+   "presenze": 26,
+   "presenze_totali": 27,
+   "squadre_stagione": 1
+  },
   "2025:youssef maleh": {
    "assist": 0,
    "campionati": [
@@ -7203,6 +8852,21 @@
    "presenze_totali": 23,
    "squadre_stagione": 2
   },
+  "2025:youssouf fofana": {
+   "assist": 3,
+   "campionati": [
+    "Coppa Italia",
+    "Serie A",
+    "Super Cup"
+   ],
+   "da_titolare": 29,
+   "gol": 2,
+   "lega": "Serie A",
+   "minuti": 2378,
+   "presenze": 33,
+   "presenze_totali": 36,
+   "squadre_stagione": 1
+  },
   "2025:yunus musah": {
    "assist": 0,
    "campionati": [
@@ -7215,22 +8879,6 @@
    "minuti": 713,
    "presenze": 19,
    "presenze_totali": 22,
-   "squadre_stagione": 2
-  },
-  "2025:z athekame": {
-   "assist": 2,
-   "campionati": [
-    "Coppa Italia",
-    "Serie A",
-    "Super Cup",
-    "Super League"
-   ],
-   "da_titolare": 9,
-   "gol": 2,
-   "lega": "Serie A",
-   "minuti": 1110,
-   "presenze": 27,
-   "presenze_totali": 33,
    "squadre_stagione": 2
   },
   "2025:zakaria aboukhlal": {
@@ -7263,6 +8911,20 @@
    "presenze_totali": 42,
    "squadre_stagione": 2
   },
+  "2025:zeki celik": {
+   "assist": 2,
+   "campionati": [
+    "Coppa Italia",
+    "Serie A"
+   ],
+   "da_titolare": 33,
+   "gol": 1,
+   "lega": "Serie A",
+   "minuti": 2820,
+   "presenze": 34,
+   "presenze_totali": 35,
+   "squadre_stagione": 1
+  },
   "2025:zion suzuki": {
    "assist": 0,
    "campionati": [
@@ -7284,5 +8946,5 @@
   "sassuolo": 488,
   "venezia": 517
  },
- "versione": 3
+ "versione": 4
 }
