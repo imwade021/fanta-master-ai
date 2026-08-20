@@ -741,10 +741,17 @@ def main():
         ufficiale = safe_float(row['FVM_Ufficiale'])
         fvm = scegli_fvm(ufficiale, stima)
 
-        # Presenze totali di stagione: distingue chi non gioca da chi e'
-        # arrivato a gennaio. Si chiede solo per i casi dubbi.
+        # Minuti, partite da titolare, presenze totali e squadre di stagione.
+        #
+        # Prima si chiedevano SOLO a chi aveva meno di PRESENZE_SOSPETTE
+        # presenze, perche' servivano a distinguere chi non gioca da chi e'
+        # arrivato a gennaio. Ma i minuti servono a molto di piu': sono
+        # l'unico modo per sapere se uno ha giocato quindici partite intere
+        # o e' entrato quindici volte al novantesimo. Con il vecchio cancello
+        # 165 giocatori su 501 avevano Min e Tit a zero per costruzione, e la
+        # colonna era inutilizzabile.
         presenze_totali, squadre_stagione, da_titolare, minuti = pv, 1, 0, 0
-        if 0 < pv < PRESENZE_SOSPETTE:
+        if pv > 0:
             try:
                 extra = scout.presenze_stagione(nome_api)
             except Exception:
@@ -780,6 +787,19 @@ def main():
     scout.salva_cache()
 
     print("─" * 55)
+    # Controllo che le colonne siano davvero piene. Minuti e titolarita' erano
+    # rimaste vuote per mesi senza che nessuno se ne accorgesse: una colonna che
+    # si svuota in silenzio e' peggio di una che manca, perche' a valle qualcuno
+    # ci fa dei conti sopra.
+    con_minuti = int((pd.to_numeric(df['Min'], errors='coerce').fillna(0) > 0).sum())
+    con_titolarita = int((pd.to_numeric(df['Tit'], errors='coerce').fillna(0) > 0).sum())
+    attesi = int((pd.to_numeric(df['Pv'], errors='coerce').fillna(0) > 0).sum())
+    if con_minuti < attesi * 0.5:
+        print(f"⚠️ ATTENZIONE: solo {con_minuti} giocatori su {attesi} con presenze "
+              f"hanno i minuti. La colonna Min e' quasi vuota.")
+    else:
+        print(f"⏱️  Minuti: {con_minuti}/{attesi} · da titolare: {con_titolarita}/{attesi}")
+
     print(f"📊 Statistiche: {conteggio['id']} per Id | {conteggio['nome']} per nome | "
           f"{conteggio['scout']} proiezioni | {conteggio['nessuno']} senza dati")
     print(f"📡 Chiamate API: {scout.chiamate} (di cui {scout.lookup} lookup giocatore)"
