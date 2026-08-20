@@ -40,7 +40,11 @@ CACHE_FILE = "scout_cache.json"
 # Cambiare questo numero invalida le statistiche in cache. Va alzato ogni volta
 # che cambia il MODO in cui i dati vengono calcolati, altrimenti i valori
 # sbagliati salvati ieri sopravvivono alla correzione di oggi.
-CACHE_VERSIONE = 3
+# Alzare questo numero quando cambia CIO' CHE SI SALVA in cache, non solo il
+# codice. Le voci vecchie non hanno i campi nuovi e .get(...) restituisce zero
+# in silenzio: e' cosi' che minuti e titolarita' potevano risultare vuoti anche
+# per i giocatori a cui erano stati chiesti davvero.
+CACHE_VERSIONE = 4
 
 # Limiti fisici di UNA stagione: 38 di campionato + coppe + Europa + nazionale.
 # Oltre, il dato e' quasi certamente la somma di piu' annate o di un omonimo.
