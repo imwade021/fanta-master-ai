@@ -1,10 +1,21 @@
 ⚠️ <b>Giocatori fuori dal listone</b>
 Sono nelle rose di Serie A ma non nelle tue quotazioni:
 
+• <b>G. Artistico</b> (Lazio, A) — 31 pres, 13 gol
+• <b>A. Kostić</b> (Milan, A) — 35 pres, 11 gol
+• <b>A. Cissè</b> (Milan, A) — 22 pres, 6 gol
+• <b>L. Banda</b> (Lecce, A) — 32 pres, 5 gol
 • <b>L. Banovec</b> (Como, C) — 31 pres, 3 gol
+• <b>W. Cheddira</b> (Napoli, A) — 17 pres, 3 gol
 • <b>M&apos;Bala Nzola</b> (Fiorentina, A) — 16 pres, 3 gol
+• <b>F. Terracciano</b> (Milan, C) — 36 pres, 2 gol
+• <b>E. Del Prato</b> (Parma, D) — 35 pres, 2 gol
+• <b>K. Baldé</b> (Monza, A) — 21 pres, 2 gol
+• <b>J. Rouhi</b> (Juventus, D) — 15 pres, 1 gol
+• <b>N. Obaretin</b> (Napoli, D) — 29 pres, 0 gol
+• <b>C. Comotto</b> (Milan, C) — 28 pres, 0 gol
 • <b>N. Fortini</b> (Fiorentina, D) — 16 pres, 0 gol
-• <b>S. Wiafe</b> (Genoa, C) — 9 pres, 0 gol
-• <b>N. Cavuoti</b> (Cagliari, C) — 7 pres, 0 gol
+• <b>J. Lindstrøm</b> (Napoli, C) — 15 pres, 0 gol
+...e altri 6.
 
 Scarica le quotazioni aggiornate da Fantacalcio e caricale in <code>fanta-master-ai</code>: il motore le usa dalla notte dopo.
