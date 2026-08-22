@@ -8,6 +8,14 @@
   "lega": "Serie B"
  },
  {
+  "nome": "P. Nuamah",
+  "squadra": "Sassuolo",
+  "ruolo": "A",
+  "presenze": 28,
+  "gol": 13,
+  "lega": "Serie B"
+ },
+ {
   "nome": "A. Kostić",
   "squadra": "Milan",
   "ruolo": "A",
@@ -21,6 +29,14 @@
   "ruolo": "A",
   "presenze": 22,
   "gol": 6,
+  "lega": "Serie B"
+ },
+ {
+  "nome": "R. Ciervo",
+  "squadra": "Sassuolo",
+  "ruolo": "C",
+  "presenze": 37,
+  "gol": 5,
   "lega": "Serie B"
  },
  {
@@ -38,6 +54,22 @@
   "presenze": 31,
   "gol": 3,
   "lega": "HNL"
+ },
+ {
+  "nome": "E. Ndicka",
+  "squadra": "Roma",
+  "ruolo": "D",
+  "presenze": 31,
+  "gol": 3,
+  "lega": "Serie A"
+ },
+ {
+  "nome": "A. Joujou",
+  "squadra": "Parma",
+  "ruolo": "A",
+  "presenze": 23,
+  "gol": 3,
+  "lega": "Primeira Liga"
  },
  {
   "nome": "W. Cheddira",
@@ -72,6 +104,14 @@
   "lega": "Serie A"
  },
  {
+  "nome": "L. Cherubini",
+  "squadra": "Roma",
+  "ruolo": "A",
+  "presenze": 35,
+  "gol": 2,
+  "lega": "Serie B"
+ },
+ {
   "nome": "K. Baldé",
   "squadra": "Monza",
   "ruolo": "A",
@@ -80,9 +120,25 @@
   "lega": "Serie B"
  },
  {
+  "nome": "C. Odenthal",
+  "squadra": "Sassuolo",
+  "ruolo": "D",
+  "presenze": 18,
+  "gol": 1,
+  "lega": "Serie B"
+ },
+ {
   "nome": "J. Rouhi",
   "squadra": "Juventus",
   "ruolo": "D",
+  "presenze": 15,
+  "gol": 1,
+  "lega": "Serie B"
+ },
+ {
+  "nome": "R. Kouda",
+  "squadra": "Parma",
+  "ruolo": "C",
   "presenze": 15,
   "gol": 1,
   "lega": "Serie B"
@@ -100,6 +156,14 @@
   "squadra": "Milan",
   "ruolo": "C",
   "presenze": 28,
+  "gol": 0,
+  "lega": "Serie B"
+ },
+ {
+  "nome": "A. Ghion",
+  "squadra": "Sassuolo",
+  "ruolo": "C",
+  "presenze": 26,
   "gol": 0,
   "lega": "Serie B"
  },
@@ -128,6 +192,14 @@
   "lega": "Ligue 2"
  },
  {
+  "nome": "A. Dembélé",
+  "squadra": "Torino",
+  "ruolo": "D",
+  "presenze": 14,
+  "gol": 0,
+  "lega": "Serie B"
+ },
+ {
   "nome": "A. Brorsson",
   "squadra": "Monza",
   "ruolo": "D",
@@ -152,12 +224,28 @@
   "lega": "Serie A"
  },
  {
+  "nome": "N. Pierini",
+  "squadra": "Sassuolo",
+  "ruolo": "A",
+  "presenze": 11,
+  "gol": 0,
+  "lega": "Serie A"
+ },
+ {
   "nome": "S. Wiafe",
   "squadra": "Genoa",
   "ruolo": "C",
   "presenze": 9,
   "gol": 0,
   "lega": "Serie B"
+ },
+ {
+  "nome": "F. Israel",
+  "squadra": "Torino",
+  "ruolo": "P",
+  "presenze": 9,
+  "gol": 0,
+  "lega": "Serie A"
  },
  {
   "nome": "N. Cavuoti",
