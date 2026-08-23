@@ -1,116 +1,112 @@
 {
  "infortuni": {
-  "1457": {
-   "dal": "2026-08-20",
-   "motivo": "Suspended"
+  "118956": {
+   "dal": "2026-08-23",
+   "motivo": "Inactive"
   },
-  "162561": {
-   "dal": "2026-08-21",
+  "137976": {
+   "dal": "2026-08-23",
+   "motivo": "Muscle Injury"
+  },
+  "147859": {
+   "dal": "2026-08-23",
    "motivo": "Thigh Injury"
   },
-  "162907": {
-   "dal": "2026-08-20",
-   "motivo": "Knee Injury"
-  },
-  "180763": {
-   "dal": "2026-08-20",
-   "motivo": "Health problems"
-  },
-  "18797": {
-   "dal": "2026-08-20",
-   "motivo": "Red Card"
-  },
-  "215": {
-   "dal": "2026-08-20",
-   "motivo": "Injury"
-  },
-  "289304": {
-   "dal": "2026-08-22",
+  "19209": {
+   "dal": "2026-08-23",
    "motivo": "Inactive"
   },
-  "30436": {
-   "dal": "2026-08-20",
+  "199837": {
+   "dal": "2026-08-23",
    "motivo": "Knee Injury"
   },
-  "30603": {
-   "dal": "2026-08-20",
-   "motivo": "Suspended"
+  "212": {
+   "dal": "2026-08-23",
+   "motivo": "Hernia"
   },
-  "31057": {
-   "dal": "2026-08-20",
+  "22236": {
+   "dal": "2026-08-23",
    "motivo": "Muscle Injury"
   },
-  "31191": {
-   "dal": "2026-08-22",
-   "motivo": "Yellow Cards"
-  },
-  "31226": {
-   "dal": "2026-08-20",
-   "motivo": "Knee Injury"
-  },
-  "31390": {
-   "dal": "2026-08-22",
-   "motivo": "Knee Injury"
-  },
-  "31532": {
-   "dal": "2026-08-22",
+  "22254": {
+   "dal": "2026-08-23",
    "motivo": "Inactive"
   },
-  "354533": {
-   "dal": "2026-08-20",
-   "motivo": "Achilles Tendon Injury"
+  "26095": {
+   "dal": "2026-08-23",
+   "motivo": "Hip Injury"
   },
-  "362061": {
-   "dal": "2026-08-20",
-   "motivo": "Knee Injury"
-  },
-  "383026": {
-   "dal": "2026-08-20",
-   "motivo": "Knee Injury"
-  },
-  "388547": {
-   "dal": "2026-08-20",
-   "motivo": "Knee Injury"
-  },
-  "394438": {
-   "dal": "2026-08-22",
+  "268341": {
+   "dal": "2026-08-23",
    "motivo": "Injury"
   },
-  "404523": {
-   "dal": "2026-08-22",
+  "269": {
+   "dal": "2026-08-23",
    "motivo": "Inactive"
   },
-  "408635": {
-   "dal": "2026-08-22",
+  "289761": {
+   "dal": "2026-08-23",
+   "motivo": "Ankle Injury"
+  },
+  "291780": {
+   "dal": "2026-08-23",
    "motivo": "Muscle Injury"
   },
-  "452033": {
-   "dal": "2026-08-20",
-   "motivo": "Knee Injury"
+  "30537": {
+   "dal": "2026-08-23",
+   "motivo": "Ankle Injury"
   },
-  "499380": {
-   "dal": "2026-08-20",
-   "motivo": "Yellow Cards"
-  },
-  "56293": {
-   "dal": "2026-08-22",
-   "motivo": "Knee Injury"
-  },
-  "56851": {
-   "dal": "2026-08-22",
-   "motivo": "Inactive"
-  },
-  "584116": {
-   "dal": "2026-08-20",
+  "31094": {
+   "dal": "2026-08-23",
    "motivo": "Injury"
   },
-  "8481": {
-   "dal": "2026-08-20",
-   "motivo": "Foot Injury"
+  "328046": {
+   "dal": "2026-08-23",
+   "motivo": "Broken Leg"
   },
-  "881": {
-   "dal": "2026-08-20",
+  "335071": {
+   "dal": "2026-08-23",
+   "motivo": "Thigh Injury"
+  },
+  "342055": {
+   "dal": "2026-08-23",
+   "motivo": "Knee Injury"
+  },
+  "353609": {
+   "dal": "2026-08-23",
+   "motivo": "Knee Injury"
+  },
+  "41371": {
+   "dal": "2026-08-23",
+   "motivo": "Knee Injury"
+  },
+  "451504": {
+   "dal": "2026-08-23",
    "motivo": "Muscle Injury"
+  },
+  "453906": {
+   "dal": "2026-08-23",
+   "motivo": "Muscle Injury"
+  },
+  "48372": {
+   "dal": "2026-08-23",
+   "motivo": "Injury"
+  },
+  "56266": {
+   "dal": "2026-08-23",
+   "motivo": "Shoulder Injury"
+  },
+  "59513": {
+   "dal": "2026-08-23",
+   "motivo": "Knee Injury"
+  },
+  "719": {
+   "dal": "2026-08-23",
+   "motivo": "Lacking Match Fitness"
+  },
+  "94562": {
+   "dal": "2026-08-23",
+   "motivo": "Ankle Injury"
   }
  },
  "infortuni_stagione_2025": {
