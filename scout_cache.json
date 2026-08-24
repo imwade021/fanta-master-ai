@@ -1,112 +1,40 @@
 {
  "infortuni": {
-  "118956": {
-   "dal": "2026-08-23",
+  "136087": {
+   "dal": "2026-08-24",
+   "motivo": "Knee Injury"
+  },
+  "1632": {
+   "dal": "2026-08-24",
+   "motivo": "Knee Injury"
+  },
+  "1775": {
+   "dal": "2026-08-24",
    "motivo": "Inactive"
   },
-  "137976": {
-   "dal": "2026-08-23",
+  "1852": {
+   "dal": "2026-08-24",
    "motivo": "Muscle Injury"
   },
-  "147859": {
-   "dal": "2026-08-23",
+  "31099": {
+   "dal": "2026-08-24",
+   "motivo": "Muscle Injury"
+  },
+  "31507": {
+   "dal": "2026-08-24",
+   "motivo": "Back Injury"
+  },
+  "626686": {
+   "dal": "2026-08-24",
+   "motivo": "Knee Injury"
+  },
+  "63934": {
+   "dal": "2026-08-24",
+   "motivo": "Knee Injury"
+  },
+  "782": {
+   "dal": "2026-08-24",
    "motivo": "Thigh Injury"
-  },
-  "19209": {
-   "dal": "2026-08-23",
-   "motivo": "Inactive"
-  },
-  "199837": {
-   "dal": "2026-08-23",
-   "motivo": "Knee Injury"
-  },
-  "212": {
-   "dal": "2026-08-23",
-   "motivo": "Hernia"
-  },
-  "22236": {
-   "dal": "2026-08-23",
-   "motivo": "Muscle Injury"
-  },
-  "22254": {
-   "dal": "2026-08-23",
-   "motivo": "Inactive"
-  },
-  "26095": {
-   "dal": "2026-08-23",
-   "motivo": "Hip Injury"
-  },
-  "268341": {
-   "dal": "2026-08-23",
-   "motivo": "Injury"
-  },
-  "269": {
-   "dal": "2026-08-23",
-   "motivo": "Inactive"
-  },
-  "289761": {
-   "dal": "2026-08-23",
-   "motivo": "Ankle Injury"
-  },
-  "291780": {
-   "dal": "2026-08-23",
-   "motivo": "Muscle Injury"
-  },
-  "30537": {
-   "dal": "2026-08-23",
-   "motivo": "Ankle Injury"
-  },
-  "31094": {
-   "dal": "2026-08-23",
-   "motivo": "Injury"
-  },
-  "328046": {
-   "dal": "2026-08-23",
-   "motivo": "Broken Leg"
-  },
-  "335071": {
-   "dal": "2026-08-23",
-   "motivo": "Thigh Injury"
-  },
-  "342055": {
-   "dal": "2026-08-23",
-   "motivo": "Knee Injury"
-  },
-  "353609": {
-   "dal": "2026-08-23",
-   "motivo": "Knee Injury"
-  },
-  "41371": {
-   "dal": "2026-08-23",
-   "motivo": "Knee Injury"
-  },
-  "451504": {
-   "dal": "2026-08-23",
-   "motivo": "Muscle Injury"
-  },
-  "453906": {
-   "dal": "2026-08-23",
-   "motivo": "Muscle Injury"
-  },
-  "48372": {
-   "dal": "2026-08-23",
-   "motivo": "Injury"
-  },
-  "56266": {
-   "dal": "2026-08-23",
-   "motivo": "Shoulder Injury"
-  },
-  "59513": {
-   "dal": "2026-08-23",
-   "motivo": "Knee Injury"
-  },
-  "719": {
-   "dal": "2026-08-23",
-   "motivo": "Lacking Match Fitness"
-  },
-  "94562": {
-   "dal": "2026-08-23",
-   "motivo": "Ankle Injury"
   }
  },
  "infortuni_stagione_2025": {
