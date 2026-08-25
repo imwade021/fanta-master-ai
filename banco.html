@@ -1,0 +1,1143 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#10141c">
+<title>Banco — asta fantacalcio</title>
+<style>
+:root{
+  --fondo:#10141c; --carta:#1a2029; --rilievo:#222a35; --linea:#2c3542;
+  --testo:#e9ecf1; --fioco:#8b94a3; --tenue:#5d6674;
+  --oro:#f0b429; --allarme:#e06c5b; --verde:#6fbf9b; --acqua:#63a8c9;
+  --raggio:14px;
+  --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --mono:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,"Roboto Mono",monospace;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;padding:0}
+body{
+  background:var(--fondo); color:var(--testo); font-family:var(--sans);
+  font-size:15px; line-height:1.45; padding-bottom:calc(74px + env(safe-area-inset-bottom));
+  -webkit-font-smoothing:antialiased;
+}
+button,input,select{font:inherit;color:inherit}
+button{background:none;border:none;cursor:pointer}
+.wrap{max-width:560px;margin:0 auto;padding:0 14px}
+
+/* ---------- testata ---------- */
+header{
+  position:sticky;top:0;z-index:40;background:rgba(16,20,28,.94);
+  backdrop-filter:blur(12px);border-bottom:1px solid var(--linea);
+  padding-top:env(safe-area-inset-top);
+}
+.barra{display:flex;align-items:stretch;gap:1px;background:var(--linea);
+  border-bottom:1px solid var(--linea)}
+.cella{flex:1;background:var(--fondo);padding:9px 10px;text-align:center}
+.cella .et{font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--tenue)}
+.cella .vl{font-family:var(--mono);font-size:17px;font-weight:600;
+  font-variant-numeric:tabular-nums;margin-top:1px}
+
+/* ---------- schede ---------- */
+nav{
+  position:fixed;left:0;right:0;bottom:0;z-index:50;
+  background:rgba(16,20,28,.97);backdrop-filter:blur(12px);
+  border-top:1px solid var(--linea);display:flex;
+  padding-bottom:env(safe-area-inset-bottom);
+}
+nav button{flex:1;padding:13px 4px 14px;font-size:10.5px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--tenue);border-top:2px solid transparent}
+nav button.on{color:var(--oro);border-top-color:var(--oro)}
+
+/* ---------- il numero ---------- */
+.banco{background:var(--carta);border:1px solid var(--linea);border-radius:var(--raggio);
+  margin:14px 0;overflow:hidden}
+.ruoli{display:flex;gap:1px;background:var(--linea)}
+.ruoli button{flex:1;background:var(--carta);padding:11px 0;font-size:12px;font-weight:600;
+  letter-spacing:.1em;color:var(--tenue)}
+.ruoli button.on{background:var(--rilievo);color:var(--testo)}
+.ruoli button .mini{display:block;font-size:9.5px;font-weight:400;color:var(--tenue);
+  letter-spacing:.04em;margin-top:2px}
+.ruoli button.on .mini{color:var(--fioco)}
+.ruoli button.pieno{color:var(--verde)}
+
+.cifra{padding:22px 18px 16px;text-align:center}
+.cifra .et{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--fioco)}
+.cifra .n{font-family:var(--mono);font-size:66px;font-weight:700;line-height:.94;
+  color:var(--oro);font-variant-numeric:tabular-nums;letter-spacing:-.04em;margin:6px 0 2px;
+  transition:color .18s}
+.cifra.rosso .n{color:var(--allarme)}
+.cifra .sotto{font-size:13px;color:var(--fioco);margin-top:6px}
+.cifra .sotto b{color:var(--testo);font-weight:600}
+
+/* barra di cassa */
+.cassa{display:flex;height:7px;margin:2px 14px 0;border-radius:4px;overflow:hidden;
+  background:var(--rilievo)}
+.cassa i{display:block;height:100%}
+.legenda{display:flex;justify-content:space-between;padding:7px 14px 14px;
+  font-size:10.5px;color:var(--tenue)}
+.legenda span{display:flex;align-items:center;gap:5px}
+.pallino{width:7px;height:7px;border-radius:2px;display:inline-block}
+
+/* ---------- griglia caselle ---------- */
+.sez{margin:18px 0 8px;display:flex;align-items:baseline;justify-content:space-between}
+.sez h2{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--fioco);
+  margin:0;font-weight:600}
+.sez .nota{font-size:11px;color:var(--tenue)}
+
+.riga{display:flex;align-items:center;gap:10px;padding:9px 12px;background:var(--carta);
+  border:1px solid var(--linea);border-radius:10px;margin-bottom:7px}
+.riga .rl{width:26px;font-family:var(--mono);font-size:13px;font-weight:700;color:var(--fioco);
+  flex:none;text-align:center}
+.caselle{display:flex;flex-wrap:wrap;gap:4px;flex:1}
+.cs{min-width:30px;height:26px;border-radius:6px;display:flex;align-items:center;
+  justify-content:center;font-family:var(--mono);font-size:11.5px;font-variant-numeric:tabular-nums;
+  padding:0 5px}
+.cs.presa{background:rgba(111,191,155,.16);color:var(--verde);
+  border:1px solid rgba(111,191,155,.3);font-weight:600}
+.cs.vuota{background:var(--rilievo);color:var(--tenue);border:1px solid var(--linea)}
+.riga .tot{font-family:var(--mono);font-size:12px;color:var(--fioco);flex:none;
+  font-variant-numeric:tabular-nums}
+
+/* ---------- pulsanti ---------- */
+.azioni{display:flex;gap:8px;margin:14px 0}
+.btn{flex:1;padding:14px 10px;border-radius:11px;font-size:13.5px;font-weight:600;
+  text-align:center;border:1px solid var(--linea);background:var(--carta)}
+.btn.primo{background:var(--oro);color:#171307;border-color:var(--oro)}
+.btn.spento{color:var(--fioco)}
+.btn:active{transform:scale(.98)}
+
+.avviso{border-radius:11px;padding:11px 13px;font-size:13px;margin:12px 0;
+  border:1px solid rgba(224,108,91,.4);background:rgba(224,108,91,.1);color:#f2b3a8}
+.avviso b{color:var(--allarme)}
+.avviso.calmo{border-color:rgba(99,168,201,.35);background:rgba(99,168,201,.09);color:#bcd9e6}
+
+/* ---------- listone ---------- */
+.filtri{position:sticky;top:0;z-index:20;background:var(--fondo);padding:10px 0 8px}
+.cerca{width:100%;padding:11px 13px;border-radius:10px;background:var(--carta);
+  border:1px solid var(--linea);font-size:15px}
+.cerca::placeholder{color:var(--tenue)}
+.chip{display:flex;gap:5px;margin-top:8px;overflow-x:auto;padding-bottom:2px;
+  scrollbar-width:none}
+.chip::-webkit-scrollbar{display:none}
+.chip button{padding:6px 11px;border-radius:20px;font-size:11.5px;white-space:nowrap;
+  border:1px solid var(--linea);background:var(--carta);color:var(--fioco)}
+.chip button.on{background:var(--rilievo);color:var(--testo);border-color:var(--tenue)}
+
+.g{display:flex;align-items:center;gap:10px;padding:10px 11px;border-bottom:1px solid var(--linea)}
+.g.via{opacity:.34}
+.g .id{flex:1;min-width:0}
+.g .nm{font-size:14.5px;font-weight:600;white-space:nowrap;overflow:hidden;
+  text-overflow:ellipsis}
+.g .sq{font-size:11px;color:var(--tenue);margin-top:1px;display:flex;gap:6px;
+  align-items:center;flex-wrap:wrap}
+.g .pz{font-family:var(--mono);font-size:16px;font-weight:600;color:var(--oro);
+  font-variant-numeric:tabular-nums;flex:none;text-align:right;min-width:38px}
+.g .pz small{display:block;font-size:9.5px;color:var(--tenue);font-weight:400}
+.tag{font-size:9.5px;padding:1.5px 5px;border-radius:4px;letter-spacing:.04em;
+  border:1px solid var(--linea);color:var(--fioco);white-space:nowrap}
+.tag.f1{border-color:rgba(240,180,41,.5);color:var(--oro)}
+.tag.rig{border-color:rgba(99,168,201,.5);color:var(--acqua)}
+.tag.buono{border-color:rgba(111,191,155,.5);color:var(--verde)}
+.tag.ignoto{border-color:rgba(224,108,91,.45);color:var(--allarme)}
+.barrina{width:34px;height:4px;border-radius:2px;background:var(--rilievo);
+  overflow:hidden;flex:none}
+.barrina i{display:block;height:100%;background:var(--verde)}
+
+/* ---------- foglio ---------- */
+.velo{position:fixed;inset:0;z-index:60;background:rgba(8,10,14,.72);
+  display:flex;align-items:flex-end;justify-content:center;
+  animation:sfuma .16s ease}
+@keyframes sfuma{from{opacity:0}to{opacity:1}}
+.foglio{width:100%;max-width:560px;max-height:88vh;overflow-y:auto;
+  background:var(--carta);border-radius:18px 18px 0 0;border-top:1px solid var(--linea);
+  padding:8px 16px calc(22px + env(safe-area-inset-bottom));
+  animation:sali .22s cubic-bezier(.2,.8,.3,1)}
+@keyframes sali{from{transform:translateY(28px)}to{transform:translateY(0)}}
+.maniglia{width:38px;height:4px;border-radius:2px;background:var(--linea);margin:6px auto 14px}
+.foglio h3{margin:0 0 2px;font-size:21px}
+.foglio .oc{font-size:12.5px;color:var(--fioco);margin-bottom:14px}
+
+.fatti{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--linea);
+  border:1px solid var(--linea);border-radius:10px;overflow:hidden;margin-bottom:12px}
+.fatto{background:var(--carta);padding:9px 8px;text-align:center}
+.fatto .et{font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--tenue)}
+.fatto .vl{font-family:var(--mono);font-size:16px;font-weight:600;margin-top:2px;
+  font-variant-numeric:tabular-nums}
+.prosa{font-size:13px;color:var(--fioco);line-height:1.55;margin:10px 0}
+.prosa b{color:var(--testo);font-weight:600}
+
+.spesa{display:flex;align-items:center;gap:9px;margin:14px 0 6px}
+.spesa input{flex:1;padding:13px;border-radius:10px;background:var(--rilievo);
+  border:1px solid var(--linea);font-family:var(--mono);font-size:19px;text-align:center;
+  font-variant-numeric:tabular-nums}
+.spesa button{width:46px;height:46px;border-radius:10px;background:var(--rilievo);
+  border:1px solid var(--linea);font-size:20px;color:var(--fioco);flex:none}
+
+/* ---------- piano ---------- */
+.campo{display:flex;align-items:center;justify-content:space-between;padding:11px 12px;
+  background:var(--carta);border:1px solid var(--linea);border-radius:10px;margin-bottom:7px}
+.campo label{font-size:13.5px}
+.campo .aiuto{font-size:11px;color:var(--tenue);margin-top:2px}
+.campo input,.campo select{width:82px;padding:8px;border-radius:8px;background:var(--rilievo);
+  border:1px solid var(--linea);font-family:var(--mono);text-align:center;font-size:15px}
+.campo select{width:auto;font-family:var(--sans);font-size:13px;text-align:left}
+
+.fasciera{background:var(--carta);border:1px solid var(--linea);border-radius:10px;
+  padding:11px 12px;margin-bottom:7px}
+.fasciera .cap{display:flex;justify-content:space-between;align-items:baseline;
+  margin-bottom:9px}
+.fasciera .cap b{font-size:14px}
+.fasciera .cap span{font-family:var(--mono);font-size:12.5px;color:var(--fioco)}
+.livello{display:flex;align-items:center;gap:9px;padding:5px 0}
+.livello .nome{flex:1;font-size:12.5px;color:var(--fioco)}
+.livello .nome i{font-style:normal;color:var(--tenue);font-size:11px}
+.livello .cnt{font-family:var(--mono);font-size:15px;width:22px;text-align:center;
+  font-variant-numeric:tabular-nums}
+.livello button{width:30px;height:30px;border-radius:8px;background:var(--rilievo);
+  border:1px solid var(--linea);color:var(--fioco);font-size:16px;line-height:1}
+
+.piede{font-size:11.5px;color:var(--tenue);line-height:1.6;margin:20px 0 8px;
+  padding-top:14px;border-top:1px solid var(--linea)}
+.vuoto{text-align:center;color:var(--tenue);font-size:13px;padding:34px 20px;line-height:1.6}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="barra">
+    <div class="cella"><div class="et">Cassa</div><div class="vl" id="hCassa">—</div></div>
+    <div class="cella"><div class="et">Caselle</div><div class="vl" id="hCaselle">—</div></div>
+    <div class="cella"><div class="et">Inflazione</div><div class="vl" id="hInfl">—</div></div>
+  </div>
+</header>
+
+<main class="wrap" id="vista"></main>
+
+<nav>
+  <button data-t="asta" class="on">Asta</button>
+  <button data-t="listone">Listone</button>
+  <button data-t="piano">Piano</button>
+</nav>
+
+<div id="modale"></div>
+
+<script id="dati" type="application/json">{"aggiornato":"2026-08-25","squadre":12,"budget":500,"slot":{"P":3,"D":8,"C":8,"A":6},"rotture":{"P":[{"fascia":1,"da":30,"a":13,"quanti":12,"rif":21},{"fascia":2,"da":12,"a":1,"quanti":12,"rif":4},{"fascia":3,"da":1,"a":1,"quanti":12,"rif":1},{"fascia":4,"da":1,"a":1,"quanti":12,"rif":1},{"fascia":5,"da":1,"a":1,"quanti":13,"rif":1}],"D":[{"fascia":1,"da":120,"a":21,"quanti":12,"rif":23},{"fascia":2,"da":19,"a":13,"quanti":12,"rif":16},{"fascia":3,"da":13,"a":11,"quanti":12,"rif":12},{"fascia":4,"da":11,"a":10,"quanti":12,"rif":10},{"fascia":5,"da":9,"a":1,"quanti":129,"rif":1}],"C":[{"fascia":1,"da":113,"a":40,"quanti":12,"rif":53},{"fascia":2,"da":37,"a":22,"quanti":12,"rif":28},{"fascia":3,"da":21,"a":18,"quanti":12,"rif":19},{"fascia":4,"da":17,"a":13,"quanti":12,"rif":14},{"fascia":5,"da":13,"a":1,"quanti":127,"rif":6}],"A":[{"fascia":1,"da":167,"a":55,"quanti":12,"rif":96},{"fascia":2,"da":53,"a":28,"quanti":12,"rif":38},{"fascia":3,"da":27,"a":16,"quanti":12,"rif":21},{"fascia":4,"da":15,"a":11,"quanti":12,"rif":13},{"fascia":5,"da":10,"a":1,"quanti":40,"rif":1}]},"giocatori":[{"id":2764,"n":"Martinez L.","r":"A","s":"Inter","p":167,"f":1,"c":82,"nc":"titolare fisso","y":7.9,"pv":30,"mv":6.42,"fm":8.25,"g":17,"a":6,"rig":null,"v":0.65,"vc":-4,"q":35},{"id":5585,"n":"Malen","r":"A","s":"Roma","p":165,"f":1,"c":61,"nc":"gioca, ma non sempre dall'inizio","y":8.24,"pv":18,"mv":6.72,"fm":8.97,"g":14,"a":2,"rig":"rigorista","v":0.99,"vc":-26,"q":34},{"id":4871,"n":"Thuram","r":"A","s":"Inter","p":127,"f":1,"c":78,"nc":"gioca, ma non sempre dall'inizio","y":7.65,"pv":29,"mv":6.43,"fm":7.95,"g":13,"a":6,"rig":null,"v":0.4,"vc":-10,"q":29},{"id":6052,"n":"Hojlund","r":"A","s":"Napoli","p":123,"f":1,"c":93,"nc":"titolare fisso","y":7.27,"pv":33,"mv":6.21,"fm":7.44,"g":12,"a":5,"rig":"ha calciato rigori","v":-0.17,"vc":12,"q":28},{"id":254,"n":"Dimarco","r":"D","s":"Inter","p":120,"f":1,"c":95,"nc":"titolare fisso","y":7.33,"pv":35,"mv":6.6,"fm":7.64,"g":7,"a":17,"rig":null,"v":1.08,"vc":5,"q":32},{"id":6875,"n":"Paz N.","r":"C","s":"Como","p":113,"f":1,"c":93,"nc":"titolare fisso","y":7.1,"pv":35,"mv":6.37,"fm":7.3,"g":12,"a":5,"rig":"ha calciato rigori","v":0.22,"vc":13,"q":30},{"id":4777,"n":"McTominay","r":"C","s":"Napoli","p":109,"f":1,"c":93,"nc":"titolare fisso","y":7.06,"pv":33,"mv":6.39,"fm":7.26,"g":10,"a":2,"rig":"ha calciato rigori","v":0.16,"vc":16,"q":28},{"id":6397,"n":"Ramos G.","r":"A","s":"Milan","p":105,"f":1,"c":null,"nc":"nessuno storico utile","y":null,"pv":0,"mv":null,"fm":6.69,"g":0,"a":0,"rig":null,"v":null,"vc":null,"q":27},{"id":2194,"n":"Calhanoglu","r":"C","s":"Inter","p":104,"f":1,"c":73,"nc":"titolare fisso","y":7.27,"pv":22,"mv":6.52,"fm":7.64,"g":9,"a":4,"rig":"rigorista","v":0.39,"vc":-9,"q":27},{"id":5951,"n":"Kolo Muani","r":"A","s":"Juventus","p":102,"f":1,"c":null,"nc":"nessuno storico utile","y":null,"pv":0,"mv":null,"fm":6.29,"g":0,"a":0,"rig":null,"v":null,"vc":null,"q":26},{"id":2167,"n":"Orsolini","r":"C","s":"Bologna","p":91,"f":1,"c":84,"nc":"gioca, ma non sempre dall'inizio","y":6.66,"pv":34,"mv":6.06,"fm":6.76,"g":10,"a":1,"rig":"rigorista","v":-0.16,"vc":2,"q":26},{"id":2097,"n":"Kean","r":"A","s":"Fiorentina","p":91,"f":1,"c":80,"nc":"titolare fisso","y":6.73,"pv":26,"mv":5.88,"fm":6.77,"g":8,"a":1,"rig":"ha calciato rigori","v":-0.48,"vc":1,"q":25},{"id":6434,"n":"Yildiz","r":"A","s":"Juventus","p":87,"f":1,"c":95,"nc":"titolare fisso","y":7.17,"pv":35,"mv":6.39,"fm":7.3,"g":10,"a":6,"rig":"ha calciato rigori","v":0.04,"vc":15,"q":23},{"id":2423,"n":"Pulisic","r":"C","s":"Milan","p":82,"f":1,"c":68,"nc":"gioca, ma non sempre dall'inizio","y":6.88,"pv":27,"mv":6.15,"fm":7.07,"g":8,"a":4,"rig":"ha calciato rigori","v":-0.04,"vc":-16,"q":25},{"id":7017,"n":"Douvikas","r":"A","s":"Como","p":72,"f":1,"c":96,"nc":"titolare fisso","y":7.23,"pv":36,"mv":6.18,"fm":7.38,"g":14,"a":1,"rig":"ha calciato rigori","v":0.12,"vc":18,"q":20},{"id":2137,"n":"Scamacca","r":"A","s":"Atalanta","p":60,"f":1,"c":63,"nc":"gioca, ma non sempre dall'inizio","y":7.29,"pv":22,"mv":6.18,"fm":7.55,"g":10,"a":1,"rig":"ha calciato rigori","v":0.24,"vc":-16,"q":19},{"id":2379,"n":"Rabiot","r":"C","s":"Milan","p":59,"f":1,"c":87,"nc":"titolare fisso","y":6.82,"pv":29,"mv":6.33,"fm":6.98,"g":6,"a":4,"rig":null,"v":0.07,"vc":7,"q":22},{"id":5637,"n":"Davis K.","r":"A","s":"Udinese","p":56,"f":1,"c":80,"nc":"gioca, ma non sempre dall'inizio","y":7.2,"pv":30,"mv":6.32,"fm":7.37,"g":10,"a":4,"rig":"rigorista","v":0.21,"vc":2,"q":19},{"id":4510,"n":"Leao","r":"A","s":"Milan","p":55,"f":1,"c":76,"nc":"gioca, ma non sempre dall'inizio","y":6.8,"pv":28,"mv":5.88,"fm":6.86,"g":9,"a":3,"rig":"ha calciato rigori","v":-0.25,"vc":-3,"q":18},{"id":531,"n":"Berardi","r":"A","s":"Venezia","p":53,"f":2,"c":44,"nc":"gioca, ma non sempre dall'inizio","y":7.05,"pv":26,"mv":6.31,"fm":7.19,"g":8,"a":4,"rig":"rigorista","v":0.09,"vc":-36,"q":18},{"id":5995,"n":"De Ketelaere","r":"A","s":"Atalanta","p":49,"f":2,"c":85,"nc":"titolare fisso","y":6.6,"pv":31,"mv":6.21,"fm":6.6,"g":3,"a":5,"rig":null,"v":-0.39,"vc":6,"q":17},{"id":7126,"n":"Baturina","r":"C","s":"Como","p":47,"f":1,"c":71,"nc":"gioca, ma non sempre dall'inizio","y":6.92,"pv":25,"mv":6.3,"fm":7.14,"g":6,"a":3,"rig":null,"v":0.21,"vc":-14,"q":19},{"id":2766,"n":"Zaniolo","r":"C","s":"Udinese","p":46,"f":1,"c":80,"nc":"gioca, ma non sempre dall'inizio","y":6.66,"pv":31,"mv":6.26,"fm":6.77,"g":5,"a":5,"rig":null,"v":-0.11,"vc":-4,"q":18},{"id":2517,"n":"De Bruyne","r":"C","s":"Napoli","p":45,"f":1,"c":57,"nc":"gioca, ma non sempre dall'inizio","y":6.92,"pv":17,"mv":6.26,"fm":7.24,"g":5,"a":2,"rig":"rigorista","v":0.28,"vc":-30,"q":15},{"id":6435,"n":"Krstovic","r":"A","s":"Atalanta","p":44,"f":2,"c":79,"nc":"gioca, ma non sempre dall'inizio","y":7.07,"pv":32,"mv":6.16,"fm":7.19,"g":10,"a":5,"rig":null,"v":0.21,"vc":1,"q":18},{"id":7071,"n":"Esposito F.P.","r":"A","s":"Inter","p":43,"f":2,"c":70,"nc":"gioca, ma non sempre dall'inizio","y":6.93,"pv":31,"mv":6.26,"fm":7.02,"g":7,"a":3,"rig":null,"v":0.13,"vc":-9,"q":16},{"id":632,"n":"Zaccagni","r":"C","s":"Lazio","p":42,"f":1,"c":82,"nc":"titolare fisso","y":6.03,"pv":26,"mv":5.88,"fm":5.96,"g":3,"a":0,"rig":"ha calciato rigori","v":-0.63,"vc":2,"q":16},{"id":5559,"n":"Da Cunha","r":"C","s":"Como","p":41,"f":1,"c":93,"nc":"titolare fisso","y":6.79,"pv":35,"mv":6.34,"fm":6.91,"g":6,"a":4,"rig":"rigorista","v":0.17,"vc":13,"q":18},{"id":6060,"n":"Laurientè","r":"A","s":"Sassuolo","p":41,"f":2,"c":92,"nc":"gioca, ma non sempre dall'inizio","y":6.92,"pv":37,"mv":6.23,"fm":6.99,"g":7,"a":9,"rig":null,"v":0.19,"vc":18,"q":15},{"id":4998,"n":"Molina N.","r":"D","s":"Roma","p":40,"f":1,"c":null,"nc":"nessuno storico utile","y":null,"pv":0,"mv":null,"fm":6.42,"g":0,"a":0,"rig":null,"v":null,"vc":null,"q":18},{"id":6908,"n":"Atta","r":"C","s":"Juventus","p":40,"f":1,"c":63,"nc":"gioca, ma non sempre dall'inizio","y":6.75,"pv":32,"mv":6.36,"fm":6.88,"g":5,"a":3,"rig":null,"v":0.15,"vc":-19,"q":17},{"id":7181,"n":"Wesley","r":"D","s":"Roma","p":38,"f":1,"c":89,"nc":"titolare fisso","y":6.37,"pv":30,"mv":6.12,"fm":6.47,"g":5,"a":0,"rig":null,"v":0.05,"vc":-4,"q":17},{"id":2061,"n":"Simeone","r":"A","s":"Torino","p":38,"f":2,"c":84,"nc":"gioca, ma non sempre dall'inizio","y":6.99,"pv":32,"mv":6.08,"fm":7.09,"g":11,"a":0,"rig":null,"v":0.29,"vc":5,"q":15},{"id":1870,"n":"Barella","r":"C","s":"Inter","p":37,"f":2,"c":92,"nc":"titolare fisso","y":6.62,"pv":34,"mv":6.28,"fm":6.71,"g":3,"a":9,"rig":null,"v":0.02,"vc":12,"q":17},{"id":5687,"n":"Vlasic","r":"C","s":"Torino","p":37,"f":2,"c":99,"nc":"titolare fisso","y":6.59,"pv":37,"mv":6.03,"fm":6.66,"g":8,"a":3,"rig":"rigorista","v":-0.02,"vc":18,"q":14},{"id":6572,"n":"Castro S.","r":"A","s":"Roma","p":37,"f":2,"c":88,"nc":"gioca, ma non sempre dall'inizio","y":6.52,"pv":35,"mv":5.93,"fm":6.51,"g":7,"a":1,"rig":null,"v":-0.25,"vc":9,"q":14},{"id":6675,"n":"Dovbyk","r":"A","s":"Bologna","p":34,"f":2,"c":28,"nc":"gioca, ma non sempre dall'inizio","y":6.7,"pv":13,"mv":6.0,"fm":6.77,"g":3,"a":1,"rig":null,"v":-0.08,"vc":-54,"q":16},{"id":4973,"n":"McKennie","r":"C","s":"Juventus","p":32,"f":2,"c":95,"nc":"titolare fisso","y":6.6,"pv":34,"mv":6.13,"fm":6.68,"g":5,"a":6,"rig":null,"v":0.0,"vc":12,"q":17},{"id":309,"n":"Dybala","r":"A","s":"Roma","p":31,"f":2,"c":61,"nc":"gioca, ma non sempre dall'inizio","y":6.7,"pv":21,"mv":6.26,"fm":6.74,"g":2,"a":7,"rig":"ha calciato rigori","v":0.03,"vc":-22,"q":14},{"id":5841,"n":"Svilar","r":"P","s":"Roma","p":30,"f":1,"c":100,"nc":"titolare fisso","y":5.4,"pv":38,"mv":6.26,"fm":5.45,"g":0,"a":0,"rig":null,"v":0.15,"vc":2,"q":18},{"id":7314,"n":"Taylor K.","r":"C","s":"Lazio","p":30,"f":2,"c":75,"nc":"titolare fisso","y":6.46,"pv":17,"mv":6.06,"fm":6.56,"g":3,"a":2,"rig":null,"v":-0.13,"vc":-11,"q":13},{"id":5116,"n":"Martinez Jo.","r":"P","s":"Inter","p":29,"f":1,"c":60,"nc":"solo 5 presenze in Serie A","y":5.18,"pv":5,"mv":6.0,"fm":5.2,"g":0,"a":0,"rig":null,"v":-0.17,"vc":-39,"q":17},{"id":4371,"n":"Raspadori","r":"A","s":"Atalanta","p":29,"f":2,"c":47,"nc":"gioca, ma non sempre dall'inizio","y":6.77,"pv":13,"mv":6.12,"fm":6.88,"g":3,"a":1,"rig":null,"v":0.13,"vc":-34,"q":13},{"id":4923,"n":"Colombo","r":"A","s":"Genoa","p":29,"f":2,"c":98,"nc":"titolare fisso","y":6.44,"pv":37,"mv":5.92,"fm":6.41,"g":7,"a":1,"rig":"ha calciato rigori","v":-0.26,"vc":34,"q":11},{"id":5800,"n":"Gudmundsson A.","r":"C","s":"Fiorentina","p":28,"f":2,"c":85,"nc":"gioca, ma non sempre dall'inizio","y":6.32,"pv":32,"mv":5.88,"fm":6.34,"g":5,"a":3,"rig":"rigorista","v":-0.14,"vc":1,"q":13},{"id":6884,"n":"Conceicao","r":"C","s":"Juventus","p":28,"f":2,"c":81,"nc":"gioca, ma non sempre dall'inizio","y":6.6,"pv":30,"mv":6.28,"fm":6.7,"g":3,"a":5,"rig":null,"v":0.21,"vc":-4,"q":12},{"id":7023,"n":"Pellegrino M.","r":"A","s":"Fiorentina","p":28,"f":2,"c":99,"nc":"titolare fisso","y":6.64,"pv":37,"mv":5.99,"fm":6.65,"g":9,"a":0,"rig":"ha calciato rigori","v":-0.06,"vc":36,"q":15},{"id":7078,"n":"Mastantuono","r":"C","s":"Fiorentina","p":27,"f":2,"c":null,"nc":"nessuno storico utile","y":null,"pv":0,"mv":null,"fm":6.24,"g":0,"a":0,"rig":null,"v":null,"vc":null,"q":12},{"id":7351,"n":"Santos A.","r":"A","s":"Napoli","p":27,"f":3,"c":39,"nc":"gioca, ma non sempre dall'inizio","y":6.98,"pv":13,"mv":6.35,"fm":7.23,"g":4,"a":0,"rig":null,"v":0.28,"vc":-35,"q":14},{"id":6966,"n":"Butez","r":"P","s":"Como","p":26,"f":1,"c":100,"nc":"titolare fisso","y":5.33,"pv":38,"mv":6.07,"fm":5.37,"g":0,"a":1,"rig":"ha calciato rigori","v":0.03,"vc":2,"q":16},{"id":4159,"n":"Akanji","r":"D","s":"Inter","p":26,"f":1,"c":93,"nc":"titolare fisso","y":6.33,"pv":32,"mv":6.28,"fm":6.41,"g":2,"a":0,"rig":null,"v":0.01,"vc":6,"q":16},{"id":7436,"n":"Alajbegovic","r":"C","s":"Juventus","p":26,"f":2,"c":null,"nc":"nessuno storico utile","y":null,"pv":0,"mv":null,"fm":7.1,"g":0,"a":0,"rig":null,"v":null,"vc":null,"q":12},{"id":2848,"n":"Frattesi","r":"C","s":"Lazio","p":26,"f":2,"c":42,"nc":"gioca, ma non sempre dall'inizio","y":6.02,"pv":14,"mv":5.89,"fm":5.89,"g":0,"a":0,"rig":null,"v":-0.44,"vc":-43,"q":7},{"id":2038,"n":"Pinamonti","r":"A","s":"Sassuolo","p":26,"f":3,"c":89,"nc":"titolare fisso","y":6.61,"pv":34,"mv":5.88,"fm":6.62,"g":9,"a":3,"rig":"ha calciato rigori","v":-0.09,"vc":20,"q":13},{"id":4220,"n":"Zambo Anguissa","r":"C","s":"Napoli","p":25,"f":2,"c":66,"nc":"titolare fisso","y":6.67,"pv":18,"mv":6.17,"fm":6.86,"g":4,"a":1,"rig":null,"v":0.24,"vc":-18,"q":11},{"id":5734,"n":"Soulè","r":"A","s":"Roma","p":25,"f":3,"c":81,"nc":"gioca, ma non sempre dall'inizio","y":6.78,"pv":32,"mv":6.12,"fm":6.83,"g":6,"a":5,"rig":null,"v":0.11,"vc":12,"q":12},{"id":4431,"n":"Carnesecchi","r":"P","s":"Atalanta","p":24,"f":1,"c":99,"nc":"titolare fisso","y":5.51,"pv":37,"mv":6.36,"fm":5.58,"g":0,"a":0,"rig":"ha calciato rigori","v":0.24,"vc":4,"q":16},{"id":7484,"n":"Adams A.","r":"A","s":"Venezia","p":24,"f":3,"c":null,"nc":"nessuno storico utile","y":null,"pv":0,"mv":null,"fm":7.14,"g":0,"a":0,"rig":null,"v":null,"vc":null,"q":12},{"id":4312,"n":"Maignan","r":"P","s":"Milan","p":23,"f":1,"c":98,"nc":"titolare fisso","y":5.37,"pv":37,"mv":6.26,"fm":5.42,"g":0,"a":0,"rig":"ha calciato rigori","v":0.13,"vc":7,"q":15},{"id":2788,"n":"Bremer","r":"D","s":"Juventus","p":23,"f":1,"c":81,"nc":"titolare fisso","y":6.62,"pv":26,"mv":6.33,"fm":6.81,"g":4,"a":3,"rig":null,"v":0.3,"vc":-10,"q":15},{"id":2296,"n":"Mancini","r":"D","s":"Roma","p":23,"f":1,"c":97,"nc":"titolare fisso","y":6.42,"pv":36,"mv":6.25,"fm":6.51,"g":4,"a":2,"rig":null,"v":0.1,"vc":10,"q":15},{"id":5022,"n":"Pavlovic","r":"D","s":"Milan","p":23,"f":1,"c":95,"nc":"titolare fisso","y":6.5,"pv":34,"mv":6.24,"fm":6.62,"g":5,"a":0,"rig":null,"v":0.18,"vc":8,"q":14},{"id":2606,"n":"Modric","r":"C","s":"Milan","p":23,"f":2,"c":91,"nc":"titolare fisso","y":6.59,"pv":33,"mv":6.45,"fm":6.67,"g":2,"a":3,"rig":null,"v":0.17,"vc":8,"q":12},{"id":6967,"n":"Diao","r":"A","s":"Como","p":23,"f":3,"c":64,"nc":"gioca, ma non sempre dall'inizio","y":6.45,"pv":16,"mv":6.0,"fm":6.38,"g":2,"a":1,"rig":null,"v":-0.26,"vc":-17,"q":11},{"id":4409,"n":"Rrahmani","r":"D","s":"Napoli","p":22,"f":1,"c":73,"nc":"titolare fisso","y":6.32,"pv":21,"mv":6.24,"fm":6.45,"g":2,"a":0,"rig":null,"v":-0.0,"vc":-18,"q":14},{"id":4976,"n":"Kalulu","r":"D","s":"Juventus","p":22,"f":1,"c":99,"nc":"titolare fisso","y":6.29,"pv":37,"mv":6.14,"fm":6.35,"g":2,"a":4,"rig":null,"v":-0.04,"vc":12,"q":13},{"id":6956,"n":"Solet","r":"D","s":"Udinese","p":22,"f":1,"c":95,"nc":"titolare fisso","y":6.32,"pv":34,"mv":6.18,"fm":6.4,"g":3,"a":1,"rig":"ha calciato rigori","v":-0.0,"vc":8,"q":13},{"id":536,"n":"Politano","r":"C","s":"Napoli","p":22,"f":2,"c":84,"nc":"gioca, ma non sempre dall'inizio","y":6.34,"pv":33,"mv":6.09,"fm":6.36,"g":2,"a":5,"rig":null,"v":-0.09,"vc":2,"q":10},{"id":7547,"n":"Kevin Carlos","r":"A","s":"Cagliari","p":22,"f":3,"c":null,"nc":"nessuno storico utile","y":null,"pv":0,"mv":null,"fm":6.12,"g":0,"a":0,"rig":null,"v":null,"vc":null,"q":13},{"id":2521,"n":"De Gea","r":"P","s":"Fiorentina","p":21,"f":1,"c":99,"nc":"titolare fisso","y":5.03,"pv":37,"mv":6.24,"fm":5.0,"g":0,"a":0,"rig":"ha calciato rigori","v":-0.28,"vc":4,"q":13},{"id":572,"n":"Meret","r":"P","s":"Napoli","p":21,"f":1,"c":60,"nc":"titolare fisso","y":5.17,"pv":11,"mv":6.23,"fm":5.18,"g":0,"a":1,"rig":null,"v":-0.14,"vc":-38,"q":11},{"id":2120,"n":"Bastoni","r":"D","s":"Inter","p":21,"f":1,"c":87,"nc":"titolare fisso","y":6.26,"pv":28,"mv":6.2,"fm":6.34,"g":1,"a":4,"rig":null,"v":-0.06,"vc":-4,"q":14},{"id":4317,"n":"N'Dicka","r":"D","s":"Roma","p":21,"f":1,"c":84,"nc":"titolare fisso","y":6.25,"pv":31,"mv":6.08,"fm":6.32,"g":3,"a":1,"rig":null,"v":-0.07,"vc":-8,"q":13},{"id":5792,"n":"Ederson D.S.","r":"C","s":"Atalanta","p":21,"f":3,"c":87,"nc":"titolare fisso","y":6.39,"pv":30,"mv":6.25,"fm":6.43,"g":2,"a":1,"rig":"ha calciato rigori","v":-0.03,"vc":6,"q":12},{"id":5119,"n":"Samardzic","r":"C","s":"Atalanta","p":20,"f":3,"c":56,"nc":"gioca, ma non sempre dall'inizio","y":6.28,"pv":21,"mv":5.93,"fm":6.29,"g":2,"a":2,"rig":null,"v":-0.13,"vc":-26,"q":12},{"id":4892,"n":"Saelemaekers","r":"C","s":"Milan","p":20,"f":3,"c":95,"nc":"titolare fisso","y":6.38,"pv":35,"mv":6.14,"fm":6.41,"g":3,"a":3,"rig":null,"v":-0.03,"vc":14,"q":10},{"id":5589,"n":"Konè M.","r":"C","s":"Roma","p":20,"f":3,"c":86,"nc":"titolare fisso","y":6.47,"pv":29,"mv":6.26,"fm":6.53,"g":2,"a":3,"rig":null,"v":0.08,"vc":5,"q":10},{"id":6229,"n":"Tourè E.","r":"A","s":"Parma","p":20,"f":3,"c":null,"nc":"nessuno storico utile","y":null,"pv":0,"mv":null,"fm":6.8,"g":0,"a":0,"rig":null,"v":null,"vc":null,"q":11},{"id":5876,"n":"Di Gregorio","r":"P","s":"Juventus","p":19,"f":1,"c":91,"nc":"titolare fisso","y":5.3,"pv":30,"mv":6.08,"fm":5.33,"g":0,"a":0,"rig":"ha calciato rigori","v":0.09,"vc":-3,"q":9},{"id":2816,"n":"Di Lorenzo","r":"D","s":"Napoli","p":19,"f":2,"c":82,"nc":"titolare fisso","y":6.25,"pv":26,"mv":6.08,"fm":6.33,"g":2,"a":1,"rig":null,"v":-0.07,"vc":-8,"q":12},{"id":5982,"n":"Spence","r":"D","s":"Inter","p":19,"f":2,"c":null,"nc":"nessuno storico utile","y":null,"pv":0,"mv":null,"fm":6.15,"g":0,"a":0,"rig":null,"v":null,"vc":null,"q":12},{"id":5750,"n":"Ostigard","r":"D","s":"Genoa","p":19,"f":2,"c":88,"nc":"titolare fisso","y":6.41,"pv":30,"mv":6.13,"fm":6.52,"g":5,"a":0,"rig":null,"v":0.12,"vc":-2,"q":11},{"id":152,"n":"Zielinski","r":"C","s":"Inter","p":19,"f":3,"c":79,"nc":"gioca, ma non sempre dall'inizio","y":6.68,"pv":30,"mv":6.25,"fm":6.8,"g":6,"a":2,"rig":"ha calciato rigori","v":0.29,"vc":-5,"q":10},{"id":5562,"n":"Thuram K.","r":"C","s":"Juventus","p":19,"f":3,"c":88,"nc":"titolare fisso","y":6.37,"pv":34,"mv":6.1,"fm":6.4,"g":3,"a":2,"rig":null,"v":-0.04,"vc":6,"q":10},{"id":5844,"n":"Thorstvedt","r":"C","s":"Sassuolo","p":19,"f":3,"c":87,"nc":"titolare fisso","y":6.43,"pv":31,"mv":6.15,"fm":6.48,"g":4,"a":3,"rig":null,"v":0.04,"vc":5,"q":10},{"id":6684,"n":"Ekkelenkamp","r":"C","s":"Udinese","p":19,"f":3,"c":82,"nc":"gioca, ma non sempre dall'inizio","y":6.53,"pv":31,"mv":6.05,"fm":6.61,"g":5,"a":3,"rig":null,"v":0.14,"vc":-2,"q":10},{"id":4463,"n":"Esposito Se.","r":"A","s":"Cagliari","p":19,"f":3,"c":92,"nc":"titolare fisso","y":6.83,"pv":36,"mv":6.26,"fm":6.88,"g":7,"a":4,"rig":"ha calciato rigori","v":0.48,"vc":28,"q":13},{"id":7347,"n":"Bowie","r":"A","s":"Sassuolo","p":19,"f":3,"c":62,"nc":"gioca, ma non sempre dall'inizio","y":6.71,"pv":14,"mv":5.96,"fm":6.79,"g":4,"a":0,"rig":null,"v":0.36,"vc":-6,"q":10},{"id":5544,"n":"David","r":"A","s":"Juventus","p":19,"f":3,"c":74,"nc":"gioca, ma non sempre dall'inizio","y":6.38,"pv":30,"mv":5.77,"fm":6.33,"g":6,"a":2,"rig":"ha calciato rigori","v":-0.0,"vc":10,"q":9},{"id":133,"n":"Skorupski","r":"P","s":"Bologna","p":18,"f":1,"c":69,"nc":"titolare fisso","y":5.24,"pv":18,"mv":6.19,"fm":5.28,"g":0,"a":0,"rig":null,"v":0.11,"vc":-26,"q":10},{"id":2514,"n":"Stones","r":"D","s":"Inter","p":18,"f":2,"c":null,"nc":"nessuno storico utile","y":null,"pv":0,"mv":null,"fm":6.04,"g":0,"a":0,"rig":null,"v":null,"vc":null,"q":12},{"id":6844,"n":"Rowe","r":"C","s":"Bologna","p":18,"f":3,"c":73,"nc":"gioca, ma non sempre dall'inizio","y":6.51,"pv":28,"mv":6.2,"fm":6.59,"g":3,"a":3,"rig":null,"v":0.13,"vc":-9,"q":11},{"id":6151,"n":"Perrone","r":"C","s":"Como","p":18,"f":3,"c":96,"nc":"titolare fisso","y":6.43,"pv":36,"mv":6.22,"fm":6.47,"g":3,"a":4,"rig":null,"v":0.05,"vc":15,"q":10},{"id":5888,"n":"Casadei","r":"C","s":"Torino","p":18,"f":3,"c":81,"nc":"gioca, ma non sempre dall'inizio","y":6.41,"pv":32,"mv":5.97,"fm":6.45,"g":6,"a":0,"rig":null,"v":0.03,"vc":-1,"q":10},{"id":6274,"n":"Diouf","r":"C","s":"Inter","p":18,"f":3,"c":39,"nc":"gioca, ma non sempre dall'inizio","y":6.36,"pv":10,"mv":6.15,"fm":6.45,"g":1,"a":0,"rig":null,"v":-0.03,"vc":-43,"q":8},{"id":7554,"n":"Romero D.","r":"A","s":"Parma","p":18,"f":3,"c":null,"nc":"nessuno storico utile","y":null,"pv":0,"mv":null,"fm":6.38,"g":0,"a":0,"rig":null,"v":null,"vc":null,"q":10},{"id":6666,"n":"Bernabè","r":"C","s":"Parma","p":17,"f":4,"c":87,"nc":"titolare fisso","y":6.43,"pv":32,"mv":6.17,"fm":6.48,"g":3,"a":1,"rig":null,"v":0.05,"vc":8,"q":7},{"id":6217,"n":"Bisseck","r":"D","s":"Inter","p":16,"f":2,"c":81,"nc":"titolare fisso","y":6.48,"pv":23,"mv":6.22,"fm":6.65,"g":3,"a":2,"rig":null,"v":0.37,"vc":-9,"q":11},{"id":5514,"n":"Vasquez","r":"D","s":"Genoa","p":16,"f":2,"c":98,"nc":"titolare fisso","y":6.11,"pv":36,"mv":6.08,"fm":6.14,"g":1,"a":0,"rig":null,"v":0.0,"vc":8,"q":9},{"id":7223,"n":"Vergara","r":"C","s":"Napoli","p":16,"f":4,"c":42,"nc":"solo 8 presenze in Serie A","y":6.37,"pv":8,"mv":6.25,"fm":6.5,"g":1,"a":0,"rig":null,"v":-0.01,"vc":-36,"q":8},{"id":2155,"n":"Cutrone","r":"A","s":"Monza","p":16,"f":3,"c":60,"nc":"gioca, ma non sempre dall'inizio","y":6.17,"pv":14,"mv":5.71,"fm":5.93,"g":1,"a":0,"rig":null,"v":-0.46,"vc":-3,"q":9},{"id":5833,"n":"Gila","r":"D","s":"Milan","p":15,"f":2,"c":90,"nc":"titolare fisso","y":5.96,"pv":31,"mv":6.03,"fm":5.95,"g":0,"a":0,"rig":null,"v":-0.15,"vc":2,"q":12},{"id":6869,"n":"Ramon","r":"D","s":"Como","p":15,"f":2,"c":93,"nc":"titolare fisso","y":6.11,"pv":32,"mv":6.16,"fm":6.14,"g":2,"a":0,"rig":null,"v":0.03,"vc":5,"q":10},{"id":7129,"n":"Rodriguez Je.","r":"C","s":"Como","p":15,"f":4,"c":73,"nc":"gioca, ma non sempre dall'inizio","y":6.57,"pv":28,"mv":6.25,"fm":6.66,"g":2,"a":8,"rig":null,"v":0.2,"vc":-5,"q":12},{"id":2077,"n":"Pasalic","r":"C","s":"Atalanta","p":15,"f":4,"c":80,"nc":"gioca, ma non sempre dall'inizio","y":6.26,"pv":31,"mv":5.94,"fm":6.27,"g":3,"a":3,"rig":null,"v":-0.12,"vc":3,"q":9},{"id":827,"n":"Locatelli","r":"C","s":"Juventus","p":15,"f":4,"c":98,"nc":"titolare fisso","y":6.2,"pv":36,"mv":6.26,"fm":6.19,"g":1,"a":2,"rig":"ha calciato rigori","v":-0.18,"vc":21,"q":8},{"id":5672,"n":"Dia","r":"A","s":"Lazio","p":15,"f":4,"c":63,"nc":"gioca, ma non sempre dall'inizio","y":6.03,"pv":25,"mv":5.68,"fm":5.86,"g":1,"a":2,"rig":null,"v":-0.6,"vc":1,"q":10},{"id":7313,"n":"Ratkov","r":"A","s":"Lazio","p":15,"f":4,"c":47,"nc":"solo 7 presenze in Serie A","y":6.14,"pv":7,"mv":5.64,"fm":5.64,"g":0,"a":0,"rig":null,"v":-0.49,"vc":-16,"q":10},{"id":6646,"n":"Adams C.","r":"A","s":"Torino","p":15,"f":4,"c":79,"nc":"gioca, ma non sempre dall'inizio","y":6.63,"pv":32,"mv":5.98,"fm":6.64,"g":6,"a":3,"rig":null,"v":0.24,"vc":17,"q":9},{"id":4359,"n":"Piccoli","r":"A","s":"Bologna","p":15,"f":4,"c":71,"nc":"gioca, ma non sempre dall'inizio","y":6.32,"pv":27,"mv":5.78,"fm":6.24,"g":4,"a":1,"rig":null,"v":-0.31,"vc":9,"q":8},{"id":6482,"n":"Mandas","r":"P","s":"Lazio","p":14,"f":1,"c":null,"nc":"nessuno storico utile","y":null,"pv":0,"mv":null,"fm":6.0,"g":0,"a":0,"rig":null,"v":null,"vc":null,"q":9},{"id":6462,"n":"Okoye","r":"P","s":"Udinese","p":14,"f":1,"c":90,"nc":"titolare fisso","y":5.1,"pv":30,"mv":6.07,"fm":5.08,"g":0,"a":1,"rig":"ha calciato rigori","v":0.18,"vc":-1,"q":9},{"id":5526,"n":"Scalvini","r":"D","s":"Atalanta","p":14,"f":2,"c":78,"nc":"titolare fisso","y":6.33,"pv":24,"mv":6.06,"fm":6.44,"g":3,"a":1,"rig":null,"v":0.26,"vc":-12,"q":10},{"id":5885,"n":"Dodò","r":"D","s":"Fiorentina","p":14,"f":2,"c":97,"nc":"titolare fisso","y":6.02,"pv":36,"mv":5.99,"fm":6.03,"g":1,"a":2,"rig":null,"v":-0.06,"vc":8,"q":10},{"id":5823,"n":"Baldanzi","r":"C","s":"Genoa","p":14,"f":4,"c":46,"nc":"gioca, ma non sempre dall'inizio","y":6.34,"pv":17,"mv":6.15,"fm":6.38,"g":1,"a":2,"rig":null,"v":-0.03,"vc":-32,"q":11},{"id":530,"n":"Pellegrini Lo.","r":"C","s":"Roma","p":14,"f":4,"c":67,"nc":"gioca, ma non sempre dall'inizio","y":6.5,"pv":24,"mv":6.04,"fm":6.58,"g":4,"a":2,"rig":"ha calciato rigori","v":0.13,"vc":-10,"q":10},{"id":1933,"n":"Mandragora","r":"C","s":"Fiorentina","p":14,"f":4,"c":89,"nc":"titolare fisso","y":6.55,"pv":34,"mv":6.04,"fm":6.62,"g":7,"a":2,"rig":"ha calciato rigori","v":0.18,"vc":12,"q":9},{"id":5500,"n":"Cancellieri","r":"C","s":"Lazio","p":14,"f":4,"c":70,"nc":"gioca, ma non sempre dall'inizio","y":6.28,"pv":28,"mv":5.93,"fm":6.29,"g":4,"a":1,"rig":null,"v":-0.09,"vc":-8,"q":9},{"id":779,"n":"Cristante","r":"C","s":"Roma","p":14,"f":4,"c":99,"nc":"titolare fisso","y":6.22,"pv":37,"mv":6.11,"fm":6.22,"g":2,"a":1,"rig":null,"v":-0.15,"vc":22,"q":8},{"id":7551,"n":"Schmid","r":"C","s":"Frosinone","p":14,"f":4,"c":null,"nc":"nessuno storico utile","y":null,"pv":0,"mv":null,"fm":6.7,"g":0,"a":0,"rig":null,"v":null,"vc":null,"q":8},{"id":6530,"n":"Ghedjemis","r":"A","s":"Frosinone","p":14,"f":4,"c":null,"nc":"nessuno storico utile","y":null,"pv":0,"mv":null,"fm":7.09,"g":0,"a":0,"rig":null,"v":null,"vc":null,"q":9},{"id":6904,"n":"Yeboah J.","r":"A","s":"Venezia","p":14,"f":4,"c":null,"nc":"nessuno storico utile","y":null,"pv":0,"mv":null,"fm":6.97,"g":0,"a":0,"rig":null,"v":null,"vc":null,"q":8},{"id":4360,"n":"Caprile","r":"P","s":"Cagliari","p":13,"f":1,"c":100,"nc":"titolare fisso","y":4.92,"pv":38,"mv":6.29,"fm":4.87,"g":0,"a":0,"rig":null,"v":-0.08,"vc":18,"q":9},{"id":4807,"n":"Hermoso","r":"D","s":"Roma","p":13,"f":2,"c":81,"nc":"titolare fisso","y":6.31,"pv":27,"mv":6.17,"fm":6.41,"g":3,"a":2,"rig":null,"v":0.24,"vc":-9,"q":10},{"id":5520,"n":"Cambiaso","r":"D","s":"Juventus","p":13,"f":2,"c":98,"nc":"titolare fisso","y":5.99,"pv":36,"mv":5.81,"fm":5.99,"g":3,"a":4,"rig":null,"v":-0.08,"vc":10,"q":9},{"id":5641,"n":"Chalobah T.","r":"D","s":"Como","p":13,"f":3,"c":null,"nc":"nessuno storico utile","y":null,"pv":0,"mv":null,"fm":null,"g":0,"a":0,"rig":null,"v":null,"vc":null,"q":9},{"id":5365,"n":"Dragusin","r":"D","s":"Fiorentina","p":13,"f":3,"c":null,"nc":"nessuno storico utile","y":null,"pv":0,"mv":null,"fm":6.05,"g":0,"a":0,"rig":null,"v":null,"vc":null,"q":8},{"id":6727,"n":"Couto","r":"D","s":"Como","p":13,"f":3,"c":null,"nc":"nessuno storico utile","y":null,"pv":0,"mv":null,"fm":6.5,"g":0,"a":0,"rig":null,"v":null,"vc":null,"q":8},{"id":5877,"n":"Carlos Augusto","r":"D","s":"Inter","p":13,"f":3,"c":72,"nc":"gioca, ma non sempre dall'inizio","y":6.12,"pv":28,"mv":6.12,"fm":6.16,"g":1,"a":1,"rig":null,"v":0.05,"vc":-18,"q":7},{"id":7070,"n":"Sucic P.","r":"C","s":"Inter","p":13,"f":5,"c":71,"nc":"gioca, ma non sempre dall'inizio","y":6.26,"pv":28,"mv":6.07,"fm":6.27,"g":2,"a":2,"rig":null,"v":-0.08,"vc":-6,"q":8},{"id":6218,"n":"Oristanio","r":"C","s":"Torino","p":13,"f":4,"c":48,"nc":"gioca, ma non sempre dall'inizio","y":6.02,"pv":18,"mv":5.78,"fm":5.92,"g":1,"a":0,"rig":null,"v":-0.32,"vc":-29,"q":7},{"id":2134,"n":"Falcone","r":"P","s":"Lecce","p":12,"f":2,"c":100,"nc":"titolare fisso","y":5.21,"pv":38,"mv":6.41,"fm":5.22,"g":0,"a":0,"rig":"ha calciato rigori","v":0.29,"vc":10,"q":8},{"id":554,"n":"Zappacosta","r":"D","s":"Atalanta","p":12,"f":3,"c":95,"nc":"titolare fisso","y":6.24,"pv":35,"mv":6.06,"fm":6.3,"g":3,"a":1,"rig":null,"v":0.22,"vc":10,"q":8},{"id":4734,"n":"Miranda J.","r":"D","s":"Bologna","p":12,"f":3,"c":90,"nc":"titolare fisso","y":6.08,"pv":31,"mv":6.0,"fm":6.1,"g":1,"a":3,"rig":null,"v":0.06,"vc":5,"q":8},{"id":6496,"n":"Bartesaghi","r":"D","s":"Milan","p":12,"f":3,"c":90,"nc":"titolare fisso","y":6.04,"pv":31,"mv":5.97,"fm":6.05,"g":2,"a":0,"rig":null,"v":0.02,"vc":5,"q":8},{"id":1852,"n":"Spinazzola","r":"D","s":"Napoli","p":12,"f":3,"c":77,"nc":"gioca, ma non sempre dall'inizio","y":6.43,"pv":30,"mv":6.17,"fm":6.55,"g":3,"a":3,"rig":null,"v":0.41,"vc":-9,"q":8},{"id":5862,"n":"Valeri","r":"D","s":"Parma","p":12,"f":3,"c":93,"nc":"titolare fisso","y":6.07,"pv":34,"mv":6.06,"fm":6.09,"g":0,"a":2,"rig":null,"v":0.05,"vc":8,"q":8},{"id":460,"n":"Romagnoli","r":"D","s":"Lazio","p":12,"f":3,"c":92,"nc":"titolare fisso","y":5.93,"pv":32,"mv":6.03,"fm":5.92,"g":0,"a":0,"rig":null,"v":-0.11,"vc":7,"q":7},{"id":4401,"n":"Gabbia","r":"D","s":"Milan","p":12,"f":3,"c":87,"nc":"titolare fisso","y":5.87,"pv":29,"mv":5.91,"fm":5.84,"g":0,"a":0,"rig":null,"v":-0.17,"vc":2,"q":7},{"id":6398,"n":"Isaksen","r":"C","s":"Lazio","p":12,"f":5,"c":71,"nc":"gioca, ma non sempre dall'inizio","y":6.54,"pv":27,"mv":6.04,"fm":6.63,"g":5,"a":1,"rig":null,"v":0.28,"vc":-4,"q":9},{"id":4436,"n":"Cambiaghi","r":"C","s":"Bologna","p":12,"f":5,"c":64,"nc":"gioca, ma non sempre dall'inizio","y":6.38,"pv":24,"mv":5.98,"fm":6.42,"g":3,"a":4,"rig":null,"v":0.12,"vc":-11,"q":8},{"id":6294,"n":"Ndour","r":"C","s":"Fiorentina","p":12,"f":5,"c":77,"nc":"gioca, ma non sempre dall'inizio","y":6.11,"pv":30,"mv":5.8,"fm":6.07,"g":3,"a":0,"rig":null,"v":-0.16,"vc":5,"q":8},{"id":5878,"n":"Colpani","r":"C","s":"Monza","p":12,"f":5,"c":null,"nc":"nessuno storico utile","y":null,"pv":0,"mv":null,"fm":6.32,"g":0,"a":0,"rig":null,"v":null,"vc":null,"q":8},{"id":4364,"n":"Gaetano","r":"C","s":"Atalanta","p":12,"f":5,"c":78,"nc":"gioca, ma non sempre dall'inizio","y":6.3,"pv":32,"mv":6.06,"fm":6.31,"g":2,"a":4,"rig":null,"v":0.04,"vc":6,"q":7},{"id":7472,"n":"Calò","r":"C","s":"Frosinone","p":12,"f":5,"c":null,"nc":"nessuno storico utile","y":null,"pv":0,"mv":null,"fm":7.04,"g":0,"a":0,"rig":null,"v":null,"vc":null,"q":7},{"id":4728,"n":"Nkunku","r":"A","s":"Milan","p":12,"f":4,"c":63,"nc":"gioca, ma non sempre dall'inizio","y":6.8,"pv":26,"mv":5.94,"fm":6.87,"g":7,"a":3,"rig":"rigorista","v":0.41,"vc":3,"q":13},{"id":5029,"n":"Geubbels","r":"A","s":"Lecce","p":12,"f":4,"c":null,"nc":"nessuno storico utile","y":null,"pv":0,"mv":null,"fm":6.65,"g":0,"a":0,"rig":null,"v":null,"vc":null,"q":9},{"id":5436,"n":"Raimondo","r":"A","s":"Frosinone","p":12,"f":4,"c":null,"nc":"nessuno storico utile","y":null,"pv":0,"mv":null,"fm":null,"g":0,"a":0,"rig":null,"v":null,"vc":null,"q":7},{"id":2832,"n":"Boga","r":"A","s":"Juventus","p":12,"f":4,"c":50,"nc":"gioca, ma non sempre dall'inizio","y":6.93,"pv":13,"mv":6.19,"fm":7.15,"g":4,"a":1,"rig":null,"v":0.54,"vc":-10,"q":6},{"id":6531,"n":"Jimenez A.","r":"D","s":"Fiorentina","p":11,"f":4,"c":52,"nc":"solo 1 presenze in Serie A","y":5.88,"pv":1,"mv":5.5,"fm":5.0,"g":0,"a":0,"rig":null,"v":-0.14,"vc":-31,"q":8},{"id":6814,"n":"Norton-Cuffy","r":"D","s":"Genoa","p":11,"f":4,"c":83,"nc":"titolare fisso","y":6.07,"pv":27,"mv":5.93,"fm":6.09,"g":2,"a":1,"rig":null,"v":0.06,"vc":0,"q":8},{"id":7414,"n":"Kaiki","r":"D","s":"Como","p":11,"f":4,"c":null,"nc":"nessuno storico utile","y":null,"pv":0,"mv":null,"fm":null,"g":0,"a":0,"rig":null,"v":null,"vc":null,"q":7},{"id":6320,"n":"Doekhi","r":"D","s":"Lazio","p":11,"f":3,"c":null,"nc":"nessuno storico utile","y":null,"pv":0,"mv":null,"fm":6.57,"g":0,"a":0,"rig":null,"v":null,"vc":null,"q":7},{"id":2765,"n":"Odgaard","r":"C","s":"Bologna","p":11,"f":5,"c":63,"nc":"gioca, ma non sempre dall'inizio","y":6.51,"pv":22,"mv":5.91,"fm":6.61,"g":5,"a":1,"rig":null,"v":0.29,"vc":-8,"q":8},{"id":4465,"n":"Fagioli","r":"C","s":"Fiorentina","p":11,"f":5,"c":92,"nc":"titolare fisso","y":6.23,"pv":33,"mv":6.03,"fm":6.23,"g":2,"a":3,"rig":null,"v":-0.01,"vc":22,"q":8},{"id":5735,"n":"Volpato","r":"C","s":"Sassuolo","p":11,"f":5,"c":58,"nc":"gioca, ma non sempre dall'inizio","y":6.44,"pv":21,"mv":6.14,"fm":6.52,"g":2,"a":4,"rig":null,"v":0.22,"vc":-13,"q":7},{"id":6783,"n":"Unai Gomez","r":"C","s":"Udinese","p":11,"f":5,"c":null,"nc":"nessuno storico utile","y":null,"pv":0,"mv":null,"fm":6.28,"g":0,"a":0,"rig":null,"v":null,"vc":null,"q":7},{"id":6678,"n":"Liberali","r":"C","s":"Como","p":11,"f":5,"c":null,"nc":"nessuno storico utile","y":null,"pv":0,"mv":null,"fm":null,"g":0,"a":0,"rig":null,"v":null,"vc":null,"q":6},{"id":4686,"n":"Fofana Y.","r":"C","s":"Milan","p":11,"f":5,"c":85,"nc":"gioca, ma non sempre dall'inizio","y":6.1,"pv":33,"mv":5.85,"fm":6.06,"g":2,"a":3,"rig":null,"v":-0.15,"vc":14,"q":5},{"id":6831,"n":"Neres","r":"A","s":"Napoli","p":11,"f":4,"c":60,"nc":"gioca, ma non sempre dall'inizio","y":6.75,"pv":16,"mv":6.19,"fm":6.84,"g":3,"a":3,"rig":null,"v":0.34,"vc":2,"q":6},{"id":4896,"n":"Maldini","r":"A","s":"Cagliari","p":11,"f":4,"c":55,"nc":"gioca, ma non sempre dall'inizio","y":6.39,"pv":18,"mv":5.94,"fm":6.31,"g":2,"a":1,"rig":null,"v":-0.08,"vc":-5,"q":5},{"id":6641,"n":"Suzuki","r":"P","s":"Parma","p":10,"f":2,"c":73,"nc":"titolare fisso","y":4.87,"pv":20,"mv":6.02,"fm":4.75,"g":0,"a":0,"rig":"ha calciato rigori","v":-0.28,"vc":4,"q":7},{"id":4210,"n":"Mina","r":"D","s":"Cagliari","p":10,"f":4,"c":83,"nc":"titolare fisso","y":6.13,"pv":26,"mv":6.0,"fm":6.17,"g":2,"a":1,"rig":null,"v":0.14,"vc":0,"q":8},{"id":6664,"n":"Delprato","r":"D","s":"Parma","p":10,"f":4,"c":93,"nc":"titolare fisso","y":6.01,"pv":35,"mv":5.91,"fm":6.01,"g":2,"a":0,"rig":null,"v":0.02,"vc":10,"q":8},{"id":7529,"n":"Koulierakis","r":"D","s":"Roma","p":10,"f":4,"c":null,"nc":"nessuno storico utile","y":null,"pv":0,"mv":null,"fm":6.53,"g":0,"a":0,"rig":null,"v":null,"vc":null,"q":8},{"id":4994,"n":"Vojvoda","r":"D","s":"Udinese","p":10,"f":4,"c":71,"nc":"gioca, ma non sempre dall'inizio","y":6.18,"pv":27,"mv":6.02,"fm":6.24,"g":2,"a":1,"rig":null,"v":0.19,"vc":-12,"q":8},{"id":6672,"n":"Idzes","r":"D","s":"Sassuolo","p":10,"f":4,"c":96,"nc":"titolare fisso","y":5.92,"pv":35,"mv":5.94,"fm":5.9,"g":0,"a":0,"rig":null,"v":-0.09,"vc":13,"q":7},{"id":6485,"n":"Kristensen T.","r":"D","s":"Atalanta","p":10,"f":4,"c":85,"nc":"titolare fisso","y":6.18,"pv":28,"mv":5.98,"fm":6.23,"g":3,"a":0,"rig":null,"v":0.19,"vc":2,"q":7},{"id":4433,"n":"Zortea","r":"D","s":"Bologna","p":10,"f":4,"c":75,"nc":"gioca, ma non sempre dall'inizio","y":5.91,"pv":28,"mv":5.86,"fm":5.89,"g":0,"a":2,"rig":null,"v":-0.1,"vc":-8,"q":6},{"id":7410,"n":"Viery","r":"D","s":"Fiorentina","p":10,"f":4,"c":null,"nc":"nessuno storico utile","y":null,"pv":0,"mv":null,"fm":6.06,"g":0,"a":0,"rig":null,"v":null,"vc":null,"q":6},{"id":2188,"n":"Marusic","r":"D","s":"Lazio","p":10,"f":4,"c":93,"nc":"titolare fisso","y":5.97,"pv":33,"mv":5.86,"fm":5.97,"g":1,"a":2,"rig":null,"v":-0.04,"vc":10,"q":6},{"id":184,"n":"Bernardeschi","r":"C","s":"Bologna","p":10,"f":5,"c":68,"nc":"gioca, ma non sempre dall'inizio","y":6.48,"pv":24,"mv":6.04,"fm":6.56,"g":4,"a":2,"rig":"ha calciato rigori","v":0.37,"vc":-3,"q":9},{"id":6717,"n":"Konè I.","r":"C","s":"Sassuolo","p":10,"f":5,"c":96,"nc":"titolare fisso","y":6.56,"pv":35,"mv":6.19,"fm":6.63,"g":6,"a":0,"rig":null,"v":0.45,"vc":26,"q":9},{"id":6010,"n":"Fazzini","r":"C","s":"Cagliari","p":10,"f":5,"c":37,"nc":"gioca, ma non sempre dall'inizio","y":5.99,"pv":12,"mv":5.88,"fm":5.83,"g":0,"a":0,"rig":null,"v":-0.14,"vc":-34,"q":7},{"id":5791,"n":"Frendrup","r":"C","s":"Genoa","p":10,"f":5,"c":98,"nc":"titolare fisso","y":6.02,"pv":36,"mv":5.96,"fm":5.97,"g":1,"a":0,"rig":null,"v":-0.11,"vc":28,"q":7},{"id":4287,"n":"Lobotka","r":"C","s":"Napoli","p":10,"f":5,"c":87,"nc":"titolare fisso","y":6.13,"pv":31,"mv":6.05,"fm":6.1,"g":1,"a":0,"rig":null,"v":0.02,"vc":17,"q":7},{"id":5422,"n":"Zalewski","r":"C","s":"Atalanta","p":10,"f":5,"c":78,"nc":"gioca, ma non sempre dall'inizio","y":6.37,"pv":31,"mv":6.1,"fm":6.4,"g":2,"a":5,"rig":null,"v":0.26,"vc":8,"q":6},{"id":5036,"n":"Caqueret","r":"C","s":"Como","p":10,"f":5,"c":78,"nc":"titolare fisso","y":6.37,"pv":28,"mv":6.11,"fm":6.41,"g":2,"a":4,"rig":null,"v":0.26,"vc":8,"q":6},{"id":7464,"n":"Oulai","r":"C","s":"Fiorentina","p":10,"f":5,"c":null,"nc":"nessuno storico utile","y":null,"pv":0,"mv":null,"fm":6.45,"g":0,"a":0,"rig":null,"v":null,"vc":null,"q":6},{"id":6549,"n":"Pierotti","r":"C","s":"Lecce","p":10,"f":5,"c":93,"nc":"titolare fisso","y":5.92,"pv":37,"mv":5.8,"fm":5.85,"g":1,"a":1,"rig":null,"v":-0.21,"vc":23,"q":6},{"id":6680,"n":"Karlstrom","r":"C","s":"Udinese","p":10,"f":5,"c":97,"nc":"titolare fisso","y":6.01,"pv":36,"mv":5.96,"fm":5.96,"g":1,"a":0,"rig":null,"v":-0.12,"vc":27,"q":6},{"id":5674,"n":"Basic","r":"C","s":"Venezia","p":10,"f":5,"c":77,"nc":"titolare fisso","y":6.38,"pv":23,"mv":6.09,"fm":6.43,"g":2,"a":3,"rig":null,"v":0.27,"vc":7,"q":6},{"id":2529,"n":"Mkhitaryan","r":"C","s":"Inter","p":10,"f":5,"c":67,"nc":"gioca, ma non sempre dall'inizio","y":6.51,"pv":28,"mv":6.21,"fm":6.59,"g":4,"a":1,"rig":null,"v":0.4,"vc":-4,"q":5},{"id":6164,"n":"Vitinha O.","r":"A","s":"Genoa","p":10,"f":5,"c":81,"nc":"gioca, ma non sempre dall'inizio","y":6.43,"pv":31,"mv":5.95,"fm":6.39,"g":5,"a":1,"rig":null,"v":0.04,"vc":26,"q":8},{"id":7449,"n":"Rrahmani Al.","r":"A","s":"Venezia","p":10,"f":5,"c":null,"nc":"nessuno storico utile","y":null,"pv":0,"mv":null,"fm":7.02,"g":0,"a":0,"rig":null,"v":null,"vc":null,"q":8},{"id":6669,"n":"Bonny","r":"A","s":"Inter","p":10,"f":5,"c":60,"nc":"gioca, ma non sempre dall'inizio","y":6.77,"pv":27,"mv":6.15,"fm":6.83,"g":5,"a":4,"rig":null,"v":0.38,"vc":5,"q":7},{"id":6519,"n":"Camarda","r":"A","s":"Milan","p":10,"f":5,"c":44,"nc":"gioca, ma non sempre dall'inizio","y":5.93,"pv":18,"mv":5.67,"fm":5.64,"g":1,"a":0,"rig":"ha calciato rigori","v":-0.5,"vc":-16,"q":5},{"id":7332,"n":"Bijlow","r":"P","s":"Genoa","p":9,"f":2,"c":74,"nc":"titolare fisso","y":4.91,"pv":16,"mv":6.06,"fm":4.78,"g":0,"a":0,"rig":null,"v":-0.23,"vc":10,"q":8},{"id":6042,"n":"Lucumì","r":"D","s":"Juventus","p":9,"f":5,"c":86,"nc":"titolare fisso","y":5.91,"pv":28,"mv":5.88,"fm":5.89,"g":1,"a":0,"rig":null,"v":-0.06,"vc":6,"q":8},{"id":6989,"n":"Tiago Gabriel","r":"D","s":"Lecce","p":9,"f":5,"c":98,"nc":"titolare fisso","y":6.01,"pv":36,"mv":6.0,"fm":6.01,"g":2,"a":0,"rig":null,"v":0.04,"vc":18,"q":7},{"id":6642,"n":"Coco","r":"D","s":"Torino","p":9,"f":5,"c":96,"nc":"titolare fisso","y":5.93,"pv":35,"mv":5.84,"fm":5.91,"g":1,"a":1,"rig":null,"v":-0.04,"vc":16,"q":7},{"id":5010,"n":"Ismajli","r":"D","s":"Torino","p":9,"f":5,"c":77,"nc":"titolare fisso","y":5.92,"pv":24,"mv":5.92,"fm":5.9,"g":0,"a":2,"rig":null,"v":-0.05,"vc":-4,"q":7},{"id":7219,"n":"Bernasconi","r":"D","s":"Atalanta","p":9,"f":5,"c":71,"nc":"titolare fisso","y":6.12,"pv":22,"mv":6.09,"fm":6.16,"g":0,"a":3,"rig":null,"v":0.15,"vc":-10,"q":6},{"id":6867,"n":"Valle","r":"D","s":"Como","p":9,"f":5,"c":81,"nc":"titolare fisso","y":6.17,"pv":26,"mv":6.06,"fm":6.23,"g":1,"a":3,"rig":null,"v":0.2,"vc":1,"q":6},{"id":7294,"n":"Valdepenas","r":"D","s":"Fiorentina","p":9,"f":5,"c":null,"nc":"nessuno storico utile","y":null,"pv":0,"mv":null,"fm":null,"g":0,"a":0,"rig":null,"v":null,"vc":null,"q":6},{"id":4177,"n":"Pavard","r":"D","s":"Inter","p":9,"f":5,"c":51,"nc":"solo 1 presenze in Serie A","y":6.05,"pv":1,"mv":6.5,"fm":6.5,"g":0,"a":0,"rig":null,"v":0.08,"vc":-30,"q":6},{"id":5620,"n":"Tavares N.","r":"D","s":"Lazio","p":9,"f":5,"c":70,"nc":"gioca, ma non sempre dall'inizio","y":5.85,"pv":22,"mv":5.91,"fm":5.8,"g":0,"a":0,"rig":null,"v":-0.12,"vc":-11,"q":6},{"id":6663,"n":"Circati","r":"D","s":"Parma","p":9,"f":5,"c":50,"nc":"gioca, ma non sempre dall'inizio","y":5.93,"pv":31,"mv":5.92,"fm":5.92,"g":1,"a":0,"rig":null,"v":-0.04,"vc":-31,"q":6},{"id":5858,"n":"Ferguson","r":"C","s":"Bologna","p":9,"f":5,"c":70,"nc":"gioca, ma non sempre dall'inizio","y":5.9,"pv":23,"mv":5.8,"fm":5.78,"g":1,"a":0,"rig":null,"v":-0.2,"vc":0,"q":7},{"id":6020,"n":"Ellertsson","r":"C","s":"Genoa","p":9,"f":5,"c":95,"nc":"titolare fisso","y":5.97,"pv":35,"mv":5.84,"fm":5.91,"g":1,"a":1,"rig":null,"v":-0.13,"vc":25,"q":6},{"id":5761,"n":"Zhegrova","r":"C","s":"Juventus","p":9,"f":5,"c":31,"nc":"gioca, ma non sempre dall'inizio","y":6.07,"pv":12,"mv":5.96,"fm":5.96,"g":0,"a":0,"rig":null,"v":-0.03,"vc":-39,"q":6},{"id":4349,"n":"Nicolussi Caviglia","r":"C","s":"Parma","p":9,"f":5,"c":67,"nc":"gioca, ma non sempre dall'inizio","y":6.08,"pv":23,"mv":5.89,"fm":6.02,"g":0,"a":4,"rig":null,"v":-0.02,"vc":-3,"q":6},{"id":6190,"n":"Pisilli","r":"C","s":"Roma","p":9,"f":5,"c":64,"nc":"gioca, ma non sempre dall'inizio","y":6.42,"pv":22,"mv":6.09,"fm":6.48,"g":2,"a":4,"rig":null,"v":0.32,"vc":-6,"q":5},{"id":7060,"n":"Cacciamani","r":"C","s":"Torino","p":9,"f":5,"c":null,"nc":"nessuno storico utile","y":null,"pv":0,"mv":null,"fm":6.34,"g":0,"a":0,"rig":null,"v":null,"vc":null,"q":5},{"id":6271,"n":"El Aynaoui","r":"C","s":"Roma","p":9,"f":5,"c":55,"nc":"gioca, ma non sempre dall'inizio","y":6.14,"pv":21,"mv":5.98,"fm":6.1,"g":1,"a":2,"rig":null,"v":0.04,"vc":-15,"q":4},{"id":7252,"n":"Stulic","r":"A","s":"Lecce","p":9,"f":5,"c":74,"nc":"gioca, ma non sempre dall'inizio","y":6.22,"pv":30,"mv":5.73,"fm":6.12,"g":4,"a":0,"rig":"ha calciato rigori","v":-0.17,"vc":19,"q":7},{"id":608,"n":"Zapata D.","r":"A","s":"Torino","p":9,"f":5,"c":55,"nc":"gioca, ma non sempre dall'inizio","y":6.25,"pv":23,"mv":5.83,"fm":6.13,"g":3,"a":1,"rig":"ha calciato rigori","v":-0.14,"vc":-5,"q":7},{"id":6556,"n":"Noslin","r":"A","s":"Lazio","p":9,"f":5,"c":60,"nc":"gioca, ma non sempre dall'inizio","y":6.52,"pv":23,"mv":6.02,"fm":6.5,"g":4,"a":2,"rig":null,"v":0.19,"vc":5,"q":6},{"id":5882,"n":"Mota","r":"A","s":"Monza","p":9,"f":5,"c":null,"nc":"nessuno storico utile","y":null,"pv":0,"mv":null,"fm":6.52,"g":0,"a":0,"rig":null,"v":null,"vc":null,"q":5},{"id":4236,"n":"Muric","r":"P","s":"Sassuolo","p":8,"f":2,"c":93,"nc":"titolare fisso","y":4.85,"pv":32,"mv":6.08,"fm":4.77,"g":0,"a":0,"rig":"ha calciato rigori","v":-0.29,"vc":29,"q":7},{"id":6046,"n":"Hien","r":"D","s":"Atalanta","p":8,"f":5,"c":80,"nc":"titolare fisso","y":5.89,"pv":28,"mv":5.91,"fm":5.86,"g":1,"a":0,"rig":null,"v":-0.03,"vc":3,"q":8},{"id":2724,"n":"Buongiorno","r":"D","s":"Napoli","p":8,"f":5,"c":87,"nc":"titolare fisso","y":5.9,"pv":32,"mv":5.89,"fm":5.88,"g":0,"a":1,"rig":null,"v":-0.02,"vc":10,"q":7},{"id":6916,"n":"Ahanor","r":"D","s":"Atalanta","p":8,"f":5,"c":69,"nc":"gioca, ma non sempre dall'inizio","y":5.77,"pv":21,"mv":5.79,"fm":5.69,"g":0,"a":0,"rig":null,"v":-0.15,"vc":-8,"q":6},{"id":4887,"n":"Bellanova","r":"D","s":"Atalanta","p":8,"f":5,"c":64,"nc":"gioca, ma non sempre dall'inizio","y":5.87,"pv":22,"mv":5.82,"fm":5.82,"g":0,"a":1,"rig":null,"v":-0.05,"vc":-14,"q":6},{"id":7212,"n":"Heggem","r":"D","s":"Bologna","p":8,"f":5,"c":83,"nc":"titolare fisso","y":5.85,"pv":25,"mv":5.84,"fm":5.8,"g":0,"a":0,"rig":null,"v":-0.07,"vc":6,"q":6},{"id":7485,"n":"Mangas","r":"D","s":"Monza","p":8,"f":5,"c":null,"nc":"nessuno storico utile","y":null,"pv":0,"mv":null,"fm":6.45,"g":0,"a":0,"rig":null,"v":null,"vc":null,"q":6},{"id":7329,"n":"Obrador","r":"D","s":"Sassuolo","p":8,"f":5,"c":63,"nc":"gioca, ma non sempre dall'inizio","y":6.27,"pv":16,"mv":6.06,"fm":6.41,"g":1,"a":3,"rig":null,"v":0.35,"vc":-14,"q":6},{"id":2593,"n":"Martin","r":"D","s":"Genoa","p":8,"f":5,"c":83,"nc":"gioca, ma non sempre dall'inizio","y":6.08,"pv":29,"mv":5.97,"fm":6.1,"g":1,"a":5,"rig":"ha calciato rigori","v":0.16,"vc":6,"q":5},{"id":4817,"n":"Pedraza","r":"D","s":"Lazio","p":8,"f":5,"c":null,"nc":"nessuno storico utile","y":null,"pv":0,"mv":null,"fm":6.35,"g":0,"a":0,"rig":null,"v":null,"vc":null,"q":5},{"id":6986,"n":"Rensch","r":"D","s":"Roma","p":8,"f":5,"c":59,"nc":"gioca, ma non sempre dall'inizio","y":6.35,"pv":19,"mv":6.16,"fm":6.5,"g":1,"a":4,"rig":null,"v":0.43,"vc":-18,"q":5},{"id":2741,"n":"Pessina","r":"C","s":"Monza","p":8,"f":5,"c":null,"nc":"nessuno storico utile","y":null,"pv":0,"mv":null,"fm":6.49,"g":0,"a":0,"rig":null,"v":null,"vc":null,"q":7},{"id":4459,"n":"Rovella","r":"C","s":"Lazio","p":8,"f":5,"c":39,"nc":"gioca, ma non sempre dall'inizio","y":5.89,"pv":11,"mv":5.73,"fm":5.64,"g":0,"a":1,"rig":null,"v":-0.21,"vc":-28,"q":6},{"id":6593,"n":"Akinsanmiro","r":"C","s":"Monza","p":8,"f":5,"c":68,"nc":"gioca, ma non sempre dall'inizio","y":5.91,"pv":23,"mv":5.8,"fm":5.8,"g":0,"a":1,"rig":null,"v":-0.18,"vc":1,"q":6},{"id":6015,"n":"Berisha M.","r":"C","s":"Lecce","p":8,"f":5,"c":42,"nc":"gioca, ma non sempre dall'inizio","y":6.65,"pv":12,"mv":6.17,"fm":6.92,"g":2,"a":3,"rig":null,"v":0.57,"vc":-26,"q":5},{"id":6898,"n":"Keita M.","r":"C","s":"Parma","p":8,"f":5,"c":97,"nc":"titolare fisso","y":6.09,"pv":36,"mv":6.01,"fm":6.06,"g":1,"a":1,"rig":null,"v":0.0,"vc":30,"q":5},{"id":2528,"n":"Matic","r":"C","s":"Sassuolo","p":8,"f":5,"c":94,"nc":"titolare fisso","y":6.01,"pv":34,"mv":5.96,"fm":5.96,"g":1,"a":1,"rig":null,"v":-0.08,"vc":27,"q":5},{"id":6677,"n":"Adzic","r":"C","s":"Sassuolo","p":8,"f":5,"c":22,"nc":"solo 4 presenze in Serie A","y":6.45,"pv":4,"mv":6.12,"fm":6.88,"g":1,"a":0,"rig":null,"v":0.37,"vc":-46,"q":5},{"id":7198,"n":"Piotrowski","r":"C","s":"Udinese","p":8,"f":5,"c":72,"nc":"gioca, ma non sempre dall'inizio","y":6.01,"pv":30,"mv":5.88,"fm":5.95,"g":1,"a":0,"rig":null,"v":-0.08,"vc":5,"q":5},{"id":5918,"n":"Sulemana K.","r":"A","s":"Atalanta","p":8,"f":5,"c":53,"nc":"gioca, ma non sempre dall'inizio","y":6.33,"pv":21,"mv":6.0,"fm":6.24,"g":2,"a":1,"rig":null,"v":-0.01,"vc":-4,"q":6},{"id":6598,"n":"Mutandwa","r":"A","s":"Cagliari","p":8,"f":5,"c":null,"nc":"nessuno storico utile","y":null,"pv":0,"mv":null,"fm":7.57,"g":0,"a":0,"rig":null,"v":null,"vc":null,"q":6},{"id":6204,"n":"Kvernadze","r":"A","s":"Frosinone","p":8,"f":5,"c":null,"nc":"nessuno storico utile","y":null,"pv":0,"mv":null,"fm":6.57,"g":0,"a":0,"rig":null,"v":null,"vc":null,"q":4},{"id":6248,"n":"Stankovic F.","r":"P","s":"Venezia","p":7,"f":2,"c":null,"nc":"nessuno storico utile","y":null,"pv":0,"mv":null,"fm":6.19,"g":0,"a":0,"rig":null,"v":null,"vc":null,"q":6},{"id":4657,"n":"Celik","r":"D","s":"Juventus","p":7,"f":5,"c":92,"nc":"titolare fisso","y":6.21,"pv":32,"mv":6.17,"fm":6.27,"g":1,"a":2,"rig":null,"v":0.31,"vc":16,"q":8},{"id":5701,"n":"Obert","r":"D","s":"Cagliari","p":7,"f":5,"c":95,"nc":"titolare fisso","y":5.85,"pv":34,"mv":5.88,"fm":5.82,"g":0,"a":3,"rig":null,"v":-0.06,"vc":19,"q":7},{"id":4952,"n":"Monterisi","r":"D","s":"Frosinone","p":7,"f":5,"c":null,"nc":"nessuno storico utile","y":null,"pv":0,"mv":null,"fm":6.43,"g":0,"a":0,"rig":null,"v":null,"vc":null,"q":6},{"id":6660,"n":"Marcandalli","r":"D","s":"Genoa","p":7,"f":5,"c":91,"nc":"titolare fisso","y":5.87,"pv":31,"mv":5.87,"fm":5.84,"g":0,"a":1,"rig":null,"v":-0.04,"vc":15,"q":6},{"id":4502,"n":"Gallo","r":"D","s":"Lecce","p":7,"f":5,"c":98,"nc":"titolare fisso","y":5.99,"pv":37,"mv":5.95,"fm":5.99,"g":0,"a":3,"rig":null,"v":0.09,"vc":22,"q":6},{"id":6202,"n":"Beukema","r":"D","s":"Napoli","p":7,"f":5,"c":75,"nc":"titolare fisso","y":6.12,"pv":22,"mv":5.93,"fm":6.16,"g":2,"a":0,"rig":null,"v":0.22,"vc":-2,"q":6},{"id":7253,"n":"Bella-Kotchap","r":"D","s":"Venezia","p":7,"f":5,"c":68,"nc":"gioca, ma non sempre dall'inizio","y":5.82,"pv":18,"mv":5.83,"fm":5.75,"g":0,"a":0,"rig":null,"v":-0.09,"vc":-9,"q":6},{"id":5678,"n":"Holm","r":"D","s":"Bologna","p":7,"f":5,"c":54,"nc":"gioca, ma non sempre dall'inizio","y":6.29,"pv":16,"mv":6.09,"fm":6.44,"g":1,"a":4,"rig":null,"v":0.39,"vc":-23,"q":5},{"id":6893,"n":"Kempf","r":"D","s":"Como","p":7,"f":5,"c":80,"nc":"titolare fisso","y":6.41,"pv":29,"mv":6.12,"fm":6.52,"g":4,"a":1,"rig":null,"v":0.51,"vc":4,"q":5},{"id":5840,"n":"Olivera","r":"D","s":"Napoli","p":7,"f":5,"c":65,"nc":"gioca, ma non sempre dall'inizio","y":5.76,"pv":22,"mv":5.75,"fm":5.68,"g":0,"a":0,"rig":null,"v":-0.15,"vc":-12,"q":5},{"id":6426,"n":"Pedersen","r":"D","s":"Torino","p":7,"f":5,"c":83,"nc":"titolare fisso","y":5.97,"pv":28,"mv":5.84,"fm":5.96,"g":1,"a":2,"rig":null,"v":0.07,"vc":7,"q":5},{"id":5946,"n":"Sow","r":"C","s":"Genoa","p":7,"f":5,"c":null,"nc":"nessuno storico utile","y":null,"pv":0,"mv":null,"fm":6.71,"g":0,"a":0,"rig":null,"v":null,"vc":null,"q":7},{"id":5298,"n":"Pobega","r":"C","s":"Bologna","p":7,"f":5,"c":66,"nc":"gioca, ma non sempre dall'inizio","y":6.19,"pv":23,"mv":5.83,"fm":6.17,"g":3,"a":1,"rig":null,"v":0.12,"vc":1,"q":6},{"id":4870,"n":"Adopo","r":"C","s":"Cagliari","p":7,"f":5,"c":100,"nc":"titolare fisso","y":5.94,"pv":38,"mv":5.83,"fm":5.88,"g":1,"a":1,"rig":null,"v":-0.14,"vc":35,"q":6},{"id":4260,"n":"Winks","r":"C","s":"Cagliari","p":7,"f":5,"c":null,"nc":"nessuno storico utile","y":null,"pv":0,"mv":null,"fm":6.27,"g":0,"a":0,"rig":null,"v":null,"vc":null,"q":6},{"id":5504,"n":"Coulibaly L.","r":"C","s":"Lecce","p":7,"f":5,"c":91,"nc":"titolare fisso","y":6.28,"pv":33,"mv":6.05,"fm":6.29,"g":3,"a":1,"rig":null,"v":0.21,"vc":26,"q":6},{"id":7412,"n":"Milla","r":"C","s":"Como","p":7,"f":5,"c":null,"nc":"nessuno storico utile","y":null,"pv":0,"mv":null,"fm":6.52,"g":0,"a":0,"rig":null,"v":null,"vc":null,"q":5},{"id":5998,"n":"Zerbin","r":"C","s":"Frosinone","p":7,"f":5,"c":74,"nc":"gioca, ma non sempre dall'inizio","y":5.89,"pv":29,"mv":5.76,"fm":5.79,"g":0,"a":2,"rig":null,"v":-0.19,"vc":9,"q":5},{"id":7409,"n":"Meichtry","r":"C","s":"Genoa","p":7,"f":5,"c":null,"nc":"nessuno storico utile","y":null,"pv":0,"mv":null,"fm":6.79,"g":0,"a":0,"rig":null,"v":null,"vc":null,"q":5},{"id":5685,"n":"Koopmeiners","r":"C","s":"Juventus","p":7,"f":5,"c":75,"nc":"gioca, ma non sempre dall'inizio","y":5.7,"pv":29,"mv":5.64,"fm":5.55,"g":0,"a":0,"rig":null,"v":-0.38,"vc":10,"q":5},{"id":6629,"n":"Dele-Bashiru","r":"C","s":"Lazio","p":7,"f":5,"c":60,"nc":"gioca, ma non sempre dall'inizio","y":5.94,"pv":21,"mv":5.69,"fm":5.83,"g":1,"a":0,"rig":null,"v":-0.14,"vc":-5,"q":5},{"id":7318,"n":"Gandelman","r":"C","s":"Lecce","p":7,"f":5,"c":65,"nc":"gioca, ma non sempre dall'inizio","y":6.35,"pv":16,"mv":5.97,"fm":6.41,"g":2,"a":1,"rig":null,"v":0.28,"vc":0,"q":5},{"id":7036,"n":"Bakola","r":"C","s":"Sassuolo","p":7,"f":5,"c":16,"nc":"solo 3 presenze in Serie A","y":6.22,"pv":3,"mv":6.17,"fm":6.17,"g":0,"a":0,"rig":null,"v":0.15,"vc":-49,"q":5},{"id":6170,"n":"Gineitis","r":"C","s":"Torino","p":7,"f":5,"c":75,"nc":"gioca, ma non sempre dall'inizio","y":5.91,"pv":27,"mv":5.87,"fm":5.81,"g":0,"a":1,"rig":null,"v":-0.17,"vc":10,"q":5},{"id":5507,"n":"Busio","r":"C","s":"Venezia","p":7,"f":5,"c":null,"nc":"nessuno storico utile","y":null,"pv":0,"mv":null,"fm":6.66,"g":0,"a":0,"rig":null,"v":null,"vc":null,"q":5},{"id":5319,"n":"Sohm","r":"C","s":"Venezia","p":7,"f":5,"c":65,"nc":"gioca, ma non sempre dall'inizio","y":5.78,"pv":24,"mv":5.65,"fm":5.62,"g":0,"a":1,"rig":null,"v":-0.3,"vc":0,"q":5},{"id":6994,"n":"Perez K.","r":"C","s":"Venezia","p":7,"f":5,"c":null,"nc":"nessuno storico utile","y":null,"pv":0,"mv":null,"fm":6.5,"g":0,"a":0,"rig":null,"v":null,"vc":null,"q":5},{"id":7550,"n":"Grillitsch","r":"C","s":"Frosinone","p":7,"f":5,"c":null,"nc":"nessuno storico utile","y":null,"pv":0,"mv":null,"fm":6.25,"g":0,"a":0,"rig":null,"v":null,"vc":null,"q":5},{"id":5301,"n":"Luis Henrique","r":"C","s":"Inter","p":7,"f":5,"c":70,"nc":"gioca, ma non sempre dall'inizio","y":6.1,"pv":27,"mv":5.89,"fm":6.06,"g":1,"a":2,"rig":null,"v":0.03,"vc":5,"q":4},{"id":6207,"n":"Almqvist","r":"C","s":"Parma","p":7,"f":5,"c":34,"nc":"solo 9 presenze in Serie A","y":6.14,"pv":9,"mv":5.94,"fm":6.06,"g":0,"a":1,"rig":null,"v":0.07,"vc":-31,"q":4},{"id":7535,"n":"Fitz-Jim","r":"C","s":"Torino","p":7,"f":5,"c":null,"nc":"nessuno storico utile","y":null,"pv":0,"mv":null,"fm":6.22,"g":0,"a":0,"rig":null,"v":null,"vc":null,"q":4},{"id":7008,"n":"Gimenez","r":"A","s":"Milan","p":7,"f":5,"c":52,"nc":"gioca, ma non sempre dall'inizio","y":5.9,"pv":15,"mv":5.5,"fm":5.53,"g":0,"a":1,"rig":null,"v":-0.48,"vc":-6,"q":6},{"id":7213,"n":"Frigan","r":"A","s":"Parma","p":7,"f":5,"c":null,"nc":"nessuno storico utile","y":null,"pv":0,"mv":null,"fm":6.81,"g":0,"a":0,"rig":null,"v":null,"vc":null,"q":5},{"id":4387,"n":"Adorante","r":"A","s":"Venezia","p":7,"f":5,"c":null,"nc":"nessuno storico utile","y":null,"pv":0,"mv":null,"fm":7.27,"g":0,"a":0,"rig":null,"v":null,"vc":null,"q":5},{"id":4485,"n":"Thiam","r":"P","s":"Monza","p":6,"f":2,"c":null,"nc":"nessuno storico utile","y":null,"pv":0,"mv":null,"fm":6.21,"g":0,"a":0,"rig":null,"v":null,"vc":null,"q":5},{"id":4751,"n":"Tomori","r":"D","s":"Milan","p":6,"f":5,"c":92,"nc":"titolare fisso","y":5.9,"pv":32,"mv":5.97,"fm":5.88,"g":0,"a":1,"rig":null,"v":0.02,"vc":16,"q":7},{"id":6495,"n":"Comuzzo","r":"D","s":"Torino","p":6,"f":5,"c":73,"nc":"gioca, ma non sempre dall'inizio","y":5.81,"pv":24,"mv":5.75,"fm":5.75,"g":1,"a":0,"rig":null,"v":-0.09,"vc":-4,"q":6},{"id":5555,"n":"Kamara H.","r":"D","s":"Udinese","p":6,"f":5,"c":78,"nc":"titolare fisso","y":5.9,"pv":26,"mv":5.88,"fm":5.87,"g":0,"a":2,"rig":null,"v":0.02,"vc":2,"q":6},{"id":2640,"n":"Kolasinac","r":"D","s":"Atalanta","p":6,"f":5,"c":61,"nc":"gioca, ma non sempre dall'inizio","y":5.96,"pv":17,"mv":6.03,"fm":5.94,"g":0,"a":0,"rig":null,"v":0.08,"vc":-16,"q":5},{"id":7068,"n":"Vitik","r":"D","s":"Bologna","p":6,"f":5,"c":66,"nc":"titolare fisso","y":5.9,"pv":18,"mv":5.94,"fm":5.86,"g":0,"a":0,"rig":null,"v":0.02,"vc":-10,"q":5},{"id":7532,"n":"Kofler","r":"D","s":"Cagliari","p":6,"f":5,"c":null,"nc":"nessuno storico utile","y":null,"pv":0,"mv":null,"fm":6.36,"g":0,"a":0,"rig":null,"v":null,"vc":null,"q":5},{"id":7274,"n":"Zè Pedro","r":"D","s":"Monza","p":6,"f":5,"c":74,"nc":"titolare fisso","y":5.76,"pv":22,"mv":5.77,"fm":5.68,"g":0,"a":1,"rig":null,"v":-0.14,"vc":-2,"q":5},{"id":5449,"n":"Parisi","r":"D","s":"Fiorentina","p":6,"f":5,"c":72,"nc":"gioca, ma non sempre dall'inizio","y":5.98,"pv":23,"mv":6.02,"fm":5.98,"g":1,"a":1,"rig":null,"v":0.1,"vc":-4,"q":5},{"id":7469,"n":"Bracaglia","r":"D","s":"Frosinone","p":6,"f":5,"c":null,"nc":"nessuno storico utile","y":null,"pv":0,"mv":null,"fm":6.51,"g":0,"a":0,"rig":null,"v":null,"vc":null,"q":5},{"id":6238,"n":"Oyono A.","r":"D","s":"Frosinone","p":6,"f":5,"c":null,"nc":"nessuno storico utile","y":null,"pv":0,"mv":null,"fm":6.31,"g":0,"a":0,"rig":null,"v":null,"vc":null,"q":5},{"id":6632,"n":"Gaspar K.","r":"D","s":"Lecce","p":6,"f":5,"c":76,"nc":"titolare fisso","y":5.74,"pv":21,"mv":5.83,"fm":5.64,"g":0,"a":0,"rig":null,"v":-0.16,"vc":0,"q":5},{"id":6990,"n":"Veiga D.","r":"D","s":"Lecce","p":6,"f":5,"c":98,"nc":"titolare fisso","y":5.75,"pv":36,"mv":5.82,"fm":5.69,"g":0,"a":0,"rig":null,"v":-0.15,"vc":22,"q":5},{"id":6890,"n":"Moreno M.","r":"D","s":"Venezia","p":6,"f":5,"c":null,"nc":"nessuno storico utile","y":null,"pv":0,"mv":null,"fm":6.14,"g":0,"a":0,"rig":null,"v":null,"vc":null,"q":5},{"id":5695,"n":"Haps","r":"D","s":"Venezia","p":6,"f":5,"c":null,"nc":"nessuno storico utile","y":null,"pv":0,"mv":null,"fm":6.63,"g":0,"a":0,"rig":null,"v":null,"vc":null,"q":5},{"id":7240,"n":"Siebert","r":"D","s":"Lecce","p":6,"f":5,"c":77,"nc":"titolare fisso","y":5.83,"pv":19,"mv":5.68,"fm":5.76,"g":1,"a":0,"rig":null,"v":-0.07,"vc":2,"q":4},{"id":2115,"n":"Delli Carri","r":"D","s":"Monza","p":6,"f":5,"c":null,"nc":"nessuno storico utile","y":null,"pv":0,"mv":null,"fm":6.37,"g":0,"a":0,"rig":null,"v":null,"vc":null,"q":4},{"id":6659,"n":"Lucchesi","r":"D","s":"Monza","p":6,"f":5,"c":null,"nc":"nessuno storico utile","y":null,"pv":0,"mv":null,"fm":6.23,"g":0,"a":0,"rig":null,"v":null,"vc":null,"q":4},{"id":5838,"n":"Birindelli","r":"D","s":"Monza","p":6,"f":5,"c":null,"nc":"nessuno storico utile","y":null,"pv":0,"mv":null,"fm":6.51,"g":0,"a":0,"rig":null,"v":null,"vc":null,"q":4},{"id":4845,"n":"Correia T.","r":"D","s":"Venezia","p":6,"f":5,"c":null,"nc":"nessuno storico utile","y":null,"pv":0,"mv":null,"fm":6.2,"g":0,"a":0,"rig":null,"v":null,"vc":null,"q":4},{"id":4375,"n":"Terzic","r":"D","s":"Frosinone","p":6,"f":5,"c":null,"nc":"nessuno storico utile","y":null,"pv":0,"mv":null,"fm":6.15,"g":0,"a":0,"rig":null,"v":null,"vc":null,"q":4},{"id":7131,"n":"Floriani Mussolini","r":"D","s":"Lazio","p":6,"f":5,"c":59,"nc":"gioca, ma non sempre dall'inizio","y":5.79,"pv":23,"mv":5.72,"fm":5.72,"g":0,"a":1,"rig":null,"v":-0.11,"vc":-18,"q":3},{"id":5739,"n":"De Winter","r":"D","s":"Milan","p":6,"f":5,"c":78,"nc":"titolare fisso","y":5.92,"pv":24,"mv":5.75,"fm":5.9,"g":1,"a":1,"rig":null,"v":0.04,"vc":2,"q":3},{"id":6985,"n":"Candè","r":"D","s":"Sassuolo","p":6,"f":5,"c":41,"nc":"solo 8 presenze in Serie A","y":5.78,"pv":8,"mv":5.69,"fm":5.56,"g":0,"a":0,"rig":null,"v":-0.12,"vc":-36,"q":3},{"id":4856,"n":"Chukwueze","r":"C","s":"Milan","p":6,"f":5,"c":36,"nc":"solo 1 presenze in Serie A","y":6.16,"pv":1,"mv":5.5,"fm":5.5,"g":0,"a":0,"rig":null,"v":0.09,"vc":-29,"q":6},{"id":7528,"n":"Amondarain","r":"C","s":"Bologna","p":6,"f":5,"c":null,"nc":"nessuno storico utile","y":null,"pv":0,"mv":null,"fm":6.06,"g":0,"a":0,"rig":null,"v":null,"vc":null,"q":5},{"id":7311,"n":"Romano","r":"C","s":"Cagliari","p":6,"f":5,"c":null,"nc":"nessuno storico utile","y":null,"pv":0,"mv":null,"fm":6.13,"g":0,"a":0,"rig":null,"v":null,"vc":null,"q":5},{"id":2857,"n":"Traorè Hj.","r":"C","s":"Genoa","p":6,"f":5,"c":null,"nc":"nessuno storico utile","y":null,"pv":0,"mv":null,"fm":6.52,"g":0,"a":0,"rig":null,"v":null,"vc":null,"q":5},{"id":22,"n":"De Roon","r":"C","s":"Atalanta","p":6,"f":5,"c":95,"nc":"titolare fisso","y":6.05,"pv":34,"mv":5.97,"fm":6.0,"g":1,"a":2,"rig":null,"v":-0.06,"vc":32,"q":4},{"id":7473,"n":"Cichella","r":"C","s":"Frosinone","p":6,"f":5,"c":null,"nc":"nessuno storico utile","y":null,"pv":0,"mv":null,"fm":6.37,"g":0,"a":0,"rig":null,"v":null,"vc":null,"q":4},{"id":7474,"n":"Koutsoupias","r":"C","s":"Frosinone","p":6,"f":5,"c":null,"nc":"nessuno storico utile","y":null,"pv":0,"mv":null,"fm":6.75,"g":0,"a":0,"rig":null,"v":null,"vc":null,"q":4},{"id":7341,"n":"Amorim","r":"C","s":"Genoa","p":6,"f":5,"c":50,"nc":"solo 9 presenze in Serie A","y":5.94,"pv":9,"mv":5.72,"fm":5.67,"g":0,"a":0,"rig":null,"v":-0.17,"vc":-15,"q":4},{"id":4911,"n":"Douglas Luiz","r":"C","s":"Juventus","p":6,"f":5,"c":null,"nc":"nessuno storico utile","y":null,"pv":0,"mv":null,"fm":6.31,"g":0,"a":0,"rig":null,"v":null,"vc":null,"q":4},{"id":333,"n":"Cataldi","r":"C","s":"Lazio","p":6,"f":5,"c":79,"nc":"titolare fisso","y":6.37,"pv":27,"mv":6.07,"fm":6.41,"g":3,"a":3,"rig":"ha calciato rigori","v":0.3,"vc":16,"q":4},{"id":7322,"n":"Ngom","r":"C","s":"Lecce","p":6,"f":5,"c":62,"nc":"gioca, ma non sempre dall'inizio","y":5.87,"pv":13,"mv":5.69,"fm":5.65,"g":0,"a":0,"rig":null,"v":-0.24,"vc":-3,"q":4},{"id":5453,"n":"Ricci S.","r":"C","s":"Milan","p":6,"f":5,"c":66,"nc":"gioca, ma non sempre dall'inizio","y":6.19,"pv":28,"mv":6.0,"fm":6.18,"g":1,"a":3,"rig":null,"v":0.12,"vc":2,"q":4},{"id":7203,"n":"Jashari","r":"C","s":"Milan","p":6,"f":5,"c":46,"nc":"gioca, ma non sempre dall'inizio","y":5.97,"pv":12,"mv":5.71,"fm":5.79,"g":0,"a":1,"rig":null,"v":-0.14,"vc":-19,"q":4},{"id":4199,"n":"Loftus-Cheek","r":"C","s":"Milan","p":6,"f":5,"c":57,"nc":"gioca, ma non sempre dall'inizio","y":6.44,"pv":21,"mv":6.1,"fm":6.52,"g":3,"a":1,"rig":null,"v":0.37,"vc":-8,"q":4},{"id":6827,"n":"Njie","r":"C","s":"Torino","p":6,"f":5,"c":32,"nc":"gioca, ma non sempre dall'inizio","y":6.19,"pv":10,"mv":5.8,"fm":6.15,"g":1,"a":1,"rig":null,"v":0.12,"vc":-33,"q":4},{"id":6895,"n":"Dominguez B.","r":"C","s":"Sassuolo","p":6,"f":5,"c":36,"nc":"gioca, ma non sempre dall'inizio","y":6.12,"pv":12,"mv":5.83,"fm":6.04,"g":0,"a":3,"rig":null,"v":0.05,"vc":-29,"q":3},{"id":5813,"n":"Miretti","r":"C","s":"Juventus","p":6,"f":5,"c":38,"nc":"gioca, ma non sempre dall'inizio","y":6.21,"pv":15,"mv":5.97,"fm":6.2,"g":1,"a":1,"rig":null,"v":0.14,"vc":-27,"q":3},{"id":7209,"n":"Sorensen O.","r":"C","s":"Parma","p":6,"f":5,"c":74,"nc":"gioca, ma non sempre dall'inizio","y":6.01,"pv":30,"mv":5.85,"fm":5.95,"g":1,"a":1,"rig":null,"v":-0.1,"vc":10,"q":3},{"id":7536,"n":"Diallo O.","r":"C","s":"Parma","p":6,"f":5,"c":null,"nc":"nessuno storico utile","y":null,"pv":0,"mv":null,"fm":null,"g":0,"a":0,"rig":null,"v":null,"vc":null,"q":3},{"id":7208,"n":"Miller L.","r":"C","s":"Udinese","p":6,"f":5,"c":54,"nc":"gioca, ma non sempre dall'inizio","y":6.04,"pv":19,"mv":5.92,"fm":5.95,"g":0,"a":2,"rig":null,"v":-0.07,"vc":-11,"q":3},{"id":7342,"n":"Elphege","r":"A","s":"Parma","p":6,"f":5,"c":46,"nc":"solo 8 presenze in Serie A","y":6.73,"pv":8,"mv":6.0,"fm":6.88,"g":2,"a":1,"rig":null,"v":0.44,"vc":-12,"q":3},{"id":7411,"n":"Daffara","r":"P","s":"Parma","p":1,"f":2,"c":null,"nc":"nessuno storico utile","y":null,"pv":0,"mv":null,"fm":6.12,"g":0,"a":0,"rig":null,"v":null,"vc":null,"q":7},{"id":218,"n":"Perin","r":"P","s":"Juventus","p":1,"f":2,"c":60,"nc":"solo 9 presenze in Serie A","y":5.14,"pv":9,"mv":6.11,"fm":5.11,"g":0,"a":0,"rig":null,"v":-0.03,"vc":4,"q":6},{"id":2170,"n":"Milinkovic-Savic V.","r":"P","s":"Napoli","p":1,"f":2,"c":86,"nc":"titolare fisso","y":5.54,"pv":27,"mv":6.2,"fm":5.65,"g":0,"a":0,"rig":"rigorista","v":0.39,"vc":30,"q":5},{"id":6415,"n":"Palmisani","r":"P","s":"Frosinone","p":1,"f":2,"c":null,"nc":"nessuno storico utile","y":null,"pv":0,"mv":null,"fm":6.19,"g":0,"a":0,"rig":null,"v":null,"vc":null,"q":4},{"id":7463,"n":"Desplanches","r":"P","s":"Frosinone","p":1,"f":2,"c":null,"nc":"nessuno storico utile","y":null,"pv":0,"mv":null,"fm":6.12,"g":0,"a":0,"rig":null,"v":null,"vc":null,"q":2},{"id":2814,"n":"Provedel","r":"P","s":"Inter","p":1,"f":2,"c":82,"nc":"titolare fisso","y":5.31,"pv":27,"mv":6.26,"fm":5.35,"g":0,"a":0,"rig":"ha calciato rigori","v":0.16,"vc":26,"q":2},{"id":4,"n":"Sportiello","r":"P","s":"Atalanta","p":1,"f":3,"c":56,"nc":"solo 1 presenze in Serie A","y":5.09,"pv":1,"mv":5.5,"fm":4.5,"g":0,"a":0,"rig":null,"v":-0.08,"vc":-4,"q":1},{"id":7533,"n":"Happonen","r":"P","s":"Bologna","p":1,"f":3,"c":null,"nc":"nessuno storico utile","y":null,"pv":0,"mv":null,"fm":null,"g":0,"a":0,"rig":null,"v":null,"vc":null,"q":1},{"id":7172,"n":"Pessina Mas.","r":"P","s":"Bologna","p":1,"f":3,"c":60,"nc":"solo 4 presenze in Serie A","y":5.32,"pv":4,"mv":6.12,"fm":5.62,"g":0,"a":0,"rig":null,"v":0.17,"vc":4,"q":1},{"id":6650,"n":"Sherri","r":"P","s":"Cagliari","p":1,"f":3,"c":null,"nc":"nessuno storico utile","y":null,"pv":0,"mv":null,"fm":6.0,"g":0,"a":0,"rig":null,"v":null,"vc":null,"q":1},{"id":7301,"n":"Tornqvist","r":"P","s":"Como","p":1,"f":3,"c":null,"nc":"nessuno storico utile","y":null,"pv":0,"mv":null,"fm":null,"g":0,"a":0,"rig":null,"v":null,"vc":null,"q":1},{"id":2809,"n":"Vigorito","r":"P","s":"Como","p":1,"f":3,"c":null,"nc":"nessuno storico utile","y":null,"pv":0,"mv":null,"fm":null,"g":0,"a":0,"rig":null,"v":null,"vc":null,"q":1},{"id":6403,"n":"Christensen O.","r":"P","s":"Fiorentina","p":1,"f":3,"c":56,"nc":"solo 1 presenze in Serie A","y":5.31,"pv":1,"mv":7.5,"fm":6.5,"g":0,"a":0,"rig":null,"v":0.16,"vc":-4,"q":1},{"id":158,"n":"Lezzerini","r":"P","s":"Fiorentina","p":1,"f":3,"c":null,"nc":"nessuno storico utile","y":null,"pv":0,"mv":null,"fm":6.0,"g":0,"a":0,"rig":null,"v":null,"vc":null,"q":1},{"id":7466,"n":"Lolic","r":"P","s":"Frosinone","p":1,"f":3,"c":null,"nc":"nessuno storico utile","y":null,"pv":0,"mv":null,"fm":null,"g":0,"a":0,"rig":null,"v":null,"vc":null,"q":1},{"id":219,"n":"Sommariva","r":"P","s":"Genoa","p":1,"f":3,"c":19,"nc":"solo 2 presenze in Serie A","y":4.88,"pv":2,"mv":5.75,"fm":3.75,"g":0,"a":0,"rig":null,"v":-0.29,"vc":-41,"q":1},{"id":6569,"n":"Stolz","r":"P","s":"Genoa","p":1,"f":3,"c":null,"nc":"nessuno storico utile","y":null,"pv":0,"mv":null,"fm":6.08,"g":0,"a":0,"rig":null,"v":null,"vc":null,"q":1},{"id":1926,"n":"Di Gennaro","r":"P","s":"Inter","p":1,"f":3,"c":2,"nc":"solo 1 presenze in Serie A","y":5.15,"pv":1,"mv":6.0,"fm":5.0,"g":0,"a":0,"rig":null,"v":-0.02,"vc":-58,"q":1},{"id":1930,"n":"Pinsoglio","r":"P","s":"Juventus","p":1,"f":4,"c":null,"nc":"nessuno storico utile","y":null,"pv":0,"mv":null,"fm":null,"g":0,"a":0,"rig":null,"v":null,"vc":null,"q":1},{"id":7337,"n":"Motta","r":"P","s":"Lazio","p":1,"f":4,"c":64,"nc":"solo 9 presenze in Serie A","y":5.17,"pv":9,"mv":6.0,"fm":5.17,"g":0,"a":0,"rig":"ha calciato rigori","v":0.02,"vc":8,"q":1},{"id":7534,"n":"Renzetti","r":"P","s":"Lazio","p":1,"f":4,"c":null,"nc":"nessuno storico utile","y":null,"pv":0,"mv":null,"fm":null,"g":0,"a":0,"rig":null,"v":null,"vc":null,"q":1},{"id":2815,"n":"Terracciano","r":"P","s":"Milan","p":1,"f":4,"c":46,"nc":"solo 2 presenze in Serie A","y":5.33,"pv":2,"mv":6.0,"fm":6.0,"g":0,"a":0,"rig":null,"v":0.18,"vc":-14,"q":1},{"id":6813,"n":"Torriani","r":"P","s":"Milan","p":1,"f":4,"c":null,"nc":"nessuno storico utile","y":null,"pv":0,"mv":null,"fm":null,"g":0,"a":0,"rig":null,"v":null,"vc":null,"q":1},{"id":6682,"n":"Pizzignacco","r":"P","s":"Monza","p":1,"f":4,"c":null,"nc":"nessuno storico utile","y":null,"pv":0,"mv":null,"fm":null,"g":0,"a":0,"rig":null,"v":null,"vc":null,"q":1},{"id":7475,"n":"Strajnar","r":"P","s":"Monza","p":1,"f":4,"c":null,"nc":"nessuno storico utile","y":null,"pv":0,"mv":null,"fm":null,"g":0,"a":0,"rig":null,"v":null,"vc":null,"q":1},{"id":2845,"n":"Contini","r":"P","s":"Napoli","p":1,"f":4,"c":null,"nc":"nessuno storico utile","y":null,"pv":0,"mv":null,"fm":6.0,"g":0,"a":0,"rig":null,"v":null,"vc":null,"q":1},{"id":6662,"n":"Corvi","r":"P","s":"Parma","p":1,"f":4,"c":75,"nc":"titolare fisso","y":5.11,"pv":17,"mv":6.18,"fm":5.09,"g":0,"a":0,"rig":null,"v":-0.06,"vc":19,"q":1},{"id":7048,"n":"De Marzi","r":"P","s":"Roma","p":1,"f":4,"c":null,"nc":"nessuno storico utile","y":null,"pv":0,"mv":null,"fm":null,"g":0,"a":0,"rig":null,"v":null,"vc":null,"q":1},{"id":610,"n":"Gollini","r":"P","s":"Roma","p":1,"f":4,"c":null,"nc":"nessuno storico utile","y":null,"pv":0,"mv":null,"fm":null,"g":0,"a":0,"rig":null,"v":null,"vc":null,"q":1},{"id":4518,"n":"Russo A.","r":"P","s":"Sassuolo","p":1,"f":4,"c":null,"nc":"nessuno storico utile","y":null,"pv":0,"mv":null,"fm":null,"g":0,"a":0,"rig":null,"v":null,"vc":null,"q":1},{"id":4867,"n":"Turati","r":"P","s":"Sassuolo","p":1,"f":5,"c":56,"nc":"solo 6 presenze in Serie A","y":5.09,"pv":6,"mv":6.17,"fm":5.0,"g":0,"a":0,"rig":null,"v":-0.08,"vc":-4,"q":1},{"id":7457,"n":"Mascardi","r":"P","s":"Torino","p":1,"f":5,"c":null,"nc":"nessuno storico utile","y":null,"pv":0,"mv":null,"fm":6.08,"g":0,"a":0,"rig":null,"v":null,"vc":null,"q":1},{"id":5320,"n":"Paleari","r":"P","s":"Torino","p":1,"f":5,"c":89,"nc":"titolare fisso","y":4.66,"pv":29,"mv":6.09,"fm":4.52,"g":0,"a":0,"rig":null,"v":-0.51,"vc":33,"q":1},{"id":7363,"n":"Siviero","r":"P","s":"Torino","p":1,"f":5,"c":null,"nc":"nessuno storico utile","y":null,"pv":0,"mv":null,"fm":null,"g":0,"a":0,"rig":null,"v":null,"vc":null,"q":1},{"id":543,"n":"Padelli","r":"P","s":"Udinese","p":1,"f":5,"c":52,"nc":"solo 2 presenze in Serie A","y":5.18,"pv":2,"mv":6.25,"fm":5.25,"g":0,"a":0,"rig":null,"v":0.03,"vc":-8,"q":1},{"id":5707,"n":"Piana","r":"P","s":"Udinese","p":1,"f":5,"c":null,"nc":"nessuno storico utile","y":null,"pv":0,"mv":null,"fm":null,"g":0,"a":0,"rig":null,"v":null,"vc":null,"q":1},{"id":6671,"n":"Grandi","r":"P","s":"Venezia","p":1,"f":5,"c":null,"nc":"nessuno storico utile","y":null,"pv":0,"mv":null,"fm":6.0,"g":0,"a":0,"rig":null,"v":null,"vc":null,"q":1},{"id":7531,"n":"Pozzi","r":"P","s":"Venezia","p":1,"f":5,"c":null,"nc":"nessuno storico utile","y":null,"pv":0,"mv":null,"fm":null,"g":0,"a":0,"rig":null,"v":null,"vc":null,"q":1},{"id":7545,"n":"Vismara","r":"P","s":"Atalanta","p":1,"f":5,"c":null,"nc":"nessuno storico utile","y":null,"pv":0,"mv":null,"fm":null,"g":0,"a":0,"rig":null,"v":null,"vc":null,"q":1},{"id":2127,"n":"Satalino","r":"P","s":"Lazio","p":1,"f":5,"c":null,"nc":"nessuno storico utile","y":null,"pv":0,"mv":null,"fm":null,"g":0,"a":0,"rig":null,"v":null,"vc":null,"q":1},{"id":7557,"n":"Penev","r":"P","s":"Lecce","p":1,"f":5,"c":null,"nc":"nessuno storico utile","y":null,"pv":0,"mv":null,"fm":null,"g":0,"a":0,"rig":null,"v":null,"vc":null,"q":1},{"id":7560,"n":"Pisseri","r":"P","s":"Frosinone","p":1,"f":5,"c":null,"nc":"nessuno storico utile","y":null,"pv":0,"mv":null,"fm":6.0,"g":0,"a":0,"rig":null,"v":null,"vc":null,"q":1},{"id":3,"n":"Radunovic","r":"P","s":"Cagliari","p":1,"f":5,"c":null,"nc":"nessuno storico utile","y":null,"pv":0,"mv":null,"fm":6.08,"g":0,"a":0,"rig":null,"v":null,"vc":null,"q":1},{"id":6766,"n":"Kelly L.","r":"D","s":"Juventus","p":1,"f":5,"c":95,"nc":"titolare fisso","y":6.06,"pv":35,"mv":6.01,"fm":6.07,"g":1,"a":1,"rig":null,"v":0.19,"vc":42,"q":5},{"id":4461,"n":"Zappa","r":"D","s":"Cagliari","p":1,"f":5,"c":66,"nc":"gioca, ma non sempre dall'inizio","y":5.98,"pv":25,"mv":5.9,"fm":5.98,"g":0,"a":3,"rig":null,"v":0.12,"vc":12,"q":4},{"id":7014,"n":"Smolcic I.","r":"D","s":"Como","p":1,"f":5,"c":71,"nc":"gioca, ma non sempre dall'inizio","y":5.88,"pv":25,"mv":5.96,"fm":5.84,"g":0,"a":1,"rig":null,"v":0.01,"vc":18,"q":4},{"id":5603,"n":"Pongracic","r":"D","s":"Fiorentina","p":1,"f":5,"c":96,"nc":"titolare fisso","y":5.73,"pv":35,"mv":5.84,"fm":5.67,"g":0,"a":0,"rig":null,"v":-0.14,"vc":42,"q":4},{"id":7467,"n":"Calvani","r":"D","s":"Frosinone","p":1,"f":5,"c":null,"nc":"nessuno storico utile","y":null,"pv":0,"mv":null,"fm":6.25,"g":0,"a":0,"rig":null,"v":null,"vc":null,"q":4},{"id":7537,"n":"Mitaj","r":"D","s":"Genoa","p":1,"f":5,"c":null,"nc":"nessuno storico utile","y":null,"pv":0,"mv":null,"fm":6.3,"g":0,"a":0,"rig":null,"v":null,"vc":null,"q":4},{"id":5831,"n":"Gatti","r":"D","s":"Juventus","p":1,"f":5,"c":55,"nc":"gioca, ma non sempre dall'inizio","y":6.14,"pv":16,"mv":5.94,"fm":6.22,"g":2,"a":0,"rig":null,"v":0.27,"vc":1,"q":4},{"id":5307,"n":"Valenti","r":"D","s":"Parma","p":1,"f":5,"c":85,"nc":"titolare fisso","y":5.87,"pv":27,"mv":5.96,"fm":5.83,"g":0,"a":0,"rig":null,"v":0.0,"vc":32,"q":4},{"id":6631,"n":"Ghilardi","r":"D","s":"Roma","p":1,"f":5,"c":61,"nc":"gioca, ma non sempre dall'inizio","y":5.96,"pv":21,"mv":5.98,"fm":5.95,"g":0,"a":0,"rig":null,"v":0.09,"vc":8,"q":4},{"id":4374,"n":"Walukiewicz","r":"D","s":"Sassuolo","p":1,"f":5,"c":94,"nc":"titolare fisso","y":5.79,"pv":34,"mv":5.81,"fm":5.74,"g":0,"a":1,"rig":null,"v":-0.08,"vc":40,"q":4},{"id":5851,"n":"Doig","r":"D","s":"Sassuolo","p":1,"f":5,"c":78,"nc":"gioca, ma non sempre dall'inizio","y":5.81,"pv":27,"mv":5.85,"fm":5.76,"g":0,"a":0,"rig":null,"v":-0.07,"vc":24,"q":4},{"id":7526,"n":"Comert","r":"D","s":"Torino","p":1,"f":5,"c":null,"nc":"nessuno storico utile","y":null,"pv":0,"mv":null,"fm":6.48,"g":0,"a":0,"rig":null,"v":null,"vc":null,"q":4},{"id":4263,"n":"Kabasele","r":"D","s":"Udinese","p":1,"f":5,"c":85,"nc":"titolare fisso","y":6.14,"pv":28,"mv":5.98,"fm":6.18,"g":3,"a":0,"rig":null,"v":0.27,"vc":32,"q":4},{"id":5820,"n":"Bertola","r":"D","s":"Udinese","p":1,"f":5,"c":73,"nc":"gioca, ma non sempre dall'inizio","y":5.88,"pv":25,"mv":5.86,"fm":5.84,"g":0,"a":1,"rig":null,"v":0.01,"vc":20,"q":4},{"id":5527,"n":"Zanoli","r":"D","s":"Udinese","p":1,"f":5,"c":64,"nc":"gioca, ma non sempre dall'inizio","y":6.2,"pv":19,"mv":6.05,"fm":6.29,"g":1,"a":2,"rig":null,"v":0.34,"vc":10,"q":4},{"id":7312,"n":"Arizala","r":"D","s":"Udinese","p":1,"f":5,"c":38,"nc":"solo 5 presenze in Serie A","y":5.92,"pv":5,"mv":5.8,"fm":5.8,"g":0,"a":0,"rig":null,"v":0.05,"vc":-18,"q":4},{"id":7538,"n":"Halhal","r":"D","s":"Venezia","p":1,"f":5,"c":null,"nc":"nessuno storico utile","y":null,"pv":0,"mv":null,"fm":6.29,"g":0,"a":0,"rig":null,"v":null,"vc":null,"q":4},{"id":5578,"n":"Kossounou","r":"D","s":"Atalanta","p":1,"f":5,"c":52,"nc":"gioca, ma non sempre dall'inizio","y":6.06,"pv":16,"mv":5.94,"fm":6.09,"g":1,"a":0,"rig":null,"v":0.19,"vc":-4,"q":3},{"id":5498,"n":"Casale","r":"D","s":"Bologna","p":1,"f":5,"c":44,"nc":"gioca, ma non sempre dall'inizio","y":5.8,"pv":10,"mv":5.65,"fm":5.65,"g":0,"a":0,"rig":null,"v":-0.08,"vc":-12,"q":3},{"id":7268,"n":"Rodriguez Ju.","r":"D","s":"Cagliari","p":1,"f":5,"c":71,"nc":"titolare fisso","y":5.81,"pv":16,"mv":5.62,"fm":5.72,"g":1,"a":0,"rig":null,"v":-0.07,"vc":18,"q":3},{"id":7125,"n":"Idrissi R.","r":"D","s":"Cagliari","p":1,"f":5,"c":44,"nc":"gioca, ma non sempre dall'inizio","y":6.06,"pv":17,"mv":5.82,"fm":6.09,"g":2,"a":0,"rig":null,"v":0.19,"vc":-12,"q":3},{"id":4378,"n":"Ranieri L.","r":"D","s":"Fiorentina","p":1,"f":5,"c":88,"nc":"titolare fisso","y":5.83,"pv":31,"mv":5.85,"fm":5.79,"g":1,"a":0,"rig":null,"v":-0.04,"vc":34,"q":3},{"id":7175,"n":"Joao Mario","r":"D","s":"Fiorentina","p":1,"f":5,"c":51,"nc":"gioca, ma non sempre dall'inizio","y":6.0,"pv":14,"mv":5.79,"fm":6.0,"g":1,"a":1,"rig":null,"v":0.13,"vc":-4,"q":3},{"id":7540,"n":"Akpoguma","r":"D","s":"Frosinone","p":1,"f":5,"c":null,"nc":"nessuno storico utile","y":null,"pv":0,"mv":null,"fm":6.04,"g":0,"a":0,"rig":null,"v":null,"vc":null,"q":3},{"id":5757,"n":"Cittadini","r":"D","s":"Frosinone","p":1,"f":5,"c":null,"nc":"nessuno storico utile","y":null,"pv":0,"mv":null,"fm":6.12,"g":0,"a":0,"rig":null,"v":null,"vc":null,"q":3},{"id":7012,"n":"Provstgaard","r":"D","s":"Lazio","p":1,"f":5,"c":69,"nc":"gioca, ma non sempre dall'inizio","y":5.89,"pv":23,"mv":5.91,"fm":5.85,"g":0,"a":0,"rig":null,"v":0.02,"vc":16,"q":3},{"id":5273,"n":"Estupinan","r":"D","s":"Milan","p":1,"f":5,"c":57,"nc":"gioca, ma non sempre dall'inizio","y":5.81,"pv":14,"mv":5.64,"fm":5.71,"g":1,"a":1,"rig":null,"v":-0.07,"vc":4,"q":3},{"id":7238,"n":"Kouadio","r":"D","s":"Monza","p":1,"f":5,"c":23,"nc":"solo 1 presenze in Serie A","y":5.99,"pv":1,"mv":6.0,"fm":6.0,"g":0,"a":0,"rig":null,"v":0.12,"vc":-32,"q":3},{"id":4925,"n":"Carboni A.","r":"D","s":"Monza","p":1,"f":5,"c":null,"nc":"nessuno storico utile","y":null,"pv":0,"mv":null,"fm":6.33,"g":0,"a":0,"rig":null,"v":null,"vc":null,"q":3},{"id":7235,"n":"Troilo","r":"D","s":"Parma","p":1,"f":5,"c":80,"nc":"titolare fisso","y":5.79,"pv":21,"mv":5.79,"fm":5.71,"g":1,"a":0,"rig":null,"v":-0.08,"vc":26,"q":3},{"id":7255,"n":"Britschgi","r":"D","s":"Parma","p":1,"f":5,"c":85,"nc":"titolare fisso","y":5.77,"pv":28,"mv":5.75,"fm":5.7,"g":0,"a":2,"rig":null,"v":-0.11,"vc":32,"q":3},{"id":6892,"n":"Schingtienne","r":"D","s":"Venezia","p":1,"f":5,"c":null,"nc":"nessuno storico utile","y":null,"pv":0,"mv":null,"fm":6.27,"g":0,"a":0,"rig":null,"v":null,"vc":null,"q":3},{"id":6673,"n":"Sverko","r":"D","s":"Venezia","p":1,"f":5,"c":null,"nc":"nessuno storico utile","y":null,"pv":0,"mv":null,"fm":6.15,"g":0,"a":0,"rig":null,"v":null,"vc":null,"q":3},{"id":6821,"n":"Hainaut","r":"D","s":"Venezia","p":1,"f":5,"c":null,"nc":"nessuno storico utile","y":null,"pv":0,"mv":null,"fm":6.56,"g":0,"a":0,"rig":null,"v":null,"vc":null,"q":3},{"id":7326,"n":"Helland","r":"D","s":"Bologna","p":1,"f":5,"c":62,"nc":"solo 6 presenze in Serie A","y":5.71,"pv":6,"mv":5.5,"fm":5.33,"g":0,"a":0,"rig":null,"v":-0.17,"vc":8,"q":2},{"id":7483,"n":"Alhassane","r":"D","s":"Bologna","p":1,"f":5,"c":null,"nc":"nessuno storico utile","y":null,"pv":0,"mv":null,"fm":6.13,"g":0,"a":0,"rig":null,"v":null,"vc":null,"q":2},{"id":6896,"n":"Van Der Brempt","r":"D","s":"Como","p":1,"f":5,"c":46,"nc":"gioca, ma non sempre dall'inizio","y":5.97,"pv":14,"mv":5.96,"fm":5.96,"g":0,"a":1,"rig":null,"v":0.1,"vc":-10,"q":2},{"id":6977,"n":"Otoa","r":"D","s":"Genoa","p":1,"f":5,"c":56,"nc":"gioca, ma non sempre dall'inizio","y":5.64,"pv":10,"mv":5.6,"fm":5.35,"g":0,"a":0,"rig":null,"v":-0.24,"vc":2,"q":2},{"id":7413,"n":"Puczka","r":"D","s":"Genoa","p":1,"f":5,"c":null,"nc":"nessuno storico utile","y":null,"pv":0,"mv":null,"fm":null,"g":0,"a":0,"rig":null,"v":null,"vc":null,"q":2},{"id":791,"n":"Sabelli","r":"D","s":"Genoa","p":1,"f":5,"c":57,"nc":"gioca, ma non sempre dall'inizio","y":5.78,"pv":13,"mv":5.81,"fm":5.65,"g":0,"a":0,"rig":null,"v":-0.09,"vc":4,"q":2},{"id":2263,"n":"Lazzari","r":"D","s":"Lazio","p":1,"f":5,"c":48,"nc":"gioca, ma non sempre dall'inizio","y":5.82,"pv":17,"mv":5.79,"fm":5.74,"g":0,"a":0,"rig":null,"v":-0.05,"vc":-8,"q":2},{"id":2728,"n":"Pellegrini Lu.","r":"D","s":"Lazio","p":1,"f":5,"c":72,"nc":"gioca, ma non sempre dall'inizio","y":5.86,"pv":24,"mv":5.85,"fm":5.81,"g":1,"a":0,"rig":null,"v":-0.01,"vc":18,"q":2},{"id":6883,"n":"Jean","r":"D","s":"Lecce","p":1,"f":5,"c":19,"nc":"solo 5 presenze in Serie A","y":5.88,"pv":5,"mv":5.8,"fm":5.7,"g":0,"a":0,"rig":null,"v":0.01,"vc":-36,"q":2},{"id":7525,"n":"Diawara S.","r":"D","s":"Milan","p":1,"f":5,"c":null,"nc":"nessuno storico utile","y":null,"pv":0,"mv":null,"fm":null,"g":0,"a":0,"rig":null,"v":null,"vc":null,"q":2},{"id":6638,"n":"Marin R.","r":"D","s":"Napoli","p":1,"f":5,"c":null,"nc":"nessuno storico utile","y":null,"pv":0,"mv":null,"fm":6.24,"g":0,"a":0,"rig":null,"v":null,"vc":null,"q":2},{"id":252,"n":"Biraghi","r":"D","s":"Torino","p":1,"f":5,"c":42,"nc":"gioca, ma non sempre dall'inizio","y":5.76,"pv":11,"mv":5.59,"fm":5.59,"g":0,"a":0,"rig":null,"v":-0.12,"vc":-14,"q":2},{"id":6925,"n":"Palma","r":"D","s":"Udinese","p":1,"f":5,"c":48,"nc":"solo 4 presenze in Serie A","y":5.83,"pv":4,"mv":5.5,"fm":5.5,"g":0,"a":0,"rig":null,"v":-0.04,"vc":-8,"q":2},{"id":5994,"n":"Ebosse","r":"D","s":"Udinese","p":1,"f":5,"c":66,"nc":"gioca, ma non sempre dall'inizio","y":5.81,"pv":16,"mv":5.75,"fm":5.72,"g":0,"a":1,"rig":null,"v":-0.07,"vc":12,"q":2},{"id":7478,"n":"Franjic","r":"D","s":"Venezia","p":1,"f":5,"c":null,"nc":"nessuno storico utile","y":null,"pv":0,"mv":null,"fm":6.17,"g":0,"a":0,"rig":null,"v":null,"vc":null,"q":2},{"id":6681,"n":"Sagrado","r":"D","s":"Venezia","p":1,"f":5,"c":null,"nc":"nessuno storico utile","y":null,"pv":0,"mv":null,"fm":6.24,"g":0,"a":0,"rig":null,"v":null,"vc":null,"q":2},{"id":7548,"n":"Aurelio","r":"D","s":"Cagliari","p":1,"f":5,"c":null,"nc":"nessuno storico utile","y":null,"pv":0,"mv":null,"fm":6.61,"g":0,"a":0,"rig":null,"v":null,"vc":null,"q":2},{"id":487,"n":"De Silvestri","r":"D","s":"Bologna","p":1,"f":5,"c":37,"nc":"gioca, ma non sempre dall'inizio","y":5.97,"pv":10,"mv":6.05,"fm":5.95,"g":0,"a":0,"rig":null,"v":0.1,"vc":-18,"q":1},{"id":418,"n":"Goldaniga","r":"D","s":"Como","p":1,"f":5,"c":null,"nc":"nessuno storico utile","y":null,"pv":0,"mv":null,"fm":null,"g":0,"a":0,"rig":null,"v":null,"vc":null,"q":1},{"id":7407,"n":"Cuenca A.","r":"D","s":"Como","p":1,"f":5,"c":null,"nc":"nessuno storico utile","y":null,"pv":0,"mv":null,"fm":6.14,"g":0,"a":0,"rig":null,"v":null,"vc":null,"q":1},{"id":5424,"n":"Amey","r":"D","s":"Frosinone","p":1,"f":5,"c":null,"nc":"nessuno storico utile","y":null,"pv":0,"mv":null,"fm":null,"g":0,"a":0,"rig":null,"v":null,"vc":null,"q":1},{"id":7468,"n":"Gelli J.","r":"D","s":"Frosinone","p":1,"f":5,"c":null,"nc":"nessuno storico utile","y":null,"pv":0,"mv":null,"fm":6.08,"g":0,"a":0,"rig":null,"v":null,"vc":null,"q":1},{"id":7470,"n":"Oyono J.","r":"D","s":"Frosinone","p":1,"f":5,"c":null,"nc":"nessuno storico utile","y":null,"pv":0,"mv":null,"fm":6.12,"g":0,"a":0,"rig":null,"v":null,"vc":null,"q":1},{"id":7471,"n":"Corrado","r":"D","s":"Frosinone","p":1,"f":5,"c":null,"nc":"nessuno storico utile","y":null,"pv":0,"mv":null,"fm":6.47,"g":0,"a":0,"rig":null,"v":null,"vc":null,"q":1},{"id":6244,"n":"Matturro","r":"D","s":"Genoa","p":1,"f":5,"c":null,"nc":"nessuno storico utile","y":null,"pv":0,"mv":null,"fm":null,"g":0,"a":0,"rig":null,"v":null,"vc":null,"q":1},{"id":294,"n":"Rugani","r":"D","s":"Juventus","p":1,"f":5,"c":40,"nc":"solo 8 presenze in Serie A","y":5.78,"pv":8,"mv":5.69,"fm":5.56,"g":0,"a":0,"rig":null,"v":-0.09,"vc":-16,"q":1},{"id":6039,"n":"Cabal","r":"D","s":"Juventus","p":1,"f":5,"c":26,"nc":"solo 9 presenze in Serie A","y":6.29,"pv":9,"mv":5.94,"fm":6.56,"g":2,"a":0,"rig":null,"v":0.42,"vc":-30,"q":1},{"id":327,"n":"Patric","r":"D","s":"Lazio","p":1,"f":5,"c":43,"nc":"gioca, ma non sempre dall'inizio","y":5.86,"pv":10,"mv":5.85,"fm":5.75,"g":0,"a":0,"rig":null,"v":-0.01,"vc":-12,"q":1},{"id":7182,"n":"Ndaba","r":"D","s":"Lecce","p":1,"f":5,"c":45,"nc":"solo 9 presenze in Serie A","y":5.73,"pv":9,"mv":5.5,"fm":5.5,"g":0,"a":0,"rig":null,"v":-0.14,"vc":-10,"q":1},{"id":5399,"n":"Antov","r":"D","s":"Monza","p":1,"f":5,"c":null,"nc":"nessuno storico utile","y":null,"pv":0,"mv":null,"fm":6.01,"g":0,"a":0,"rig":null,"v":null,"vc":null,"q":1},{"id":7476,"n":"Bakoune","r":"D","s":"Monza","p":1,"f":5,"c":null,"nc":"nessuno storico utile","y":null,"pv":0,"mv":null,"fm":6.21,"g":0,"a":0,"rig":null,"v":null,"vc":null,"q":1},{"id":6809,"n":"Marianucci","r":"D","s":"Napoli","p":1,"f":5,"c":52,"nc":"gioca, ma non sempre dall'inizio","y":5.84,"pv":11,"mv":5.73,"fm":5.73,"g":0,"a":1,"rig":null,"v":-0.04,"vc":-4,"q":1},{"id":5481,"n":"Mazzocchi","r":"D","s":"Napoli","p":1,"f":5,"c":28,"nc":"solo 9 presenze in Serie A","y":5.96,"pv":9,"mv":5.94,"fm":5.94,"g":0,"a":1,"rig":null,"v":0.09,"vc":-28,"q":1},{"id":7202,"n":"Ndiaye","r":"D","s":"Parma","p":1,"f":5,"c":40,"nc":"gioca, ma non sempre dall'inizio","y":5.63,"pv":11,"mv":5.59,"fm":5.36,"g":0,"a":0,"rig":null,"v":-0.25,"vc":-16,"q":1},{"id":6149,"n":"Carboni F.","r":"D","s":"Parma","p":1,"f":5,"c":36,"nc":"solo 2 presenze in Serie A","y":5.99,"pv":2,"mv":6.0,"fm":6.0,"g":0,"a":0,"rig":null,"v":0.12,"vc":-20,"q":1},{"id":7260,"n":"Ziolkowski","r":"D","s":"Roma","p":1,"f":5,"c":37,"nc":"solo 9 presenze in Serie A","y":5.88,"pv":9,"mv":5.94,"fm":5.78,"g":0,"a":0,"rig":null,"v":0.01,"vc":-18,"q":1},{"id":6189,"n":"Missori","r":"D","s":"Sassuolo","p":1,"f":5,"c":null,"nc":"nessuno storico utile","y":null,"pv":0,"mv":null,"fm":6.33,"g":0,"a":0,"rig":null,"v":null,"vc":null,"q":1},{"id":7156,"n":"Pieragnolo","r":"D","s":"Sassuolo","p":1,"f":5,"c":null,"nc":"nessuno storico utile","y":null,"pv":0,"mv":null,"fm":null,"g":0,"a":0,"rig":null,"v":null,"vc":null,"q":1},{"id":7356,"n":"Mlacic","r":"D","s":"Udinese","p":1,"f":5,"c":50,"nc":"solo 3 presenze in Serie A","y":5.9,"pv":3,"mv":5.83,"fm":5.67,"g":0,"a":0,"rig":null,"v":0.04,"vc":-6,"q":1},{"id":6021,"n":"Abankwah","r":"D","s":"Udinese","p":1,"f":5,"c":null,"nc":"nessuno storico utile","y":null,"pv":0,"mv":null,"fm":6.22,"g":0,"a":0,"rig":null,"v":null,"vc":null,"q":1},{"id":7454,"n":"Gomes","r":"D","s":"Venezia","p":1,"f":5,"c":null,"nc":"nessuno storico utile","y":null,"pv":0,"mv":null,"fm":6.07,"g":0,"a":0,"rig":null,"v":null,"vc":null,"q":1},{"id":6640,"n":"Felici","r":"C","s":"Cagliari","p":1,"f":5,"c":30,"nc":"gioca, ma non sempre dall'inizio","y":6.42,"pv":11,"mv":6.05,"fm":6.55,"g":2,"a":1,"rig":null,"v":0.34,"vc":-14,"q":5},{"id":7127,"n":"Addai","r":"C","s":"Como","p":1,"f":5,"c":42,"nc":"gioca, ma non sempre dall'inizio","y":6.42,"pv":12,"mv":5.96,"fm":6.54,"g":3,"a":0,"rig":null,"v":0.34,"vc":-2,"q":5},{"id":6054,"n":"Moro N.","r":"C","s":"Bologna","p":1,"f":5,"c":76,"nc":"gioca, ma non sempre dall'inizio","y":6.15,"pv":28,"mv":5.93,"fm":6.12,"g":2,"a":0,"rig":null,"v":0.07,"vc":34,"q":4},{"id":6424,"n":"Prati","r":"C","s":"Cagliari","p":1,"f":5,"c":79,"nc":"gioca, ma non sempre dall'inizio","y":5.95,"pv":32,"mv":5.88,"fm":5.88,"g":1,"a":0,"rig":null,"v":-0.13,"vc":36,"q":4},{"id":6206,"n":"Fabbian","r":"C","s":"Fiorentina","p":1,"f":5,"c":59,"nc":"gioca, ma non sempre dall'inizio","y":6.1,"pv":22,"mv":5.8,"fm":6.05,"g":2,"a":0,"rig":null,"v":0.02,"vc":16,"q":4},{"id":6252,"n":"Folorunsho","r":"C","s":"Napoli","p":1,"f":5,"c":80,"nc":"titolare fisso","y":6.22,"pv":26,"mv":6.04,"fm":6.21,"g":2,"a":0,"rig":null,"v":0.14,"vc":38,"q":4},{"id":6005,"n":"Ilkhan","r":"C","s":"Torino","p":1,"f":5,"c":59,"nc":"gioca, ma non sempre dall'inizio","y":6.08,"pv":17,"mv":5.82,"fm":6.0,"g":1,"a":2,"rig":null,"v":-0.0,"vc":16,"q":4},{"id":6024,"n":"Sulemana I.","r":"C","s":"Atalanta","p":1,"f":5,"c":58,"nc":"gioca, ma non sempre dall'inizio","y":5.92,"pv":18,"mv":5.69,"fm":5.78,"g":1,"a":0,"rig":null,"v":-0.17,"vc":16,"q":3},{"id":1871,"n":"Deiola","r":"C","s":"Cagliari","p":1,"f":5,"c":69,"nc":"titolare fisso","y":6.03,"pv":20,"mv":5.98,"fm":5.95,"g":0,"a":1,"rig":null,"v":-0.05,"vc":26,"q":3},{"id":4947,"n":"Brescianini","r":"C","s":"Fiorentina","p":1,"f":5,"c":52,"nc":"gioca, ma non sempre dall'inizio","y":6.29,"pv":18,"mv":5.97,"fm":6.31,"g":2,"a":1,"rig":null,"v":0.21,"vc":10,"q":3},{"id":6241,"n":"Gelli F.","r":"C","s":"Frosinone","p":1,"f":5,"c":null,"nc":"nessuno storico utile","y":null,"pv":0,"mv":null,"fm":6.24,"g":0,"a":0,"rig":null,"v":null,"vc":null,"q":3},{"id":6506,"n":"Fini","r":"C","s":"Frosinone","p":1,"f":5,"c":29,"nc":"solo 1 presenze in Serie A","y":6.16,"pv":1,"mv":5.5,"fm":5.5,"g":0,"a":0,"rig":null,"v":0.08,"vc":-15,"q":3},{"id":4970,"n":"Messias","r":"C","s":"Genoa","p":1,"f":5,"c":49,"nc":"gioca, ma non sempre dall'inizio","y":6.55,"pv":19,"mv":6.18,"fm":6.68,"g":3,"a":1,"rig":"ha calciato rigori","v":0.47,"vc":6,"q":3},{"id":6503,"n":"Stankovic A.","r":"C","s":"Inter","p":1,"f":5,"c":null,"nc":"nessuno storico utile","y":null,"pv":0,"mv":null,"fm":6.61,"g":0,"a":0,"rig":null,"v":null,"vc":null,"q":3},{"id":7477,"n":"Colombo L.","r":"C","s":"Monza","p":1,"f":5,"c":null,"nc":"nessuno storico utile","y":null,"pv":0,"mv":null,"fm":6.29,"g":0,"a":0,"rig":null,"v":null,"vc":null,"q":3},{"id":5131,"n":"Gilmour","r":"C","s":"Napoli","p":1,"f":5,"c":43,"nc":"gioca, ma non sempre dall'inizio","y":6.26,"pv":13,"mv":6.08,"fm":6.27,"g":1,"a":0,"rig":null,"v":0.18,"vc":0,"q":3},{"id":7183,"n":"Aboukhlal","r":"C","s":"Torino","p":1,"f":5,"c":34,"nc":"gioca, ma non sempre dall'inizio","y":5.89,"pv":11,"mv":5.77,"fm":5.64,"g":0,"a":0,"rig":null,"v":-0.2,"vc":-10,"q":3},{"id":5872,"n":"Helgason","r":"C","s":"Venezia","p":1,"f":5,"c":26,"nc":"solo 4 presenze in Serie A","y":6.03,"pv":4,"mv":5.62,"fm":5.62,"g":0,"a":0,"rig":null,"v":-0.05,"vc":-18,"q":3},{"id":6225,"n":"El Azzouzi O.","r":"C","s":"Bologna","p":1,"f":5,"c":null,"nc":"nessuno storico utile","y":null,"pv":0,"mv":null,"fm":6.29,"g":0,"a":0,"rig":null,"v":null,"vc":null,"q":2},{"id":6815,"n":"Fadera","r":"C","s":"Como","p":1,"f":5,"c":69,"nc":"gioca, ma non sempre dall'inizio","y":6.17,"pv":24,"mv":5.92,"fm":6.15,"g":2,"a":1,"rig":null,"v":0.09,"vc":26,"q":2},{"id":6903,"n":"Hasa","r":"C","s":"Frosinone","p":1,"f":5,"c":null,"nc":"nessuno storico utile","y":null,"pv":0,"mv":null,"fm":6.58,"g":0,"a":0,"rig":null,"v":null,"vc":null,"q":2},{"id":6917,"n":"Masini","r":"C","s":"Frosinone","p":1,"f":5,"c":64,"nc":"gioca, ma non sempre dall'inizio","y":5.99,"pv":21,"mv":5.98,"fm":5.9,"g":0,"a":1,"rig":null,"v":-0.09,"vc":22,"q":2},{"id":6980,"n":"Venturino","r":"C","s":"Genoa","p":1,"f":5,"c":28,"nc":"solo 7 presenze in Serie A","y":6.06,"pv":7,"mv":5.86,"fm":5.86,"g":0,"a":0,"rig":null,"v":-0.03,"vc":-16,"q":2},{"id":5457,"n":"Maleh","r":"C","s":"Lecce","p":1,"f":5,"c":73,"nc":"gioca, ma non sempre dall'inizio","y":5.86,"pv":21,"mv":5.69,"fm":5.71,"g":1,"a":0,"rig":null,"v":-0.22,"vc":30,"q":2},{"id":5295,"n":"Musah","r":"C","s":"Milan","p":1,"f":5,"c":45,"nc":"gioca, ma non sempre dall'inizio","y":6.14,"pv":16,"mv":5.94,"fm":6.09,"g":1,"a":0,"rig":null,"v":0.06,"vc":2,"q":2},{"id":5880,"n":"Ciurria","r":"C","s":"Monza","p":1,"f":5,"c":null,"nc":"nessuno storico utile","y":null,"pv":0,"mv":null,"fm":6.26,"g":0,"a":0,"rig":null,"v":null,"vc":null,"q":2},{"id":7138,"n":"Ordonez C.","r":"C","s":"Parma","p":1,"f":5,"c":65,"nc":"gioca, ma non sempre dall'inizio","y":5.93,"pv":21,"mv":5.79,"fm":5.81,"g":1,"a":0,"rig":null,"v":-0.16,"vc":22,"q":2},{"id":6219,"n":"Boloca","r":"C","s":"Sassuolo","p":1,"f":5,"c":19,"nc":"solo 2 presenze in Serie A","y":6.14,"pv":2,"mv":5.75,"fm":5.75,"g":0,"a":0,"rig":null,"v":0.06,"vc":-25,"q":2},{"id":6246,"n":"Lipani","r":"C","s":"Sassuolo","p":1,"f":5,"c":57,"nc":"gioca, ma non sempre dall'inizio","y":5.99,"pv":21,"mv":5.93,"fm":5.9,"g":0,"a":1,"rig":null,"v":-0.09,"vc":14,"q":2},{"id":7418,"n":"Chakvetadze","r":"C","s":"Udinese","p":1,"f":5,"c":null,"nc":"nessuno storico utile","y":null,"pv":0,"mv":null,"fm":6.22,"g":0,"a":0,"rig":null,"v":null,"vc":null,"q":2},{"id":526,"n":"Duncan","r":"C","s":"Venezia","p":1,"f":5,"c":null,"nc":"nessuno storico utile","y":null,"pv":0,"mv":null,"fm":6.25,"g":0,"a":0,"rig":null,"v":null,"vc":null,"q":2},{"id":7165,"n":"Liteta","r":"C","s":"Cagliari","p":1,"f":5,"c":42,"nc":"solo 4 presenze in Serie A","y":6.08,"pv":4,"mv":5.75,"fm":5.75,"g":0,"a":0,"rig":null,"v":-0.0,"vc":-2,"q":1},{"id":7357,"n":"Lahdo","r":"C","s":"Como","p":1,"f":5,"c":null,"nc":"nessuno storico utile","y":null,"pv":0,"mv":null,"fm":null,"g":0,"a":0,"rig":null,"v":null,"vc":null,"q":1},{"id":7456,"n":"El Azzouzi A.","r":"C","s":"Frosinone","p":1,"f":5,"c":null,"nc":"nessuno storico utile","y":null,"pv":0,"mv":null,"fm":6.26,"g":0,"a":0,"rig":null,"v":null,"vc":null,"q":1},{"id":5725,"n":"Kone B.","r":"C","s":"Frosinone","p":1,"f":5,"c":null,"nc":"nessuno storico utile","y":null,"pv":0,"mv":null,"fm":6.28,"g":0,"a":0,"rig":null,"v":null,"vc":null,"q":1},{"id":6191,"n":"Belahyane","r":"C","s":"Lazio","p":1,"f":5,"c":45,"nc":"gioca, ma non sempre dall'inizio","y":6.0,"pv":11,"mv":5.77,"fm":5.82,"g":0,"a":2,"rig":null,"v":-0.08,"vc":2,"q":1},{"id":7345,"n":"Przyborek","r":"C","s":"Lazio","p":1,"f":5,"c":null,"nc":"nessuno storico utile","y":null,"pv":0,"mv":null,"fm":6.46,"g":0,"a":0,"rig":null,"v":null,"vc":null,"q":1},{"id":7248,"n":"Gorter","r":"C","s":"Lecce","p":1,"f":5,"c":22,"nc":"solo 1 presenze in Serie A","y":6.16,"pv":1,"mv":5.5,"fm":5.5,"g":0,"a":0,"rig":null,"v":0.08,"vc":-22,"q":1},{"id":6410,"n":"Kaba","r":"C","s":"Lecce","p":1,"f":5,"c":40,"nc":"gioca, ma non sempre dall'inizio","y":5.94,"pv":11,"mv":5.77,"fm":5.73,"g":0,"a":0,"rig":null,"v":-0.14,"vc":-4,"q":1},{"id":7319,"n":"Fofana Sa.","r":"C","s":"Lecce","p":1,"f":5,"c":38,"nc":"solo 2 presenze in Serie A","y":6.09,"pv":2,"mv":5.5,"fm":5.5,"g":0,"a":0,"rig":null,"v":0.01,"vc":-6,"q":1},{"id":7276,"n":"Cremaschi","r":"C","s":"Parma","p":1,"f":5,"c":35,"nc":"solo 1 presenze in Serie A","y":6.21,"pv":1,"mv":6.0,"fm":6.0,"g":0,"a":0,"rig":null,"v":0.13,"vc":-9,"q":1},{"id":7157,"n":"Iannoni","r":"C","s":"Sassuolo","p":1,"f":5,"c":25,"nc":"solo 5 presenze in Serie A","y":6.34,"pv":5,"mv":6.0,"fm":6.5,"g":1,"a":0,"rig":null,"v":0.26,"vc":-19,"q":1},{"id":5007,"n":"Ilic","r":"C","s":"Torino","p":1,"f":5,"c":39,"nc":"solo 8 presenze in Serie A","y":6.06,"pv":8,"mv":6.0,"fm":5.88,"g":0,"a":0,"rig":null,"v":-0.03,"vc":-5,"q":1},{"id":6889,"n":"Anjorin","r":"C","s":"Torino","p":1,"f":5,"c":24,"nc":"solo 9 presenze in Serie A","y":5.96,"pv":9,"mv":5.78,"fm":5.72,"g":0,"a":0,"rig":null,"v":-0.12,"vc":-20,"q":1},{"id":7392,"n":"Camara A.","r":"C","s":"Udinese","p":1,"f":5,"c":null,"nc":"nessuno storico utile","y":null,"pv":0,"mv":null,"fm":6.0,"g":0,"a":0,"rig":null,"v":null,"vc":null,"q":1},{"id":6212,"n":"Zarraga","r":"C","s":"Udinese","p":1,"f":5,"c":31,"nc":"gioca, ma non sempre dall'inizio","y":5.94,"pv":10,"mv":5.75,"fm":5.7,"g":0,"a":0,"rig":null,"v":-0.14,"vc":-13,"q":1},{"id":7481,"n":"Dagasso","r":"C","s":"Venezia","p":1,"f":5,"c":null,"nc":"nessuno storico utile","y":null,"pv":0,"mv":null,"fm":6.35,"g":0,"a":0,"rig":null,"v":null,"vc":null,"q":1},{"id":6643,"n":"Dallinga","r":"A","s":"Bologna","p":1,"f":5,"c":46,"nc":"gioca, ma non sempre dall'inizio","y":6.26,"pv":19,"mv":5.82,"fm":6.13,"g":2,"a":1,"rig":null,"v":-0.07,"vc":7,"q":8},{"id":6243,"n":"Borrelli","r":"A","s":"Cagliari","p":1,"f":5,"c":62,"nc":"gioca, ma non sempre dall'inizio","y":6.49,"pv":26,"mv":5.92,"fm":6.46,"g":5,"a":1,"rig":null,"v":0.16,"vc":23,"q":4},{"id":7374,"n":"Mendy P.","r":"A","s":"Cagliari","p":1,"f":5,"c":38,"nc":"solo 8 presenze in Serie A","y":6.6,"pv":8,"mv":5.94,"fm":6.62,"g":2,"a":0,"rig":null,"v":0.27,"vc":-8,"q":4},{"id":313,"n":"Morata","r":"A","s":"Como","p":1,"f":5,"c":48,"nc":"gioca, ma non sempre dall'inizio","y":5.65,"pv":17,"mv":5.5,"fm":5.21,"g":0,"a":0,"rig":"ha calciato rigori","v":-0.68,"vc":9,"q":4},{"id":7453,"n":"Havel","r":"A","s":"Genoa","p":1,"f":5,"c":null,"nc":"nessuno storico utile","y":null,"pv":0,"mv":null,"fm":7.41,"g":0,"a":0,"rig":null,"v":null,"vc":null,"q":4},{"id":7162,"n":"Giovane","r":"A","s":"Napoli","p":1,"f":5,"c":75,"nc":"gioca, ma non sempre dall'inizio","y":6.48,"pv":31,"mv":6.0,"fm":6.45,"g":3,"a":6,"rig":null,"v":0.15,"vc":36,"q":4},{"id":7349,"n":"Kulenovic","r":"A","s":"Torino","p":1,"f":5,"c":33,"nc":"solo 7 presenze in Serie A","y":6.21,"pv":7,"mv":5.71,"fm":5.79,"g":0,"a":1,"rig":null,"v":-0.12,"vc":-13,"q":4},{"id":7272,"n":"Gueye","r":"A","s":"Udinese","p":1,"f":5,"c":36,"nc":"gioca, ma non sempre dall'inizio","y":6.17,"pv":13,"mv":5.77,"fm":5.92,"g":1,"a":0,"rig":null,"v":-0.16,"vc":-10,"q":4},{"id":7546,"n":"Robinson J.","r":"A","s":"Monza","p":1,"f":5,"c":null,"nc":"nessuno storico utile","y":null,"pv":0,"mv":null,"fm":6.32,"g":0,"a":0,"rig":null,"v":null,"vc":null,"q":4},{"id":7128,"n":"Kuhn","r":"A","s":"Como","p":1,"f":5,"c":46,"nc":"gioca, ma non sempre dall'inizio","y":6.37,"pv":14,"mv":5.96,"fm":6.25,"g":1,"a":1,"rig":null,"v":0.04,"vc":7,"q":3},{"id":6822,"n":"Ekhator","r":"A","s":"Juventus","p":1,"f":5,"c":55,"nc":"gioca, ma non sempre dall'inizio","y":6.35,"pv":25,"mv":5.96,"fm":6.28,"g":3,"a":0,"rig":null,"v":0.02,"vc":16,"q":3},{"id":7001,"n":"N'Dri","r":"A","s":"Lecce","p":1,"f":5,"c":53,"nc":"gioca, ma non sempre dall'inizio","y":6.25,"pv":17,"mv":5.82,"fm":6.09,"g":2,"a":0,"rig":null,"v":-0.08,"vc":14,"q":3},{"id":7523,"n":"Varela G.","r":"A","s":"Monza","p":1,"f":5,"c":null,"nc":"nessuno storico utile","y":null,"pv":0,"mv":null,"fm":6.52,"g":0,"a":0,"rig":null,"v":null,"vc":null,"q":3},{"id":7120,"n":"Lang","r":"A","s":"Napoli","p":1,"f":5,"c":48,"nc":"gioca, ma non sempre dall'inizio","y":6.42,"pv":14,"mv":6.04,"fm":6.32,"g":1,"a":2,"rig":null,"v":0.09,"vc":9,"q":3},{"id":6215,"n":"Lucca","r":"A","s":"Napoli","p":1,"f":5,"c":34,"nc":"solo 9 presenze in Serie A","y":6.27,"pv":9,"mv":5.72,"fm":6.0,"g":1,"a":0,"rig":null,"v":-0.06,"vc":-12,"q":3},{"id":383,"n":"Petagna","r":"A","s":"Monza","p":1,"f":5,"c":null,"nc":"nessuno storico utile","y":null,"pv":0,"mv":null,"fm":6.86,"g":0,"a":0,"rig":null,"v":null,"vc":null,"q":2},{"id":7249,"n":"Buksa","r":"A","s":"Udinese","p":1,"f":5,"c":54,"nc":"gioca, ma non sempre dall'inizio","y":6.33,"pv":21,"mv":5.88,"fm":6.24,"g":3,"a":0,"rig":null,"v":0.0,"vc":15,"q":2},{"id":7338,"n":"Albarracin","r":"A","s":"Cagliari","p":1,"f":5,"c":32,"nc":"solo 2 presenze in Serie A","y":6.47,"pv":2,"mv":6.0,"fm":6.0,"g":0,"a":0,"rig":null,"v":0.14,"vc":-14,"q":1},{"id":7317,"n":"Trepy","r":"A","s":"Cagliari","p":1,"f":5,"c":19,"nc":"solo 3 presenze in Serie A","y":6.33,"pv":3,"mv":5.67,"fm":5.67,"g":0,"a":0,"rig":null,"v":0.0,"vc":-27,"q":1},{"id":7027,"n":"Azon","r":"A","s":"Como","p":1,"f":5,"c":null,"nc":"nessuno storico utile","y":null,"pv":0,"mv":null,"fm":null,"g":0,"a":0,"rig":null,"v":null,"vc":null,"q":1},{"id":6981,"n":"Vaz","r":"A","s":"Roma","p":1,"f":5,"c":28,"nc":"solo 7 presenze in Serie A","y":6.48,"pv":7,"mv":5.93,"fm":6.36,"g":1,"a":0,"rig":null,"v":0.15,"vc":-18,"q":1},{"id":7158,"n":"Moro L.","r":"A","s":"Sassuolo","p":1,"f":5,"c":23,"nc":"solo 6 presenze in Serie A","y":6.12,"pv":6,"mv":5.58,"fm":5.5,"g":0,"a":0,"rig":null,"v":-0.21,"vc":-23,"q":1},{"id":7161,"n":"Bayo V.","r":"A","s":"Udinese","p":1,"f":5,"c":39,"nc":"gioca, ma non sempre dall'inizio","y":6.13,"pv":12,"mv":5.75,"fm":5.83,"g":0,"a":1,"rig":null,"v":-0.2,"vc":-7,"q":1},{"id":7408,"n":"Lisman","r":"A","s":"Venezia","p":1,"f":5,"c":null,"nc":"nessuno storico utile","y":null,"pv":0,"mv":null,"fm":6.13,"g":0,"a":0,"rig":null,"v":null,"vc":null,"q":1},{"id":7482,"n":"Lauberbach","r":"A","s":"Venezia","p":1,"f":5,"c":null,"nc":"nessuno storico utile","y":null,"pv":0,"mv":null,"fm":6.8,"g":0,"a":0,"rig":null,"v":null,"vc":null,"q":1}]}</script>
+<script>
+"use strict";
+const DATI = JSON.parse(document.getElementById('dati').textContent);
+const RUOLI = ['P','D','C','A'];
+const NOME_RUOLO = {P:'Portieri', D:'Difensori', C:'Centrocampisti', A:'Attaccanti'};
+// Quanti se ne schierano davvero ogni domenica. Serve a impedire al piano di
+// proporre tre portieri da titolare: il secondo e il terzo non giocano mai, e
+// i crediti spesi li' sono crediti buttati.
+const IN_CAMPO = {P:1, D:3, C:4, A:3};
+const CHIAVE = 'banco:stato:v1';
+
+/* ============================================================ MEMORIA
+   L'asta dura due ore e il telefono si blocca. Lo stato si salva a ogni
+   tocco, su qualunque deposito il browser conceda; se non ne concede
+   nessuno resta in memoria e il pulsante di esportazione diventa
+   l'unica rete. Non si perde niente in silenzio. */
+const Deposito = (() => {
+  let cache = null;
+  const prova = async (fn, fallback) => { try { return await fn(); } catch (e) { return fallback; } };
+  return {
+    async leggi() {
+      if (typeof window.storage !== 'undefined') {
+        const r = await prova(() => window.storage.get(CHIAVE), null);
+        if (r && r.value) return JSON.parse(r.value);
+      }
+      const l = await prova(() => localStorage.getItem(CHIAVE), null);
+      if (l) return JSON.parse(l);
+      return cache;
+    },
+    async scrivi(o) {
+      cache = o;
+      const testo = JSON.stringify(o);
+      if (typeof window.storage !== 'undefined') {
+        await prova(() => window.storage.set(CHIAVE, testo), null);
+      }
+      await prova(() => localStorage.setItem(CHIAVE, testo), null);
+    }
+  };
+})();
+
+/* ============================================================ STATO */
+const PIANI = {
+  corazzata:  {quota:{P:.05, D:.15, C:.30, A:.50}, cima:+1,
+               desc:'due o tre nomi grossi, il resto a un credito'},
+  equilibrata:{quota:{P:.07, D:.20, C:.32, A:.41}, cima:0,
+               desc:'un titolare per reparto, poi si scala'},
+  spalmata:   {quota:{P:.09, D:.26, C:.34, A:.31}, cima:-1,
+               desc:'nessun buco, nessun campione'}
+};
+
+let S = {
+  budget: DATI.budget, squadre: DATI.squadre,
+  slot: Object.assign({}, DATI.slot),
+  piano: null,             // {ruolo:[fascia per casella ancora libera]}
+  strategia: 'equilibrata',
+  regola: 'basso',
+  priorita: ['P','D','C','A'],   // chi paga per primo, dal meno prezioso
+  miei: [], venduti: {},
+  ruoloAttivo: 'A'
+};
+let scheda = 'asta', filtro = {testo:'', ruolo:'', soloLiberi:true, ordine:'p'};
+
+const INDICE = {};
+DATI.giocatori.forEach(g => INDICE[g.id] = g);
+
+/* ============================================================ MOTORE
+   Tutta l'aritmetica sta qui e non guarda niente fuori: nessuna rete,
+   nessuna stima. Stessi acquisti, stesso risultato, sempre. */
+
+function rif(ruolo, fascia) {
+  const r = (DATI.rotture[ruolo] || []).find(x => x.fascia === fascia);
+  return r ? Math.max(1, r.rif) : 1;
+}
+
+/* Quanto sta pagando la stanza rispetto al listino. Si misura sui prezzi
+   gridati ad alta voce - i miei e quelli degli altri - senza sapere né
+   volere sapere di chi sia la squadra che li ha presi. */
+function inflazione() {
+  let pagato = 0, atteso = 0, n = 0;
+  const conta = (id, prezzo) => {
+    const g = INDICE[id];
+    if (!g || g.p < 3) return;          // sotto i tre crediti il rapporto impazzisce
+    pagato += prezzo; atteso += g.p; n++;
+  };
+  S.miei.forEach(a => conta(a.id, a.prezzo));
+  Object.entries(S.venduti).forEach(([id, p]) => conta(+id, p));
+  if (n < 8 || atteso <= 0) return {valore:1, campione:n, pronta:false};
+  return {valore: pagato / atteso, campione:n, pronta:true};
+}
+
+function rifVivo(ruolo, fascia, infl) {
+  return Math.max(1, Math.round(rif(ruolo, fascia) * infl));
+}
+
+/* Le caselle ancora da riempire, con la fascia che il piano le assegna. */
+function residue(ruolo) { return (S.piano && S.piano[ruolo]) ? S.piano[ruolo].slice() : []; }
+
+function impegno(ruolo, infl, salta) {
+  const lista = residue(ruolo);
+  let somma = 0;
+  lista.forEach((f, i) => { if (i !== salta) somma += rifVivo(ruolo, f, infl); });
+  return somma;
+}
+
+function quadro() {
+  const infl = inflazione();
+  const speso = S.miei.reduce((t, a) => t + a.prezzo, 0);
+  const cassa = S.budget - speso;
+  const caselle = {}; let vuoteTot = 0, impegnoTot = 0;
+  RUOLI.forEach(r => {
+    const res = residue(r);
+    caselle[r] = {vuote: res.length, fasce: res, impegno: impegno(r, infl.valore, -1)};
+    vuoteTot += res.length; impegnoTot += caselle[r].impegno;
+  });
+  return {infl, speso, cassa, caselle, vuoteTot, impegnoTot,
+          scoperto: impegnoTot > cassa};
+}
+
+/* Il numero. Quanti crediti sono davvero miei, ora, per questa casella.
+
+   Due vincoli, vale il più stretto:
+     1. la cassa meno quello che serve per finire tutto il resto al piano;
+     2. il pavimento assoluto - ogni casella che resta costa almeno un
+        credito, e quel credito non è spendibile qui.
+   Il secondo non si viola mai: è la regola che impedisce di finire l'asta
+   con quattro caselle vuote e otto crediti in mano. */
+function massimo(ruolo, indiceCasella) {
+  const q = quadro();
+  const res = residue(ruolo);
+  if (!res.length) return {valore:0, piena:true, q};
+
+  const i = (indiceCasella == null) ? 0 : indiceCasella;
+  const altre = RUOLI.filter(r => r !== ruolo)
+                     .reduce((t, r) => t + q.caselle[r].impegno, 0);
+  const stessoRuolo = impegno(ruolo, q.infl.valore, i);
+
+  const perPiano = q.cassa - altre - stessoRuolo;
+  const pavimento = q.cassa - (q.vuoteTot - 1);
+  const valore = Math.max(1, Math.min(perPiano, pavimento));
+
+  return {
+    valore, piena:false, q, fascia:res[i],
+    riferimento: rifVivo(ruolo, res[i], q.infl.valore),
+    impegnoAltrove: altre + stessoRuolo,
+    pavimento, perPiano,
+    scoperto: q.scoperto
+  };
+}
+
+/* ------------------------------------------------------------ ACQUISTO
+   Comprare non è togliere crediti: è consumare una casella del piano e
+   riequilibrare quelle che restano. Se ho pagato più del riferimento, la
+   differenza la deve pagare qualcun altro del piano - e il consulente dice
+   esattamente chi, senza chiedermelo. */
+function scalaFascia(ruolo, quale) {
+  const res = S.piano[ruolo];
+  if (res[quale] >= 5) return 0;
+  const prima = rif(ruolo, res[quale]);
+  res[quale]++;
+  return prima - rif(ruolo, res[quale]);
+}
+
+function riequilibra(ruolo, avanzo) {
+  const mosse = [];
+  let mancano = avanzo, giri = 0;
+  while (mancano > 0 && giri < 200) {
+    giri++;
+    let scelta = null;
+    if (S.regola === 'basso') {
+      // paga la casella più bassa dello stesso reparto; finito il reparto,
+      // si va sugli altri seguendo la priorità dichiarata.
+      const ordine = [ruolo, ...S.priorita.filter(r => r !== ruolo)];
+      for (const r of ordine) {
+        const res = S.piano[r] || [];
+        let peggiore = -1;
+        res.forEach((f, i) => { if (f < 5 && (peggiore < 0 || f > res[peggiore])) peggiore = i; });
+        if (peggiore >= 0) { scelta = [r, peggiore]; break; }
+      }
+    } else if (S.regola === 'reparto') {
+      for (const r of S.priorita) {
+        const res = S.piano[r] || [];
+        let peggiore = -1;
+        res.forEach((f, i) => { if (f < 5 && (peggiore < 0 || f > res[peggiore])) peggiore = i; });
+        if (peggiore >= 0) { scelta = [r, peggiore]; break; }
+      }
+    } else {
+      // proporzionale: paga chi in questo momento vale di più, così il
+      // colpo si spalma invece di svuotare un reparto solo.
+      let top = null;
+      RUOLI.forEach(r => (S.piano[r] || []).forEach((f, i) => {
+        if (f < 5 && (!top || rif(r, f) > rif(top[0], S.piano[top[0]][top[1]]))) top = [r, i];
+      }));
+      scelta = top;
+    }
+    if (!scelta) break;
+    const recuperato = scalaFascia(scelta[0], scelta[1]);
+    if (recuperato <= 0) { if (S.piano[scelta[0]][scelta[1]] >= 5) continue; else break; }
+    mancano -= recuperato;
+    mosse.push({ruolo:scelta[0], fascia:S.piano[scelta[0]][scelta[1]]});
+  }
+  return {mosse, residuo: Math.max(0, mancano)};
+}
+
+function compra(g, prezzo) {
+  const res = S.piano[g.r] || [];
+  if (!res.length) return {errore:'Le caselle di questo reparto sono già tutte piene.'};
+
+  // Quale casella sto riempiendo: quella la cui fascia costa più vicino a
+  // quanto ho pagato. Se pago 90, sto consumando lo slot da titolare, non
+  // uno dei riempitivi.
+  const infl = inflazione().valore;
+  let quale = 0, scarto = Infinity;
+  res.forEach((f, i) => {
+    const d = Math.abs(rifVivo(g.r, f, infl) - prezzo);
+    if (d < scarto) { scarto = d; quale = i; }
+  });
+
+  const fascia = res[quale];
+  const riferimento = rifVivo(g.r, fascia, infl);
+  res.splice(quale, 1);
+
+  const avanzo = prezzo - riferimento;
+  const eco = avanzo > 0 ? riequilibra(g.r, avanzo) : {mosse:[], residuo:0};
+  RUOLI.forEach(r => (S.piano[r] || []).sort((a, b) => a - b));
+
+  S.miei.push({id:g.id, nome:g.n, r:g.r, prezzo, fascia});
+  delete S.venduti[g.id];
+  salva();
+  return {fascia, riferimento, avanzo, eco};
+}
+
+function annulla(indice) {
+  const a = S.miei[indice];
+  if (!a) return;
+  S.miei.splice(indice, 1);
+  // Ricostruire il piano dopo un annullo è più onesto che indovinare quale
+  // fascia rimettere: si riparte dal piano teorico e si riconsumano gli
+  // acquisti rimasti, in ordine.
+  const acquisti = S.miei.slice();
+  S.miei = [];
+  rigeneraPiano();
+  acquisti.forEach(x => { const g = INDICE[x.id]; if (g) compra(g, x.prezzo); });
+  salva();
+}
+
+/* ------------------------------------------------------------ IL PIANO
+   Le fasce non sono percentuali decise a tavolino: sono la fila d'attesa.
+   Con dodici squadre, i primi dodici di un ruolo se li spartiscono le
+   squadre, uno a testa - quelli sono fascia 1. Il piano dice quante caselle
+   voglio a ciascun livello, e si adatta al budget da solo. */
+function pianoBase() {
+  const p = {};
+  RUOLI.forEach(r => { p[r] = new Array(S.slot[r]).fill(5); });
+  return p;
+}
+
+function costoPiano(p) {
+  let t = 0;
+  RUOLI.forEach(r => (p[r] || []).forEach(f => t += rif(r, f)));
+  return t;
+}
+
+/* Tutte le forme possibili di un reparto: quante caselle a ciascuna fascia.
+   Con al massimo otto caselle e cinque fasce sono poche centinaia di
+   combinazioni - si guardano tutte, invece di indovinare. */
+function forme(caselle, fasce, da) {
+  da = da || 1;
+  if (da === fasce) return [[caselle]];
+  const fuori = [];
+  for (let q = 0; q <= caselle; q++) {
+    forme(caselle - q, fasce, da + 1).forEach(resto => fuori.push([q].concat(resto)));
+  }
+  return fuori;
+}
+
+function rigeneraPiano() {
+  const strategia = PIANI[S.strategia];
+  const tetto = Math.floor(S.budget * 0.97);
+  const p = {};
+
+  RUOLI.forEach(r => {
+    const caselle = S.slot[r];
+    const quota = Math.floor(tetto * strategia.quota[r]);
+
+    // Si cerca la forma che usa meglio la quota del reparto senza sforarla.
+    let migliore = null, spesaTop = 0;
+    const candidate = [];
+    forme(caselle, 5).forEach(f => {
+      let costo = 0;
+      f.forEach((q, i) => costo += q * rif(r, i + 1));
+      if (costo > quota) return;
+      if (f[0] > IN_CAMPO[r]) return;     // niente panchine di fuoriclasse
+      candidate.push({f, costo});
+      if (costo > spesaTop) spesaTop = costo;
+    });
+
+    // Fra quelle che ci vanno vicino, decide la strategia: la corazzata
+    // preferisce concentrare in cima, la spalmata distribuire.
+    // Fra tutte quelle che usano bene la quota, sceglie la strategia: quanto
+    // concentrare in cima invece di spalmare.
+    const vicine = candidate.filter(c => c.costo >= spesaTop * 0.80);
+    const cima = (x) => x.f[0] * 10 + x.f[1] * 3 + x.f[2];
+    vicine.sort((a, b) => {
+      const d = (cima(b) - cima(a)) * strategia.cima;
+      return d !== 0 ? d : b.costo - a.costo;
+    });
+    migliore = (vicine[0] || candidate[0] || {f:[0,0,0,0,caselle]}).f;
+
+    const lista = [];
+    migliore.forEach((q, i) => { for (let k = 0; k < q; k++) lista.push(i + 1); });
+    lista.sort((a, b) => a - b);
+    p[r] = lista;
+  });
+
+  // Quello che avanza dopo i reparti non si butta: sale dove costa meno.
+  for (let giro = 0; giro < 300; giro++) {
+    const attuale = costoPiano(p);
+    let scelto = null, costo = Infinity;
+    RUOLI.forEach(r => p[r].forEach((f, i) => {
+      if (f <= 1) return;
+      // Vale anche qui: mai piu' titolari veri di quanti se ne schierano.
+      if (f === 2 && p[r].filter(x => x === 1).length >= IN_CAMPO[r]) return;
+      const c = rif(r, f - 1) - rif(r, f);
+      if (c > 0 && c < costo && attuale + c <= tetto) { costo = c; scelto = [r, i]; }
+    }));
+    if (!scelto) break;
+    p[scelto[0]][scelto[1]]--;
+    p[scelto[0]].sort((a, b) => a - b);
+  }
+
+  S.piano = p;
+  return p;
+}
+
+/* ============================================================ SALVATAGGIO */
+let inSalvataggio = null;
+function salva() {
+  clearTimeout(inSalvataggio);
+  inSalvataggio = setTimeout(() => Deposito.scrivi(S), 120);
+}
+
+async function ripristina() {
+  const o = await Deposito.leggi();
+  if (o && o.miei) {
+    S = Object.assign(S, o);
+    if (!S.piano) rigeneraPiano();
+  } else {
+    rigeneraPiano();
+  }
+}
+
+/* ============================================================ VISTE */
+const E = (t, c, h) => { const n = document.createElement(t); if (c) n.className = c;
+  if (h != null) n.innerHTML = h; return n; };
+const $ = s => document.querySelector(s);
+
+function disegna() {
+  const q = quadro();
+  $('#hCassa').textContent = q.cassa;
+  $('#hCaselle').textContent = q.vuoteTot;
+  $('#hInfl').textContent = q.infl.pronta
+    ? (q.infl.valore >= 1 ? '+' : '') + Math.round((q.infl.valore - 1) * 100) + '%'
+    : '—';
+  $('#hInfl').style.color = q.infl.pronta
+    ? (q.infl.valore > 1.12 ? 'var(--allarme)' : q.infl.valore < 0.9 ? 'var(--verde)' : 'var(--testo)')
+    : 'var(--tenue)';
+
+  const v = $('#vista');
+  v.innerHTML = '';
+  if (scheda === 'asta') v.append(vistaAsta(q));
+  else if (scheda === 'listone') v.append(vistaListone());
+  else v.append(vistaPiano());
+
+  document.querySelectorAll('nav button').forEach(b =>
+    b.classList.toggle('on', b.dataset.t === scheda));
+}
+
+/* ------------------------------------------------------------ ASTA */
+function vistaAsta(q) {
+  const f = document.createDocumentFragment();
+  const m = massimo(S.ruoloAttivo, 0);
+
+  const banco = E('div', 'banco');
+
+  const ruoli = E('div', 'ruoli');
+  RUOLI.forEach(r => {
+    const vuote = q.caselle[r].vuote;
+    const b = E('button', (r === S.ruoloAttivo ? 'on ' : '') + (vuote ? '' : 'pieno'),
+      `${r}<span class="mini">${vuote ? vuote + ' da fare' : 'completo'}</span>`);
+    b.onclick = () => { S.ruoloAttivo = r; salva(); disegna(); };
+    ruoli.append(b);
+  });
+  banco.append(ruoli);
+
+  const cif = E('div', 'cifra' + (m.scoperto ? ' rosso' : ''));
+  if (m.piena) {
+    cif.innerHTML = `<div class="et">Reparto completo</div>
+      <div class="n">✓</div>
+      <div class="sotto">Non ti serve più niente qui. Passa a un altro ruolo.</div>`;
+  } else {
+    cif.innerHTML = `<div class="et">Massimo su questa casella</div>
+      <div class="n">${m.valore}</div>
+      <div class="sotto">casella di <b>fascia ${m.fascia}</b> · il piano ne prevedeva
+        <b>${m.riferimento}</b></div>`;
+  }
+  banco.append(cif);
+
+  // La barra di cassa: speso, impegnato dal piano, libero. È l'estratto conto.
+  const libero = Math.max(0, q.cassa - q.impegnoTot);
+  const tot = Math.max(1, S.budget);
+  const barra = E('div', 'cassa');
+  const seg = (w, col) => { const i = document.createElement('i');
+    i.style.width = (w / tot * 100) + '%'; i.style.background = col; return i; };
+  barra.append(seg(q.speso, 'var(--verde)'));
+  barra.append(seg(Math.min(q.impegnoTot, q.cassa), 'var(--oro)'));
+  barra.append(seg(libero, 'var(--rilievo)'));
+  banco.append(barra);
+  banco.append(E('div', 'legenda',
+    `<span><i class="pallino" style="background:var(--verde)"></i>speso ${q.speso}</span>
+     <span><i class="pallino" style="background:var(--oro)"></i>impegnato ${q.impegnoTot}</span>
+     <span><i class="pallino" style="background:var(--rilievo)"></i>libero ${libero}</span>`));
+  f.append(banco);
+
+  if (q.scoperto) {
+    f.append(E('div', 'avviso', `<b>Sei sotto il piano.</b> Per finire la rosa ai prezzi
+      di stasera servirebbero ${q.impegnoTot} crediti e ne hai ${q.cassa}. Da qui in poi
+      ogni casella scende di fascia: compra sotto il riferimento o rinuncia a un titolare.`));
+  } else if (q.infl.pronta && q.infl.valore > 1.15) {
+    f.append(E('div', 'avviso calmo', `L'asta sta pagando il <b>${Math.round((q.infl.valore-1)*100)}%
+      sopra il listino</b>. I riferimenti qui sopra sono già stati rialzati: se compri al
+      listino di agosto, stai comprando bene.`));
+  } else if (q.infl.pronta && q.infl.valore < 0.9) {
+    f.append(E('div', 'avviso calmo', `L'asta sta pagando <b>sotto il listino</b>. I riferimenti
+      sono stati abbassati: tieni i crediti, più avanti costano meno.`));
+  }
+
+  // Le caselle: cosa ho, cosa manca, a che livello.
+  f.append(E('div', 'sez', `<h2>La rosa</h2><span class="nota">verde = preso · grigio = fascia prevista</span>`));
+  RUOLI.forEach(r => {
+    const riga = E('div', 'riga');
+    riga.append(E('div', 'rl', r));
+    const c = E('div', 'caselle');
+    S.miei.filter(a => a.r === r).forEach((a, i) => {
+      const el = E('div', 'cs presa', a.prezzo);
+      el.title = a.nome;
+      el.onclick = () => apriAcquisto(a);
+      c.append(el);
+    });
+    residue(r).forEach(fa => c.append(E('div', 'cs vuota', 'F' + fa)));
+    riga.append(c);
+    riga.append(E('div', 'tot', S.miei.filter(a => a.r === r)
+      .reduce((t, a) => t + a.prezzo, 0)));
+    f.append(riga);
+  });
+
+  const az = E('div', 'azioni');
+  const b1 = E('button', 'btn primo', 'Ho comprato');
+  b1.onclick = () => apriRicerca('mio');
+  const b2 = E('button', 'btn spento', 'Venduto ad altri');
+  b2.onclick = () => apriRicerca('altri');
+  az.append(b1, b2);
+  f.append(az);
+
+  // Il piano B: chi resta, allo stesso prezzo, se questo me lo soffiano.
+  if (!m.piena) {
+    const alt = alternative(S.ruoloAttivo, m.fascia, 5);
+    f.append(E('div', 'sez', `<h2>Se lo perdo</h2>
+      <span class="nota">liberi, fascia ${m.fascia}</span>`));
+    if (!alt.length) {
+      f.append(E('div', 'vuoto', 'Non è rimasto nessuno in questa fascia. La casella scende di livello.'));
+    } else {
+      alt.forEach(g => f.append(rigaGiocatore(g)));
+    }
+  }
+  return f;
+}
+
+function preso(id) { return S.venduti[id] != null || S.miei.some(a => a.id === id); }
+
+function alternative(ruolo, fascia, quanti) {
+  return DATI.giocatori
+    .filter(g => g.r === ruolo && g.f === fascia && !preso(g.id))
+    .sort((a, b) => (b.v ?? -9) - (a.v ?? -9))
+    .slice(0, quanti);
+}
+
+/* ------------------------------------------------------------ LISTONE */
+function vistaListone() {
+  const f = document.createDocumentFragment();
+
+  const box = E('div', 'filtri');
+  const inp = E('input', 'cerca');
+  inp.placeholder = 'Cerca un nome…';
+  inp.value = filtro.testo;
+  inp.oninput = e => { filtro.testo = e.target.value; aggiornaLista(); };
+  box.append(inp);
+
+  const c1 = E('div', 'chip');
+  [['', 'Tutti'], ['P', 'P'], ['D', 'D'], ['C', 'C'], ['A', 'A']].forEach(([v, et]) => {
+    const b = E('button', filtro.ruolo === v ? 'on' : '', et);
+    b.onclick = () => { filtro.ruolo = v; disegna(); };
+    c1.append(b);
+  });
+  const sep = E('button', filtro.soloLiberi ? 'on' : '', 'Solo liberi');
+  sep.onclick = () => { filtro.soloLiberi = !filtro.soloLiberi; disegna(); };
+  c1.append(sep);
+  box.append(c1);
+
+  const c2 = E('div', 'chip');
+  [['p', 'Prezzo'], ['v', 'Meglio a pari prezzo'], ['c', 'Certezza'], ['y', 'Resa']]
+    .forEach(([v, et]) => {
+      const b = E('button', filtro.ordine === v ? 'on' : '', et);
+      b.onclick = () => { filtro.ordine = v; disegna(); };
+      c2.append(b);
+    });
+  box.append(c2);
+  f.append(box);
+
+  const cont = E('div', '');
+  cont.id = 'lista';
+  f.append(cont);
+  setTimeout(aggiornaLista, 0);
+  return f;
+}
+
+function aggiornaLista() {
+  const cont = document.getElementById('lista');
+  if (!cont) return;
+  const t = filtro.testo.trim().toLowerCase();
+  let ls = DATI.giocatori.filter(g => {
+    if (filtro.ruolo && g.r !== filtro.ruolo) return false;
+    if (filtro.soloLiberi && preso(g.id)) return false;
+    if (t && !(g.n + ' ' + g.s).toLowerCase().includes(t)) return false;
+    return true;
+  });
+  const chiave = {p:g => g.p, v:g => g.v ?? -9, c:g => g.c ?? -9, y:g => g.y ?? -9}[filtro.ordine];
+  ls.sort((a, b) => chiave(b) - chiave(a));
+  cont.innerHTML = '';
+  if (!ls.length) { cont.append(E('div', 'vuoto', 'Nessun giocatore con questi filtri.')); return; }
+  ls.slice(0, 80).forEach(g => cont.append(rigaGiocatore(g)));
+  if (ls.length > 80) cont.append(E('div', 'vuoto', `Altri ${ls.length - 80}. Restringi la ricerca.`));
+}
+
+function rigaGiocatore(g) {
+  const el = E('div', 'g' + (preso(g.id) ? ' via' : ''));
+  const tag = [];
+  if (g.f === 1) tag.push('<span class="tag f1">fascia 1</span>');
+  else tag.push(`<span class="tag">F${g.f}</span>`);
+  if (g.c == null) tag.push('<span class="tag ignoto">nessuno storico</span>');
+  if (g.rig === 'rigorista') tag.push('<span class="tag rig">rigorista</span>');
+  if (g.v != null && g.v >= 0.25 && g.c != null && g.c >= 75)
+    tag.push(`<span class="tag buono">+${g.v.toFixed(2)} a pari prezzo</span>`);
+
+  const barra = g.c == null ? '' :
+    `<span class="barrina"><i style="width:${g.c}%;background:${g.c >= 80 ? 'var(--verde)' : g.c >= 55 ? 'var(--oro)' : 'var(--allarme)'}"></i></span>`;
+
+  el.innerHTML = `
+    <div class="id">
+      <div class="nm">${g.n}</div>
+      <div class="sq">${g.s} ${barra} ${tag.join(' ')}</div>
+    </div>
+    <div class="pz">${g.p}<small>listino</small></div>`;
+  el.onclick = () => apriGiocatore(g);
+  return el;
+}
+
+/* ------------------------------------------------------------ PIANO */
+function vistaPiano() {
+  const f = document.createDocumentFragment();
+
+  f.append(E('div', 'sez', '<h2>La lega</h2>'));
+  f.append(campoNumero('Budget', S.budget, v => { S.budget = v; rigeneraPiano(); }, 'crediti a squadra'));
+  f.append(campoNumero('Squadre', S.squadre, v => { S.squadre = v; }, 'quante siete in asta'));
+  RUOLI.forEach(r => f.append(campoNumero(NOME_RUOLO[r], S.slot[r], v => {
+    S.slot[r] = v; rigeneraPiano();
+  }, 'caselle in rosa')));
+
+  f.append(E('div', 'sez', '<h2>Strategia</h2>'));
+  const sel = E('div', 'campo');
+  sel.innerHTML = `<div><label>Come divido i crediti</label>
+    <div class="aiuto">${PIANI[S.strategia].desc}</div></div>`;
+  const s = E('select');
+  Object.keys(PIANI).forEach(k => {
+    const o = document.createElement('option');
+    o.value = k; o.textContent = k; o.selected = (k === S.strategia);
+    s.append(o);
+  });
+  s.onchange = e => { S.strategia = e.target.value; rigeneraPiano(); salva(); disegna(); };
+  sel.append(s);
+  f.append(sel);
+
+  const reg = E('div', 'campo');
+  reg.innerHTML = `<div><label>Se sforo, chi paga</label>
+    <div class="aiuto">deciso a freddo una volta sola</div></div>`;
+  const s2 = E('select');
+  [['basso', 'la casella più bassa del reparto'],
+   ['reparto', 'il reparto meno importante'],
+   ['proporzionale', 'un po\' tutti']].forEach(([v, et]) => {
+    const o = document.createElement('option');
+    o.value = v; o.textContent = et; o.selected = (v === S.regola);
+    s2.append(o);
+  });
+  s2.onchange = e => { S.regola = e.target.value; salva(); };
+  reg.append(s2);
+  f.append(reg);
+
+  f.append(E('div', 'sez', `<h2>Le caselle</h2>
+    <span class="nota">totale ${costoPiano(S.piano)} / ${S.budget}</span>`));
+  RUOLI.forEach(r => f.append(fasciera(r)));
+
+  const az = E('div', 'azioni');
+  const b1 = E('button', 'btn', 'Copia lo stato');
+  b1.onclick = esporta;
+  const b2 = E('button', 'btn spento', 'Ricomincia');
+  b2.onclick = azzera;
+  az.append(b1, b2);
+  f.append(az);
+
+  f.append(E('div', 'piede', `Ogni numero di questa app si ricalcola dal listone e dai prezzi
+    che inserisci tu. Nessuna connessione, nessuna previsione di rendimento: le fasce sono
+    la fila d'attesa dei ${S.squadre} partecipanti, la certezza sono presenze e minuti già
+    giocati, la resa è la fantamedia corretta per quante partite l'ha tenuta.
+    Listone aggiornato al ${DATI.aggiornato}.`));
+  return f;
+}
+
+function campoNumero(et, val, fn, aiuto) {
+  const c = E('div', 'campo');
+  c.innerHTML = `<div><label>${et}</label>${aiuto ? `<div class="aiuto">${aiuto}</div>` : ''}</div>`;
+  const i = document.createElement('input');
+  i.type = 'number'; i.value = val; i.min = 1;
+  i.onchange = e => { const v = parseInt(e.target.value, 10);
+    if (v > 0) { fn(v); salva(); disegna(); } };
+  c.append(i);
+  return c;
+}
+
+function fasciera(r) {
+  const c = E('div', 'fasciera');
+  const conteggio = {};
+  (S.piano[r] || []).forEach(f => conteggio[f] = (conteggio[f] || 0) + 1);
+  const presi = S.miei.filter(a => a.r === r).length;
+  const costo = (S.piano[r] || []).reduce((t, f) => t + rif(r, f), 0);
+  c.append(E('div', 'cap', `<b>${NOME_RUOLO[r]}</b>
+    <span>${presi} presi · ${(S.piano[r] || []).length} da fare · ${costo} cr</span>`));
+  for (let f = 1; f <= 5; f++) {
+    const l = E('div', 'livello');
+    l.innerHTML = `<span class="nome">Fascia ${f} <i>~${rif(r, f)} cr</i></span>`;
+    const meno = E('button', '', '−');
+    const cnt = E('div', 'cnt', String(conteggio[f] || 0));
+    const piu = E('button', '', '+');
+    meno.onclick = () => { declassa(r, f); };
+    piu.onclick = () => { promuovi(r, f); };
+    l.append(meno, cnt, piu);
+    c.append(l);
+  }
+  return c;
+}
+
+/* Muovere una casella significa spostarla di livello, non aggiungerla: quante
+   caselle hai lo decide la rosa, non tu. Il + prende la casella buona più
+   vicina sotto e la porta qui; il − manda una di queste un gradino più giù. */
+function declassa(r, fascia) {
+  const lista = S.piano[r] || [];
+  const i = lista.indexOf(fascia);
+  if (i < 0 || fascia >= 5) return;
+  lista[i] = fascia + 1;
+  lista.sort((a, b) => a - b);
+  salva(); disegna();
+}
+
+function promuovi(r, fascia) {
+  const lista = S.piano[r] || [];
+  let scelto = -1;
+  for (let f = fascia + 1; f <= 5; f++) {
+    const i = lista.indexOf(f);
+    if (i >= 0) { scelto = i; break; }
+  }
+  if (scelto < 0) return;
+  lista[scelto] = fascia;
+  lista.sort((a, b) => a - b);
+  salva(); disegna();
+}
+
+/* ============================================================ FOGLI */
+function chiudi() { $('#modale').innerHTML = ''; }
+
+function foglio(dentro) {
+  const velo = E('div', 'velo');
+  const f = E('div', 'foglio');
+  f.append(E('div', 'maniglia'));
+  f.append(dentro);
+  velo.append(f);
+  velo.onclick = e => { if (e.target === velo) chiudi(); };
+  $('#modale').innerHTML = '';
+  $('#modale').append(velo);
+}
+
+function apriRicerca(modo) {
+  const d = document.createDocumentFragment();
+  d.append(E('h3', '', modo === 'mio' ? 'Chi hai preso' : 'Chi è stato venduto'));
+  d.append(E('div', 'oc', modo === 'mio'
+    ? 'Cerca il nome, poi metti quanto l\'hai pagato.'
+    : 'Serve solo il prezzo: misura quanto sta pagando la stanza. Di chi sia la squadra non interessa.'));
+  const inp = E('input', 'cerca');
+  inp.placeholder = 'Cerca…';
+  d.append(inp);
+  const box = E('div', '');
+  box.style.marginTop = '10px';
+  d.append(box);
+  const cerca = () => {
+    const t = inp.value.trim().toLowerCase();
+    box.innerHTML = '';
+    if (t.length < 2) { box.append(E('div', 'vuoto', 'Scrivi almeno due lettere.')); return; }
+    const ls = DATI.giocatori.filter(g => !preso(g.id) &&
+      (g.n + ' ' + g.s).toLowerCase().includes(t)).slice(0, 12);
+    if (!ls.length) { box.append(E('div', 'vuoto', 'Nessuno con questo nome ancora libero.')); return; }
+    ls.forEach(g => {
+      const el = rigaGiocatore(g);
+      el.onclick = () => apriGiocatore(g, modo);
+      box.append(el);
+    });
+  };
+  inp.oninput = cerca;
+  foglio(d);
+  setTimeout(() => inp.focus(), 60);
+}
+
+function apriGiocatore(g, modo) {
+  const d = document.createDocumentFragment();
+  d.append(E('h3', '', g.n));
+  d.append(E('div', 'oc', `${NOME_RUOLO[g.r]} · ${g.s} · listino ${g.p} crediti · fascia ${g.f}`));
+
+  const fatti = E('div', 'fatti');
+  const f = (et, vl, col) => `<div class="fatto"><div class="et">${et}</div>
+    <div class="vl" ${col ? `style="color:${col}"` : ''}>${vl}</div></div>`;
+  fatti.innerHTML =
+    f('Certezza', g.c == null ? '—' : g.c,
+      g.c == null ? 'var(--allarme)' : g.c >= 80 ? 'var(--verde)' : g.c >= 55 ? 'var(--oro)' : 'var(--allarme)') +
+    f('Presenze', g.pv || '—') +
+    f('Fantamedia', g.fm ?? '—') +
+    f('Resa', g.y ?? '—') +
+    f('Gol', g.g) +
+    f('Assist', g.a);
+  d.append(fatti);
+
+  // Solo fatti, in prosa. Niente pronostici: quello che non si sa si dice.
+  const righe = [];
+  righe.push(g.c == null
+    ? `<b>Non ci sono dati utili su di lui.</b> Neopromosso, arrivato da fuori o mai
+       impiegato: qualunque cifra sulla sua stagione sarebbe inventata. Trattalo come una
+       scommessa e mettici il minimo.`
+    : `<b>${g.nc}.</b> ${g.pv} presenze in campionato.`);
+  if (g.rig) righe.push(`Nel dubbio conta che <b>${g.rig}</b>: sui rigori i bonus arrivano
+    anche nelle domeniche storte.`);
+  if (g.v != null) {
+    const seg = g.v >= 0.25 ? 'var(--verde)' : g.v <= -0.25 ? 'var(--allarme)' : 'var(--fioco)';
+    righe.push(`Rispetto a chi costa più o meno come lui nel suo ruolo, rende
+      <b style="color:${seg}">${g.v >= 0 ? '+' : ''}${g.v.toFixed(2)}</b> di fantamedia${
+      g.vc != null ? ` e gioca <b style="color:${seg}">${g.vc >= 0 ? '+' : ''}${g.vc}</b>
+      di certezza` : ''}.`);
+  }
+  d.append(E('div', 'prosa', righe.join(' ')));
+
+  // Quanto posso permettermelo davvero, adesso.
+  const m = massimo(g.r, 0);
+  if (!m.piena) {
+    const ok = m.valore >= g.p;
+    d.append(E('div', 'avviso' + (ok ? ' calmo' : ''),
+      ok ? `Puoi arrivare a <b>${m.valore}</b>. Il listino dice ${g.p}: sei coperto.`
+         : `Puoi arrivare a <b>${m.valore}</b>, il listino dice ${g.p}. Se lo prendi
+            comunque, qualche casella scende di fascia.`));
+  }
+
+  let prezzo = Math.max(1, g.p);
+  const sp = E('div', 'spesa');
+  const meno = E('button', '', '−');
+  const inp = document.createElement('input');
+  inp.type = 'number'; inp.value = prezzo; inp.min = 1; inp.inputMode = 'numeric';
+  const piu = E('button', '', '+');
+  meno.onclick = () => { inp.value = Math.max(1, (+inp.value || 1) - 1); };
+  piu.onclick = () => { inp.value = (+inp.value || 0) + 1; };
+  sp.append(meno, inp, piu);
+  d.append(sp);
+
+  const az = E('div', 'azioni');
+  if (modo !== 'altri') {
+    const b1 = E('button', 'btn primo', 'L\'ho preso io');
+    b1.onclick = () => {
+      const p = Math.max(1, parseInt(inp.value, 10) || 1);
+      const esito = compra(g, p);
+      chiudi();
+      if (esito.errore) { avvisa(esito.errore); }
+      else { S.ruoloAttivo = g.r; scheda = 'asta'; disegna(); mostraEsito(g, p, esito); }
+    };
+    az.append(b1);
+  }
+  const b2 = E('button', 'btn spento', 'Preso da un altro');
+  b2.onclick = () => {
+    S.venduti[g.id] = Math.max(1, parseInt(inp.value, 10) || 1);
+    salva(); chiudi(); disegna();
+  };
+  az.append(b2);
+  d.append(az);
+  foglio(d);
+}
+
+function apriAcquisto(a) {
+  const d = document.createDocumentFragment();
+  d.append(E('h3', '', a.nome));
+  d.append(E('div', 'oc', `${NOME_RUOLO[a.r]} · pagato ${a.prezzo} · casella di fascia ${a.fascia}`));
+  const az = E('div', 'azioni');
+  const b = E('button', 'btn spento', 'Annulla questo acquisto');
+  b.onclick = () => {
+    const i = S.miei.findIndex(x => x.id === a.id);
+    if (i >= 0) annulla(i);
+    chiudi(); disegna();
+  };
+  az.append(b);
+  d.append(az);
+  foglio(d);
+}
+
+function mostraEsito(g, prezzo, esito) {
+  const d = document.createDocumentFragment();
+  d.append(E('h3', '', `${g.n}, ${prezzo} crediti`));
+  d.append(E('div', 'oc', `Casella di fascia ${esito.fascia} — il piano ne prevedeva ${esito.riferimento}.`));
+
+  const m = massimo(S.ruoloAttivo, 0);
+  const q = m.q;
+  if (esito.avanzo > 0) {
+    const conto = {};
+    esito.eco.mosse.forEach(x => conto[x.ruolo] = (conto[x.ruolo] || 0) + 1);
+    const chi = Object.entries(conto).map(([r, n]) =>
+      `${n} casella${n > 1 ? 'e' : ''} in ${NOME_RUOLO[r].toLowerCase()}`).join(', ');
+    d.append(E('div', 'prosa', esito.eco.mosse.length
+      ? `Hai speso <b>${esito.avanzo} sopra il piano</b>. Li ho recuperati abbassando di
+         fascia ${chi}.${esito.eco.residuo ? ` Restano <b>${esito.eco.residuo}</b> scoperti:
+         non c'è più niente da abbassare.` : ''}`
+      : `Hai speso <b>${esito.avanzo} sopra il piano</b> e non c'è più niente da abbassare.
+         Le prossime caselle vanno prese al minimo.`));
+  } else if (esito.avanzo < 0) {
+    d.append(E('div', 'prosa', `Hai risparmiato <b>${-esito.avanzo} crediti</b> sul piano.
+      Sono tornati in cassa e allargano le caselle che restano.`));
+  } else {
+    d.append(E('div', 'prosa', 'Esattamente al piano.'));
+  }
+
+  const fatti = E('div', 'fatti');
+  fatti.innerHTML =
+    `<div class="fatto"><div class="et">Cassa</div><div class="vl">${q.cassa}</div></div>
+     <div class="fatto"><div class="et">Caselle</div><div class="vl">${q.vuoteTot}</div></div>
+     <div class="fatto"><div class="et">Prossimo max</div>
+       <div class="vl" style="color:var(--oro)">${m.piena ? '—' : m.valore}</div></div>`;
+  d.append(fatti);
+
+  const az = E('div', 'azioni');
+  const b = E('button', 'btn primo', 'Avanti');
+  b.onclick = chiudi;
+  az.append(b);
+  d.append(az);
+  foglio(d);
+}
+
+function avvisa(testo) {
+  const d = document.createDocumentFragment();
+  d.append(E('div', 'prosa', testo));
+  const az = E('div', 'azioni');
+  const b = E('button', 'btn', 'Ok');
+  b.onclick = chiudi;
+  az.append(b); d.append(az);
+  foglio(d);
+}
+
+async function esporta() {
+  const testo = JSON.stringify(S);
+  let fatto = false;
+  try { await navigator.clipboard.writeText(testo); fatto = true; } catch (e) { fatto = false; }
+  const d = document.createDocumentFragment();
+  d.append(E('h3', '', fatto ? 'Copiato' : 'Copia a mano'));
+  d.append(E('div', 'prosa', fatto
+    ? 'Lo stato dell\'asta è negli appunti. Incollalo dove vuoi: se il telefono si blocca, lo rimetti da lì.'
+    : 'Seleziona e copia questo testo. È tutta l\'asta.'));
+  if (!fatto) {
+    const t = document.createElement('textarea');
+    t.value = testo;
+    t.style.cssText = 'width:100%;height:120px;background:var(--rilievo);color:var(--fioco);border:1px solid var(--linea);border-radius:10px;padding:10px;font-family:var(--mono);font-size:11px';
+    d.append(t);
+  }
+  const az = E('div', 'azioni');
+  const b = E('button', 'btn', 'Chiudi'); b.onclick = chiudi;
+  az.append(b); d.append(az);
+  foglio(d);
+}
+
+function azzera() {
+  const d = document.createDocumentFragment();
+  d.append(E('h3', '', 'Ricominciare da zero'));
+  d.append(E('div', 'prosa', 'Cancella gli acquisti, i prezzi degli altri e riporta il piano ai valori di partenza. Non si torna indietro.'));
+  const az = E('div', 'azioni');
+  const b1 = E('button', 'btn spento', 'Lascia stare'); b1.onclick = chiudi;
+  const b2 = E('button', 'btn primo', 'Cancella tutto');
+  b2.onclick = () => {
+    S.miei = []; S.venduti = {}; rigeneraPiano(); salva(); chiudi(); scheda = 'asta'; disegna();
+  };
+  az.append(b1, b2); d.append(az);
+  foglio(d);
+}
+
+/* ============================================================ AVVIO */
+document.querySelectorAll('nav button').forEach(b =>
+  b.onclick = () => { scheda = b.dataset.t; window.scrollTo(0, 0); disegna(); });
+
+ripristina().then(disegna);
+</script>
+</body>
+</html>
