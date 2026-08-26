@@ -488,6 +488,34 @@ function compra(g, prezzo) {
   return {fascia, riferimento, avanzo, eco};
 }
 
+/* Cancellare la rosa e' irreversibile: si chiede una volta, chiaramente, e
+   basta - una seconda domanda dopo la prima e' solo attrito. */
+function confermaAzzera() {
+  const d = document.createDocumentFragment();
+  d.append(E('h3', '', 'Azzerare tutto?'));
+  const quanti = S.miei.length, venduti = Object.keys(S.venduti).length;
+  d.append(E('div', 'prosa', quanti + venduti === 0
+    ? 'Non c\'è ancora niente da cancellare: nessun acquisto, nessuna vendita segnata.'
+    : `Si cancellano <b>${quanti} acquisti</b> tuoi e <b>${venduti} prezzi</b> segnati
+       degli altri. Budget, caselle e regole del piano restano come li hai messi.
+       Non si torna indietro.`));
+  const az = E('div', 'azioni');
+  if (quanti + venduti > 0) {
+    const si = E('button', 'btn pericolo', 'Sì, azzera');
+    si.onclick = () => {
+      S.miei = []; S.venduti = {};
+      rigeneraPiano();
+      salva(); chiudi(); scheda = 'asta'; disegna();
+    };
+    az.append(si);
+  }
+  const no = E('button', 'btn spento', 'Lascia stare');
+  no.onclick = chiudi;
+  az.append(no);
+  d.append(az);
+  foglio(d);
+}
+
 /* ------------------------------------------------------------ IL PIANO
    Le fasce non sono percentuali decise a tavolino: sono la fila d'attesa.
    Con dodici squadre, i primi dodici di un ruolo se li spartiscono le
@@ -600,6 +628,7 @@ const E = (t, c, h) => { const n = document.createElement(t); if (c) n.className
 const $ = s => document.querySelector(s);
 
 function disegna() {
+  riIndicizza();
   const q = quadro();
   $('#hCassa').textContent = q.cassa;
   $('#hCaselle').textContent = q.vuoteTot;
@@ -610,14 +639,20 @@ function disegna() {
     ? (q.infl.valore > 1.12 ? 'var(--allarme)' : q.infl.valore < 0.9 ? 'var(--verde)' : 'var(--testo)')
     : 'var(--tenue)';
 
-  const v = $('#vista');
-  v.innerHTML = '';
-  if (scheda === 'asta') v.append(vistaAsta(q));
-  else if (scheda === 'listone') v.append(vistaListone());
-  else v.append(vistaPiano());
-
+  // La scheda attiva si accende subito, prima di costruire qualunque nodo:
+  // altrimenti il dito preme e per un attimo non succede niente, ed e' quel
+  // vuoto che fa sembrare lenta l'app.
   document.querySelectorAll('nav button').forEach(b =>
     b.classList.toggle('on', b.dataset.t === scheda));
+
+  const v = $('#vista');
+  const nuova = scheda === 'asta' ? vistaAsta(q)
+              : scheda === 'listone' ? vistaListone()
+              : vistaPiano();
+  // Un solo scambio di contenuto: svuotare e riempire sono due riflussi, la
+  // sostituzione in blocco e' uno.
+  v.replaceChildren(nuova);
+  v.scrollTop = 0;
 }
 
 /* ------------------------------------------------------------ ASTA */
@@ -740,7 +775,11 @@ function vistaAsta(q) {
   return f;
 }
 
-function preso(id) { return S.venduti[id] != null || S.miei.some(a => a.id === id); }
+/* Chiamata una volta per riga disegnata, cioe' centinaia di volte a ridisegno:
+   scorrere la rosa ogni volta e' lavoro inutile quando basta un insieme. */
+let MIEI_ID = new Set();
+function riIndicizza() { MIEI_ID = new Set(S.miei.map(a => a.id)); }
+function preso(id) { return S.venduti[id] != null || MIEI_ID.has(id); }
 
 /* La faccia. Serve a riconoscere il nome in mezzo secondo mentre il banditore
    grida: leggere "Esposito Se." e capire quale sia costa piu' tempo di quanto
@@ -748,25 +787,58 @@ function preso(id) { return S.venduti[id] != null || S.miei.some(a => a.id === i
    si muove e la pagina non aspetta. */
 const FOTO = 'https://content.fantacalcio.it/web/campioncini/21/card/';
 
+/* Le sigle si calcolano una volta sola: sono 501 e non cambiano mai. */
+const SIGLE = {};
+DATI.giocatori.forEach(g => SIGLE[g.id] = g.n.replace(/[^A-Za-zÀ-ÿ ]/g, '')
+  .trim().split(/\s+/).map(p => p[0]).join('').slice(0, 2).toUpperCase());
+
+/* Chi ha gia' fallito non si ritenta: senza rete, all'asta, sarebbero 80
+   richieste morte a ogni lettera digitata nella ricerca. */
+const FOTO_ROTTE = new Set();
+
 function faccia(g, grande) {
   const el = E('div', 'faccia' + (grande ? ' grande' : ''));
-  const sigla = g.n.replace(/[^A-Za-zÀ-ÿ ]/g, '').trim().split(/\s+/)
-    .map(p => p[0]).join('').slice(0, 2).toUpperCase();
-  el.append(E('span', '', sigla));
-  const img = new Image();
+  el.append(E('span', '', SIGLE[g.id] || '?'));
+  if (FOTO_ROTTE.has(g.id)) return el;
+  // Un <img> nel documento con loading="lazy" lo scarica il browser, una volta
+  // sola, e solo se la riga e' davvero sullo schermo. new Image() invece
+  // partiva subito, per tutte e ottanta le righe, a ogni ridisegno.
+  const img = document.createElement('img');
   img.alt = '';
+  img.loading = 'lazy';
+  img.decoding = 'async';
   img.onload = () => img.classList.add('c');
+  img.onerror = () => { FOTO_ROTTE.add(g.id); img.remove(); };
   img.src = FOTO + g.id + '.png?v=647';
   el.append(img);
   return el;
 }
 
+/* L'ordine per convenienza non cambia finche' non cambiano le regole della
+   lega: si calcola una volta e si riusa, invece di riordinare cinquecento
+   giocatori ogni volta che tocchi qualcosa. */
+let ORDINE_CACHE = null, ORDINE_CHIAVE = null;
+function ordinati() {
+  const chiave = String(S.modificatore);
+  if (ORDINE_CHIAVE !== chiave) {
+    ORDINE_CACHE = DATI.giocatori.slice()
+      .sort((a, b) => (vantaggioDi(b).valore ?? -9) - (vantaggioDi(a).valore ?? -9));
+    ORDINE_CHIAVE = chiave;
+  }
+  return ORDINE_CACHE;
+}
+
 function alternative(ruolo, fascia, quanti) {
-  return DATI.giocatori
-    .filter(g => g.r === ruolo && g.f === fascia && !preso(g.id))
-    .filter(g => !(g.out && g.out.grave))     // chi e' fuori adesso non e' un piano B
-    .sort((a, b) => (vantaggioDi(b).valore ?? -9) - (vantaggioDi(a).valore ?? -9))
-    .slice(0, quanti);
+  // Gia' in ordine di convenienza: si scorre finche' non se ne sono trovati
+  // abbastanza, senza toccare il resto della lista.
+  const fuori = [];
+  const tutti = ordinati();
+  for (let i = 0; i < tutti.length && fuori.length < quanti; i++) {
+    const g = tutti[i];
+    if (g.r === ruolo && g.f === fascia && !preso(g.id) && !(g.out && g.out.grave))
+      fuori.push(g);
+  }
+  return fuori;
 }
 
 /* ------------------------------------------------------------ LISTONE */
@@ -777,7 +849,7 @@ function vistaListone() {
   const inp = E('input', 'cerca');
   inp.placeholder = 'Cerca un nome…';
   inp.value = filtro.testo;
-  inp.oninput = e => { filtro.testo = e.target.value; aggiornaLista(); };
+  inp.oninput = e => { filtro.testo = e.target.value; aggiornaListaTraPoco(); };
   box.append(inp);
 
   const c1 = E('div', 'chip');
@@ -811,6 +883,15 @@ function vistaListone() {
   return f;
 }
 
+/* Ottanta righe ricostruite a ogni lettera digitata sono ottanta creazioni di
+   nodi mentre il dito e' ancora sulla tastiera. Aspettare che le lettere
+   finiscano costa un attimo e restituisce la fluidita'. */
+let attesa = null;
+function aggiornaListaTraPoco() {
+  clearTimeout(attesa);
+  attesa = setTimeout(aggiornaLista, 120);
+}
+
 function aggiornaLista() {
   const cont = document.getElementById('lista');
   if (!cont) return;
@@ -822,13 +903,34 @@ function aggiornaLista() {
     if (t && !g._c.includes(t)) return false;
     return true;
   });
-  const chiave = {p: g => g.p, v: g => vantaggioDi(g).valore ?? -9,
-                  c: g => g.c ?? -9, y: g => g.y ?? -9}[filtro.ordine];
-  ls.sort((a, b) => chiave(b) - chiave(a));
+  if (filtro.ordine === 'v') {
+    const posto = new Map(ordinati().map((g, i) => [g.id, i]));
+    ls.sort((a, b) => posto.get(a.id) - posto.get(b.id));
+  } else {
+    const chiave = {p: g => g.p, c: g => g.c ?? -9, y: g => g.y ?? -9}[filtro.ordine];
+    ls.sort((a, b) => chiave(b) - chiave(a));
+  }
   cont.innerHTML = '';
   if (!ls.length) { cont.append(E('div', 'vuoto', 'Nessun giocatore con questi filtri.')); return; }
-  ls.slice(0, 80).forEach(g => cont.append(rigaGiocatore(g)));
-  if (ls.length > 80) cont.append(E('div', 'vuoto', `Altri ${ls.length - 80}. Restringi la ricerca.`));
+
+  // Si disegna un blocco per volta, e il successivo solo quando arrivi in
+  // fondo: sullo schermo ne stanno una decina, costruirne ottanta e' lavoro
+  // buttato che si paga in attesa.
+  const PASSO = 25;
+  let quanti = 0;
+  const altri = E('div', 'ancora');
+  const disegnaBlocco = () => {
+    const pezzo = document.createDocumentFragment();
+    ls.slice(quanti, quanti + PASSO).forEach(g => pezzo.append(rigaGiocatore(g)));
+    quanti += PASSO;
+    cont.insertBefore(pezzo, altri);
+    if (quanti >= ls.length) altri.remove();
+    else altri.textContent = `Mostra altri ${Math.min(PASSO, ls.length - quanti)}` +
+      ` (ne restano ${ls.length - quanti})`;
+  };
+  altri.onclick = disegnaBlocco;
+  cont.append(altri);
+  disegnaBlocco();
 }
 
 /* Una differenza di fantamedia non si sente: +0.62 non vuol dire niente a
