@@ -48,6 +48,14 @@
   "lega": "Serie A"
  },
  {
+  "nome": "Diego Moreira",
+  "squadra": "Milan",
+  "ruolo": "A",
+  "presenze": 27,
+  "gol": 4,
+  "lega": "Ligue 1"
+ },
+ {
   "nome": "L. Banovec",
   "squadra": "Como",
   "ruolo": "C",
@@ -88,9 +96,17 @@
   "lega": "Serie A"
  },
  {
+  "nome": "C. Favasuli",
+  "squadra": "Napoli",
+  "ruolo": "D",
+  "presenze": 41,
+  "gol": 2,
+  "lega": "Serie B"
+ },
+ {
   "nome": "F. Terracciano",
   "squadra": "Milan",
-  "ruolo": "C",
+  "ruolo": "D",
   "presenze": 36,
   "gol": 2,
   "lega": "Serie A"
@@ -196,14 +212,6 @@
   "squadra": "Torino",
   "ruolo": "D",
   "presenze": 14,
-  "gol": 0,
-  "lega": "Serie B"
- },
- {
-  "nome": "A. Brorsson",
-  "squadra": "Monza",
-  "ruolo": "D",
-  "presenze": 12,
   "gol": 0,
   "lega": "Serie B"
  },

@@ -2553,6 +2553,7 @@
    "presenze_totali": 3,
    "squadre_stagione": 1
   },
+  "2025:a ballanti": "vuoto",
   "2025:a brorsson": {
    "assist": 0,
    "campionati": [
@@ -3743,6 +3744,20 @@
    "squadre_stagione": 1
   },
   "2025:c corradi": "vuoto",
+  "2025:c favasuli": {
+   "assist": 5,
+   "campionati": [
+    "Coppa Italia",
+    "Serie B"
+   ],
+   "da_titolare": 40,
+   "gol": 2,
+   "lega": "Serie B",
+   "minuti": 3519,
+   "presenze": 41,
+   "presenze_totali": 42,
+   "squadre_stagione": 1
+  },
   "2025:c frangella": {
    "assist": 0,
    "campionati": [
@@ -4229,6 +4244,20 @@
    "minuti": 1584,
    "presenze": 17,
    "presenze_totali": 18,
+   "squadre_stagione": 1
+  },
+  "2025:diego moreira": {
+   "assist": 6,
+   "campionati": [
+    "Coupe de France",
+    "Ligue 1"
+   ],
+   "da_titolare": 28,
+   "gol": 4,
+   "lega": "Ligue 1",
+   "minuti": 2326,
+   "presenze": 27,
+   "presenze_totali": 31,
    "squadre_stagione": 1
   },
   "2025:djibril sow": {
@@ -6468,6 +6497,7 @@
    "squadre_stagione": 1
   },
   "2025:l kovac": "vuoto",
+  "2025:l kusic": "vuoto",
   "2025:l lukia": "vuoto",
   "2025:l nyarko": "vuoto",
   "2025:l topalovic": {

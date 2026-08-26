@@ -7,15 +7,15 @@ Sono nelle rose di Serie A ma non nelle tue quotazioni:
 • <b>A. Cissè</b> (Milan, A) — 22 pres, 6 gol
 • <b>R. Ciervo</b> (Sassuolo, A) — 37 pres, 5 gol
 • <b>L. Banda</b> (Lecce, A) — 32 pres, 5 gol
+• <b>Diego Moreira</b> (Milan, A) — 27 pres, 4 gol
 • <b>L. Banovec</b> (Como, C) — 31 pres, 3 gol
 • <b>E. Ndicka</b> (Roma, D) — 31 pres, 3 gol
 • <b>A. Joujou</b> (Parma, A) — 23 pres, 3 gol
 • <b>W. Cheddira</b> (Napoli, A) — 17 pres, 3 gol
 • <b>M&apos;Bala Nzola</b> (Fiorentina, A) — 16 pres, 3 gol
-• <b>F. Terracciano</b> (Milan, C) — 36 pres, 2 gol
+• <b>C. Favasuli</b> (Napoli, D) — 41 pres, 2 gol
+• <b>F. Terracciano</b> (Milan, D) — 36 pres, 2 gol
 • <b>E. Del Prato</b> (Parma, D) — 35 pres, 2 gol
-• <b>L. Cherubini</b> (Roma, A) — 35 pres, 2 gol
-• <b>K. Baldé</b> (Monza, A) — 21 pres, 2 gol
-...e altri 17.
+...e altri 18.
 
 Scarica le quotazioni aggiornate da Fantacalcio e caricale in <code>fanta-master-ai</code>: il motore le usa dalla notte dopo.
