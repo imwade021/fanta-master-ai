@@ -169,12 +169,30 @@ nav button.on{color:var(--oro);border-top-color:var(--oro)}
 .chip button.on{background:var(--rilievo);color:var(--testo);border-color:var(--tenue)}
 
 .g{display:flex;align-items:center;gap:10px;padding:9px 11px;border-bottom:1px solid var(--linea)}
-.faccia{width:38px;height:38px;border-radius:9px;flex:none;background:var(--rilievo);
-  display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative}
+/* L'immagine sorgente e' una figurina verticale, non un ritratto: piu' di
+   meta' e' cornice, loghi e sfondo, e la faccia ci sta dentro piccola. Un
+   ritaglio quadrato ancorato in alto mostrava soprattutto la decorazione.
+
+   Si ingrandisce attorno alla testa: con transform-origin sul volto, il punto
+   di ancoraggio resta fermo e tutto il resto si allarga fuori dal riquadro.
+   L'ingrandimento e' volutamente contenuto - le figurine escono da un
+   modello, ma se qualche volto e' posizionato un po' diverso, a 1.4 resta
+   comunque intero. Le due variabili qui sotto sono le uniche da toccare per
+   correggere l'inquadratura. */
+.faccia{
+  --zoom:1.4; --volto-x:52%; --volto-y:46%;
+  width:38px;height:38px;border-radius:9px;flex:none;background:var(--rilievo);
+  display:flex;align-items:center;justify-content:center;overflow:hidden;
+  position:relative;isolation:isolate}
 .faccia span{font-size:12.5px;font-weight:700;color:var(--tenue);letter-spacing:.02em}
 .faccia img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
-  object-position:top center;opacity:0;transition:opacity .25s}
+  object-position:top center;opacity:0;transition:opacity .25s;
+  transform:scale(var(--zoom));transform-origin:var(--volto-x) var(--volto-y)}
 .faccia img.c{opacity:1}
+/* Un bordo interno stacca il ritratto dallo sfondo della riga: senza, le
+   figurine scure sembrano sbavate sul fondo della lista. */
+.faccia::after{content:'';position:absolute;inset:0;border-radius:inherit;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.09);pointer-events:none}
 .faccia.grande{width:62px;height:62px;border-radius:14px}
 .faccia.grande span{font-size:20px}
 .testata{display:flex;align-items:center;gap:13px;margin-bottom:4px}
