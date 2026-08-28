@@ -1,78 +1,76 @@
-# fanta-master-ai
+# +3 — il banco della tua asta
 
-Motore dati per l'asta del Fantacalcio. **Unica fonte di verita'**: produce
-`Lista_Finale_Master.csv`, che FantaBot si limita a leggere e mostrare.
+Due applicazioni che si parlano: **+3** è quella che usi all'asta, **Studio**
+serve a decidere come deve apparire. Nessuna delle due ha bisogno di internet
+per funzionare.
 
-## Come funziona
+## Installarle sul telefono o sull'iPad
 
-Ogni notte alle 04:00 (UTC) la GitHub Action esegue `build_master.py`, che:
+Carica tutti i file nella root del repo, poi Settings → Pages → Deploy from
+branch `main`, cartella `/ (root)`.
 
-1. legge il file **quotazioni** piu' recente (`Quotazioni_Fantacalcio_Stagione_*.xlsx`)
-   per sapere chi e' in Serie A, in che squadra e quanto vale;
-2. incrocia per `Id` le **statistiche** della stagione conclusa (`Statistiche.xlsx`);
-3. arricchisce con l'**anagrafica** (`Lista-FantaAsta-Fantacalcio.csv`): foto,
-   piede, nazionalita', nome completo;
-4. interroga **API-Football** per rose aggiornate, foto ufficiali, gare saltate
-   e indisponibili di oggi;
-5. calcola il **prezzo consigliato** distribuendo il monte crediti della lega
-   fra i giocatori che verranno davvero comprati;
-6. committa il CSV aggiornato.
+Apri `https://imwade021.github.io/fanta-master-ai/astanote.html` in Safari e fai
+**Condividi → Aggiungi a Home**. Da quel momento parte a tutto schermo, con la
+sua icona, e non serve più la rete: al primo avvio si mette da parte tutto.
+Ripeti con `studio.html` se vuoi anche lo Studio sulla Home.
 
-Alle 05:00 FantaBot lo scarica.
+Un file `.html` scaricato nell'app File **non** può diventare un'applicazione:
+Apple ha disabilitato l'apertura di file locali in Safari. Il passaggio da
+Pages è l'unico modo, e si fa una volta sola.
 
-## Fonti da aggiornare a mano
+## L'aspetto
 
-| File | Quando | Dove prenderlo |
-|---|---|---|
-| `Quotazioni_Fantacalcio_Stagione_AAAA_AA.xlsx` | a ogni aggiornamento delle quotazioni | area download di Fantacalcio.it |
-| `Statistiche.xlsx` | una volta a stagione, a campionato finito | area download di Fantacalcio.it |
-| `Lista-FantaAsta-Fantacalcio.csv` | quando cambia l'anagrafica | area download di Fantacalcio.it |
+Da +3: Piano → **Personalizza l'aspetto**. Si apre lo Studio, che carica +3
+dentro di sé: le manopole agiscono sull'applicazione vera, non su una copia.
+Quaranta comandi divisi per pezzo — sfondo, pannelli, testi, numero, righe,
+pulsanti, schede, materiale (vetro, grana, vignettatura).
 
-Il file quotazioni piu' recente viene scelto **da solo** in base al nome: basta
-caricare quello nuovo. Il vecchio si puo' cancellare.
+**Tieni questo aspetto** lo salva. Torni su +3 con **Vai a +3** e c'è già.
+Niente da copiare. I ritocchi restano separati fra tema chiaro e scuro.
 
-## Variabili d'ambiente
+## Prima dell'asta — scheda Piano
 
-| Variabile | Default | A cosa serve |
-|---|---|---|
-| `API_FOOTBALL_KEY` | — | chiave API-Football (secret della repo) |
-| `FANTA_SEASON_STATS` | `2025` | stagione conclusa (2025 = 2025/26) |
-| `FANTA_SEASON` | `2026` | stagione in corso, per gli infortuni |
-| `FANTA_MAX_LOOKUP` | `600` | tetto ai lookup statistiche per giocatore |
-| `FANTA_PAUSA` | `0.3` | secondi fra due chiamate (6.5 sul piano free) |
-| `FANTA_SQUADRE_LEGA` | `8` | squadre della lega di riferimento |
-| `FANTA_BUDGET` | `500` | crediti per squadra |
-| `FANTA_ESPONENTE` | `1.0` | quanto e' ripida la scala prezzi (>1 = top piu' cari) |
-| `FANTA_FVM` | `ufficiale` | `ufficiale` \| `stima` \| `misto` |
-| `FANTA_STRICT` | `1` | se `1`, un dato mancante fa fallire il run |
+Budget, quante squadre, quante caselle per reparto, la strategia, se la lega usa
+il modificatore di difesa, e chi paga quando sfori. Se giochi su un tavolo,
+attiva **tieni acceso lo schermo**.
 
-## Colonne di `Lista_Finale_Master.csv`
+## Durante — scheda Asta
 
-Separatore `;`. Le principali:
+*Ho comprato* per i tuoi, *Venduto ad altri* per gli altri: di quelli serve solo
+il prezzo. Il numero grande dice quanti crediti puoi mettere su questa casella
+adesso, col conto per esteso — un tetto che non sai spiegare, a metà asta non lo
+rispetti. Sotto, quante caselle di quel ruolo restano scoperte in tutta la lega.
 
-- **Anagrafica**: `Id`, `Nome`, `Nome_Breve`, `Nome_Completo`, `R`,
-  `Ruolo_Esteso`, `Squadra`, `Piede`, `Nazionalita`, `DataNascita`,
-  `PhotoURL`, `FotoAPI`
-- **Valore**: `Qt.A`, `Qt.I`, `Qt.M`, `Diff.M`, `FVM`, `FVM.M`,
-  `FVM_Ufficiale`, `FVM_Stima`, `Scarto`, `Prezzo`
-- **Rendimento**: `Pv`, `Mv`, `Fm`, `Gf`, `Gs`, `Rp`, `Rc`, `R+`, `R-`,
-  `Ass`, `Amm`, `Esp`
-- **Impiego**: `PvTot`, `SquadreStag`, `Tit`, `Min`
-- **Disponibilita'**: `GareSaltate` (**solo** assenze fisiche), `MotivoStop`,
-  `GareSaltateAltro` (squalifiche, nazionale, turnover), `MotivoAltro`,
-  `Infortunio`, `InfortunioTipo`, `InfortunioDal`
-- `Aggiornato`
+Se sbagli, **Annulla** in alto torna indietro di dieci passi.
 
-`FVM` e' il valore su cui si calcolano prezzi e fasce. `FVM_Stima` e' il
-modello interno; `Scarto` = stima / ufficiale. Uno **scarto alto** segnala un
-giocatore che il modello valuta piu' del mercato: e' li' che si cercano le
-occasioni, non nella classifica dei piu' cari.
+## Dopo
 
-## Regole di progetto
+Piano → *La mia rosa*: negli appunti già formattata, o stampata.
 
-- Si scrivono **fatti**, non deduzioni. "Ha saltato 12 gare per un infortunio
-  al ginocchio" e' un fatto; "e' fragile" e' un giudizio, e lo fa chi legge.
-- Assenze fisiche e squalifiche stanno in **colonne diverse**.
-- Un dato fuori scala (69 presenze in una stagione) viene **scartato**, non
-  pubblicato.
-- Nessuna logica di presentazione qui dentro: quella e' di FantaBot.
+## Se qualcosa va storto
+
+**Salva una copia** scrive un file con tutta l'asta dentro; **Rimetti dentro** lo
+rilegge. Fallo una volta a metà asta.
+
+## Aggiornare il listone
+
+Lancia `motore.py` accanto al `Lista_Finale_Master.csv` aggiornato e carica il
+`dati_asta.json` che produce da Piano → *Listone aggiornato*.
+
+## Cosa NON fa
+
+Non prevede il rendimento di nessuno. Le fasce sono la fila d'attesa: con dodici
+squadre i primi dodici di un ruolo sono fascia 1, uno a testa. L'affidabilità
+sono presenze e minuti già giocati, col motivo scritto sotto. Chi non ha mai
+giocato in Serie A non ha numeri: c'è scritto "nessuno storico", e basta.
+
+## I file
+
+| file | cosa fa |
+|---|---|
+| `astanote.html` | +3: l'applicazione, dati e icone incorporati |
+| `studio.html` | lo Studio: modifica l'aspetto di +3 |
+| `sw.js` | fa funzionare tutto senza rete |
+| `piu3.webmanifest`, `studio.webmanifest` | nome e icone sulla schermata Home |
+| `icona-*.png` | le icone |
+| `motore.py` | rigenera `dati_asta.json` dal Master |
