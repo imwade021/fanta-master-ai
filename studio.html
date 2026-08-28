@@ -1,0 +1,924 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0b2716">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Studio">
+<title>Studio</title>
+<style>
+/* ===========================================================================
+   STUDIO — seconda versione
+
+   La prima aveva i comandi in fondo alla pagina: per cambiare un colore
+   dovevi scorrere via proprio il pezzo che stavi cambiando, e a quel punto
+   non ne vedevi piu' l'effetto. Inutilizzabile, e giustamente bocciata.
+
+   Qui lo schermo e' diviso in due e resta diviso. Sopra l'applicazione, sotto
+   i comandi del pezzo scelto. Tocchi un pezzo, il pannello sotto cambia, e
+   mentre muovi un cursore vedi il pezzo muoversi. Mai piu' scorrimento fra la
+   causa e l'effetto. La riga fra le due meta' si trascina, se vuoi piu'
+   anteprima o piu' comandi.
+   =========================================================================== */
+
+:root{
+  /* --- quello che si puo' cambiare --- */
+  --sfondo-tipo:campo;
+  --erba-a:#0d2e1a; --erba-b:#10361f; --erba-passo:38px;
+  --righe-colore:#ffffff; --righe-opacita:.5;
+  --chrome:#f6faf4; --chrome-testo:#12251a; --chrome-etichetta:#788b7e;
+  --carta:#fbfdfa; --rilievo:#eef3ec; --linea:#d6ded2;
+  --testo:#12251a; --fioco:#4d6155; --tenue:#788b7e;
+  --oro:#8a5c00; --oro-pieno:#f0b429; --su-oro:#1a1405;
+  --allarme:#b03521; --verde:#136c43; --acqua:#175f7d;
+  --raggio:14px; --raggio-riga:10px; --raggio-pulsante:11px; --raggio-etichetta:6px;
+  --ombra:0 2px 14px rgba(0,0,0,.22); --bordo-pannello:1px;
+
+  /* Materiale: quanto il pannello lascia passare quello che ha dietro, quanto
+     lo sfoca e quanto ne ravviva i colori. La saturazione e' il trucco che
+     distingue il vetro vero dal semplice velo: senza, il verde che filtra
+     diventa grigio e sembra sporco. */
+  --vetro:0%; --sfocatura:18px; --saturazione:180%;
+  --luce-alto:0; --luce-bordo:0;
+
+  /* Finiture */
+  --grana:0; --vignetta:0; --bagliore:0px; --aria:0px; --capello:1px;
+  --numero-colore:#8a5c00; --numero-peso:700; --numero-corpo:52px;
+  --nome-corpo:14.5px; --nome-peso:600; --testo-corpo:15px;
+  --font-testo:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  --font-cifre:ui-monospace,SFMono-Regular,"SF Mono",Menlo,monospace;
+  --nav-attivo:#8a5c00; --nav-spento:#788b7e;
+
+  /* --- lo Studio stesso, che non cambia mai --- */
+  --s-carta:#151b25; --s-linea:#28323f; --s-fioco:#93a0b0; --s-vivo:#4da3ff;
+  --alto:52vh;          /* su schermo stretto: quanto occupa l'anteprima */
+  --colonna:390px;      /* su schermo largo: quanto occupano i comandi */
+  --disposizione:una; --divisione:50%;
+  --posto-numero:sx1; --posto-rosa:sx2; --posto-listone:dx1; --posto-scheda:dx2;
+  --largo-telaio:400px; /* la larghezza dell'apparecchio che stai simulando */
+}
+
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{touch-action:manipulation}
+html,body{margin:0;padding:0;height:100%;overflow:hidden;overscroll-behavior:none}
+body{background:#0a0d12;color:#e9ecf1;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  -webkit-font-smoothing:antialiased;-webkit-touch-callout:none;user-select:none}
+button{font:inherit;color:inherit;background:none;border:none;cursor:pointer;
+  touch-action:manipulation}
+input,select{font:inherit;color:inherit;font-size:16px}
+
+/* ======================= SOPRA: l'applicazione ======================= */
+#palco{position:fixed;top:0;left:0;right:0;height:var(--alto);overflow-y:auto;
+  -webkit-overflow-scrolling:touch;z-index:1;background:var(--erba-a)}
+.scena{min-height:100%;padding:12px 10px 22px;position:relative}
+.scena::before{content:'';position:absolute;inset:0;
+  background:repeating-linear-gradient(180deg,
+    var(--erba-a) 0 var(--erba-passo),
+    var(--erba-b) var(--erba-passo) calc(var(--erba-passo)*2))}
+.scena::after{content:'';position:absolute;inset:0;
+  background:var(--righe-svg) center/cover no-repeat;opacity:var(--righe-opacita)}
+html[data-sfondo="tinta"] .scena::before{background:var(--erba-a)}
+html[data-sfondo="sfumatura"] .scena::before{
+  background:linear-gradient(160deg,var(--erba-a),var(--erba-b))}
+html[data-sfondo="tinta"] .scena::after,
+html[data-sfondo="sfumatura"] .scena::after{display:none}
+
+/* Col vetro a zero il pannello e' opaco e la sfocatura non si vede - ma il
+   telefono la calcola lo stesso, a ogni scorrimento. Quando non serve si
+   spegne del tutto. */
+html[data-vetro="no"] .pannello,
+html[data-vetro="no"] .testata,
+html[data-vetro="no"] .schede{backdrop-filter:none;-webkit-backdrop-filter:none}
+.scena > *{position:relative}
+
+/* Il pezzo scelto resta segnato, col suo nome addosso. */
+[data-pezzo]{position:relative}
+[data-pezzo].scelto{outline:2px solid var(--s-vivo);outline-offset:2px;border-radius:8px}
+[data-pezzo].scelto::after{content:attr(data-nome);position:absolute;top:-9px;left:6px;
+  background:var(--s-vivo);color:#06121f;font-size:9px;font-weight:700;padding:1px 6px;
+  border-radius:5px;letter-spacing:.04em;z-index:5;pointer-events:none;
+  font-family:-apple-system,system-ui,sans-serif}
+
+/* Grana e vignettatura: due velature sopra la scena. La grana toglie
+   quell'aria di sfondo generato al computer, la vignettatura porta l'occhio
+   al centro. Sono entrambe a zero finche' non le alzi. */
+.velatura{position:absolute;inset:0;pointer-events:none;z-index:3}
+.velatura::before{content:'';position:absolute;inset:0;opacity:var(--grana);
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23g)'/%3E%3C/svg%3E");
+  mix-blend-mode:overlay}
+.velatura::after{content:'';position:absolute;inset:0;opacity:var(--vignetta);
+  background:radial-gradient(ellipse at 50% 40%, transparent 40%, #000 130%)}
+
+.telaio{max-width:var(--largo-telaio);margin:0 auto;border-radius:18px;overflow:hidden;
+  box-shadow:0 8px 30px rgba(0,0,0,.45);font-family:var(--font-testo)}
+
+.testata{background:color-mix(in srgb, var(--chrome) calc(100% - var(--vetro)), transparent);
+  backdrop-filter:blur(var(--sfocatura)) saturate(var(--saturazione));
+  -webkit-backdrop-filter:blur(var(--sfocatura)) saturate(var(--saturazione));
+  padding:8px 11px 0}
+.marchio{display:flex;align-items:center;gap:6px;font-size:12px;font-weight:700;
+  color:var(--chrome-testo)}
+.marchio i{width:18px;height:18px;border-radius:5px;background:#1b5330}
+.celle{display:flex;gap:1px;background:var(--linea);margin-top:7px}
+.cella{flex:1;background:transparent;padding:7px 4px;text-align:center}
+.cella .et{font-size:8.5px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--chrome-etichetta)}
+.cella .vl{font-family:var(--font-cifre);font-size:16px;font-weight:600;
+  color:var(--chrome-testo);margin-top:1px}
+
+.corpo{padding:11px;font-size:var(--testo-corpo)}
+
+/* La stanza: su schermo stretto una colonna sola, su schermo largo due, con
+   la divisione che decidi tu. E' questa la disposizione che finirebbe
+   nell'applicazione vera su iPad. */
+.stanza{display:grid;gap:11px;grid-template-columns:1fr}
+html[data-disposizione="due"] .stanza{
+  grid-template-columns:var(--divisione) 1fr}
+.colonna{min-width:0;display:flex;flex-direction:column;gap:0}
+html:not([data-disposizione="due"]) .colonna[data-lato="dx"]:empty{display:none}
+.settore{margin-bottom:11px}
+.settore:last-child{margin-bottom:0}
+
+/* le caselle della rosa */
+.caselle{display:flex;gap:4px;flex:1;justify-content:center}
+.cs{width:30px;height:26px;border-radius:7px;border:1px solid var(--linea);
+  background:var(--rilievo);color:var(--tenue);font-size:9.5px;font-style:normal;
+  display:flex;align-items:center;justify-content:center}
+.cs.piena{background:color-mix(in srgb,var(--verde) 14%,transparent);
+  border-color:color-mix(in srgb,var(--verde) 36%,transparent);color:var(--verde);
+  font-weight:700}
+/* Un pannello di vetro e' quattro cose insieme: lascia passare, sfoca,
+   ravviva i colori di quello che filtra, e ha una riga di luce sul bordo
+   superiore. Togline una e sembra solo un rettangolo semitrasparente. */
+.pannello{background:color-mix(in srgb, var(--carta) calc(100% - var(--vetro)), transparent);
+  border:var(--bordo-pannello) solid var(--linea);
+  border-radius:var(--raggio);box-shadow:var(--ombra);overflow:hidden;margin-bottom:11px;
+  backdrop-filter:blur(var(--sfocatura)) saturate(var(--saturazione));
+  -webkit-backdrop-filter:blur(var(--sfocatura)) saturate(var(--saturazione));
+  position:relative}
+.pannello::before{content:'';position:absolute;inset:0;pointer-events:none;z-index:2;
+  border-radius:inherit;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,var(--luce-alto)),
+             inset 0 0 0 1px rgba(255,255,255,var(--luce-bordo))}
+
+.ruoli{display:flex;background:var(--linea);gap:1px}
+.ruoli button{flex:1;background:transparent;padding:7px 2px;color:var(--tenue);font-size:10.5px}
+.ruoli button.on{background:var(--rilievo);color:var(--testo);font-weight:700}
+.ruoli button small{display:block;font-size:8.5px;margin-top:2px;color:var(--tenue)}
+
+.cifra{padding:14px 12px 10px;text-align:center}
+.cifra .et{font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--tenue)}
+.cifra .n{font-family:var(--font-cifre);font-size:var(--numero-corpo);
+  font-weight:var(--numero-peso);color:var(--numero-colore);line-height:1.05;margin:2px 0;
+  text-shadow:0 0 var(--bagliore) currentColor}
+.cifra .um{font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--tenue)}
+.conto{padding:0 12px 9px;font-size:12px;line-height:1.55;text-align:center;color:var(--fioco)}
+.conto b{color:var(--testo);font-weight:600}
+.scarso{margin:0 12px 11px;padding:8px 10px;border-radius:var(--raggio-riga);font-size:11.5px;
+  line-height:1.5;text-align:center;color:var(--fioco);background:var(--rilievo);
+  border:1px solid var(--linea)}
+.scarso b{color:var(--testo)}
+
+.sez{display:flex;justify-content:space-between;align-items:baseline;margin:2px 2px 6px}
+.sez h2{margin:0;font-size:10px;letter-spacing:.17em;text-transform:uppercase;
+  color:#cddbd1;font-weight:600}
+.sez span{font-size:10px;color:#a3b8aa}
+
+.riga{display:flex;align-items:center;gap:8px;background:transparent;
+  padding:calc(8px + var(--aria)) 10px;
+  border-bottom:var(--capello) solid var(--linea)}
+.riga:last-child{border-bottom:none}
+.faccia{width:34px;height:42px;border-radius:7px;background:var(--rilievo);flex:none;
+  display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;
+  color:var(--tenue)}
+.riga .id{flex:1;min-width:0}
+.riga .nm{font-size:var(--nome-corpo);font-weight:var(--nome-peso);color:var(--testo)}
+.riga .sq{font-size:10.5px;color:var(--tenue);margin-top:3px;display:flex;gap:4px;
+  flex-wrap:wrap;align-items:center}
+.riga .pz{font-family:var(--font-cifre);font-size:15px;font-weight:600;color:var(--oro);
+  text-align:right}
+.riga .pz small{display:block;font-size:8px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--tenue);font-family:var(--font-testo)}
+
+.tag{font-size:9px;padding:2px 5px;border-radius:var(--raggio-etichetta);
+  border:1px solid var(--linea);color:var(--fioco);white-space:nowrap}
+.tag.f1{border-color:var(--oro);color:var(--oro)}
+.tag.buono{border-color:var(--verde);color:var(--verde)}
+.tag.info{border-color:var(--acqua);color:var(--acqua)}
+.tag.fuori{border-color:var(--allarme);color:var(--allarme);
+  background:color-mix(in srgb,var(--allarme) 10%,transparent)}
+
+.fatti{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--linea);
+  border:1px solid var(--linea);border-radius:var(--raggio-riga);overflow:hidden;margin-bottom:10px}
+.fatto{background:transparent;padding:7px 4px;text-align:center}
+.fatto .et{font-size:8px;letter-spacing:.08em;text-transform:uppercase;color:var(--tenue)}
+.fatto .vl{font-family:var(--font-cifre);font-size:14px;font-weight:600;color:var(--testo);
+  margin-top:2px}
+
+.azioni{display:flex;gap:7px}
+.btn{flex:1;padding:calc(12px + var(--aria)) 6px;border-radius:var(--raggio-pulsante);font-size:12.5px;
+  font-weight:600;text-align:center;border:1px solid var(--linea);background:var(--carta);
+  color:var(--testo)}
+.btn.primo{background:var(--oro-pieno);color:var(--su-oro);border-color:var(--oro-pieno)}
+.btn.pericolo{background:color-mix(in srgb,var(--allarme) 10%,transparent);
+  color:var(--allarme);border-color:color-mix(in srgb,var(--allarme) 34%,transparent)}
+.campetto{background:var(--rilievo);border:1px solid var(--linea);
+  border-radius:var(--raggio-riga);padding:9px 10px;color:var(--testo);
+  font-family:var(--font-cifre);text-align:center;margin-bottom:9px}
+
+.schede{display:flex;position:relative;border-top:var(--capello) solid var(--linea);
+  background:color-mix(in srgb, var(--chrome) calc(100% - var(--vetro)), transparent);
+  backdrop-filter:blur(var(--sfocatura)) saturate(var(--saturazione));
+  -webkit-backdrop-filter:blur(var(--sfocatura)) saturate(var(--saturazione))}
+.schede button{flex:1;padding:8px 4px 9px;display:flex;flex-direction:column;align-items:center;
+  gap:2px;font-size:9.5px;color:var(--nav-spento)}
+.schede button.on{color:var(--nav-attivo)}
+.schede svg{width:21px;height:21px;stroke:currentColor;fill:none;stroke-width:1.7;
+  stroke-linecap:round;stroke-linejoin:round}
+.schede i{position:absolute;top:0;left:0;width:33.33%;height:2px;background:var(--nav-attivo)}
+
+/* ======================= SOTTO: i comandi ======================= */
+#banco{position:fixed;left:0;right:0;bottom:0;top:var(--alto);z-index:10;
+  background:var(--s-carta);border-top:1px solid var(--s-linea);
+  border-radius:16px 16px 0 0;display:flex;flex-direction:column;
+  box-shadow:0 -8px 30px rgba(0,0,0,.5)}
+#presa{padding:8px 0 5px;display:flex;justify-content:center;flex:none;touch-action:none}
+#presa i{width:40px;height:4px;border-radius:3px;background:#475466}
+
+/* Se la finestra e' stretta non e' un difetto dello Studio, ma non e' ovvio:
+   va detto, con la misura, altrimenti si pensa che sia rotto. */
+#stretto{margin:0 14px 10px;padding:9px 11px;border-radius:10px;font-size:12px;
+  line-height:1.5;color:#ffd9a8;background:rgba(240,180,41,.1);
+  border:1px solid rgba(240,180,41,.3);flex:none}
+#stretto b{color:#f0b429}
+@media (min-width:760px){#stretto{display:none}}
+
+#capo{padding:0 14px 9px;flex:none}
+#capo h1{margin:0;font-size:16px;font-weight:700}
+#capo h1 small{display:block;font-size:11.5px;font-weight:400;color:var(--s-fioco);
+  margin-top:3px;line-height:1.35}
+
+#pezzi{display:flex;gap:6px;overflow-x:auto;padding:0 14px 10px;flex:none;
+  scrollbar-width:none}
+#pezzi::-webkit-scrollbar{display:none}
+#pezzi button{padding:9px 14px;border-radius:18px;font-size:12.5px;white-space:nowrap;
+  background:#1d2531;border:1px solid var(--s-linea);color:var(--s-fioco);min-height:42px}
+#pezzi button.on{background:var(--s-vivo);color:#06121f;border-color:var(--s-vivo);
+  font-weight:600}
+
+#comandi{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;
+  padding:0 14px calc(76px + env(safe-area-inset-bottom))}
+.voce{display:flex;align-items:center;gap:11px;padding:11px 0;
+  border-bottom:1px solid #1f2733;min-height:58px}
+.voce:last-child{border-bottom:none}
+.voce .nome{flex:1;font-size:13.5px;line-height:1.3}
+.voce .nome small{display:block;color:#6f7b8a;font-size:11px;margin-top:3px;line-height:1.4}
+.voce input[type=color]{width:54px;height:40px;padding:0;border:1px solid #333f4d;
+  border-radius:9px;background:none;flex:none}
+.voce input[type=range]{width:128px;flex:none;accent-color:var(--s-vivo);height:36px}
+.voce select{background:#1d2531;border:1px solid #333f4d;border-radius:9px;padding:10px 9px;
+  flex:none;max-width:158px}
+.voce .val{font-family:ui-monospace,monospace;font-size:11.5px;color:#78849a;
+  min-width:40px;text-align:right;flex:none}
+.posto{display:flex;gap:4px;flex:none}
+.posto button{padding:9px 10px;border-radius:8px;font-size:11.5px;background:#1d2531;
+  border:1px solid #333f4d;color:var(--s-fioco);min-height:40px}
+.posto button.on{background:var(--s-vivo);color:#06121f;border-color:var(--s-vivo);
+  font-weight:600}
+.posto button.freccia{padding:9px 8px;font-size:12px}
+
+#piede{position:fixed;left:0;right:0;bottom:0;z-index:20;display:flex;gap:8px;
+  padding:9px 14px calc(9px + env(safe-area-inset-bottom));
+  background:rgba(15,20,28,.97);border-top:1px solid var(--s-linea)}
+#piede button{padding:13px 6px;border-radius:11px;font-size:13px;font-weight:600;
+  border:1px solid #333f4d;background:#1d2531;min-height:48px;flex:1}
+#piede button.primo{background:var(--s-vivo);border-color:var(--s-vivo);color:#06121f;flex:2.2}
+
+/* ======================= SCHERMO LARGO =======================
+   Su un tablet impilare anteprima e comandi come su un telefono spreca meta'
+   della superficie e lascia a entrambi lo spazio di prima. Affiancati, invece,
+   l'anteprima prende tutta l'altezza e i comandi non hanno piu' bisogno di
+   scorrere. La riga da trascinare sparisce: non c'e' piu' niente da spostare. */
+@media (min-width:760px){
+  #palco{right:var(--colonna);height:100vh;display:flex;align-items:stretch;
+    justify-content:center;padding:0}
+  .scena{width:100%;padding:26px 24px 40px}
+  #banco{top:0;left:auto;width:var(--colonna);border-radius:0;
+    border-top:none;border-left:1px solid var(--s-linea);
+    box-shadow:-8px 0 30px rgba(0,0,0,.4)}
+  #presa{display:none}
+  #capo{padding-top:16px}
+  #piede{left:auto;width:var(--colonna)}
+  #apparecchio{display:flex}
+}
+/* Su schermo stretto la scelta dell'apparecchio non serve: e' gia' un
+   telefono, e simulare un tablet dentro un telefono non dice niente. */
+#apparecchio{display:none;gap:6px;padding:0 14px 10px}
+#apparecchio button{flex:1;padding:9px 4px;border-radius:9px;font-size:11.5px;
+  background:#1d2531;border:1px solid var(--s-linea);color:var(--s-fioco);min-height:38px}
+#apparecchio button.on{background:#2b3849;color:#fff;border-color:#3f4e63}
+
+dialog{border:none;border-radius:16px;background:var(--s-carta);color:#e9ecf1;
+  max-width:520px;width:calc(100% - 26px);padding:16px}
+dialog::backdrop{background:rgba(0,0,0,.7)}
+dialog h3{margin:0 0 6px;font-size:17px}
+dialog p{margin:0 0 10px;font-size:13px;color:var(--s-fioco);line-height:1.5}
+dialog textarea{width:100%;height:180px;background:#0e131b;color:#c3ccd8;
+  border:1px solid var(--s-linea);border-radius:10px;padding:10px;
+  font-family:ui-monospace,monospace;font-size:16px;line-height:1.35;
+  user-select:text;-webkit-user-select:text}
+</style>
+</head>
+<body>
+
+<div id="palco">
+  <div class="scena">
+    <div class="velatura"></div>
+    <div class="telaio">
+
+      <div class="testata" data-pezzo="testata" data-nome="TESTATA">
+        <div class="marchio"><i></i>+3</div>
+        <div class="celle">
+          <div class="cella"><div class="et">Cassa</div><div class="vl">500</div></div>
+          <div class="cella"><div class="et">Da comprare</div><div class="vl">25</div></div>
+          <div class="cella"><div class="et">Inflazione</div><div class="vl">—</div></div>
+        </div>
+      </div>
+
+      <div class="corpo">
+        <div class="stanza" id="stanza">
+          <div class="colonna" data-lato="sx"></div>
+          <div class="colonna" data-lato="dx"></div>
+        </div>
+      </div>
+
+      <template id="blocchi">
+
+        <div class="settore" data-blocco="numero">
+          <div class="pannello" data-pezzo="pannello" data-nome="PANNELLO">
+            <div class="ruoli">
+              <button class="on">P<small>3 da fare</small></button>
+              <button>D<small>8 da fare</small></button>
+              <button>C<small>8 da fare</small></button>
+              <button>A<small>6 da fare</small></button>
+            </div>
+            <div class="cifra" data-pezzo="numero" data-nome="NUMERO">
+              <div class="et">Puoi arrivare a</div>
+              <div class="n">38</div>
+              <div class="um">crediti</div>
+            </div>
+            <div class="conto" data-pezzo="testi" data-nome="TESTI">
+              Hai <b>500</b> crediti in cassa. Ne servono <b>462</b> per riempire le altre
+              <b>24</b> caselle al livello che hai messo nel piano.
+            </div>
+            <div class="scarso">Nella lega restano <b>36 caselle</b> da portieri su 36.</div>
+          </div>
+        </div>
+
+        <div class="settore" data-blocco="rosa">
+          <div class="sez"><h2>La rosa</h2><span>0 di 25</span></div>
+          <div class="pannello">
+            <div class="riga"><div class="id"><div class="nm">P</div></div>
+              <div class="caselle"><i class="cs">F1</i><i class="cs">F2</i><i class="cs">F2</i></div>
+              <div class="pz">0</div></div>
+            <div class="riga"><div class="id"><div class="nm">D</div></div>
+              <div class="caselle"><i class="cs piena">F1</i><i class="cs">F2</i><i class="cs">F3</i></div>
+              <div class="pz">31</div></div>
+            <div class="riga"><div class="id"><div class="nm">A</div></div>
+              <div class="caselle"><i class="cs">F1</i><i class="cs">F2</i><i class="cs">F3</i></div>
+              <div class="pz">0</div></div>
+          </div>
+        </div>
+
+        <div class="settore" data-blocco="listone">
+          <div class="sez"><h2>Il listone</h2><span>3 di 501</span></div>
+          <div class="pannello" data-pezzo="righe" data-nome="RIGHE">
+            <div class="riga">
+              <div class="faccia">TH</div>
+              <div class="id"><div class="nm">Thuram</div>
+                <div class="sq">Inter <span class="tag f1">fascia 1</span>
+                  <span class="tag buono">+15 punti</span></div></div>
+              <div class="pz">127<small>listino</small></div>
+            </div>
+            <div class="riga">
+              <div class="faccia">LE</div>
+              <div class="id"><div class="nm">Leao</div>
+                <div class="sq">Milan <span class="tag fuori">fuori ora</span></div></div>
+              <div class="pz">98<small>listino</small></div>
+            </div>
+            <div class="riga">
+              <div class="faccia">CA</div>
+              <div class="id"><div class="nm">Carnesecchi</div>
+                <div class="sq">Atalanta <span class="tag info">2 rigori parati</span></div></div>
+              <div class="pz">24<small>listino</small></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="settore" data-blocco="scheda">
+          <div class="sez"><h2>La scheda</h2><span>Carnesecchi</span></div>
+          <div class="pannello" style="padding:11px">
+            <div class="fatti">
+              <div class="fatto"><div class="et">Affidabilità</div><div class="vl">99/100</div></div>
+              <div class="fatto"><div class="et">Partite</div><div class="vl">37/38</div></div>
+              <div class="fatto"><div class="et">Fantamedia</div><div class="vl">5.58</div></div>
+            </div>
+            <div class="campetto">24</div>
+            <div class="azioni" data-pezzo="pulsanti" data-nome="PULSANTI">
+              <button class="btn primo">L'ho preso io</button>
+              <button class="btn">Da un altro</button>
+            </div>
+            <div class="azioni" style="margin-top:7px">
+              <button class="btn pericolo">Azzera tutto</button>
+            </div>
+          </div>
+        </div>
+
+      </template>
+
+      <div class="schede" data-pezzo="schede" data-nome="SCHEDE">
+        <i></i>
+        <button class="on"><svg viewBox="0 0 24 24"><path d="M4 20h16M6 16l6-9 6 9M9.5 12.5h5"/></svg><span>Asta</span></button>
+        <button><svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h10"/><circle cx="19.5" cy="18" r="2.2"/></svg><span>Listone</span></button>
+        <button><svg viewBox="0 0 24 24"><path d="M4 19V9M9.3 19V5M14.7 19v-7M20 19v-4"/></svg><span>Piano</span></button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div id="banco">
+  <div id="presa"><i></i></div>
+  <div id="stretto">
+    Sei in una finestra larga <b id="quanto">—</b>: lo Studio si impila come su
+    telefono. Aprila a tutto schermo, o scarica il file e aprilo in Safari, per
+    avere anteprima e comandi affiancati.
+  </div>
+  <div id="capo"><h1 id="titolo"></h1></div>
+  <div id="apparecchio">
+    <button data-largo="400px" class="on">Telefono</button>
+    <button data-largo="560px">iPad — come è ora</button>
+    <button data-largo="100%">iPad — a tutta larghezza</button>
+  </div>
+  <div id="pezzi"></div>
+  <div id="comandi"></div>
+</div>
+
+<div id="piede">
+  <button class="primo" id="consegna">Copia e mandami tutto</button>
+  <button id="rimetti">Rimetti</button>
+</div>
+
+<dialog id="finestra">
+  <h3 id="fTitolo"></h3>
+  <p id="fNota"></p>
+  <textarea id="fTesto" readonly></textarea>
+  <div style="margin-top:10px">
+    <button style="width:100%;padding:13px;border-radius:11px;background:#4da3ff;color:#06121f;font-weight:600;min-height:48px;border:none" id="fChiudi">Ho capito</button>
+  </div>
+</dialog>
+
+<script>
+"use strict";
+
+/* ===========================================================================
+   Tutto e' organizzato per PEZZO, non per categoria astratta. Tocchi le righe
+   del listone e trovi tutto quello che le riguarda: il loro fondo, i loro
+   bordi, il corpo dei nomi, i colori delle etichette. Se un colore vale anche
+   altrove compare sotto tutti i pezzi che tocca - non e' una ripetizione, e'
+   il punto: quando guardi le righe vuoi cambiare il loro fondo, senza dover
+   sapere che si chiama "carta" e che vale anche per i pannelli.
+   =========================================================================== */
+
+const C = {
+  'sfondo-tipo':{t:'scelta', n:'Com\'è fatto lo sfondo',
+    o:[['campo','campo da calcio'],['tinta','tinta unita'],['sfumatura','sfumatura']]},
+  'erba-a':{t:'colore', n:'Erba, striscia chiara'},
+  'erba-b':{t:'colore', n:'Erba, striscia scura'},
+  'erba-passo':{t:'px', n:'Larghezza delle strisce', min:8, max:90},
+  'righe-colore':{t:'colore', n:'Colore delle righe del campo'},
+  'righe-opacita':{t:'frazione', n:'Quanto si vedono le righe', min:0, max:1},
+
+  'chrome':{t:'colore', n:'Fondo della testata', d:'lo stesso della barra in basso'},
+  'chrome-testo':{t:'colore', n:'Numeri della testata'},
+  'chrome-etichetta':{t:'colore', n:'Etichette CASSA, DA COMPRARE…'},
+
+  'carta':{t:'colore', n:'Fondo dei pannelli'},
+  'rilievo':{t:'colore', n:'Riquadri interni', d:'caselle, campi, riquadro della scarsità'},
+  'linea':{t:'colore', n:'Bordi e separatori'},
+  'raggio':{t:'px', n:'Angoli dei pannelli', min:0, max:28},
+  'bordo-pannello':{t:'px', n:'Spessore del bordo', min:0, max:3},
+  'ombra':{t:'scelta', n:'Ombra sotto i pannelli',
+    o:[['none','nessuna'],['0 1px 6px rgba(0,0,0,.16)','leggera'],
+       ['0 2px 14px rgba(0,0,0,.22)','media'],['0 6px 26px rgba(0,0,0,.36)','marcata']]},
+
+  'testo':{t:'colore', n:'Testo principale'},
+  'fioco':{t:'colore', n:'Testo secondario', d:'le spiegazioni'},
+  'tenue':{t:'colore', n:'Testo tenue', d:'le etichette piccole'},
+  'testo-corpo':{t:'px', n:'Dimensione del testo', min:13, max:19},
+  'font-testo':{t:'scelta', n:'Carattere',
+    o:[['-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif','di sistema'],
+       ['ui-rounded,"SF Pro Rounded",system-ui,sans-serif','arrotondato'],
+       ['ui-serif,Georgia,"Times New Roman",serif','con grazie'],
+       ['"Avenir Next",Avenir,system-ui,sans-serif','Avenir'],
+       ['"Helvetica Neue",Helvetica,Arial,sans-serif','Helvetica']]},
+  'font-cifre':{t:'scelta', n:'Carattere dei numeri',
+    o:[['ui-monospace,SFMono-Regular,"SF Mono",Menlo,monospace','monospazio'],
+       ['ui-rounded,"SF Pro Rounded",system-ui,sans-serif','arrotondato'],
+       ['"Avenir Next",Avenir,system-ui,sans-serif','Avenir'],
+       ['ui-serif,Georgia,serif','con grazie']]},
+
+  'numero-colore':{t:'colore', n:'Colore del numero'},
+  'numero-corpo':{t:'px', n:'Dimensione', min:30, max:88},
+  'numero-peso':{t:'scelta', n:'Spessore',
+    o:[['400','normale'],['600','medio'],['700','grassetto'],['800','molto grassetto']]},
+
+  'nome-corpo':{t:'px', n:'Dimensione dei nomi', min:12, max:20},
+  'nome-peso':{t:'scelta', n:'Spessore dei nomi',
+    o:[['400','normale'],['600','medio'],['700','grassetto']]},
+  'raggio-riga':{t:'px', n:'Angoli dei riquadri interni', min:0, max:20},
+  'raggio-etichetta':{t:'px', n:'Angoli delle etichette', min:0, max:14},
+  'oro':{t:'colore', n:'Accento', d:'prezzi, numero grande, scheda attiva'},
+  'allarme':{t:'colore', n:'Allarme', d:'infortunati, cancellazioni'},
+  'verde':{t:'colore', n:'Buono', d:'occasioni, caselle riempite'},
+  'acqua':{t:'colore', n:'Informazione'},
+
+  'disposizione':{t:'scelta', n:'Come si dispone su schermo largo',
+    d:'su telefono resta sempre una colonna sola',
+    o:[['una','una colonna, come sul telefono'],['due','due colonne affiancate']]},
+  'divisione':{t:'scelta', n:'Larghezza della colonna di sinistra',
+    o:[['30%','stretta'],['40%','un po\' stretta'],['50%','a metà'],
+       ['60%','un po\' larga'],['70%','larga']]},
+  'posto-numero':{t:'posto', n:'Il numero e il piano'},
+  'posto-rosa':{t:'posto', n:'La rosa'},
+  'posto-listone':{t:'posto', n:'Il listone'},
+  'posto-scheda':{t:'posto', n:'La scheda del giocatore'},
+
+  'vetro':{t:'percento', n:'Quanto è trasparente', min:0, max:70,
+    d:'a zero è un foglio pieno, alzandolo diventa vetro e si vede il campo dietro'},
+  'sfocatura':{t:'px', n:'Quanto sfoca quello che filtra', min:0, max:40},
+  'saturazione':{t:'percento', n:'Vivacità di quello che filtra', min:100, max:260,
+    d:'è il trucco che distingue il vetro vero dal velo: senza, il verde dietro diventa grigio'},
+  'luce-alto':{t:'frazione', n:'Riga di luce in alto', min:0, max:.6,
+    d:'il filo chiaro sul bordo superiore, come sul vetro vero'},
+  'luce-bordo':{t:'frazione', n:'Alone sul bordo', min:0, max:.3},
+
+  'grana':{t:'frazione', n:'Grana', min:0, max:.35,
+    d:'toglie l\'aria di sfondo generato al computer'},
+  'vignetta':{t:'frazione', n:'Vignettatura', min:0, max:.7,
+    d:'scurisce gli angoli e porta l\'occhio al centro'},
+  'bagliore':{t:'px', n:'Bagliore del numero', min:0, max:30},
+  'aria':{t:'px', n:'Aria fra le righe', min:0, max:10},
+  'capello':{t:'scelta', n:'Separatori',
+    o:[['0.5px','a capello'],['1px','normali'],['2px','marcati']]},
+
+  'oro-pieno':{t:'colore', n:'Fondo del pulsante principale'},
+  'su-oro':{t:'colore', n:'Testo sul pulsante principale'},
+  'raggio-pulsante':{t:'px', n:'Angoli dei pulsanti', min:0, max:26},
+
+  'nav-attivo':{t:'colore', n:'Scheda attiva'},
+  'nav-spento':{t:'colore', n:'Schede spente'},
+};
+
+const PEZZI = [
+  {id:'sfondo',   nome:'Sfondo',   sotto:"l'erba e le righe del campo",
+   c:['sfondo-tipo','erba-a','erba-b','erba-passo','righe-colore','righe-opacita']},
+  {id:'testata',  nome:'Testata',  sotto:'la fascia con cassa e caselle',
+   c:['chrome','chrome-testo','chrome-etichetta','linea']},
+  {id:'pannello', nome:'Pannello', sotto:'i fogli su cui sta tutto il resto',
+   c:['carta','rilievo','linea','raggio','raggio-riga','bordo-pannello','ombra']},
+  {id:'numero',   nome:'Numero',   sotto:'la cifra grande dei crediti',
+   c:['numero-colore','numero-corpo','numero-peso','font-cifre','tenue']},
+  {id:'testi',    nome:'Testi',    sotto:'le spiegazioni sotto il numero',
+   c:['testo','fioco','tenue','testo-corpo','font-testo']},
+  {id:'righe',    nome:'Righe',    sotto:'i giocatori del listone',
+   c:['carta','linea','nome-corpo','nome-peso','oro','tenue','rilievo',
+      'raggio-etichetta','allarme','verde','acqua']},
+  {id:'disposizione', nome:'Disposizione', sotto:'dove sta ogni settore su schermo largo',
+   c:['disposizione','divisione','posto-numero','posto-rosa','posto-listone','posto-scheda']},
+  {id:'materiale', nome:'Materiale', sotto:'vetro o foglio pieno',
+   c:['vetro','sfocatura','saturazione','luce-alto','luce-bordo','ombra']},
+  {id:'finiture', nome:'Finiture', sotto:'grana, vignettatura, bagliore, respiro',
+   c:['grana','vignetta','bagliore','aria','capello']},
+  {id:'pulsanti', nome:'Pulsanti', sotto:'i comandi di conferma',
+   c:['oro-pieno','su-oro','raggio-pulsante','carta','testo','linea','allarme']},
+  {id:'schede',   nome:'Schede',   sotto:'la barra in fondo',
+   c:['nav-attivo','nav-spento','chrome','linea']},
+];
+
+const R = document.documentElement;
+const CHIAVE = 'studio:v2';
+const $ = s => document.querySelector(s);
+let scelto = 'sfondo';
+
+const leggi = v => getComputedStyle(R).getPropertyValue('--' + v).trim();
+const scrivi = (v, x) => R.style.setProperty('--' + v, x);
+
+/* Com'era all'apertura: serve al pulsante "Rimetti". */
+const PARTENZA = {};
+Object.keys(C).forEach(k => PARTENZA[k] = leggi(k));
+
+function ridisegnaRighe() {
+  const c = leggi('righe-colore') || '#ffffff';
+  const svg = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 190" preserveAspectRatio="xMidYMid slice">'
+    + "<g fill='none' stroke='" + c + "' stroke-width='.7'>"
+    + "<rect x='5' y='6' width='90' height='178'/><path d='M5 95h90'/>"
+    + "<circle cx='50' cy='95' r='15'/><circle cx='50' cy='95' r='1.1' fill='" + c + "'/>"
+    + "<rect x='23' y='6' width='54' height='26'/><rect x='37' y='6' width='26' height='11'/>"
+    + "<rect x='23' y='158' width='54' height='26'/><rect x='37' y='173' width='26' height='11'/>"
+    + '</g></svg>';
+  scrivi('righe-svg', 'url("data:image/svg+xml,' + svg.replace(/#/g, '%23') + '")');
+}
+function applicaSfondo() {
+  R.dataset.sfondo = (leggi('sfondo-tipo') || 'campo').replace(/['"]/g, '');
+}
+
+/* ---------------------------------------------------------------- i pezzi */
+function disegnaPezzi() {
+  const box = $('#pezzi');
+  box.innerHTML = '';
+  PEZZI.forEach(p => {
+    const b = document.createElement('button');
+    b.textContent = p.nome;
+    if (p.id === scelto) b.className = 'on';
+    b.onclick = () => scegli(p.id, true);
+    box.append(b);
+  });
+  const attivo = box.querySelector('.on');
+  if (attivo) attivo.scrollIntoView({inline:'center', block:'nearest', behavior:'smooth'});
+}
+
+function scegli(id, daFila) {
+  scelto = id;
+  const p = PEZZI.find(x => x.id === id);
+  $('#titolo').innerHTML = p.nome + '<small>' + p.sotto + '</small>';
+  disegnaPezzi();
+  disegnaComandi();
+  $('#comandi').scrollTop = 0;
+
+  segnaScelto();
+  const el = document.querySelector('[data-pezzo="' + id + '"]');
+  if (el) {
+    // Se lo hai scelto dalla fila, l'anteprima ci si porta sopra: il comando e
+    // il suo effetto devono stare a schermo insieme, sempre.
+    if (daFila) el.scrollIntoView({block:'center', behavior:'smooth'});
+  }
+}
+
+/* ---------------------------------------------------------------- i comandi */
+function disegnaComandi() {
+  const box = $('#comandi');
+  box.innerHTML = '';
+  PEZZI.find(p => p.id === scelto).c.forEach(k => {
+    const c = C[k];
+    const riga = document.createElement('div');
+    riga.className = 'voce';
+    const et = document.createElement('div');
+    et.className = 'nome';
+    et.innerHTML = c.n + (c.d ? '<small>' + c.d + '</small>' : '');
+    riga.append(et);
+    const ora = leggi(k);
+
+    if (c.t === 'colore') {
+      const i = document.createElement('input');
+      i.type = 'color'; i.value = esadecimale(ora);
+      i.oninput = () => { scrivi(k, i.value); dopo(k); };
+      riga.append(i);
+
+    } else if (c.t === 'px' || c.t === 'frazione' || c.t === 'percento') {
+      const unita = c.t === 'px' ? 'px' : c.t === 'percento' ? '%' : '';
+      const i = document.createElement('input');
+      i.type = 'range'; i.min = c.min; i.max = c.max;
+      i.step = c.t === 'frazione' ? 0.01 : 1;
+      i.value = parseFloat(ora) || 0;
+      const val = document.createElement('div');
+      val.className = 'val';
+      const mostra = () => val.textContent = c.t === 'frazione'
+        ? Math.round(i.value * 100) + '%' : i.value + unita;
+      i.oninput = () => { scrivi(k, i.value + unita); mostra(); dopo(k); };
+      mostra();
+      riga.append(i, val);
+
+    } else if (c.t === 'posto') {
+      /* Un settore ha due cose: in quale colonna sta e in che ordine. Due
+         pulsanti per il lato e due frecce per l'ordine: su un vetro, il
+         trascinamento e' preciso quanto un dito bagnato. */
+      const [lato, ordine] = leggiPosto(k);
+      const gruppo = document.createElement('div');
+      gruppo.className = 'posto';
+      ['sx', 'dx'].forEach(l => {
+        const b = document.createElement('button');
+        b.textContent = l === 'sx' ? 'Sinistra' : 'Destra';
+        if (l === lato) b.className = 'on';
+        b.onclick = () => { scrivi(k, l + ordine); dopo(k); disegnaComandi(); };
+        gruppo.append(b);
+      });
+      const su = document.createElement('button');
+      su.textContent = '▲'; su.className = 'freccia';
+      su.onclick = () => { scrivi(k, lato + Math.max(1, ordine - 1)); dopo(k); disegnaComandi(); };
+      const giu = document.createElement('button');
+      giu.textContent = '▼'; giu.className = 'freccia';
+      giu.onclick = () => { scrivi(k, lato + Math.min(4, ordine + 1)); dopo(k); disegnaComandi(); };
+      gruppo.append(su, giu);
+      riga.append(gruppo);
+
+    } else {
+      const sel = document.createElement('select');
+      c.o.forEach(([v, et2]) => {
+        const o = document.createElement('option');
+        o.value = v; o.textContent = et2;
+        o.selected = v.replace(/["']/g, '') === ora.replace(/["']/g, '');
+        sel.append(o);
+      });
+      sel.onchange = () => { scrivi(k, sel.value); dopo(k); };
+      riga.append(sel);
+    }
+    box.append(riga);
+  });
+}
+
+function leggiPosto(k) {
+  const v = (leggi(k) || 'sx1').replace(/['"]/g, '');
+  return [v.slice(0, 2), parseInt(v.slice(2), 10) || 1];
+}
+
+/* Rimette i settori dove li hai messi. Si ricostruisce da zero ogni volta:
+   quattro blocchi non sono un carico, e cosi' non ci sono stati intermedi da
+   tenere allineati. */
+function componi() {
+  const modello = document.getElementById('blocchi');
+  const stanza = document.getElementById('stanza');
+  const sx = stanza.querySelector('[data-lato="sx"]');
+  const dx = stanza.querySelector('[data-lato="dx"]');
+  sx.innerHTML = ''; dx.innerHTML = '';
+
+  const due = (leggi('disposizione') || 'una').replace(/['"]/g, '') === 'due';
+  R.dataset.disposizione = due ? 'due' : 'una';
+
+  const blocchi = ['numero', 'rosa', 'listone', 'scheda'].map(id => {
+    const [lato, ordine] = leggiPosto('posto-' + id);
+    return {id, lato: due ? lato : 'sx', ordine};
+  });
+  // In una colonna sola l'ordine e' quello complessivo, sinistra prima.
+  blocchi.sort((a, b) => {
+    if (!due) {
+      const p = l => (leggiPosto('posto-' + l.id)[0] === 'sx' ? 0 : 10);
+      return (p(a) + a.ordine) - (p(b) + b.ordine);
+    }
+    return a.ordine - b.ordine;
+  });
+
+  blocchi.forEach(b => {
+    const nodo = modello.content.querySelector('[data-blocco="' + b.id + '"]').cloneNode(true);
+    (b.lato === 'dx' ? dx : sx).append(nodo);
+  });
+  agganciaPezzi();
+  segnaScelto();
+}
+
+function dopo(k) {
+  if (k.startsWith('posto-') || k === 'disposizione') componi();
+  if (k === 'righe-colore') ridisegnaRighe();
+  if (k === 'sfondo-tipo') applicaSfondo();
+  if (k === 'vetro') applicaVetro();
+  salva();
+}
+
+function applicaVetro() {
+  R.dataset.vetro = parseFloat(leggi('vetro')) > 0 ? 'si' : 'no';
+}
+
+/* Il vetro costa: ogni superficie sfocata va ridisegnata a ogni scorrimento, e
+   su un telefono di qualche anno fa si sente. Qui sono quattro superfici, il
+   massimo ragionevole - piu' in la' l'elenco dei giocatori inizia a scattare. */
+
+/* Il selettore di colore del telefono accetta solo #rrggbb. */
+function esadecimale(col) {
+  col = (col || '').trim();
+  if (/^#[0-9a-f]{6}$/i.test(col)) return col;
+  if (/^#[0-9a-f]{3}$/i.test(col))
+    return '#' + col.slice(1).split('').map(x => x + x).join('');
+  const m = col.match(/rgba?\((\d+)[,\s]+(\d+)[,\s]+(\d+)/i);
+  if (m) return '#' + [1,2,3].map(i => (+m[i]).toString(16).padStart(2, '0')).join('');
+  return '#888888';
+}
+
+/* ------------------------------------------------- la riga fra le due metà */
+(() => {
+  const presa = $('#presa');
+  let da = null, alto0 = 0;
+  presa.addEventListener('pointerdown', e => {
+    da = e.clientY;
+    alto0 = window.innerHeight * parseFloat(getComputedStyle(R).getPropertyValue('--alto')) / 100;
+    presa.setPointerCapture(e.pointerId);
+  });
+  presa.addEventListener('pointermove', e => {
+    if (da === null) return;
+    const px = Math.min(window.innerHeight * 0.78,
+               Math.max(window.innerHeight * 0.24, alto0 + (e.clientY - da)));
+    scrivi('alto', (px / window.innerHeight * 100).toFixed(1) + 'vh');
+  });
+  ['pointerup', 'pointercancel'].forEach(ev =>
+    presa.addEventListener(ev, () => { if (da !== null) { da = null; salva(); } }));
+})();
+
+/* ---------------------------------------------------------------- memoria */
+function salva() {
+  const o = {alto: getComputedStyle(R).getPropertyValue('--alto').trim()};
+  Object.keys(C).forEach(k => o[k] = leggi(k));
+  try { localStorage.setItem(CHIAVE, JSON.stringify(o)); } catch (e) {}
+}
+function ripristina() {
+  try {
+    const o = JSON.parse(localStorage.getItem(CHIAVE) || 'null');
+    if (o) Object.entries(o).forEach(([k, v]) => v && scrivi(k, v));
+  } catch (e) {}
+}
+
+/* ---------------------------------------------------------------- consegna */
+function configurazione() {
+  const r = ['# Aspetto di +3 — fatto nello Studio', ''];
+  const gia = new Set();
+  PEZZI.forEach(p => {
+    const suoi = p.c.filter(k => !gia.has(k));
+    if (!suoi.length) return;
+    r.push('## ' + p.nome);
+    suoi.forEach(k => { gia.add(k); r.push('  --' + k + ': ' + leggi(k) + '   # ' + C[k].n); });
+    r.push('');
+  });
+  return r.join('\n');
+}
+
+$('#consegna').onclick = async () => {
+  const testo = configurazione();
+  let ok = false;
+  try { await navigator.clipboard.writeText(testo); ok = true; } catch (e) {}
+  $('#fTitolo').textContent = ok ? 'Copiato' : 'Copia a mano';
+  $('#fNota').textContent = ok
+    ? 'È negli appunti: incollalo in chat e da questo esce l\'aspetto vero dell\'applicazione.'
+    : 'Tieni premuto sul testo qui sotto, seleziona tutto e copia.';
+  $('#fTesto').value = testo;
+  $('#finestra').showModal();
+};
+$('#rimetti').onclick = () => {
+  Object.entries(PARTENZA).forEach(([k, v]) => scrivi(k, v));
+  ridisegnaRighe(); applicaSfondo(); disegnaComandi(); salva();
+};
+$('#fChiudi').onclick = () => $('#finestra').close();
+
+/* Quanto e' largo l'apparecchio simulato. Non fa parte dell'aspetto: e' una
+   comodita' del banco di lavoro, e infatti non finisce nella configurazione. */
+document.querySelectorAll('#apparecchio button').forEach(b => {
+  b.onclick = () => {
+    document.querySelectorAll('#apparecchio button').forEach(x => x.classList.remove('on'));
+    b.classList.add('on');
+    scrivi('largo-telaio', b.dataset.largo);
+    try { localStorage.setItem(CHIAVE + ':largo', b.dataset.largo); } catch (e) {}
+  };
+});
+(() => {
+  let largo = null;
+  try { largo = localStorage.getItem(CHIAVE + ':largo'); } catch (e) {}
+  if (!largo) return;
+  scrivi('largo-telaio', largo);
+  document.querySelectorAll('#apparecchio button').forEach(b =>
+    b.classList.toggle('on', b.dataset.largo === largo));
+})();
+
+/* I settori si ricostruiscono a ogni spostamento, quindi gli ascoltatori
+   vanno riagganciati: altrimenti dopo il primo spostamento toccare un pezzo
+   nell'anteprima non fa piu' niente. */
+function agganciaPezzi() {
+  document.querySelectorAll('[data-pezzo]').forEach(el => {
+    if (el.dataset.agganciato) return;
+    el.dataset.agganciato = '1';
+    el.addEventListener('click', e => { e.stopPropagation(); scegli(el.dataset.pezzo, false); });
+  });
+}
+
+function segnaScelto() {
+  document.querySelectorAll('.scelto').forEach(x => x.classList.remove('scelto'));
+  const el = document.querySelector('[data-pezzo="' + scelto + '"]');
+  if (el) el.classList.add('scelto');
+}
+
+agganciaPezzi();
+
+const misura = () => {
+  const q = document.getElementById('quanto');
+  if (q) q.textContent = Math.round(window.innerWidth) + ' punti';
+};
+window.addEventListener('resize', misura);
+misura();
+
+ripristina();
+ridisegnaRighe();
+applicaSfondo();
+applicaVetro();
+componi();
+scegli('sfondo', false);
+</script>
+</body>
+</html>
