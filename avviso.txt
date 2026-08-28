@@ -16,6 +16,6 @@ Sono nelle rose di Serie A ma non nelle tue quotazioni:
 • <b>C. Favasuli</b> (Napoli, D) — 41 pres, 2 gol
 • <b>F. Terracciano</b> (Milan, D) — 36 pres, 2 gol
 • <b>E. Del Prato</b> (Parma, D) — 35 pres, 2 gol
-...e altri 18.
+...e altri 19.
 
 Scarica le quotazioni aggiornate da Fantacalcio e caricale in <code>fanta-master-ai</code>: il motore le usa dalla notte dopo.

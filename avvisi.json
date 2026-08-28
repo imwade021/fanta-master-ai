@@ -120,12 +120,12 @@
   "lega": "Serie A"
  },
  {
-  "nome": "L. Cherubini",
-  "squadra": "Roma",
+  "nome": "K. N’Dri",
+  "squadra": "Lecce",
   "ruolo": "A",
-  "presenze": 35,
+  "presenze": 27,
   "gol": 2,
-  "lega": "Serie B"
+  "lega": "Serie A"
  },
  {
   "nome": "K. Baldé",
@@ -136,18 +136,18 @@
   "lega": "Serie B"
  },
  {
+  "nome": "Rodrigo Mora",
+  "squadra": "Roma",
+  "ruolo": "A",
+  "presenze": 28,
+  "gol": 1,
+  "lega": "Primeira Liga"
+ },
+ {
   "nome": "C. Odenthal",
   "squadra": "Sassuolo",
   "ruolo": "D",
   "presenze": 18,
-  "gol": 1,
-  "lega": "Serie B"
- },
- {
-  "nome": "J. Rouhi",
-  "squadra": "Juventus",
-  "ruolo": "D",
-  "presenze": 15,
   "gol": 1,
   "lega": "Serie B"
  },
@@ -158,6 +158,14 @@
   "presenze": 15,
   "gol": 1,
   "lega": "Serie B"
+ },
+ {
+  "nome": "G. Vicario",
+  "squadra": "Juventus",
+  "ruolo": "P",
+  "presenze": 31,
+  "gol": 0,
+  "lega": "Premier League"
  },
  {
   "nome": "N. Obaretin",

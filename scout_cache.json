@@ -1,72 +1,12 @@
 {
  "infortuni": {
-  "118956": {
-   "dal": "2026-08-25",
-   "motivo": "Inactive"
-  },
-  "123": {
-   "dal": "2026-08-25",
-   "motivo": "Knee Injury"
-  },
-  "136087": {
-   "dal": "2026-08-24",
-   "motivo": "Knee Injury"
-  },
-  "137976": {
-   "dal": "2026-08-25",
-   "motivo": "Muscle Injury"
-  },
-  "138777": {
-   "dal": "2026-08-25",
-   "motivo": "Hip Injury"
-  },
-  "1457": {
-   "dal": "2026-08-25",
-   "motivo": "Suspended"
-  },
-  "162561": {
-   "dal": "2026-08-25",
-   "motivo": "Thigh Injury"
-  },
-  "162907": {
-   "dal": "2026-08-25",
-   "motivo": "Knee Injury"
-  },
-  "1775": {
-   "dal": "2026-08-24",
-   "motivo": "Inactive"
-  },
-  "1841": {
-   "dal": "2026-08-25",
-   "motivo": "Ankle Injury"
-  },
-  "1852": {
-   "dal": "2026-08-24",
-   "motivo": "Muscle Injury"
-  },
-  "18797": {
-   "dal": "2026-08-25",
-   "motivo": "Red Card"
-  },
   "19209": {
    "dal": "2026-08-25",
    "motivo": "Inactive"
   },
-  "19235": {
-   "dal": "2026-08-25",
-   "motivo": "Inactive"
-  },
-  "199837": {
-   "dal": "2026-08-25",
-   "motivo": "Knee Injury"
-  },
   "212": {
    "dal": "2026-08-25",
    "motivo": "Hernia"
-  },
-  "215": {
-   "dal": "2026-08-25",
-   "motivo": "Injury"
   },
   "22236": {
    "dal": "2026-08-25",
@@ -80,193 +20,9 @@
    "dal": "2026-08-25",
    "motivo": "Hip Injury"
   },
-  "268341": {
-   "dal": "2026-08-25",
-   "motivo": "Injury"
-  },
-  "269": {
-   "dal": "2026-08-25",
-   "motivo": "Inactive"
-  },
-  "281495": {
-   "dal": "2026-08-25",
-   "motivo": "Ankle Injury"
-  },
-  "289304": {
-   "dal": "2026-08-25",
-   "motivo": "Inactive"
-  },
-  "291780": {
-   "dal": "2026-08-25",
-   "motivo": "Muscle Injury"
-  },
-  "30436": {
-   "dal": "2026-08-25",
-   "motivo": "Knee Injury"
-  },
-  "30532": {
-   "dal": "2026-08-25",
-   "motivo": "Injury"
-  },
-  "30537": {
-   "dal": "2026-08-25",
-   "motivo": "Ankle Injury"
-  },
-  "30603": {
-   "dal": "2026-08-25",
-   "motivo": "Suspended"
-  },
-  "30670": {
-   "dal": "2026-08-25",
-   "motivo": "Transfer negotiations"
-  },
-  "31057": {
-   "dal": "2026-08-25",
-   "motivo": "Muscle Injury"
-  },
-  "31094": {
-   "dal": "2026-08-25",
-   "motivo": "Injury"
-  },
-  "31099": {
-   "dal": "2026-08-24",
-   "motivo": "Muscle Injury"
-  },
-  "31191": {
-   "dal": "2026-08-25",
-   "motivo": "Yellow Cards"
-  },
-  "31226": {
-   "dal": "2026-08-25",
-   "motivo": "Knee Injury"
-  },
-  "31390": {
-   "dal": "2026-08-25",
-   "motivo": "Knee Injury"
-  },
-  "31507": {
-   "dal": "2026-08-24",
-   "motivo": "Back Injury"
-  },
-  "31532": {
-   "dal": "2026-08-25",
-   "motivo": "Inactive"
-  },
-  "328046": {
-   "dal": "2026-08-25",
-   "motivo": "Broken Leg"
-  },
-  "335071": {
-   "dal": "2026-08-25",
-   "motivo": "Thigh Injury"
-  },
-  "342055": {
-   "dal": "2026-08-25",
-   "motivo": "Knee Injury"
-  },
-  "354533": {
-   "dal": "2026-08-25",
-   "motivo": "Achilles Tendon Injury"
-  },
-  "383026": {
-   "dal": "2026-08-25",
-   "motivo": "Knee Injury"
-  },
-  "388547": {
-   "dal": "2026-08-25",
-   "motivo": "Knee Injury"
-  },
-  "394438": {
-   "dal": "2026-08-25",
-   "motivo": "Injury"
-  },
-  "404523": {
-   "dal": "2026-08-25",
-   "motivo": "Inactive"
-  },
-  "40582": {
-   "dal": "2026-08-25",
-   "motivo": "Muscle Injury"
-  },
-  "40594": {
-   "dal": "2026-08-25",
-   "motivo": "Inactive"
-  },
-  "408635": {
-   "dal": "2026-08-25",
-   "motivo": "Muscle Injury"
-  },
-  "41371": {
-   "dal": "2026-08-25",
-   "motivo": "Knee Injury"
-  },
   "421807": {
    "dal": "2026-08-25",
    "motivo": "Health problems"
-  },
-  "436238": {
-   "dal": "2026-08-25",
-   "motivo": "Injury"
-  },
-  "451504": {
-   "dal": "2026-08-25",
-   "motivo": "Muscle Injury"
-  },
-  "452033": {
-   "dal": "2026-08-25",
-   "motivo": "Knee Injury"
-  },
-  "453906": {
-   "dal": "2026-08-25",
-   "motivo": "Muscle Injury"
-  },
-  "48372": {
-   "dal": "2026-08-25",
-   "motivo": "Red Card"
-  },
-  "499380": {
-   "dal": "2026-08-25",
-   "motivo": "Yellow Cards"
-  },
-  "56266": {
-   "dal": "2026-08-25",
-   "motivo": "Shoulder Injury"
-  },
-  "56293": {
-   "dal": "2026-08-25",
-   "motivo": "Knee Injury"
-  },
-  "56851": {
-   "dal": "2026-08-25",
-   "motivo": "Inactive"
-  },
-  "584116": {
-   "dal": "2026-08-25",
-   "motivo": "Injury"
-  },
-  "59513": {
-   "dal": "2026-08-25",
-   "motivo": "Knee Injury"
-  },
-  "626686": {
-   "dal": "2026-08-24",
-   "motivo": "Knee Injury"
-  },
-  "63934": {
-   "dal": "2026-08-24",
-   "motivo": "Knee Injury"
-  },
-  "782": {
-   "dal": "2026-08-24",
-   "motivo": "Thigh Injury"
-  },
-  "8481": {
-   "dal": "2026-08-25",
-   "motivo": "Foot Injury"
-  },
-  "881": {
-   "dal": "2026-08-25",
-   "motivo": "Muscle Injury"
   },
   "94562": {
    "dal": "2026-08-25",
@@ -3772,6 +3528,7 @@
    "squadre_stagione": 1
   },
   "2025:c garofalo": "vuoto",
+  "2025:c lupo": "vuoto",
   "2025:c odenthal": {
    "assist": 0,
    "campionati": [
@@ -5020,9 +4777,24 @@
   },
   "2025:g astaldi": "vuoto",
   "2025:g bertolini": "vuoto",
+  "2025:g kulla": "vuoto",
   "2025:g puzzoli": "vuoto",
   "2025:g stojak": "vuoto",
   "2025:g vezzosi": "vuoto",
+  "2025:g vicario": {
+   "assist": 0,
+   "campionati": [
+    "FA Cup",
+    "Premier League"
+   ],
+   "da_titolare": 32,
+   "gol": 0,
+   "lega": "Premier League",
+   "minuti": 2880,
+   "presenze": 31,
+   "presenze_totali": 32,
+   "squadre_stagione": 1
+  },
   "2025:gabriele bracaglia": {
    "assist": 1,
    "campionati": [
@@ -6170,6 +5942,20 @@
    "minuti": 186,
    "presenze": 4,
    "presenze_totali": 5,
+   "squadre_stagione": 1
+  },
+  "2025:k ndri": {
+   "assist": 0,
+   "campionati": [
+    "Coppa Italia",
+    "Serie A"
+   ],
+   "da_titolare": 2,
+   "gol": 2,
+   "lega": "Serie A",
+   "minuti": 567,
+   "presenze": 27,
+   "presenze_totali": 28,
    "squadre_stagione": 1
   },
   "2025:kaiki bruno da silva": "vuoto",
@@ -8796,6 +8582,21 @@
    "presenze_totali": 27,
    "squadre_stagione": 2
   },
+  "2025:rodrigo mora": {
+   "assist": 1,
+   "campionati": [
+    "Primeira Liga",
+    "Taça da Liga",
+    "Taça de Portugal"
+   ],
+   "da_titolare": 20,
+   "gol": 1,
+   "lega": "Primeira Liga",
+   "minuti": 1190,
+   "presenze": 28,
+   "presenze_totali": 35,
+   "squadre_stagione": 1
+  },
   "2025:rolando mandragora": {
    "assist": 3,
    "campionati": [
@@ -9261,6 +9062,20 @@
    "minuti": 3224,
    "presenze": 34,
    "presenze_totali": 38,
+   "squadre_stagione": 1
+  },
+  "2025:t de martis": {
+   "assist": 0,
+   "campionati": [
+    "Copa Argentina",
+    "Liga Profesional Argentina"
+   ],
+   "da_titolare": 1,
+   "gol": 0,
+   "lega": "Copa Argentina",
+   "minuti": 28,
+   "presenze": 4,
+   "presenze_totali": 5,
    "squadre_stagione": 1
   },
   "2025:t macchioni": {
