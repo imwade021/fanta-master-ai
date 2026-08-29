@@ -48,6 +48,14 @@
   "lega": "Serie A"
  },
  {
+  "nome": "N. González",
+  "squadra": "Juventus",
+  "ruolo": "A",
+  "presenze": 24,
+  "gol": 5,
+  "lega": "La Liga"
+ },
+ {
   "nome": "Diego Moreira",
   "squadra": "Milan",
   "ruolo": "A",
@@ -136,9 +144,17 @@
   "lega": "Serie B"
  },
  {
+  "nome": "C. Jones",
+  "squadra": "Inter",
+  "ruolo": "C",
+  "presenze": 34,
+  "gol": 1,
+  "lega": "Premier League"
+ },
+ {
   "nome": "Rodrigo Mora",
   "squadra": "Roma",
-  "ruolo": "A",
+  "ruolo": "C",
   "presenze": 28,
   "gol": 1,
   "lega": "Primeira Liga"
@@ -158,6 +174,14 @@
   "presenze": 15,
   "gol": 1,
   "lega": "Serie B"
+ },
+ {
+  "nome": "K. Grabara",
+  "squadra": "Juventus",
+  "ruolo": "P",
+  "presenze": 36,
+  "gol": 0,
+  "lega": "Bundesliga"
  },
  {
   "nome": "G. Vicario",
@@ -216,14 +240,6 @@
   "lega": "Ligue 2"
  },
  {
-  "nome": "A. Dembélé",
-  "squadra": "Torino",
-  "ruolo": "D",
-  "presenze": 14,
-  "gol": 0,
-  "lega": "Serie B"
- },
- {
   "nome": "N. Galazzi",
   "squadra": "Monza",
   "ruolo": "C",
@@ -240,28 +256,12 @@
   "lega": "Serie A"
  },
  {
-  "nome": "N. Pierini",
-  "squadra": "Sassuolo",
-  "ruolo": "A",
-  "presenze": 11,
-  "gol": 0,
-  "lega": "Serie A"
- },
- {
   "nome": "S. Wiafe",
   "squadra": "Genoa",
   "ruolo": "C",
   "presenze": 9,
   "gol": 0,
   "lega": "Serie B"
- },
- {
-  "nome": "F. Israel",
-  "squadra": "Torino",
-  "ruolo": "P",
-  "presenze": 9,
-  "gol": 0,
-  "lega": "Serie A"
  },
  {
   "nome": "N. Cavuoti",

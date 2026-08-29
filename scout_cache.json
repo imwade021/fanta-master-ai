@@ -1,32 +1,112 @@
 {
  "infortuni": {
-  "19209": {
-   "dal": "2026-08-25",
-   "motivo": "Inactive"
+  "123": {
+   "dal": "2026-08-29",
+   "motivo": "Knee Injury"
   },
-  "212": {
-   "dal": "2026-08-25",
-   "motivo": "Hernia"
+  "136087": {
+   "dal": "2026-08-29",
+   "motivo": "Knee Injury"
   },
-  "22236": {
-   "dal": "2026-08-25",
-   "motivo": "Muscle Injury"
-  },
-  "22254": {
-   "dal": "2026-08-25",
-   "motivo": "Inactive"
-  },
-  "26095": {
-   "dal": "2026-08-25",
+  "138777": {
+   "dal": "2026-08-29",
    "motivo": "Hip Injury"
   },
-  "421807": {
-   "dal": "2026-08-25",
-   "motivo": "Health problems"
+  "162907": {
+   "dal": "2026-08-29",
+   "motivo": "Knee Injury"
   },
-  "94562": {
-   "dal": "2026-08-25",
-   "motivo": "Ankle Injury"
+  "18797": {
+   "dal": "2026-08-29",
+   "motivo": "Red Card"
+  },
+  "268341": {
+   "dal": "2026-08-29",
+   "motivo": "Injury"
+  },
+  "270507": {
+   "dal": "2026-08-29",
+   "motivo": "Rest"
+  },
+  "291780": {
+   "dal": "2026-08-29",
+   "motivo": "Muscle Injury"
+  },
+  "30436": {
+   "dal": "2026-08-29",
+   "motivo": "Knee Injury"
+  },
+  "31507": {
+   "dal": "2026-08-29",
+   "motivo": "Back Injury"
+  },
+  "31532": {
+   "dal": "2026-08-29",
+   "motivo": "Inactive"
+  },
+  "328046": {
+   "dal": "2026-08-29",
+   "motivo": "Broken Leg"
+  },
+  "334915": {
+   "dal": "2026-08-29",
+   "motivo": "Calf Injury"
+  },
+  "339883": {
+   "dal": "2026-08-29",
+   "motivo": "Foot Injury"
+  },
+  "342055": {
+   "dal": "2026-08-29",
+   "motivo": "Knee Injury"
+  },
+  "40582": {
+   "dal": "2026-08-29",
+   "motivo": "Muscle Injury"
+  },
+  "41371": {
+   "dal": "2026-08-29",
+   "motivo": "Knee Injury"
+  },
+  "422156": {
+   "dal": "2026-08-29",
+   "motivo": "Muscle Injury"
+  },
+  "434410": {
+   "dal": "2026-08-29",
+   "motivo": "Injury"
+  },
+  "451504": {
+   "dal": "2026-08-29",
+   "motivo": "Muscle Injury"
+  },
+  "56266": {
+   "dal": "2026-08-29",
+   "motivo": "Shoulder Injury"
+  },
+  "56293": {
+   "dal": "2026-08-29",
+   "motivo": "Knee Injury"
+  },
+  "59513": {
+   "dal": "2026-08-29",
+   "motivo": "Knee Injury"
+  },
+  "786": {
+   "dal": "2026-08-29",
+   "motivo": "Thigh Injury"
+  },
+  "8481": {
+   "dal": "2026-08-29",
+   "motivo": "Foot Injury"
+  },
+  "877": {
+   "dal": "2026-08-29",
+   "motivo": "Transfer negotiations"
+  },
+  "881": {
+   "dal": "2026-08-29",
+   "motivo": "Groin Injury"
   }
  },
  "infortuni_stagione_2025": {
@@ -2352,6 +2432,7 @@
    "presenze_totali": 18,
    "squadre_stagione": 2
   },
+  "2025:a durmisi": "vuoto",
   "2025:a furlanetto": {
    "assist": 0,
    "campionati": [
@@ -3528,6 +3609,22 @@
    "squadre_stagione": 1
   },
   "2025:c garofalo": "vuoto",
+  "2025:c jones": {
+   "assist": 2,
+   "campionati": [
+    "Community Shield",
+    "FA Cup",
+    "League Cup",
+    "Premier League"
+   ],
+   "da_titolare": 24,
+   "gol": 1,
+   "lega": "Premier League",
+   "minuti": 2448,
+   "presenze": 34,
+   "presenze_totali": 40,
+   "squadre_stagione": 1
+  },
   "2025:c lupo": "vuoto",
   "2025:c odenthal": {
    "assist": 0,
@@ -3762,6 +3859,7 @@
    "presenze_totali": 3,
    "squadre_stagione": 1
   },
+  "2025:d okolo": "vuoto",
   "2025:d resetar": "vuoto",
   "2025:daniel boloca": "vuoto",
   "2025:daniel maldini": {
@@ -5428,6 +5526,7 @@
    "squadre_stagione": 1
   },
   "2025:ivan smolcic": "vuoto",
+  "2025:j iddrissou": "vuoto",
   "2025:j idele": "vuoto",
   "2025:j lindstrom": {
    "assist": 0,
@@ -5944,6 +6043,19 @@
    "presenze_totali": 5,
    "squadre_stagione": 1
   },
+  "2025:k grabara": {
+   "assist": 0,
+   "campionati": [
+    "Bundesliga"
+   ],
+   "da_titolare": 36,
+   "gol": 0,
+   "lega": "Bundesliga",
+   "minuti": 3270,
+   "presenze": 36,
+   "presenze_totali": 36,
+   "squadre_stagione": 1
+  },
   "2025:k ndri": {
    "assist": 0,
    "campionati": [
@@ -6243,6 +6355,7 @@
    "presenze_totali": 31,
    "squadre_stagione": 1
   },
+  "2025:l bovio": "vuoto",
   "2025:l bovo": {
    "assist": 0,
    "campionati": [
@@ -6547,6 +6660,19 @@
    "presenze_totali": 14,
    "squadre_stagione": 2
   },
+  "2025:louis reynaud": {
+   "assist": 0,
+   "campionati": [
+    "Coupe de France"
+   ],
+   "da_titolare": 0,
+   "gol": 0,
+   "lega": "Coupe de France",
+   "minuti": 19,
+   "presenze": 1,
+   "presenze_totali": 1,
+   "squadre_stagione": 1
+  },
   "2025:luca lezzerini": {
    "assist": 0,
    "campionati": [
@@ -6746,6 +6872,7 @@
    "presenze_totali": 1,
    "squadre_stagione": 1
   },
+  "2025:m marello": "vuoto",
   "2025:m mosconi": {
    "assist": 0,
    "campionati": [
@@ -7521,6 +7648,21 @@
    "presenze": 11,
    "presenze_totali": 12,
    "squadre_stagione": 1
+  },
+  "2025:n gonzalez": {
+   "assist": 0,
+   "campionati": [
+    "Copa del Rey",
+    "La Liga",
+    "Serie A"
+   ],
+   "da_titolare": 18,
+   "gol": 5,
+   "lega": "La Liga",
+   "minuti": 1550,
+   "presenze": 24,
+   "presenze_totali": 28,
+   "squadre_stagione": 2
   },
   "2025:n grandu": "vuoto",
   "2025:n kovac": "vuoto",
