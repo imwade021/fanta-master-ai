@@ -1,112 +1,84 @@
 {
  "infortuni": {
-  "123": {
-   "dal": "2026-08-29",
-   "motivo": "Knee Injury"
-  },
-  "136087": {
-   "dal": "2026-08-29",
-   "motivo": "Knee Injury"
-  },
-  "138777": {
-   "dal": "2026-08-29",
-   "motivo": "Hip Injury"
-  },
-  "162907": {
-   "dal": "2026-08-29",
-   "motivo": "Knee Injury"
-  },
-  "18797": {
-   "dal": "2026-08-29",
-   "motivo": "Red Card"
-  },
-  "268341": {
-   "dal": "2026-08-29",
-   "motivo": "Injury"
-  },
-  "270507": {
-   "dal": "2026-08-29",
-   "motivo": "Rest"
-  },
-  "291780": {
-   "dal": "2026-08-29",
+  "144740": {
+   "dal": "2026-08-30",
    "motivo": "Muscle Injury"
   },
-  "30436": {
-   "dal": "2026-08-29",
-   "motivo": "Knee Injury"
+  "14701": {
+   "dal": "2026-08-30",
+   "motivo": "Coach's decision"
   },
-  "31507": {
-   "dal": "2026-08-29",
-   "motivo": "Back Injury"
-  },
-  "31532": {
-   "dal": "2026-08-29",
-   "motivo": "Inactive"
-  },
-  "328046": {
-   "dal": "2026-08-29",
-   "motivo": "Broken Leg"
-  },
-  "334915": {
-   "dal": "2026-08-29",
-   "motivo": "Calf Injury"
-  },
-  "339883": {
-   "dal": "2026-08-29",
-   "motivo": "Foot Injury"
-  },
-  "342055": {
-   "dal": "2026-08-29",
-   "motivo": "Knee Injury"
-  },
-  "40582": {
-   "dal": "2026-08-29",
-   "motivo": "Muscle Injury"
-  },
-  "41371": {
-   "dal": "2026-08-29",
-   "motivo": "Knee Injury"
-  },
-  "422156": {
-   "dal": "2026-08-29",
-   "motivo": "Muscle Injury"
-  },
-  "434410": {
-   "dal": "2026-08-29",
-   "motivo": "Injury"
-  },
-  "451504": {
-   "dal": "2026-08-29",
-   "motivo": "Muscle Injury"
-  },
-  "56266": {
-   "dal": "2026-08-29",
-   "motivo": "Shoulder Injury"
-  },
-  "56293": {
-   "dal": "2026-08-29",
-   "motivo": "Knee Injury"
-  },
-  "59513": {
-   "dal": "2026-08-29",
-   "motivo": "Knee Injury"
-  },
-  "786": {
-   "dal": "2026-08-29",
+  "162561": {
+   "dal": "2026-08-30",
    "motivo": "Thigh Injury"
   },
-  "8481": {
-   "dal": "2026-08-29",
-   "motivo": "Foot Injury"
+  "1775": {
+   "dal": "2026-08-30",
+   "motivo": "Inactive"
   },
-  "877": {
-   "dal": "2026-08-29",
+  "1841": {
+   "dal": "2026-08-30",
+   "motivo": "Ankle Injury"
+  },
+  "1844": {
+   "dal": "2026-08-30",
+   "motivo": "Muscle Injury"
+  },
+  "1852": {
+   "dal": "2026-08-30",
+   "motivo": "Muscle Injury"
+  },
+  "19235": {
+   "dal": "2026-08-30",
+   "motivo": "Inactive"
+  },
+  "215": {
+   "dal": "2026-08-30",
+   "motivo": "Injury"
+  },
+  "288112": {
+   "dal": "2026-08-30",
    "motivo": "Transfer negotiations"
   },
-  "881": {
-   "dal": "2026-08-29",
-   "motivo": "Groin Injury"
+  "30554": {
+   "dal": "2026-08-30",
+   "motivo": "Injury"
+  },
+  "31057": {
+   "dal": "2026-08-30",
+   "motivo": "Muscle Injury"
+  },
+  "31226": {
+   "dal": "2026-08-30",
+   "motivo": "Knee Injury"
+  },
+  "31390": {
+   "dal": "2026-08-30",
+   "motivo": "Knee Injury"
+  },
+  "354533": {
+   "dal": "2026-08-30",
+   "motivo": "Achilles Tendon Injury"
+  },
+  "383026": {
+   "dal": "2026-08-30",
+   "motivo": "Knee Injury"
+  },
+  "388547": {
+   "dal": "2026-08-30",
+   "motivo": "Knee Injury"
+  },
+  "452033": {
+   "dal": "2026-08-30",
+   "motivo": "Knee Injury"
+  },
+  "584116": {
+   "dal": "2026-08-30",
+   "motivo": "Injury"
+  },
+  "63934": {
+   "dal": "2026-08-30",
+   "motivo": "Knee Injury"
   }
  },
  "infortuni_stagione_2025": {
@@ -3407,6 +3379,21 @@
    "presenze_totali": 17,
    "squadre_stagione": 1
   },
+  "2025:b badiashile": {
+   "assist": 0,
+   "campionati": [
+    "FA Cup",
+    "League Cup",
+    "Premier League"
+   ],
+   "da_titolare": 9,
+   "gol": 0,
+   "lega": "Premier League",
+   "minuti": 808,
+   "presenze": 8,
+   "presenze_totali": 12,
+   "squadre_stagione": 1
+  },
   "2025:b bogdanovic": "vuoto",
   "2025:b galassi": "vuoto",
   "2025:bartol franjic": {
@@ -4214,6 +4201,21 @@
    "minuti": 3178,
    "presenze": 35,
    "presenze_totali": 38,
+   "squadre_stagione": 1
+  },
+  "2025:e elmas": {
+   "assist": 3,
+   "campionati": [
+    "Coppa Italia",
+    "Serie A",
+    "Super Cup"
+   ],
+   "da_titolare": 24,
+   "gol": 1,
+   "lega": "Serie A",
+   "minuti": 2113,
+   "presenze": 33,
+   "presenze_totali": 37,
    "squadre_stagione": 1
   },
   "2025:e kospo": {

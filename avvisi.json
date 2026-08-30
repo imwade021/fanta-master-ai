@@ -8,14 +8,6 @@
   "lega": "Serie B"
  },
  {
-  "nome": "P. Nuamah",
-  "squadra": "Sassuolo",
-  "ruolo": "A",
-  "presenze": 28,
-  "gol": 13,
-  "lega": "Serie B"
- },
- {
   "nome": "A. Kostić",
   "squadra": "Milan",
   "ruolo": "A",
@@ -152,6 +144,14 @@
   "lega": "Premier League"
  },
  {
+  "nome": "E. Elmas",
+  "squadra": "Atalanta",
+  "ruolo": "C",
+  "presenze": 33,
+  "gol": 1,
+  "lega": "Serie A"
+ },
+ {
   "nome": "Rodrigo Mora",
   "squadra": "Roma",
   "ruolo": "C",
@@ -262,6 +262,14 @@
   "presenze": 9,
   "gol": 0,
   "lega": "Serie B"
+ },
+ {
+  "nome": "B. Badiashile",
+  "squadra": "Napoli",
+  "ruolo": "D",
+  "presenze": 8,
+  "gol": 0,
+  "lega": "Premier League"
  },
  {
   "nome": "N. Cavuoti",

@@ -2,7 +2,6 @@
 Sono nelle rose di Serie A ma non nelle tue quotazioni:
 
 • <b>G. Artistico</b> (Lazio, A) — 31 pres, 13 gol
-• <b>P. Nuamah</b> (Sassuolo, A) — 28 pres, 13 gol
 • <b>A. Kostić</b> (Milan, A) — 35 pres, 11 gol
 • <b>A. Cissè</b> (Milan, A) — 22 pres, 6 gol
 • <b>R. Ciervo</b> (Sassuolo, A) — 37 pres, 5 gol
@@ -16,6 +15,7 @@ Sono nelle rose di Serie A ma non nelle tue quotazioni:
 • <b>M&apos;Bala Nzola</b> (Fiorentina, A) — 16 pres, 3 gol
 • <b>C. Favasuli</b> (Napoli, D) — 41 pres, 2 gol
 • <b>F. Terracciano</b> (Milan, D) — 36 pres, 2 gol
-...e altri 19.
+• <b>E. Del Prato</b> (Parma, D) — 35 pres, 2 gol
+...e altri 20.
 
 Scarica le quotazioni aggiornate da Fantacalcio e caricale in <code>fanta-master-ai</code>: il motore le usa dalla notte dopo.
