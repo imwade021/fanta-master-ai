@@ -1,84 +1,52 @@
 {
  "infortuni": {
-  "144740": {
-   "dal": "2026-08-30",
-   "motivo": "Muscle Injury"
-  },
-  "14701": {
-   "dal": "2026-08-30",
-   "motivo": "Coach's decision"
-  },
-  "162561": {
-   "dal": "2026-08-30",
-   "motivo": "Thigh Injury"
-  },
-  "1775": {
-   "dal": "2026-08-30",
+  "118956": {
+   "dal": "2026-08-31",
    "motivo": "Inactive"
   },
-  "1841": {
-   "dal": "2026-08-30",
+  "137976": {
+   "dal": "2026-08-31",
+   "motivo": "Muscle Injury"
+  },
+  "162452": {
+   "dal": "2026-08-31",
+   "motivo": "Muscle Injury"
+  },
+  "199837": {
+   "dal": "2026-08-31",
+   "motivo": "Knee Injury"
+  },
+  "281495": {
+   "dal": "2026-08-31",
    "motivo": "Ankle Injury"
   },
-  "1844": {
-   "dal": "2026-08-30",
+  "31099": {
+   "dal": "2026-08-31",
    "motivo": "Muscle Injury"
   },
-  "1852": {
-   "dal": "2026-08-30",
+  "31543": {
+   "dal": "2026-08-31",
+   "motivo": "Injury"
+  },
+  "319919": {
+   "dal": "2026-08-31",
+   "motivo": "Thigh Injury"
+  },
+  "353609": {
+   "dal": "2026-08-31",
+   "motivo": "Knee Injury"
+  },
+  "453906": {
+   "dal": "2026-08-31",
    "motivo": "Muscle Injury"
   },
-  "19235": {
-   "dal": "2026-08-30",
-   "motivo": "Inactive"
-  },
-  "215": {
-   "dal": "2026-08-30",
-   "motivo": "Injury"
-  },
-  "288112": {
-   "dal": "2026-08-30",
-   "motivo": "Transfer negotiations"
-  },
-  "30554": {
-   "dal": "2026-08-30",
-   "motivo": "Injury"
-  },
-  "31057": {
-   "dal": "2026-08-30",
-   "motivo": "Muscle Injury"
-  },
-  "31226": {
-   "dal": "2026-08-30",
+  "626686": {
+   "dal": "2026-08-31",
    "motivo": "Knee Injury"
   },
-  "31390": {
-   "dal": "2026-08-30",
-   "motivo": "Knee Injury"
-  },
-  "354533": {
-   "dal": "2026-08-30",
-   "motivo": "Achilles Tendon Injury"
-  },
-  "383026": {
-   "dal": "2026-08-30",
-   "motivo": "Knee Injury"
-  },
-  "388547": {
-   "dal": "2026-08-30",
-   "motivo": "Knee Injury"
-  },
-  "452033": {
-   "dal": "2026-08-30",
-   "motivo": "Knee Injury"
-  },
-  "584116": {
-   "dal": "2026-08-30",
-   "motivo": "Injury"
-  },
-  "63934": {
-   "dal": "2026-08-30",
-   "motivo": "Knee Injury"
+  "782": {
+   "dal": "2026-08-31",
+   "motivo": "Thigh Injury"
   }
  },
  "infortuni_stagione_2025": {
