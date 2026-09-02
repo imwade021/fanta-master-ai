@@ -16,28 +16,28 @@
   "lega": "Super Liga"
  },
  {
+  "nome": "A. Ahmed Fatah",
+  "squadra": "Lecce",
+  "ruolo": "A",
+  "presenze": 30,
+  "gol": 8,
+  "lega": "Premiership"
+ },
+ {
+  "nome": "M. Osmajić",
+  "squadra": "Genoa",
+  "ruolo": "A",
+  "presenze": 27,
+  "gol": 8,
+  "lega": "Championship"
+ },
+ {
   "nome": "A. Cissè",
   "squadra": "Milan",
   "ruolo": "A",
   "presenze": 22,
   "gol": 6,
   "lega": "Serie B"
- },
- {
-  "nome": "R. Ciervo",
-  "squadra": "Sassuolo",
-  "ruolo": "A",
-  "presenze": 37,
-  "gol": 5,
-  "lega": "Serie B"
- },
- {
-  "nome": "L. Banda",
-  "squadra": "Lecce",
-  "ruolo": "A",
-  "presenze": 32,
-  "gol": 5,
-  "lega": "Serie A"
  },
  {
   "nome": "N. González",
@@ -70,14 +70,6 @@
   "presenze": 31,
   "gol": 3,
   "lega": "Serie A"
- },
- {
-  "nome": "A. Joujou",
-  "squadra": "Parma",
-  "ruolo": "A",
-  "presenze": 23,
-  "gol": 3,
-  "lega": "Primeira Liga"
  },
  {
   "nome": "W. Cheddira",
@@ -120,6 +112,14 @@
   "lega": "Serie A"
  },
  {
+  "nome": "F. Leysen",
+  "squadra": "Sassuolo",
+  "ruolo": "D",
+  "presenze": 35,
+  "gol": 2,
+  "lega": "Super Cup"
+ },
+ {
   "nome": "K. N’Dri",
   "squadra": "Lecce",
   "ruolo": "A",
@@ -154,25 +154,17 @@
  {
   "nome": "Rodrigo Mora",
   "squadra": "Roma",
-  "ruolo": "A",
+  "ruolo": "C",
   "presenze": 28,
   "gol": 1,
   "lega": "Primeira Liga"
  },
  {
-  "nome": "C. Odenthal",
-  "squadra": "Sassuolo",
-  "ruolo": "D",
-  "presenze": 18,
-  "gol": 1,
-  "lega": "Serie B"
- },
- {
-  "nome": "R. Kouda",
-  "squadra": "Parma",
-  "ruolo": "C",
-  "presenze": 15,
-  "gol": 1,
+  "nome": "M. Bleve",
+  "squadra": "Lecce",
+  "ruolo": "P",
+  "presenze": 37,
+  "gol": 0,
   "lega": "Serie B"
  },
  {
@@ -208,20 +200,12 @@
   "lega": "Serie B"
  },
  {
-  "nome": "A. Ghion",
-  "squadra": "Sassuolo",
-  "ruolo": "C",
+  "nome": "L. Balerdi",
+  "squadra": "Roma",
+  "ruolo": "D",
   "presenze": 26,
   "gol": 0,
-  "lega": "Serie B"
- },
- {
-  "nome": "N. Fortini",
-  "squadra": "Fiorentina",
-  "ruolo": "D",
-  "presenze": 16,
-  "gol": 0,
-  "lega": "Serie A"
+  "lega": "Ligue 1"
  },
  {
   "nome": "J. Lindstrøm",
@@ -230,6 +214,14 @@
   "presenze": 15,
   "gol": 0,
   "lega": "Bundesliga"
+ },
+ {
+  "nome": "A. Dembélé",
+  "squadra": "Lecce",
+  "ruolo": "D",
+  "presenze": 14,
+  "gol": 0,
+  "lega": "Serie B"
  },
  {
   "nome": "S. Bocoum",

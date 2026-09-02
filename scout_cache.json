@@ -2590,6 +2590,20 @@
   }
  },
  "stats": {
+  "2025:a ahmed fatah": {
+   "assist": 3,
+   "campionati": [
+    "League Cup",
+    "Premiership"
+   ],
+   "da_titolare": 23,
+   "gol": 8,
+   "lega": "Premiership",
+   "minuti": 1882,
+   "presenze": 30,
+   "presenze_totali": 33,
+   "squadre_stagione": 1
+  },
   "2025:a akarakiri": {
    "assist": 1,
    "campionati": [
@@ -2660,6 +2674,7 @@
    "presenze_totali": 18,
    "squadre_stagione": 2
   },
+  "2025:a di bitonto": "vuoto",
   "2025:a durmisi": "vuoto",
   "2025:a furlanetto": {
    "assist": 0,
@@ -2747,6 +2762,8 @@
   },
   "2025:a russo": "vuoto",
   "2025:a zouin": "vuoto",
+  "2025:a zovko": "vuoto",
+  "2025:a zulevic": "vuoto",
   "2025:aaron martin": {
    "assist": 5,
    "campionati": [
@@ -3652,6 +3669,7 @@
   },
   "2025:b bogdanovic": "vuoto",
   "2025:b galassi": "vuoto",
+  "2025:b mazzeo": "vuoto",
   "2025:bartol franjic": {
    "assist": 2,
    "campionati": [
@@ -4358,6 +4376,7 @@
    "presenze_totali": 31,
    "squadre_stagione": 1
   },
+  "2025:divine onyemachi": "vuoto",
   "2025:djibril sow": {
    "assist": 4,
    "campionati": [
@@ -4771,6 +4790,20 @@
    "presenze_totali": 10,
    "squadre_stagione": 1
   },
+  "2025:f leysen": {
+   "assist": 0,
+   "campionati": [
+    "Jupiler Pro League",
+    "Super Cup"
+   ],
+   "da_titolare": 50,
+   "gol": 2,
+   "lega": "Super Cup",
+   "minuti": 4232,
+   "presenze": 35,
+   "presenze_totali": 62,
+   "squadre_stagione": 1
+  },
   "2025:f nardin": "vuoto",
   "2025:f ondoa": "vuoto",
   "2025:f reale": {
@@ -5134,6 +5167,7 @@
   "2025:g astaldi": "vuoto",
   "2025:g bertolini": "vuoto",
   "2025:g kulla": "vuoto",
+  "2025:g lauricella": "vuoto",
   "2025:g puzzoli": "vuoto",
   "2025:g stojak": "vuoto",
   "2025:g vezzosi": "vuoto",
@@ -6585,6 +6619,21 @@
    "presenze_totali": 33,
    "squadre_stagione": 1
   },
+  "2025:l balerdi": {
+   "assist": 1,
+   "campionati": [
+    "Coupe de France",
+    "Ligue 1",
+    "Trophée des Champions"
+   ],
+   "da_titolare": 25,
+   "gol": 0,
+   "lega": "Ligue 1",
+   "minuti": 2365,
+   "presenze": 26,
+   "presenze_totali": 30,
+   "squadre_stagione": 1
+  },
   "2025:l banda": {
    "assist": 4,
    "campionati": [
@@ -6671,6 +6720,7 @@
    "squadre_stagione": 1
   },
   "2025:l uzelac": "vuoto",
+  "2025:l varali": "vuoto",
   "2025:lapo siviero": "vuoto",
   "2025:lassana coulibaly": {
    "assist": 1,
@@ -7117,6 +7167,20 @@
   },
   "2025:m barbini": "vuoto",
   "2025:m bencic": "vuoto",
+  "2025:m bleve": {
+   "assist": 0,
+   "campionati": [
+    "Coppa Italia",
+    "Serie B"
+   ],
+   "da_titolare": 38,
+   "gol": 0,
+   "lega": "Serie B",
+   "minuti": 3427,
+   "presenze": 37,
+   "presenze_totali": 38,
+   "squadre_stagione": 1
+  },
   "2025:m lavelli": {
    "assist": 0,
    "campionati": [
@@ -7145,6 +7209,21 @@
    "squadre_stagione": 1
   },
   "2025:m mout": "vuoto",
+  "2025:m osmajic": {
+   "assist": 1,
+   "campionati": [
+    "Championship",
+    "FA Cup",
+    "League Cup"
+   ],
+   "da_titolare": 22,
+   "gol": 8,
+   "lega": "Championship",
+   "minuti": 1793,
+   "presenze": 27,
+   "presenze_totali": 29,
+   "squadre_stagione": 1
+  },
   "2025:m pellini": "vuoto",
   "2025:m pittarella": "vuoto",
   "2025:m plehan": "vuoto",
@@ -7954,6 +8033,7 @@
   },
   "2025:n rak": "vuoto",
   "2025:n rizzo": "vuoto",
+  "2025:n tondi": "vuoto",
   "2025:n vukasovic": "vuoto",
   "2025:nadir zortea": {
    "assist": 2,
@@ -9756,6 +9836,7 @@
    "presenze_totali": 21,
    "squadre_stagione": 2
   },
+  "2025:vitaly palamarchuk": "vuoto",
   "2025:vitinha carvalho olivera": {
    "assist": 1,
    "campionati": [
@@ -9785,6 +9866,7 @@
    "presenze_totali": 34,
    "squadre_stagione": 2
   },
+  "2025:w el bouradi": "vuoto",
   "2025:wesley": {
    "assist": 0,
    "campionati": [
