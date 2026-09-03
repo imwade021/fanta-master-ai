@@ -1,21 +1,5 @@
 [
  {
-  "nome": "G. Artistico",
-  "squadra": "Lazio",
-  "ruolo": "A",
-  "presenze": 31,
-  "gol": 13,
-  "lega": "Serie B"
- },
- {
-  "nome": "A. Kostić",
-  "squadra": "Milan",
-  "ruolo": "A",
-  "presenze": 35,
-  "gol": 11,
-  "lega": "Super Liga"
- },
- {
   "nome": "A. Ahmed Fatah",
   "squadra": "Lecce",
   "ruolo": "A",
@@ -38,6 +22,22 @@
   "presenze": 22,
   "gol": 6,
   "lega": "Serie B"
+ },
+ {
+  "nome": "R. Ciervo",
+  "squadra": "Cagliari",
+  "ruolo": "A",
+  "presenze": 37,
+  "gol": 5,
+  "lega": "Serie B"
+ },
+ {
+  "nome": "F. Kessié",
+  "squadra": "Atalanta",
+  "ruolo": "C",
+  "presenze": 26,
+  "gol": 5,
+  "lega": "Pro League"
  },
  {
   "nome": "N. González",
@@ -72,14 +72,6 @@
   "lega": "Serie A"
  },
  {
-  "nome": "W. Cheddira",
-  "squadra": "Napoli",
-  "ruolo": "A",
-  "presenze": 17,
-  "gol": 3,
-  "lega": "Serie A"
- },
- {
   "nome": "M&apos;Bala Nzola",
   "squadra": "Fiorentina",
   "ruolo": "A",
@@ -110,14 +102,6 @@
   "presenze": 35,
   "gol": 2,
   "lega": "Serie A"
- },
- {
-  "nome": "F. Leysen",
-  "squadra": "Sassuolo",
-  "ruolo": "D",
-  "presenze": 35,
-  "gol": 2,
-  "lega": "Super Cup"
  },
  {
   "nome": "K. N’Dri",
@@ -160,6 +144,22 @@
   "lega": "Primeira Liga"
  },
  {
+  "nome": "A. Theate",
+  "squadra": "Bologna",
+  "ruolo": "D",
+  "presenze": 24,
+  "gol": 1,
+  "lega": "Bundesliga"
+ },
+ {
+  "nome": "C. Ngonge",
+  "squadra": "Monza",
+  "ruolo": "A",
+  "presenze": 20,
+  "gol": 1,
+  "lega": "Serie A"
+ },
+ {
   "nome": "M. Bleve",
   "squadra": "Lecce",
   "ruolo": "P",
@@ -184,14 +184,6 @@
   "lega": "Premier League"
  },
  {
-  "nome": "N. Obaretin",
-  "squadra": "Napoli",
-  "ruolo": "D",
-  "presenze": 29,
-  "gol": 0,
-  "lega": "Serie B"
- },
- {
   "nome": "C. Comotto",
   "squadra": "Milan",
   "ruolo": "C",
@@ -206,6 +198,14 @@
   "presenze": 26,
   "gol": 0,
   "lega": "Ligue 1"
+ },
+ {
+  "nome": "J. Šutalo",
+  "squadra": "Lazio",
+  "ruolo": "D",
+  "presenze": 24,
+  "gol": 0,
+  "lega": "Eredivisie"
  },
  {
   "nome": "J. Lindstrøm",

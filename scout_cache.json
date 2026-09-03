@@ -124,6 +124,10 @@
    "dal": "2026-09-01",
    "motivo": "Muscle Injury"
   },
+  "303362": {
+   "dal": "2026-09-03",
+   "motivo": "Injury"
+  },
   "30396": {
    "dal": "2026-09-01",
    "motivo": "Illness"
@@ -331,6 +335,10 @@
   "881": {
    "dal": "2026-09-01",
    "motivo": "Groin Injury"
+  },
+  "903": {
+   "dal": "2026-09-03",
+   "motivo": "Heart Problems"
   },
   "94562": {
    "dal": "2026-09-01",
@@ -2761,6 +2769,20 @@
    "squadre_stagione": 1
   },
   "2025:a russo": "vuoto",
+  "2025:a theate": {
+   "assist": 0,
+   "campionati": [
+    "Bundesliga",
+    "DFB Pokal"
+   ],
+   "da_titolare": 25,
+   "gol": 1,
+   "lega": "Bundesliga",
+   "minuti": 2263,
+   "presenze": 24,
+   "presenze_totali": 25,
+   "squadre_stagione": 1
+  },
   "2025:a zouin": "vuoto",
   "2025:a zovko": "vuoto",
   "2025:a zulevic": "vuoto",
@@ -3019,6 +3041,7 @@
    "presenze_totali": 39,
    "squadre_stagione": 1
   },
+  "2025:aleksandr ballabio": "vuoto",
   "2025:alessandro bastoni": {
    "assist": 4,
    "campionati": [
@@ -3265,6 +3288,7 @@
    "presenze_totali": 19,
    "squadre_stagione": 1
   },
+  "2025:ali jaber": "vuoto",
   "2025:alieu fadera": "vuoto",
   "2025:alieu njie": {
    "assist": 1,
@@ -3743,6 +3767,7 @@
    "presenze_totali": 32,
    "squadre_stagione": 2
   },
+  "2025:besalet krasniqi": "vuoto",
   "2025:billy gilmour": {
    "assist": 0,
    "campionati": [
@@ -3887,6 +3912,21 @@
    "squadre_stagione": 1
   },
   "2025:c lupo": "vuoto",
+  "2025:c ngonge": {
+   "assist": 1,
+   "campionati": [
+    "Coppa Italia",
+    "La Liga",
+    "Serie A"
+   ],
+   "da_titolare": 19,
+   "gol": 1,
+   "lega": "Serie A",
+   "minuti": 1599,
+   "presenze": 20,
+   "presenze_totali": 32,
+   "squadre_stagione": 2
+  },
   "2025:c odenthal": {
    "assist": 0,
    "campionati": [
@@ -4789,6 +4829,20 @@
    "presenze": 9,
    "presenze_totali": 10,
    "squadre_stagione": 1
+  },
+  "2025:f kessie": {
+   "assist": 3,
+   "campionati": [
+    "Africa Cup of Nations Qualification",
+    "Pro League"
+   ],
+   "da_titolare": 32,
+   "gol": 5,
+   "lega": "Pro League",
+   "minuti": 2555,
+   "presenze": 26,
+   "presenze_totali": 32,
+   "squadre_stagione": 2
   },
   "2025:f leysen": {
    "assist": 0,
@@ -5847,6 +5901,20 @@
    "squadre_stagione": 1
   },
   "2025:j sardo": "vuoto",
+  "2025:j sutalo": {
+   "assist": 0,
+   "campionati": [
+    "Eredivisie",
+    "KNVB Beker"
+   ],
+   "da_titolare": 20,
+   "gol": 0,
+   "lega": "Eredivisie",
+   "minuti": 1888,
+   "presenze": 24,
+   "presenze_totali": 25,
+   "squadre_stagione": 1
+  },
   "2025:jacobo ramon": {
    "assist": 0,
    "campionati": [
