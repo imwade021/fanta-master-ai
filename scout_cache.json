@@ -1,348 +1,16 @@
 {
  "infortuni": {
-  "116": {
-   "dal": "2026-09-01",
-   "motivo": "Knee Injury"
-  },
-  "118956": {
-   "dal": "2026-08-31",
-   "motivo": "Inactive"
-  },
-  "123": {
-   "dal": "2026-09-01",
-   "motivo": "Knee Injury"
-  },
-  "136087": {
-   "dal": "2026-09-01",
-   "motivo": "Knee Injury"
-  },
-  "137976": {
-   "dal": "2026-08-31",
-   "motivo": "Muscle Injury"
-  },
-  "138777": {
-   "dal": "2026-09-01",
-   "motivo": "Hip Injury"
-  },
-  "144740": {
-   "dal": "2026-09-01",
-   "motivo": "Muscle Injury"
-  },
-  "1457": {
-   "dal": "2026-09-01",
-   "motivo": "Suspended"
-  },
-  "162452": {
-   "dal": "2026-08-31",
-   "motivo": "Muscle Injury"
-  },
-  "162561": {
-   "dal": "2026-09-01",
-   "motivo": "Thigh Injury"
-  },
-  "162907": {
-   "dal": "2026-09-01",
-   "motivo": "Knee Injury"
-  },
-  "1775": {
-   "dal": "2026-09-01",
-   "motivo": "Inactive"
-  },
-  "1841": {
-   "dal": "2026-09-01",
-   "motivo": "Ankle Injury"
-  },
-  "1844": {
-   "dal": "2026-09-01",
-   "motivo": "Muscle Injury"
-  },
-  "1852": {
-   "dal": "2026-09-01",
-   "motivo": "Muscle Injury"
-  },
-  "18797": {
-   "dal": "2026-09-01",
-   "motivo": "Red Card"
-  },
-  "19209": {
-   "dal": "2026-09-01",
-   "motivo": "Transfer negotiations"
-  },
-  "19235": {
-   "dal": "2026-09-01",
-   "motivo": "Inactive"
-  },
-  "199837": {
-   "dal": "2026-08-31",
-   "motivo": "Knee Injury"
-  },
-  "212": {
-   "dal": "2026-09-01",
-   "motivo": "Hernia"
-  },
-  "215": {
-   "dal": "2026-09-01",
-   "motivo": "Injury"
-  },
-  "22236": {
-   "dal": "2026-09-01",
-   "motivo": "Muscle Injury"
-  },
-  "22254": {
-   "dal": "2026-09-01",
-   "motivo": "Transfer negotiations"
-  },
-  "26095": {
-   "dal": "2026-09-01",
-   "motivo": "Hip Injury"
-  },
-  "268341": {
-   "dal": "2026-09-01",
-   "motivo": "Injury"
-  },
-  "269": {
-   "dal": "2026-09-01",
-   "motivo": "Inactive"
-  },
-  "270507": {
-   "dal": "2026-09-01",
-   "motivo": "Rest"
-  },
-  "278095": {
-   "dal": "2026-09-01",
-   "motivo": "Inactive"
-  },
-  "281495": {
-   "dal": "2026-08-31",
-   "motivo": "Ankle Injury"
-  },
-  "289304": {
-   "dal": "2026-09-01",
-   "motivo": "Inactive"
-  },
-  "291780": {
-   "dal": "2026-09-01",
-   "motivo": "Muscle Injury"
-  },
-  "303362": {
-   "dal": "2026-09-03",
-   "motivo": "Injury"
-  },
-  "30396": {
-   "dal": "2026-09-01",
-   "motivo": "Illness"
-  },
-  "30436": {
-   "dal": "2026-09-01",
-   "motivo": "Knee Injury"
-  },
-  "30532": {
-   "dal": "2026-09-01",
-   "motivo": "Injury"
-  },
-  "30537": {
-   "dal": "2026-09-01",
-   "motivo": "Ankle Injury"
-  },
-  "30554": {
-   "dal": "2026-09-01",
-   "motivo": "Injury"
-  },
-  "30603": {
-   "dal": "2026-09-01",
-   "motivo": "Suspended"
-  },
-  "30670": {
-   "dal": "2026-09-01",
-   "motivo": "Transfer negotiations"
-  },
-  "31057": {
-   "dal": "2026-09-01",
-   "motivo": "Muscle Injury"
-  },
-  "31094": {
-   "dal": "2026-09-01",
-   "motivo": "Injury"
-  },
-  "31099": {
-   "dal": "2026-08-31",
-   "motivo": "Muscle Injury"
-  },
-  "31191": {
-   "dal": "2026-09-01",
-   "motivo": "Yellow Cards"
-  },
-  "31226": {
-   "dal": "2026-09-01",
-   "motivo": "Knee Injury"
-  },
-  "31390": {
-   "dal": "2026-09-01",
-   "motivo": "Knee Injury"
-  },
-  "31507": {
-   "dal": "2026-09-01",
-   "motivo": "Back Injury"
-  },
-  "31532": {
-   "dal": "2026-09-01",
-   "motivo": "Inactive"
-  },
-  "319919": {
-   "dal": "2026-08-31",
-   "motivo": "Thigh Injury"
-  },
-  "328046": {
-   "dal": "2026-09-01",
-   "motivo": "Broken Leg"
-  },
-  "334915": {
-   "dal": "2026-09-01",
-   "motivo": "Calf Injury"
-  },
-  "335071": {
-   "dal": "2026-09-01",
-   "motivo": "Thigh Injury"
-  },
-  "339883": {
-   "dal": "2026-09-01",
-   "motivo": "Foot Injury"
-  },
-  "342055": {
-   "dal": "2026-09-01",
-   "motivo": "Knee Injury"
-  },
   "354533": {
    "dal": "2026-09-01",
    "motivo": "Achilles Tendon Injury"
-  },
-  "383026": {
-   "dal": "2026-09-01",
-   "motivo": "Knee Injury"
-  },
-  "388547": {
-   "dal": "2026-09-01",
-   "motivo": "Knee Injury"
-  },
-  "394438": {
-   "dal": "2026-09-01",
-   "motivo": "Injury"
-  },
-  "404523": {
-   "dal": "2026-09-01",
-   "motivo": "Inactive"
-  },
-  "40582": {
-   "dal": "2026-09-01",
-   "motivo": "Muscle Injury"
-  },
-  "40594": {
-   "dal": "2026-09-01",
-   "motivo": "Inactive"
-  },
-  "408635": {
-   "dal": "2026-09-01",
-   "motivo": "Muscle Injury"
-  },
-  "41371": {
-   "dal": "2026-09-01",
-   "motivo": "Knee Injury"
-  },
-  "415": {
-   "dal": "2026-09-01",
-   "motivo": "Muscle Injury"
-  },
-  "421807": {
-   "dal": "2026-09-01",
-   "motivo": "Health problems"
-  },
-  "422156": {
-   "dal": "2026-09-01",
-   "motivo": "Muscle Injury"
-  },
-  "436238": {
-   "dal": "2026-09-01",
-   "motivo": "Injury"
-  },
-  "451504": {
-   "dal": "2026-09-01",
-   "motivo": "Muscle Injury"
   },
   "452033": {
    "dal": "2026-09-01",
    "motivo": "Knee Injury"
   },
-  "453906": {
-   "dal": "2026-08-31",
-   "motivo": "Muscle Injury"
-  },
-  "48372": {
-   "dal": "2026-09-01",
-   "motivo": "Red Card"
-  },
-  "48392": {
-   "dal": "2026-09-01",
-   "motivo": "Muscle Injury"
-  },
-  "499380": {
-   "dal": "2026-09-01",
-   "motivo": "Yellow Cards"
-  },
-  "56266": {
-   "dal": "2026-09-01",
-   "motivo": "Shoulder Injury"
-  },
-  "56293": {
-   "dal": "2026-09-01",
-   "motivo": "Knee Injury"
-  },
-  "56851": {
-   "dal": "2026-09-01",
-   "motivo": "Inactive"
-  },
-  "584116": {
-   "dal": "2026-09-01",
-   "motivo": "Injury"
-  },
-  "59513": {
-   "dal": "2026-09-01",
-   "motivo": "Knee Injury"
-  },
-  "626686": {
-   "dal": "2026-08-31",
-   "motivo": "Knee Injury"
-  },
-  "63934": {
-   "dal": "2026-09-01",
-   "motivo": "Knee Injury"
-  },
-  "782": {
-   "dal": "2026-08-31",
-   "motivo": "Thigh Injury"
-  },
-  "786": {
-   "dal": "2026-09-01",
-   "motivo": "Thigh Injury"
-  },
-  "8481": {
-   "dal": "2026-09-01",
-   "motivo": "Foot Injury"
-  },
   "877": {
    "dal": "2026-09-01",
    "motivo": "Transfer negotiations"
-  },
-  "881": {
-   "dal": "2026-09-01",
-   "motivo": "Groin Injury"
-  },
-  "903": {
-   "dal": "2026-09-03",
-   "motivo": "Heart Problems"
-  },
-  "94562": {
-   "dal": "2026-09-01",
-   "motivo": "Ankle Injury"
   }
  },
  "infortuni_stagione_2025": {
@@ -4143,6 +3811,19 @@
    "squadre_stagione": 1
   },
   "2025:d baroncioni": "vuoto",
+  "2025:d birligea": {
+   "assist": 1,
+   "campionati": [
+    "Liga I"
+   ],
+   "da_titolare": 18,
+   "gol": 7,
+   "lega": "Liga I",
+   "minuti": 1652,
+   "presenze": 23,
+   "presenze_totali": 23,
+   "squadre_stagione": 1
+  },
   "2025:d drobnic": "vuoto",
   "2025:d elimoghale": "vuoto",
   "2025:d magdic": "vuoto",
@@ -4577,6 +4258,20 @@
    "squadre_stagione": 1
   },
   "2025:e stojak": "vuoto",
+  "2025:e tchato": {
+   "assist": 3,
+   "campionati": [
+    "Coupe de France",
+    "Ligue 2"
+   ],
+   "da_titolare": 28,
+   "gol": 0,
+   "lega": "Ligue 2",
+   "minuti": 2545,
+   "presenze": 29,
+   "presenze_totali": 32,
+   "squadre_stagione": 1
+  },
   "2025:ebenezer akinsanmiro": {
    "assist": 1,
    "campionati": [
@@ -8522,6 +8217,20 @@
    "presenze_totali": 39,
    "squadre_stagione": 2
   },
+  "2025:omar fayed": {
+   "assist": 0,
+   "campionati": [
+    "Primeira Liga",
+    "Taça de Portugal"
+   ],
+   "da_titolare": 7,
+   "gol": 0,
+   "lega": "Primeira Liga",
+   "minuti": 558,
+   "presenze": 8,
+   "presenze_totali": 10,
+   "squadre_stagione": 1
+  },
   "2025:omri gandelman": {
    "assist": 1,
    "campionati": [
@@ -9610,6 +9319,19 @@
    "minuti": 3224,
    "presenze": 34,
    "presenze_totali": 38,
+   "squadre_stagione": 1
+  },
+  "2025:t bobcek": {
+   "assist": 6,
+   "campionati": [
+    "Ekstraklasa"
+   ],
+   "da_titolare": 28,
+   "gol": 20,
+   "lega": "Ekstraklasa",
+   "minuti": 2464,
+   "presenze": 30,
+   "presenze_totali": 30,
    "squadre_stagione": 1
   },
   "2025:t de martis": {

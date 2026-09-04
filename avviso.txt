@@ -1,8 +1,10 @@
 ⚠️ <b>Giocatori fuori dal listone</b>
 Sono nelle rose di Serie A ma non nelle tue quotazioni:
 
+• <b>T. Bobček</b> (Frosinone, A) — 30 pres, 20 gol
 • <b>A. Ahmed Fatah</b> (Lecce, A) — 30 pres, 8 gol
 • <b>M. Osmajić</b> (Genoa, A) — 27 pres, 8 gol
+• <b>D. Bîrligea</b> (Frosinone, A) — 23 pres, 7 gol
 • <b>A. Cissè</b> (Milan, A) — 22 pres, 6 gol
 • <b>R. Ciervo</b> (Cagliari, A) — 37 pres, 5 gol
 • <b>F. Kessié</b> (Atalanta, C) — 26 pres, 5 gol
@@ -14,8 +16,6 @@ Sono nelle rose di Serie A ma non nelle tue quotazioni:
 • <b>C. Favasuli</b> (Napoli, D) — 41 pres, 2 gol
 • <b>F. Terracciano</b> (Milan, D) — 36 pres, 2 gol
 • <b>E. Del Prato</b> (Parma, D) — 35 pres, 2 gol
-• <b>K. N’Dri</b> (Lecce, A) — 27 pres, 2 gol
-• <b>K. Baldé</b> (Monza, A) — 21 pres, 2 gol
-...e altri 19.
+...e altri 23.
 
 Scarica le quotazioni aggiornate da Fantacalcio e caricale in <code>fanta-master-ai</code>: il motore le usa dalla notte dopo.

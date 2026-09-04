@@ -1,5 +1,13 @@
 [
  {
+  "nome": "T. Bobček",
+  "squadra": "Frosinone",
+  "ruolo": "A",
+  "presenze": 30,
+  "gol": 20,
+  "lega": "Ekstraklasa"
+ },
+ {
   "nome": "A. Ahmed Fatah",
   "squadra": "Lecce",
   "ruolo": "A",
@@ -14,6 +22,14 @@
   "presenze": 27,
   "gol": 8,
   "lega": "Championship"
+ },
+ {
+  "nome": "D. Bîrligea",
+  "squadra": "Frosinone",
+  "ruolo": "A",
+  "presenze": 23,
+  "gol": 7,
+  "lega": "Liga I"
  },
  {
   "nome": "A. Cissè",
@@ -184,6 +200,14 @@
   "lega": "Premier League"
  },
  {
+  "nome": "E. Tchato",
+  "squadra": "Frosinone",
+  "ruolo": "D",
+  "presenze": 29,
+  "gol": 0,
+  "lega": "Ligue 2"
+ },
+ {
   "nome": "C. Comotto",
   "squadra": "Milan",
   "ruolo": "C",
@@ -254,6 +278,14 @@
   "presenze": 9,
   "gol": 0,
   "lega": "Serie B"
+ },
+ {
+  "nome": "Omar Fayed",
+  "squadra": "Frosinone",
+  "ruolo": "D",
+  "presenze": 8,
+  "gol": 0,
+  "lega": "Primeira Liga"
  },
  {
   "nome": "B. Badiashile",
