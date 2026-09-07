@@ -1,116 +1,80 @@
 {
  "infortuni": {
-  "116": {
-   "dal": "2026-09-06",
+  "120": {
+   "dal": "2026-09-07",
+   "motivo": "Injury"
+  },
+  "144740": {
+   "dal": "2026-09-07",
+   "motivo": "Muscle Injury"
+  },
+  "162907": {
+   "dal": "2026-09-07",
    "motivo": "Knee Injury"
   },
-  "125674": {
-   "dal": "2026-09-06",
-   "motivo": "Thigh Injury"
-  },
-  "1266": {
-   "dal": "2026-09-06",
-   "motivo": "Foot Injury"
-  },
-  "127011": {
-   "dal": "2026-09-06",
+  "1841": {
+   "dal": "2026-09-07",
    "motivo": "Ankle Injury"
   },
-  "14704": {
-   "dal": "2026-09-06",
-   "motivo": "Injury"
-  },
-  "212": {
-   "dal": "2026-09-06",
-   "motivo": "Hernia"
-  },
-  "26095": {
-   "dal": "2026-09-06",
-   "motivo": "Hip Injury"
-  },
-  "291780": {
-   "dal": "2026-09-06",
+  "1844": {
+   "dal": "2026-09-07",
    "motivo": "Muscle Injury"
   },
-  "30436": {
-   "dal": "2026-09-06",
-   "motivo": "Knee Injury"
-  },
-  "30488": {
-   "dal": "2026-09-06",
-   "motivo": "Injury"
-  },
-  "31532": {
-   "dal": "2026-09-06",
-   "motivo": "Inactive"
-  },
-  "319919": {
-   "dal": "2026-09-06",
-   "motivo": "Thigh Injury"
-  },
-  "328046": {
-   "dal": "2026-09-06",
-   "motivo": "Broken Leg"
-  },
-  "339883": {
-   "dal": "2026-09-06",
-   "motivo": "Foot Injury"
-  },
-  "340547": {
-   "dal": "2026-09-06",
-   "motivo": "Thigh Injury"
-  },
-  "342055": {
-   "dal": "2026-09-06",
-   "motivo": "Knee Injury"
-  },
-  "384543": {
-   "dal": "2026-09-06",
-   "motivo": "Foot Injury"
-  },
-  "40582": {
-   "dal": "2026-09-06",
-   "motivo": "Muscle Injury"
-  },
-  "41371": {
-   "dal": "2026-09-06",
-   "motivo": "Knee Injury"
-  },
-  "415": {
-   "dal": "2026-09-06",
-   "motivo": "Muscle Injury"
-  },
-  "432610": {
-   "dal": "2026-09-06",
-   "motivo": "Injury"
-  },
-  "451504": {
-   "dal": "2026-09-06",
-   "motivo": "Muscle Injury"
-  },
-  "48392": {
-   "dal": "2026-09-06",
-   "motivo": "Muscle Injury"
-  },
-  "56293": {
-   "dal": "2026-09-06",
-   "motivo": "Contusion"
-  },
-  "56473": {
-   "dal": "2026-09-06",
-   "motivo": "Ankle Injury"
-  },
-  "59513": {
-   "dal": "2026-09-06",
-   "motivo": "Knee Injury"
-  },
-  "628": {
-   "dal": "2026-09-06",
-   "motivo": "Inactive"
-  },
-  "881": {
-   "dal": "2026-09-06",
+  "1852": {
+   "dal": "2026-09-07",
    "motivo": "Groin Injury"
+  },
+  "188319": {
+   "dal": "2026-09-07",
+   "motivo": "Personal Reasons"
+  },
+  "2484": {
+   "dal": "2026-09-07",
+   "motivo": "Calf Injury"
+  },
+  "30554": {
+   "dal": "2026-09-07",
+   "motivo": "Injury"
+  },
+  "30784": {
+   "dal": "2026-09-07",
+   "motivo": "Injury"
+  },
+  "31318": {
+   "dal": "2026-09-07",
+   "motivo": "Lacking Match Fitness"
+  },
+  "32887": {
+   "dal": "2026-09-07",
+   "motivo": "Inactive"
+  },
+  "383026": {
+   "dal": "2026-09-07",
+   "motivo": "Knee Injury"
+  },
+  "411171": {
+   "dal": "2026-09-07",
+   "motivo": "Thigh Injury"
+  },
+  "422156": {
+   "dal": "2026-09-07",
+   "motivo": "Muscle Injury"
+  },
+  "584116": {
+   "dal": "2026-09-07",
+   "motivo": "Injury"
+  },
+  "63934": {
+   "dal": "2026-09-07",
+   "motivo": "Knee Injury"
+  },
+  "786": {
+   "dal": "2026-09-07",
+   "motivo": "Thigh Injury"
+  },
+  "8481": {
+   "dal": "2026-09-07",
+   "motivo": "Foot Injury"
   }
  },
  "infortuni_stagione_2025": {
