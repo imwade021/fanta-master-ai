@@ -8,6 +8,14 @@
   "lega": "Ekstraklasa"
  },
  {
+  "nome": "J. Enem",
+  "squadra": "Bologna",
+  "ruolo": "A",
+  "presenze": 17,
+  "gol": 10,
+  "lega": "Super Liga"
+ },
+ {
   "nome": "A. Ahmed Fatah",
   "squadra": "Lecce",
   "ruolo": "A",
@@ -34,7 +42,7 @@
  {
   "nome": "A. Cissè",
   "squadra": "Milan",
-  "ruolo": "A",
+  "ruolo": "C",
   "presenze": 22,
   "gol": 6,
   "lega": "Serie B"
@@ -42,10 +50,18 @@
  {
   "nome": "R. Ciervo",
   "squadra": "Cagliari",
-  "ruolo": "D",
+  "ruolo": "A",
   "presenze": 37,
   "gol": 5,
   "lega": "Serie B"
+ },
+ {
+  "nome": "E. Zeballos",
+  "squadra": "Monza",
+  "ruolo": "A",
+  "presenze": 30,
+  "gol": 5,
+  "lega": "Liga Profesional Argentina"
  },
  {
   "nome": "F. Kessié",
@@ -66,7 +82,7 @@
  {
   "nome": "Diego Moreira",
   "squadra": "Milan",
-  "ruolo": "A",
+  "ruolo": "C",
   "presenze": 27,
   "gol": 4,
   "lega": "Ligue 1"
@@ -84,6 +100,30 @@
   "squadra": "Roma",
   "ruolo": "D",
   "presenze": 31,
+  "gol": 3,
+  "lega": "Serie A"
+ },
+ {
+  "nome": "Y. Massolin",
+  "squadra": "Cagliari",
+  "ruolo": "C",
+  "presenze": 29,
+  "gol": 3,
+  "lega": "Serie B"
+ },
+ {
+  "nome": "S. Mbangula",
+  "squadra": "Bologna",
+  "ruolo": "A",
+  "presenze": 26,
+  "gol": 3,
+  "lega": "Bundesliga"
+ },
+ {
+  "nome": "M&apos;Bala Nzola",
+  "squadra": "Cagliari",
+  "ruolo": "A",
+  "presenze": 16,
   "gol": 3,
   "lega": "Serie A"
  },
@@ -152,12 +192,20 @@
   "lega": "Serie A"
  },
  {
-  "nome": "Rodrigo Mora",
-  "squadra": "Roma",
-  "ruolo": "C",
-  "presenze": 28,
+  "nome": "O. Hutchinson",
+  "squadra": "Milan",
+  "ruolo": "A",
+  "presenze": 31,
   "gol": 1,
-  "lega": "Primeira Liga"
+  "lega": "Premier League"
+ },
+ {
+  "nome": "R. Gagliardini",
+  "squadra": "Cagliari",
+  "ruolo": "C",
+  "presenze": 29,
+  "gol": 1,
+  "lega": "Serie A"
  },
  {
   "nome": "A. Theate",
@@ -188,6 +236,14 @@
   "squadra": "Juventus",
   "ruolo": "P",
   "presenze": 36,
+  "gol": 0,
+  "lega": "Bundesliga"
+ },
+ {
+  "nome": "Y. Sugawara",
+  "squadra": "Cagliari",
+  "ruolo": "D",
+  "presenze": 31,
   "gol": 0,
   "lega": "Bundesliga"
  },
@@ -232,14 +288,6 @@
   "lega": "Eredivisie"
  },
  {
-  "nome": "J. Lindstrøm",
-  "squadra": "Napoli",
-  "ruolo": "C",
-  "presenze": 15,
-  "gol": 0,
-  "lega": "Bundesliga"
- },
- {
   "nome": "A. Dembélé",
   "squadra": "Lecce",
   "ruolo": "D",
@@ -256,12 +304,12 @@
   "lega": "Ligue 2"
  },
  {
-  "nome": "N. Galazzi",
+  "nome": "S. Goglichidze",
   "squadra": "Monza",
-  "ruolo": "C",
-  "presenze": 11,
+  "ruolo": "D",
+  "presenze": 12,
   "gol": 0,
-  "lega": "Serie B"
+  "lega": "Championship"
  },
  {
   "nome": "A. N&apos;Diaye",
@@ -294,13 +342,5 @@
   "presenze": 8,
   "gol": 0,
   "lega": "Premier League"
- },
- {
-  "nome": "N. Cavuoti",
-  "squadra": "Cagliari",
-  "ruolo": "C",
-  "presenze": 7,
-  "gol": 0,
-  "lega": "Serie B"
  }
 ]

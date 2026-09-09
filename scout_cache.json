@@ -128,6 +128,10 @@
    "dal": "2026-09-07",
    "motivo": "Calf Injury"
   },
+  "25061": {
+   "dal": "2026-09-09",
+   "motivo": "Injury"
+  },
   "26095": {
    "dal": "2026-09-08",
    "motivo": "Hip Injury"
@@ -348,6 +352,10 @@
    "dal": "2026-09-08",
    "motivo": "Muscle Injury"
   },
+  "474591": {
+   "dal": "2026-09-09",
+   "motivo": "Injury"
+  },
   "48372": {
    "dal": "2026-09-08",
    "motivo": "Red Card"
@@ -395,6 +403,10 @@
   "63934": {
    "dal": "2026-09-07",
    "motivo": "Knee Injury"
+  },
+  "639656": {
+   "dal": "2026-09-09",
+   "motivo": "Injury"
   },
   "782": {
    "dal": "2026-09-08",
@@ -2849,6 +2861,7 @@
    "squadre_stagione": 1
   },
   "2025:a russo": "vuoto",
+  "2025:a sugamele": "vuoto",
   "2025:a theate": {
    "assist": 0,
    "campionati": [
@@ -4021,6 +4034,7 @@
    "presenze_totali": 19,
    "squadre_stagione": 2
   },
+  "2025:c piro": "vuoto",
   "2025:carlo pinsoglio": "vuoto",
   "2025:carlos augusto": {
    "assist": 1,
@@ -4682,6 +4696,20 @@
    "minuti": 2545,
    "presenze": 29,
    "presenze_totali": 32,
+   "squadre_stagione": 1
+  },
+  "2025:e zeballos": {
+   "assist": 3,
+   "campionati": [
+    "Copa Argentina",
+    "Liga Profesional Argentina"
+   ],
+   "da_titolare": 22,
+   "gol": 5,
+   "lega": "Liga Profesional Argentina",
+   "minuti": 1920,
+   "presenze": 30,
+   "presenze_totali": 45,
    "squadre_stagione": 1
   },
   "2025:ebenezer akinsanmiro": {
@@ -5979,6 +6007,19 @@
    "squadre_stagione": 1
   },
   "2025:ivan smolcic": "vuoto",
+  "2025:j enem": {
+   "assist": 1,
+   "campionati": [
+    "Super Liga"
+   ],
+   "da_titolare": 15,
+   "gol": 10,
+   "lega": "Super Liga",
+   "minuti": 1544,
+   "presenze": 17,
+   "presenze_totali": 28,
+   "squadre_stagione": 2
+  },
   "2025:j iddrissou": "vuoto",
   "2025:j idele": "vuoto",
   "2025:j lindstrom": {
@@ -7369,6 +7410,7 @@
    "presenze_totali": 1,
    "squadre_stagione": 1
   },
+  "2025:m libra": "vuoto",
   "2025:m marello": "vuoto",
   "2025:m mosconi": {
    "assist": 0,
@@ -8526,6 +8568,21 @@
    "squadre_stagione": 1
   },
   "2025:o forson": "vuoto",
+  "2025:o hutchinson": {
+   "assist": 5,
+   "campionati": [
+    "FA Cup",
+    "League Cup",
+    "Premier League"
+   ],
+   "da_titolare": 19,
+   "gol": 1,
+   "lega": "Premier League",
+   "minuti": 1905,
+   "presenze": 31,
+   "presenze_totali": 33,
+   "squadre_stagione": 1
+  },
   "2025:obrador": {
    "assist": 3,
    "campionati": [
@@ -8963,6 +9020,20 @@
    "presenze_totali": 38,
    "squadre_stagione": 1
   },
+  "2025:r gagliardini": {
+   "assist": 0,
+   "campionati": [
+    "Serie A"
+   ],
+   "da_titolare": 25,
+   "gol": 1,
+   "lega": "Serie A",
+   "minuti": 2216,
+   "presenze": 29,
+   "presenze_totali": 29,
+   "squadre_stagione": 1
+  },
+  "2025:r gnudi": "vuoto",
   "2025:r kouda": {
    "assist": 1,
    "campionati": [
@@ -9354,6 +9425,21 @@
   "2025:s di paolo": "vuoto",
   "2025:s fernandes": "vuoto",
   "2025:s gigot": "vuoto",
+  "2025:s goglichidze": {
+   "assist": 0,
+   "campionati": [
+    "Championship",
+    "Coppa Italia",
+    "Serie A"
+   ],
+   "da_titolare": 15,
+   "gol": 0,
+   "lega": "Championship",
+   "minuti": 1359,
+   "presenze": 12,
+   "presenze_totali": 21,
+   "squadre_stagione": 2
+  },
   "2025:s levak": "vuoto",
   "2025:s lontani": "vuoto",
   "2025:s loubao": {
@@ -9367,6 +9453,20 @@
    "minuti": 83,
    "presenze": 2,
    "presenze_totali": 2,
+   "squadre_stagione": 1
+  },
+  "2025:s mbangula": {
+   "assist": 2,
+   "campionati": [
+    "Bundesliga",
+    "DFB Pokal"
+   ],
+   "da_titolare": 12,
+   "gol": 3,
+   "lega": "Bundesliga",
+   "minuti": 1212,
+   "presenze": 26,
+   "presenze_totali": 27,
    "squadre_stagione": 1
   },
   "2025:s vos": "vuoto",
@@ -10131,7 +10231,36 @@
    "presenze_totali": 39,
    "squadre_stagione": 1
   },
+  "2025:y massolin": {
+   "assist": 3,
+   "campionati": [
+    "Coppa Italia",
+    "Serie B"
+   ],
+   "da_titolare": 18,
+   "gol": 3,
+   "lega": "Serie B",
+   "minuti": 1750,
+   "presenze": 29,
+   "presenze_totali": 30,
+   "squadre_stagione": 1
+  },
   "2025:y maye": "vuoto",
+  "2025:y sugawara": {
+   "assist": 6,
+   "campionati": [
+    "Bundesliga",
+    "Championship",
+    "League Cup"
+   ],
+   "da_titolare": 31,
+   "gol": 0,
+   "lega": "Bundesliga",
+   "minuti": 2590,
+   "presenze": 31,
+   "presenze_totali": 34,
+   "squadre_stagione": 2
+  },
   "2025:yael trepy": {
    "assist": 0,
    "campionati": [
