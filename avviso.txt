@@ -2,7 +2,10 @@
 Sono nelle rose di Serie A ma non nelle tue quotazioni:
 
 • <b>T. Bobček</b> (Frosinone, A) — 30 pres, 20 gol
+• <b>Pote</b> (Fiorentina, C) — 26 pres, 12 gol
 • <b>J. Enem</b> (Bologna, A) — 17 pres, 10 gol
+• <b>Beto</b> (Fiorentina, A) — 37 pres, 9 gol
+• <b>N. Woltemade</b> (Juventus, A) — 33 pres, 8 gol
 • <b>A. Ahmed Fatah</b> (Lecce, A) — 30 pres, 8 gol
 • <b>M. Osmajić</b> (Genoa, A) — 27 pres, 8 gol
 • <b>D. Bîrligea</b> (Frosinone, A) — 23 pres, 7 gol
@@ -13,9 +16,6 @@ Sono nelle rose di Serie A ma non nelle tue quotazioni:
 • <b>N. González</b> (Juventus, C) — 24 pres, 5 gol
 • <b>Diego Moreira</b> (Milan, C) — 27 pres, 4 gol
 • <b>L. Banovec</b> (Como, C) — 31 pres, 3 gol
-• <b>E. Ndicka</b> (Roma, D) — 31 pres, 3 gol
-• <b>Y. Massolin</b> (Cagliari, C) — 29 pres, 3 gol
-• <b>S. Mbangula</b> (Bologna, A) — 26 pres, 3 gol
-...e altri 28.
+...e altri 35.
 
 Scarica le quotazioni aggiornate da Fantacalcio e caricale in <code>fanta-master-ai</code>: il motore le usa dalla notte dopo.

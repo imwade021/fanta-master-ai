@@ -240,9 +240,17 @@
    "dal": "2026-09-08",
    "motivo": "Inactive"
   },
+  "31734": {
+   "dal": "2026-09-10",
+   "motivo": "Knee Injury"
+  },
   "319919": {
    "dal": "2026-09-08",
    "motivo": "Thigh Injury"
+  },
+  "325": {
+   "dal": "2026-09-10",
+   "motivo": "Red Card"
   },
   "328046": {
    "dal": "2026-09-08",
@@ -403,10 +411,6 @@
   "63934": {
    "dal": "2026-09-07",
    "motivo": "Knee Injury"
-  },
-  "639656": {
-   "dal": "2026-09-09",
-   "motivo": "Injury"
   },
   "782": {
    "dal": "2026-09-08",
@@ -3861,6 +3865,23 @@
    "squadre_stagione": 2
   },
   "2025:besalet krasniqi": "vuoto",
+  "2025:beto": {
+   "assist": 1,
+   "campionati": [
+    "Africa Cup of Nations - Qualification",
+    "FA Cup",
+    "League Cup",
+    "Premier League",
+    "Premier League - Summer Series"
+   ],
+   "da_titolare": 31,
+   "gol": 9,
+   "lega": "Premier League",
+   "minuti": 2077,
+   "presenze": 37,
+   "presenze_totali": 46,
+   "squadre_stagione": 2
+  },
   "2025:billy gilmour": {
    "assist": 0,
    "campionati": [
@@ -3960,6 +3981,21 @@
    "squadre_stagione": 1
   },
   "2025:c corradi": "vuoto",
+  "2025:c drameh": {
+   "assist": 1,
+   "campionati": [
+    "Championship",
+    "FA Cup",
+    "League Cup"
+   ],
+   "da_titolare": 18,
+   "gol": 0,
+   "lega": "Championship",
+   "minuti": 1672,
+   "presenze": 23,
+   "presenze_totali": 26,
+   "squadre_stagione": 1
+  },
   "2025:c favasuli": {
    "assist": 5,
    "campionati": [
@@ -5769,6 +5805,7 @@
    "presenze_totali": 31,
    "squadre_stagione": 1
   },
+  "2025:h laerke": "vuoto",
   "2025:hakan calhanoglu": {
    "assist": 4,
    "campionati": [
@@ -6549,6 +6586,20 @@
    "minuti": 186,
    "presenze": 4,
    "presenze_totali": 5,
+   "squadre_stagione": 1
+  },
+  "2025:k ehizibue": {
+   "assist": 0,
+   "campionati": [
+    "Coppa Italia",
+    "Serie A"
+   ],
+   "da_titolare": 22,
+   "gol": 2,
+   "lega": "Serie A",
+   "minuti": 2009,
+   "presenze": 32,
+   "presenze_totali": 34,
    "squadre_stagione": 1
   },
   "2025:k grabara": {
@@ -7397,6 +7448,7 @@
    "presenze_totali": 38,
    "squadre_stagione": 1
   },
+  "2025:m doucoure": "vuoto",
   "2025:m lavelli": {
    "assist": 0,
    "campionati": [
@@ -8252,6 +8304,24 @@
   "2025:n rizzo": "vuoto",
   "2025:n tondi": "vuoto",
   "2025:n vukasovic": "vuoto",
+  "2025:n woltemade": {
+   "assist": 3,
+   "campionati": [
+    "Bundesliga",
+    "DFB Pokal",
+    "FA Cup",
+    "League Cup",
+    "Premier League",
+    "Super Cup"
+   ],
+   "da_titolare": 30,
+   "gol": 8,
+   "lega": "Premier League",
+   "minuti": 2633,
+   "presenze": 33,
+   "presenze_totali": 43,
+   "squadre_stagione": 2
+  },
   "2025:nadir zortea": {
    "assist": 2,
    "campionati": [
@@ -8477,6 +8547,22 @@
    "presenze": 1,
    "presenze_totali": 1,
    "squadre_stagione": 1
+  },
+  "2025:nikita solodchenko": {
+   "assist": 1,
+   "campionati": [
+    "Brasileiro U20 A",
+    "Paulista - U20",
+    "Serie A",
+    "São Paulo Youth Cup"
+   ],
+   "da_titolare": 2,
+   "gol": 0,
+   "lega": "Serie A",
+   "minuti": 964,
+   "presenze": 15,
+   "presenze_totali": 30,
+   "squadre_stagione": 2
   },
   "2025:nikola krstovic": {
    "assist": 5,
@@ -8774,6 +8860,21 @@
    "squadre_stagione": 2
   },
   "2025:p pardel": "vuoto",
+  "2025:p sarr": {
+   "assist": 4,
+   "campionati": [
+    "Africa Cup of Nations Qualification",
+    "League Cup",
+    "Premier League"
+   ],
+   "da_titolare": 17,
+   "gol": 2,
+   "lega": "Premier League",
+   "minuti": 1747,
+   "presenze": 26,
+   "presenze_totali": 32,
+   "squadre_stagione": 2
+  },
   "2025:paco esteban": "vuoto",
   "2025:paolo vismara": "vuoto",
   "2025:pasquale mazzocchi": {
@@ -9004,6 +9105,21 @@
    "minuti": 531,
    "presenze": 13,
    "presenze_totali": 14,
+   "squadre_stagione": 1
+  },
+  "2025:pote": {
+   "assist": 8,
+   "campionati": [
+    "Primeira Liga",
+    "Super Cup",
+    "Taça de Portugal"
+   ],
+   "da_titolare": 25,
+   "gol": 12,
+   "lega": "Primeira Liga",
+   "minuti": 1948,
+   "presenze": 26,
+   "presenze_totali": 32,
    "squadre_stagione": 1
   },
   "2025:r ciervo": {
@@ -9423,7 +9539,35 @@
   },
   "2025:s cinquegrano": "vuoto",
   "2025:s di paolo": "vuoto",
+  "2025:s el shaarawy": {
+   "assist": 2,
+   "campionati": [
+    "Coppa Italia",
+    "Serie A"
+   ],
+   "da_titolare": 6,
+   "gol": 1,
+   "lega": "Serie A",
+   "minuti": 746,
+   "presenze": 20,
+   "presenze_totali": 21,
+   "squadre_stagione": 1
+  },
   "2025:s fernandes": "vuoto",
+  "2025:s ghidotti": {
+   "assist": 0,
+   "campionati": [
+    "Coppa Italia",
+    "Serie B"
+   ],
+   "da_titolare": 21,
+   "gol": 0,
+   "lega": "Serie B",
+   "minuti": 1899,
+   "presenze": 20,
+   "presenze_totali": 21,
+   "squadre_stagione": 1
+  },
   "2025:s gigot": "vuoto",
   "2025:s goglichidze": {
    "assist": 0,
@@ -10080,6 +10224,7 @@
    "presenze_totali": 18,
    "squadre_stagione": 2
   },
+  "2025:valde": "vuoto",
   "2025:valentin antov": {
    "assist": 0,
    "campionati": [
@@ -10170,6 +10315,21 @@
    "squadre_stagione": 2
   },
   "2025:w el bouradi": "vuoto",
+  "2025:w gnonto": {
+   "assist": 1,
+   "campionati": [
+    "FA Cup",
+    "League Cup",
+    "Premier League"
+   ],
+   "da_titolare": 7,
+   "gol": 0,
+   "lega": "Premier League",
+   "minuti": 889,
+   "presenze": 23,
+   "presenze_totali": 29,
+   "squadre_stagione": 1
+  },
   "2025:wesley": {
    "assist": 0,
    "campionati": [

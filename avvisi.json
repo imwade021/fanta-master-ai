@@ -8,12 +8,36 @@
   "lega": "Ekstraklasa"
  },
  {
+  "nome": "Pote",
+  "squadra": "Fiorentina",
+  "ruolo": "C",
+  "presenze": 26,
+  "gol": 12,
+  "lega": "Primeira Liga"
+ },
+ {
   "nome": "J. Enem",
   "squadra": "Bologna",
   "ruolo": "A",
   "presenze": 17,
   "gol": 10,
   "lega": "Super Liga"
+ },
+ {
+  "nome": "Beto",
+  "squadra": "Fiorentina",
+  "ruolo": "A",
+  "presenze": 37,
+  "gol": 9,
+  "lega": "Premier League"
+ },
+ {
+  "nome": "N. Woltemade",
+  "squadra": "Juventus",
+  "ruolo": "A",
+  "presenze": 33,
+  "gol": 8,
+  "lega": "Premier League"
  },
  {
   "nome": "A. Ahmed Fatah",
@@ -96,14 +120,6 @@
   "lega": "HNL"
  },
  {
-  "nome": "E. Ndicka",
-  "squadra": "Roma",
-  "ruolo": "D",
-  "presenze": 31,
-  "gol": 3,
-  "lega": "Serie A"
- },
- {
   "nome": "Y. Massolin",
   "squadra": "Cagliari",
   "ruolo": "C",
@@ -122,14 +138,6 @@
  {
   "nome": "M&apos;Bala Nzola",
   "squadra": "Cagliari",
-  "ruolo": "A",
-  "presenze": 16,
-  "gol": 3,
-  "lega": "Serie A"
- },
- {
-  "nome": "M&apos;Bala Nzola",
-  "squadra": "Fiorentina",
   "ruolo": "A",
   "presenze": 16,
   "gol": 3,
@@ -160,12 +168,28 @@
   "lega": "Serie A"
  },
  {
+  "nome": "K. Ehizibue",
+  "squadra": "Genoa",
+  "ruolo": "D",
+  "presenze": 32,
+  "gol": 2,
+  "lega": "Serie A"
+ },
+ {
   "nome": "K. N’Dri",
   "squadra": "Lecce",
-  "ruolo": "A",
+  "ruolo": "C",
   "presenze": 27,
   "gol": 2,
   "lega": "Serie A"
+ },
+ {
+  "nome": "P. Sarr",
+  "squadra": "Juventus",
+  "ruolo": "C",
+  "presenze": 26,
+  "gol": 2,
+  "lega": "Premier League"
  },
  {
   "nome": "K. Baldé",
@@ -214,6 +238,14 @@
   "presenze": 24,
   "gol": 1,
   "lega": "Bundesliga"
+ },
+ {
+  "nome": "S. El Shaarawy",
+  "squadra": "Genoa",
+  "ruolo": "A",
+  "presenze": 20,
+  "gol": 1,
+  "lega": "Serie A"
  },
  {
   "nome": "C. Ngonge",
@@ -272,20 +304,44 @@
   "lega": "Serie B"
  },
  {
-  "nome": "L. Balerdi",
-  "squadra": "Roma",
-  "ruolo": "D",
-  "presenze": 26,
-  "gol": 0,
-  "lega": "Ligue 1"
- },
- {
   "nome": "J. Šutalo",
   "squadra": "Lazio",
   "ruolo": "D",
   "presenze": 24,
   "gol": 0,
   "lega": "Eredivisie"
+ },
+ {
+  "nome": "W. Gnonto",
+  "squadra": "Fiorentina",
+  "ruolo": "A",
+  "presenze": 23,
+  "gol": 0,
+  "lega": "Premier League"
+ },
+ {
+  "nome": "C. Drameh",
+  "squadra": "Genoa",
+  "ruolo": "D",
+  "presenze": 23,
+  "gol": 0,
+  "lega": "Championship"
+ },
+ {
+  "nome": "S. Ghidotti",
+  "squadra": "Parma",
+  "ruolo": "P",
+  "presenze": 20,
+  "gol": 0,
+  "lega": "Serie B"
+ },
+ {
+  "nome": "Nikita Solodchenko",
+  "squadra": "Genoa",
+  "ruolo": "C",
+  "presenze": 15,
+  "gol": 0,
+  "lega": "Serie A"
  },
  {
   "nome": "A. Dembélé",
@@ -322,7 +378,7 @@
  {
   "nome": "S. Wiafe",
   "squadra": "Genoa",
-  "ruolo": "C",
+  "ruolo": "A",
   "presenze": 9,
   "gol": 0,
   "lega": "Serie B"
