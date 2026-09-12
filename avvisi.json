@@ -178,7 +178,7 @@
  {
   "nome": "K. N’Dri",
   "squadra": "Lecce",
-  "ruolo": "C",
+  "ruolo": "A",
   "presenze": 27,
   "gol": 2,
   "lega": "Serie A"
@@ -210,7 +210,7 @@
  {
   "nome": "E. Elmas",
   "squadra": "Atalanta",
-  "ruolo": "C",
+  "ruolo": "A",
   "presenze": 33,
   "gol": 1,
   "lega": "Serie A"
@@ -378,7 +378,7 @@
  {
   "nome": "S. Wiafe",
   "squadra": "Genoa",
-  "ruolo": "A",
+  "ruolo": "C",
   "presenze": 9,
   "gol": 0,
   "lega": "Serie B"
