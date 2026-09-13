@@ -1,68 +1,144 @@
 {
  "infortuni": {
-  "137976": {
-   "dal": "2026-09-12",
-   "motivo": "Muscle Injury"
+  "116": {
+   "dal": "2026-09-13",
+   "motivo": "Knee Injury"
   },
-  "144740": {
-   "dal": "2026-09-12",
-   "motivo": "Muscle Injury"
-  },
-  "162561": {
-   "dal": "2026-09-12",
+  "120": {
+   "dal": "2026-09-13",
    "motivo": "Ankle Injury"
   },
-  "1841": {
-   "dal": "2026-09-12",
+  "125674": {
+   "dal": "2026-09-13",
+   "motivo": "Thigh Injury"
+  },
+  "127011": {
+   "dal": "2026-09-13",
    "motivo": "Ankle Injury"
   },
-  "1844": {
-   "dal": "2026-09-12",
+  "128461": {
+   "dal": "2026-09-13",
+   "motivo": "Hip Injury"
+  },
+  "15811": {
+   "dal": "2026-09-13",
    "motivo": "Muscle Injury"
   },
-  "1852": {
-   "dal": "2026-09-12",
+  "291780": {
+   "dal": "2026-09-13",
+   "motivo": "Muscle Injury"
+  },
+  "30436": {
+   "dal": "2026-09-13",
+   "motivo": "Knee Injury"
+  },
+  "30488": {
+   "dal": "2026-09-13",
+   "motivo": "Injury"
+  },
+  "30531": {
+   "dal": "2026-09-13",
+   "motivo": "Muscle Injury"
+  },
+  "30533": {
+   "dal": "2026-09-13",
+   "motivo": "Knee Injury"
+  },
+  "310943": {
+   "dal": "2026-09-13",
+   "motivo": "Muscle Injury"
+  },
+  "312": {
+   "dal": "2026-09-13",
+   "motivo": "Muscle Injury"
+  },
+  "31226": {
+   "dal": "2026-09-13",
+   "motivo": "Knee Injury"
+  },
+  "312615": {
+   "dal": "2026-09-13",
    "motivo": "Groin Injury"
   },
-  "199837": {
-   "dal": "2026-09-12",
+  "31532": {
+   "dal": "2026-09-13",
+   "motivo": "Inactive"
+  },
+  "319919": {
+   "dal": "2026-09-13",
+   "motivo": "Thigh Injury"
+  },
+  "328046": {
+   "dal": "2026-09-13",
+   "motivo": "Broken Leg"
+  },
+  "333": {
+   "dal": "2026-09-13",
+   "motivo": "Inactive"
+  },
+  "335071": {
+   "dal": "2026-09-13",
+   "motivo": "Rest"
+  },
+  "339883": {
+   "dal": "2026-09-13",
+   "motivo": "Foot Injury"
+  },
+  "3406": {
+   "dal": "2026-09-13",
+   "motivo": "Muscle Injury"
+  },
+  "342035": {
+   "dal": "2026-09-13",
+   "motivo": "Thigh Injury"
+  },
+  "342055": {
+   "dal": "2026-09-13",
    "motivo": "Knee Injury"
   },
-  "30554": {
-   "dal": "2026-09-12",
-   "motivo": "Injury"
+  "384543": {
+   "dal": "2026-09-13",
+   "motivo": "Foot Injury"
   },
-  "30784": {
-   "dal": "2026-09-12",
-   "motivo": "Injury"
+  "388547": {
+   "dal": "2026-09-13",
+   "motivo": "Knee Injury"
   },
-  "31318": {
-   "dal": "2026-09-12",
+  "40582": {
+   "dal": "2026-09-13",
+   "motivo": "Muscle Injury"
+  },
+  "41371": {
+   "dal": "2026-09-13",
+   "motivo": "Knee Injury"
+  },
+  "415": {
+   "dal": "2026-09-13",
+   "motivo": "Muscle Injury"
+  },
+  "451504": {
+   "dal": "2026-09-13",
+   "motivo": "Muscle Injury"
+  },
+  "455245": {
+   "dal": "2026-09-13",
+   "motivo": "Muscle Injury"
+  },
+  "56293": {
+   "dal": "2026-09-13",
+   "motivo": "Contusion"
+  },
+  "59513": {
+   "dal": "2026-09-13",
+   "motivo": "Knee Injury"
+  },
+  "85": {
+   "dal": "2026-09-13",
    "motivo": "Lacking Match Fitness"
   },
-  "31734": {
-   "dal": "2026-09-12",
-   "motivo": "Knee Injury"
-  },
-  "325": {
-   "dal": "2026-09-12",
-   "motivo": "Red Card"
-  },
-  "383026": {
-   "dal": "2026-09-12",
-   "motivo": "Knee Injury"
-  },
-  "452033": {
-   "dal": "2026-09-12",
-   "motivo": "Knee Injury"
-  },
-  "584116": {
-   "dal": "2026-09-12",
-   "motivo": "Injury"
-  },
-  "63934": {
-   "dal": "2026-09-12",
-   "motivo": "Knee Injury"
+  "903": {
+   "dal": "2026-09-13",
+   "motivo": "Heart Problems"
   }
  },
  "infortuni_stagione_2025": {
