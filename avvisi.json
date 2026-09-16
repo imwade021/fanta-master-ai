@@ -160,14 +160,6 @@
   "lega": "Serie A"
  },
  {
-  "nome": "E. Del Prato",
-  "squadra": "Parma",
-  "ruolo": "D",
-  "presenze": 35,
-  "gol": 2,
-  "lega": "Serie A"
- },
- {
   "nome": "K. Ehizibue",
   "squadra": "Genoa",
   "ruolo": "C",
@@ -366,14 +358,6 @@
   "presenze": 12,
   "gol": 0,
   "lega": "Championship"
- },
- {
-  "nome": "A. N&apos;Diaye",
-  "squadra": "Parma",
-  "ruolo": "D",
-  "presenze": 11,
-  "gol": 0,
-  "lega": "Serie A"
  },
  {
   "nome": "S. Wiafe",

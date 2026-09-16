@@ -16,6 +16,6 @@ Sono nelle rose di Serie A ma non nelle tue quotazioni:
 • <b>N. González</b> (Juventus, C) — 24 pres, 5 gol
 • <b>Diego Moreira</b> (Milan, A) — 27 pres, 4 gol
 • <b>L. Banovec</b> (Como, C) — 31 pres, 3 gol
-...e altri 35.
+...e altri 33.
 
 Scarica le quotazioni aggiornate da Fantacalcio e caricale in <code>fanta-master-ai</code>: il motore le usa dalla notte dopo.
