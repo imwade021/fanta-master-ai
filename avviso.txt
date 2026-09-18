@@ -1,0 +1,10 @@
+⚠️ <b>Giocatori fuori dal listone</b>
+Sono nelle rose di Serie A ma non nelle tue quotazioni:
+
+• <b>J. Enem</b> (Bologna, A) — 17 pres, 10 gol
+• <b>F. Kessié</b> (Atalanta, C) — 26 pres, 5 gol
+• <b>S. Mbangula</b> (Bologna, A) — 26 pres, 3 gol
+• <b>E. Elmas</b> (Atalanta, C) — 33 pres, 1 gol
+• <b>A. Theate</b> (Bologna, D) — 24 pres, 1 gol
+
+Scarica le quotazioni aggiornate da Fantacalcio e caricale in <code>fanta-master-ai</code>: il motore le usa dalla notte dopo.
