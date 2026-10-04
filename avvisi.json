@@ -1,1 +1,218 @@
-[]
+[
+ {
+  "nome": "T. Bobček",
+  "squadra": "Frosinone",
+  "ruolo": "A",
+  "presenze": 30,
+  "gol": 20,
+  "lega": "Ekstraklasa"
+ },
+ {
+  "nome": "Pote",
+  "squadra": "Fiorentina",
+  "ruolo": "A",
+  "presenze": 26,
+  "gol": 12,
+  "lega": "Primeira Liga"
+ },
+ {
+  "nome": "J. Enem",
+  "squadra": "Bologna",
+  "ruolo": "A",
+  "presenze": 17,
+  "gol": 10,
+  "lega": "Super Liga"
+ },
+ {
+  "nome": "Beto",
+  "squadra": "Fiorentina",
+  "ruolo": "A",
+  "presenze": 37,
+  "gol": 9,
+  "lega": "Premier League"
+ },
+ {
+  "nome": "M. Osmajić",
+  "squadra": "Genoa",
+  "ruolo": "A",
+  "presenze": 27,
+  "gol": 8,
+  "lega": "Championship"
+ },
+ {
+  "nome": "D. Bîrligea",
+  "squadra": "Frosinone",
+  "ruolo": "A",
+  "presenze": 23,
+  "gol": 7,
+  "lega": "Liga I"
+ },
+ {
+  "nome": "R. Ciervo",
+  "squadra": "Cagliari",
+  "ruolo": "A",
+  "presenze": 37,
+  "gol": 5,
+  "lega": "Serie B"
+ },
+ {
+  "nome": "F. Kessié",
+  "squadra": "Atalanta",
+  "ruolo": "C",
+  "presenze": 26,
+  "gol": 5,
+  "lega": "Pro League"
+ },
+ {
+  "nome": "L. Banovec",
+  "squadra": "Como",
+  "ruolo": "C",
+  "presenze": 31,
+  "gol": 3,
+  "lega": "HNL"
+ },
+ {
+  "nome": "Y. Massolin",
+  "squadra": "Cagliari",
+  "ruolo": "C",
+  "presenze": 29,
+  "gol": 3,
+  "lega": "Serie B"
+ },
+ {
+  "nome": "S. Mbangula",
+  "squadra": "Bologna",
+  "ruolo": "A",
+  "presenze": 26,
+  "gol": 3,
+  "lega": "Bundesliga"
+ },
+ {
+  "nome": "M&apos;Bala Nzola",
+  "squadra": "Cagliari",
+  "ruolo": "A",
+  "presenze": 16,
+  "gol": 3,
+  "lega": "Serie A"
+ },
+ {
+  "nome": "K. Ehizibue",
+  "squadra": "Genoa",
+  "ruolo": "D",
+  "presenze": 32,
+  "gol": 2,
+  "lega": "Serie A"
+ },
+ {
+  "nome": "C. Jones",
+  "squadra": "Inter",
+  "ruolo": "C",
+  "presenze": 34,
+  "gol": 1,
+  "lega": "Premier League"
+ },
+ {
+  "nome": "E. Elmas",
+  "squadra": "Atalanta",
+  "ruolo": "C",
+  "presenze": 33,
+  "gol": 1,
+  "lega": "Serie A"
+ },
+ {
+  "nome": "R. Gagliardini",
+  "squadra": "Cagliari",
+  "ruolo": "C",
+  "presenze": 29,
+  "gol": 1,
+  "lega": "Serie A"
+ },
+ {
+  "nome": "A. Theate",
+  "squadra": "Bologna",
+  "ruolo": "D",
+  "presenze": 24,
+  "gol": 1,
+  "lega": "Bundesliga"
+ },
+ {
+  "nome": "S. El Shaarawy",
+  "squadra": "Genoa",
+  "ruolo": "A",
+  "presenze": 20,
+  "gol": 1,
+  "lega": "Serie A"
+ },
+ {
+  "nome": "K. Grabara",
+  "squadra": "Juventus",
+  "ruolo": "P",
+  "presenze": 36,
+  "gol": 0,
+  "lega": "Bundesliga"
+ },
+ {
+  "nome": "Y. Sugawara",
+  "squadra": "Cagliari",
+  "ruolo": "D",
+  "presenze": 31,
+  "gol": 0,
+  "lega": "Bundesliga"
+ },
+ {
+  "nome": "G. Vicario",
+  "squadra": "Juventus",
+  "ruolo": "P",
+  "presenze": 31,
+  "gol": 0,
+  "lega": "Premier League"
+ },
+ {
+  "nome": "E. Tchato",
+  "squadra": "Frosinone",
+  "ruolo": "D",
+  "presenze": 29,
+  "gol": 0,
+  "lega": "Ligue 2"
+ },
+ {
+  "nome": "W. Gnonto",
+  "squadra": "Fiorentina",
+  "ruolo": "A",
+  "presenze": 23,
+  "gol": 0,
+  "lega": "Premier League"
+ },
+ {
+  "nome": "C. Drameh",
+  "squadra": "Genoa",
+  "ruolo": "D",
+  "presenze": 23,
+  "gol": 0,
+  "lega": "Championship"
+ },
+ {
+  "nome": "Nikita Solodchenko",
+  "squadra": "Genoa",
+  "ruolo": "C",
+  "presenze": 15,
+  "gol": 0,
+  "lega": "Serie A"
+ },
+ {
+  "nome": "S. Wiafe",
+  "squadra": "Genoa",
+  "ruolo": "A",
+  "presenze": 9,
+  "gol": 0,
+  "lega": "Serie B"
+ },
+ {
+  "nome": "Omar Fayed",
+  "squadra": "Frosinone",
+  "ruolo": "D",
+  "presenze": 8,
+  "gol": 0,
+  "lega": "Primeira Liga"
+ }
+]

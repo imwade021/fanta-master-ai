@@ -2253,6 +2253,65 @@
   }
  },
  "stats": {
+  "2024:alessandro bastoni": {
+   "assist": 5,
+   "campionati": [
+    "Coppa Italia",
+    "Serie A"
+   ],
+   "da_titolare": 34,
+   "gol": 1,
+   "lega": "Serie A",
+   "minuti": 2691,
+   "presenze": 33,
+   "presenze_totali": 37,
+   "squadre_stagione": 1
+  },
+  "2024:amir rrahmani": {
+   "assist": 3,
+   "campionati": [
+    "Serie A"
+   ],
+   "da_titolare": 38,
+   "gol": 1,
+   "lega": "Serie A",
+   "minuti": 3406,
+   "presenze": 38,
+   "presenze_totali": 38,
+   "squadre_stagione": 1
+  },
+  "2024:evan n dicka": "vuoto",
+  "2024:john stones": {
+   "assist": 0,
+   "campionati": [
+    "FA Cup",
+    "League Cup",
+    "Premier League"
+   ],
+   "da_titolare": 12,
+   "gol": 2,
+   "lega": "Premier League",
+   "minuti": 770,
+   "presenze": 15,
+   "presenze_totali": 18,
+   "squadre_stagione": 1
+  },
+  "2024:oumar solet": "vuoto",
+  "2024:pierre kalulu": {
+   "assist": 0,
+   "campionati": [
+    "Coppa Italia",
+    "Serie A"
+   ],
+   "da_titolare": 26,
+   "gol": 1,
+   "lega": "Serie A",
+   "minuti": 2426,
+   "presenze": 29,
+   "presenze_totali": 30,
+   "squadre_stagione": 1
+  },
+  "2024:strahinja pavlovic": "vuoto",
   "2025:a ahmed fatah": {
    "assist": 3,
    "campionati": [
