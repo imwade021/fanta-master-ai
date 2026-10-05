@@ -32,6 +32,14 @@
   "lega": "Premier League"
  },
  {
+  "nome": "N. Woltemade",
+  "squadra": "Juventus",
+  "ruolo": "A",
+  "presenze": 33,
+  "gol": 8,
+  "lega": "Premier League"
+ },
+ {
   "nome": "M. Osmajić",
   "squadra": "Genoa",
   "ruolo": "A",
@@ -62,6 +70,14 @@
   "presenze": 26,
   "gol": 5,
   "lega": "Pro League"
+ },
+ {
+  "nome": "N. González",
+  "squadra": "Juventus",
+  "ruolo": "A",
+  "presenze": 24,
+  "gol": 5,
+  "lega": "La Liga"
  },
  {
   "nome": "L. Banovec",
@@ -102,6 +118,14 @@
   "presenze": 32,
   "gol": 2,
   "lega": "Serie A"
+ },
+ {
+  "nome": "P. Sarr",
+  "squadra": "Juventus",
+  "ruolo": "C",
+  "presenze": 26,
+  "gol": 2,
+  "lega": "Premier League"
  },
  {
   "nome": "C. Jones",
